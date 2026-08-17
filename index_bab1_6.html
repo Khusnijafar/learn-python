@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Ajar Interaktif — Bab 1–6</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Caveat:wght@600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="scrollRail">
+        <div id="scrollFill"></div>
+    </div>
+
+    <header class="hero">
+        <nav class="top-nav">
+            <a href="index.html">🏠 Beranda</a>
+            <span class="sep">|</span>
+            <span class="current">📘 Bab 1–6</span>
+            <a href="index_bab7_8.html">Bab 7–8 →</a>
+        </nav>
+        <div class="hero-kicker"><span class="dot"></span>MODUL AJAR · SESI PRIVAT</div>
+        <h1 class="hero-title">Pengenalan <span class="snake">Python</span> untuk Pemula</h1>
+        <div class="hero-meta">
+            <span>Bab 1–6</span>
+            <span>Level: Pemula</span>
+        </div>
+    </header>
+
+    <nav class="toc" id="toc">
+        <div class="toc-head">
+            <h2>📋 Daftar Isi</h2>
+            <span id="tocPct">0% selesai</span>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab1"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 1 — Apa itu Python?</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab1-1">Penjelasan Python</a>
+                <a class="toc-item" href="#bab1-2">Format Penyimpanan File Python</a>
+                <a class="toc-item" href="#bab1-3">Instalasi Python</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab2"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 2 — Apa itu Python Extension?</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab2-1">Penjelasan Extension</a>
+                <a class="toc-item" href="#bab2-2">Instalasi Extension</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab3"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 3 — Python String Print</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab3-1">Penjelasan String Print</a>
+                <a class="toc-item" href="#bab3-2">Coba Python String Print</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab4"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 4 — Python Multiline String Print</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab4-1">Penjelasan Multiline Print</a>
+                <a class="toc-item" href="#bab4-2">Coba Multiline String Print</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab5"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 5 — Python Math Operational</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab5-1">Python Math Operational Explanation</a>
+                <a class="toc-item" href="#bab5-2">Try Python Math Operational</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab6"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 6 — Python Comment</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab6-1">Python Comment Explanation</a>
+                <a class="toc-item" href="#bab6-2">Try Python Comment</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-challenge"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Challenge</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#challenge-1">Challenge 1 - Multiline String Print</a>
+                <a class="toc-item" href="#challenge-2">Challenge 2 - Math Operational Print</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <a class="toc-header" href="#kuis-final" style="text-decoration:none;">
+                <span class="toc-check" id="check-quizfinal"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Quiz</span>
+            </a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- ================= BAB 1 ================= -->
+        <section class="bab" id="bab1">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 1 — Apa
+                        itu Python?"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 1 — Apa itu Python?">Bab 1 — Apa itu Python?</h2>
+                <p class="bab-intro">Sebelum mulai ngoding, kenalan dulu yuk sama Python — bahasa pemrograman yang bakal
+                    jadi teman belajar kita.</p>
+            </div>
+
+            <div class="card" id="bab1-1">
+                <h3><span class="num">1.1</span> Penjelasan Python</h3>
+                <p>Python adalah bahasa pemrograman tingkat tinggi yang dibuat oleh <b>Guido van Rossum</b> dan pertama
+                    kali dirilis pada tahun <b>1991</b>. Python dirancang supaya kodenya gampang dibaca — bahkan mirip
+                    seperti kalimat bahasa Inggris biasa!</p>
+                <p>Kenapa Python jadi salah satu bahasa pemrograman paling populer di dunia?</p>
+                <ul>
+                    <li>Sintaksnya sederhana dan mudah dipahami, cocok banget buat pemula.</li>
+                    <li>Serbaguna — bisa dipakai untuk membuat website, aplikasi, game, sampai kecerdasan buatan (AI).
+                    </li>
+                    <li>Komunitasnya besar, jadi kalau ketemu masalah gampang cari solusinya.</li>
+                    <li>Dipakai oleh perusahaan-perusahaan besar seperti Google, Instagram, Spotify, dan NASA.</li>
+                </ul>
+                <div class="note"><span class="hand">Catatan tutor:</span> kalau bahasa pemrograman lain kadang berasa
+                    kayak nulis mantra yang ribet, Python itu lebih mirip nulis resep masakan — instruksinya jelas,
+                    urut, dan gampang diikuti. Komputer tinggal "memasak" instruksi itu jadi program yang beneran jalan.
+                </div>
+
+                <div class="flip" onclick="this.classList.toggle('on')">
+                    <div class="flip-inner">
+                        <div class="flip-face flip-front">🤔 &nbsp;<b>&nbsp;Tau nggak, kenapa namanya
+                                "Python"?</b>&nbsp; (klik buat lihat jawabannya)</div>
+                        <div class="flip-face flip-back">😄 &nbsp;Ternyata bukan dari nama ular! Guido van Rossum
+                            menamainya dari acara komedi favoritnya, <i>Monty Python's Flying Circus</i>. Jadi namanya
+                            itu lucu-lucuan, bukan galak kayak ularnya.</div>
+                    </div>
+                </div>
+                <div class="flip-hint">👆 klik kartu di atas</div>
+            </div>
+
+            <div class="card" id="bab1-2">
+                <h3><span class="num">1.2</span> Format Penyimpanan File Python</h3>
+                <p>Setiap file kode Python disimpan dengan ekstensi <code class="inline">.py</code> — contohnya <code
+                        class="inline">latihan_pertama.py</code> atau <code class="inline">belajar_python.py</code>.</p>
+                <p>Kenapa ekstensi ini penting?</p>
+                <ul>
+                    <li>Supaya text editor (seperti VS Code) tahu ini file Python, jadi bisa mengaktifkan <i>syntax
+                            highlighting</i> (pewarnaan kode) dan autocomplete.</li>
+                    <li>Supaya komputer tahu file ini harus dijalankan pakai Python interpreter.</li>
+                </ul>
+                <p>Aturan penamaan file yang baik:</p>
+                <ul>
+                    <li>Gunakan huruf kecil semua.</li>
+                    <li>Kalau lebih dari satu kata, pisahkan dengan underscore <code class="inline">_</code>, bukan
+                        spasi.</li>
+                    <li>Jangan diawali dengan angka.</li>
+                </ul>
+
+                <div class="challenge">
+                    <span class="chal-tag">KUIS KILAT</span>
+                    <div class="quiz-q">
+                        <p class="quiz-question">Manakah nama file Python yang paling benar?</p>
+                        <div class="quiz-options">
+                            <button class="quiz-opt"
+                                onclick="answerInline(this,false,'Ada spasi di nama file — sebaiknya diganti underscore ya.')">Tugas
+                                Python.py</button>
+                            <button class="quiz-opt"
+                                onclick="answerInline(this,false,'Nama file nggak boleh diawali angka.')">1_tugas.py</button>
+                            <button class="quiz-opt"
+                                onclick="answerInline(this,true,'Tepat! Huruf kecil, pakai underscore, dan pakai ekstensi .py.')">tugas_python.py</button>
+                            <button class="quiz-opt"
+                                onclick="answerInline(this,false,'Hampir! Tapi ini belum punya ekstensi .py di belakangnya.')">tugas_python</button>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bab1-3">
+                <h3><span class="num">1.3</span> Instalasi Python</h3>
+                <p>Sebelum bisa menulis kode Python, kita perlu meng-install Python dulu di komputer. Ceklis tiap
+                    langkah di bawah sambil kamu kerjakan ya.</p>
+                <div class="checklist" id="cl-install-py">
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Buka python.org/downloads</b><span>Gunakan browser apa saja di komputer
+                                kamu.</span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Klik tombol "Download Python"</b><span>Situs otomatis menyarankan versi
+                                terbaru untuk sistemmu.</span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Buka file installer yang terunduh</b><span>Biasanya ada di folder
+                                Downloads.</span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>⚠️ Centang "Add Python to PATH"</b><span>Wajib dicentang sebelum klik
+                                lanjut — ini bagian paling sering kelewat!</span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Klik "Install Now"</b><span>Tunggu sampai proses instalasi
+                                selesai.</span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Cek keberhasilan lewat Terminal/CMD</b><span>Ketik <code
+                                    class="inline">python --version</code> — kalau muncul nomor versi, berarti
+                                berhasil!</span></div>
+                    </div>
+                </div>
+                <div class="tip">💡 Kalau nanti muncul pesan error seperti <code
+                        class="inline">'python' is not recognized</code>, biasanya itu karena lupa centang "Add Python
+                    to PATH". Install ulang dan jangan lupa centang opsi itu ya.</div>
+            </div>
+
+            <div class="card">
+                <h3>🎯 Kuis Bab 1</h3>
+                <div id="quiz-bab1"></div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 2 ================= -->
+        <section class="bab" id="bab2">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 2 — Apa
+                        itu Python Extension?"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 2 — Apa itu Python Extension?">Bab 2 — Apa itu Python Extension?
+                </h2>
+                <p class="bab-intro">Nulis kode Python bakal jauh lebih nyaman kalau pakai text editor yang tepat,
+                    lengkap dengan "senjata tambahan" bernama extension.</p>
+            </div>
+
+            <div class="card" id="bab2-1">
+                <h3><span class="num">2.1</span> Penjelasan Extension</h3>
+                <p>Untuk menulis kode Python, kita butuh sebuah text editor atau IDE (<i>Integrated Development
+                        Environment</i>). Salah satu yang paling direkomendasikan untuk pemula adalah <b>Visual Studio
+                        Code</b> (VS Code) — gratis, ringan, dan sangat populer di kalangan programmer.</p>
+                <p>Nah, <b>extension</b> itu semacam aplikasi tambahan yang bisa dipasang di VS Code untuk menambah
+                    fitur — mirip seperti kamu meng-install aplikasi tambahan di HP supaya makin canggih.</p>
+                <p>Extension "Python" dari Microsoft memberikan fitur-fitur seperti:</p>
+                <ul>
+                    <li>🎨 <b>Syntax highlighting</b> — kode jadi berwarna-warni dan gampang dibaca.</li>
+                    <li>💡 <b>IntelliSense</b> — bantuan autocomplete cerdas saat mengetik kode.</li>
+                    <li>🐞 <b>Debugging</b> — membantu menemukan dan membenarkan kesalahan di kode.</li>
+                    <li>▶️ <b>Run Code</b> — bisa langsung menjalankan kode Python dari dalam editor.</li>
+                </ul>
+            </div>
+
+            <div class="card" id="bab2-2">
+                <h3><span class="num">2.2</span> Instalasi Extension</h3>
+                <div class="checklist" id="cl-install-ext">
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Buka aplikasi VS Code</b><span>Kalau belum punya, unduh dulu dari
+                                code.visualstudio.com</span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Klik ikon Extensions</b><span>Ada di sidebar kiri, bentuknya seperti
+                                kotak-kotak lego.</span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Ketik "Python" di kolom pencarian</b><span>Hasil pencarian akan muncul
+                                di sidebar.</span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Pilih extension "Python" by Microsoft</b><span>Biasanya paling atas dan
+                                paling banyak diunduh.</span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Klik tombol "Install"</b><span>Tunggu sampai proses instalasi
+                                selesai.</span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Selesai!</b><span>VS Code kamu sekarang siap dipakai untuk ngoding
+                                Python.</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🎯 Kuis Bab 2</h3>
+                <div id="quiz-bab2"></div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 3 ================= -->
+        <section class="bab" id="bab3">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 3 —
+                        Python String Print"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 3 — Python String Print">Bab 3 — Python String Print</h2>
+                <p class="bab-intro">Saatnya menulis kode Python pertamamu! Kita mulai dari yang paling seru:
+                    menampilkan teks di layar.</p>
+            </div>
+
+            <div class="card" id="bab3-1">
+                <h3><span class="num">3.1</span> Penjelasan String Print</h3>
+                <p><b>String</b> adalah kumpulan karakter atau teks yang diapit oleh tanda kutip satu <code
+                        class="inline">' '</code> atau tanda kutip dua <code class="inline">" "</code>. Contohnya: <code
+                        class="inline">"Halo, Dunia!"</code> atau <code class="inline">'Aku belajar Python'</code>.</p>
+                <p>Untuk menampilkan teks ke layar, Python punya fungsi bawaan bernama <code
+                        class="inline">print()</code>. Formatnya seperti ini:</p>
+                <div class="term">
+                    <div class="term-bar">contoh.py</div>
+                    <pre><span class="fn">print</span>(<span class="str">"Halo, Dunia!"</span>)
+<span class="cm"># Hasil (output): Halo, Dunia!</span></pre>
+                </div>
+                <p>Kamu bisa pakai tanda kutip satu maupun dua, hasilnya sama saja:</p>
+                <div class="term">
+                    <div class="term-bar">contoh.py</div>
+                    <pre><span class="fn">print</span>(<span class="str">'Selamat belajar Python!'</span>)</pre>
+                </div>
+                <div class="tip">💡 Setiap <code class="inline">print()</code> otomatis pindah ke baris baru untuk
+                    print() berikutnya — makanya kalau kamu tulis dua <code class="inline">print()</code>, hasilnya akan
+                    tampil di dua baris terpisah.</div>
+            </div>
+
+            <div class="card" id="bab3-2">
+                <h3><span class="num">3.2</span> Coba Python String Print</h3>
+                <p>Ini beneran bisa kamu ketik dan "jalankan"! Ubah teks di dalam tanda kutip, lalu klik
+                    <b>Jalankan</b>.</p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">latihan.py</span><button class="pg-run"
+                            onclick="runCode('ed-main3','out-main3','bab3')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-main3" spellcheck="false">print("Halo, Dunia!")</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-main3"></div>
+                    </div>
+                </div>
+
+                <div class="challenge">
+                    <span class="chal-tag">LATIHAN 1</span>
+                    <p style="margin:0 0 10px;">Ganti teks di dalam tanda kutip supaya menampilkan perkenalan dirimu
+                        sendiri.</p>
+                    <div class="playground">
+                        <div class="pg-bar"><span class="pg-filename">latihan_1.py</span><button class="pg-run"
+                                onclick="runCode('ed-c3a','out-c3a','bab3')">▶ Jalankan</button></div>
+                        <textarea class="pg-editor" id="ed-c3a"
+                            spellcheck="false">print("Halo, nama saya ...")</textarea>
+                        <div class="pg-output-wrap">
+                            <div class="pg-output-label">OUTPUT</div>
+                            <div class="pg-output" id="out-c3a"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge">
+                    <span class="chal-tag">LATIHAN 2</span>
+                    <p style="margin:0 0 10px;">Tulis kode untuk menampilkan kalimat: <i>"Saya sedang belajar
+                            Python!"</i></p>
+                    <div class="playground">
+                        <div class="pg-bar"><span class="pg-filename">latihan_2.py</span><button class="pg-run"
+                                onclick="runCode('ed-c3b','out-c3b','bab3')">▶ Jalankan</button></div>
+                        <textarea class="pg-editor" id="ed-c3b" spellcheck="false"># tulis kode kamu di baris ini
+</textarea>
+                        <div class="pg-output-wrap">
+                            <div class="pg-output-label">OUTPUT</div>
+                            <div class="pg-output" id="out-c3b"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge">
+                    <span class="chal-tag">TEBAK OUTPUT</span>
+                    <div id="quiz-bab3"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 4 ================= -->
+        <section class="bab" id="bab4">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 4 —
+                        Python Multiline String Print"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 4 — Python Multiline String Print">Bab 4 — Python Multiline String
+                    Print</h2>
+                <p class="bab-intro">Gimana caranya kalau kita mau print teks yang panjangnya berbaris-baris? Yuk cari
+                    tahu triknya.</p>
+            </div>
+
+            <div class="card" id="bab4-1">
+                <h3><span class="num">4.1</span> Penjelasan Multiline Print</h3>
+                <p>Kalau teks yang mau ditampilkan cuma satu baris, tanda kutip biasa sudah cukup. Tapi kalau teksnya
+                    panjang dan perlu beberapa baris, kita bisa pakai <b>triple quotes</b>: tiga tanda kutip
+                    berturut-turut, baik <code class="inline">''' '''</code> maupun <code class="inline">""" """</code>.
+                </p>
+                <div class="term">
+                    <div class="term-bar">cerita.py</div>
+                    <pre><span class="fn">print</span>(<span class="str">"""
+Halo, namaku Python!
+Aku suka membantu manusia menulis program.
+Yuk belajar bareng!
+"""</span>)</pre>
+                </div>
+                <p>Triple quotes ini sering dipakai untuk:</p>
+                <ul>
+                    <li>Menulis paragraf panjang.</li>
+                    <li>Membuat puisi atau surat.</li>
+                    <li>Menulis dokumentasi / catatan penjelasan di dalam kode.</li>
+                </ul>
+                <div class="note"><span class="hand">Catatan tutor:</span> perhatikan baris kosong di atas dan bawah
+                    tulisan — itu karena Python mencetak persis apa yang ada di antara tanda kutip triple-nya, termasuk
+                    baris kosongnya!</div>
+            </div>
+
+            <div class="card" id="bab4-2">
+                <h3><span class="num">4.2</span> Coba Multiline String Print</h3>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">cerita.py</span><button class="pg-run"
+                            onclick="runCode('ed-main4','out-main4','bab4')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-main4" spellcheck="false" rows="6">print("""
+Halo, namaku Python!
+Aku suka membantu manusia menulis program.
+""")</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-main4"></div>
+                    </div>
+                </div>
+
+                <div class="challenge">
+                    <span class="chal-tag">LATIHAN</span>
+                    <p style="margin:0 0 10px;">Buat satu <code class="inline">print()</code> dengan triple quotes
+                        berisi 3 baris perkenalan diri: nama, kelas/umur, dan hobi kamu.</p>
+                    <div class="playground">
+                        <div class="pg-bar"><span class="pg-filename">perkenalan.py</span><button class="pg-run"
+                                onclick="runCode('ed-c4a','out-c4a','bab4')">▶ Jalankan</button></div>
+                        <textarea class="pg-editor" id="ed-c4a" spellcheck="false" rows="6">print("""
+Nama: ...
+Kelas: ...
+Hobi: ...
+""")</textarea>
+                        <div class="pg-output-wrap">
+                            <div class="pg-output-label">OUTPUT</div>
+                            <div class="pg-output" id="out-c4a"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge">
+                    <span class="chal-tag">TEBAK OUTPUT</span>
+                    <div id="quiz-bab4"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 5 ================= -->
+        <section class="bab" id="bab5">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 5 —
+                        Python Math Operational"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 5 — Python Math Operational">Bab 5 — Python Math Operational</h2>
+                <p class="bab-intro">Ternyata Python bukan cuma jago nulis teks — dia juga jago berhitung. Yuk kita coba
+                    pakai Python sebagai kalkulator!</p>
+            </div>
+
+            <div class="card" id="bab5-1">
+                <h3><span class="num">5.1</span> Python Math Operational Explanation</h3>
+                <p>Inget di Bab 3, kita lihat kalau <code class="inline">print("5 + 3")</code> hasilnya teks <code
+                        class="inline">5 + 3</code> — itu karena angkanya diapit tanda kutip, jadi dianggap string. Nah,
+                    kalau tanda kutipnya kita <b>hilangkan</b>, Python beneran akan menghitungnya!</p>
+                <div class="term">
+                    <div class="term-bar">kalkulator.py</div>
+                    <pre><span class="fn">print</span>(5 + 3)
+<span class="cm"># Hasil (output): 8</span></pre>
+                </div>
+                <p>Beberapa operator matematika yang bisa dipakai:</p>
+                <ul>
+                    <li><code class="inline">+</code> tambah — <code class="inline">print(5 + 3)</code> → 8</li>
+                    <li><code class="inline">-</code> kurang — <code class="inline">print(10 - 4)</code> → 6</li>
+                    <li><code class="inline">*</code> kali — <code class="inline">print(6 * 7)</code> → 42</li>
+                    <li><code class="inline">/</code> bagi — <code class="inline">print(20 / 4)</code> → 5.0</li>
+                    <li><code class="inline">//</code> bagi bulat (floor division) — <code
+                            class="inline">print(17 // 5)</code> → 3</li>
+                    <li><code class="inline">%</code> sisa bagi (modulus) — <code class="inline">print(17 % 5)</code> →
+                        2</li>
+                    <li><code class="inline">**</code> pangkat — <code class="inline">print(2 ** 3)</code> → 8</li>
+                </ul>
+                <div class="tip">💡 Hasil pembagian ( <code class="inline">/</code> ) di Python SELALU berupa desimal
+                    (float), walaupun hasilnya bulat. Makanya <code class="inline">20 / 4</code> hasilnya <code
+                        class="inline">5.0</code>, bukan <code class="inline">5</code>.</div>
+                <div class="note"><span class="hand">Catatan tutor:</span> tanda kurung <code class="inline">( )</code>
+                    tetap bisa dipakai buat ngatur urutan operasi, sama seperti matematika biasa — yang di dalam kurung
+                    dikerjakan duluan.</div>
+            </div>
+
+            <div class="card" id="bab5-2">
+                <h3><span class="num">5.2</span> Try Python Math Operational</h3>
+                <p>Coba ganti angka atau operatornya, lalu klik <b>Jalankan</b> buat lihat hasil hitungnya.</p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">kalkulator.py</span><button class="pg-run"
+                            onclick="runCode('ed-main5','out-main5','bab5')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-main5" spellcheck="false">print(5 + 3)</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-main5"></div>
+                    </div>
+                </div>
+
+                <div class="challenge">
+                    <span class="chal-tag">LATIHAN</span>
+                    <p style="margin:0 0 10px;">Sebuah persegi panjang punya panjang 8 cm dan lebar 5 cm. Tulis <code
+                            class="inline">print()</code> untuk menghitung luasnya (panjang × lebar).</p>
+                    <div class="playground">
+                        <div class="pg-bar"><span class="pg-filename">luas.py</span><button class="pg-run"
+                                onclick="runCode('ed-c5a','out-c5a','bab5')">▶ Jalankan</button></div>
+                        <textarea class="pg-editor" id="ed-c5a" spellcheck="false"># luas = panjang x lebar
+print(...)</textarea>
+                        <div class="pg-output-wrap">
+                            <div class="pg-output-label">OUTPUT</div>
+                            <div class="pg-output" id="out-c5a"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge">
+                    <span class="chal-tag">TEBAK OUTPUT</span>
+                    <div id="quiz-bab5"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 6 ================= -->
+        <section class="bab" id="bab6">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 6 —
+                        Python Comment"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 6 — Python Comment">Bab 6 — Python Comment</h2>
+                <p class="bab-intro">Kadang kita perlu ninggalin catatan kecil di dalam kode. Yuk kenalan sama comment.
+                </p>
+            </div>
+
+            <div class="card" id="bab6-1">
+                <h3><span class="num">6.1</span> Python Comment Explanation</h3>
+                <p><b>Comment</b> adalah catatan di dalam kode yang <b>tidak ikut dijalankan</b> oleh Python — isinya
+                    cuma buat dibaca manusia, bukan buat diproses komputer.</p>
+                <p>Cara membuatnya gampang: taruh tanda pagar <code class="inline">#</code> di awal baris, atau di
+                    belakang kode.</p>
+                <div class="term">
+                    <div class="term-bar">catatan.py</div>
+                    <pre><span class="cm"># Ini komentar, tidak akan muncul di output</span>
+<span class="fn">print</span>(<span class="str">"Halo!"</span>) <span class="cm"># Ini juga komentar, ditulis di belakang kode</span></pre>
+                </div>
+                <p>Kenapa comment berguna?</p>
+                <ul>
+                    <li>Membantu menjelaskan maksud kode buat diri sendiri atau orang lain yang baca nanti.</li>
+                    <li>Bisa dipakai buat "mematikan sementara" satu baris kode tanpa perlu menghapusnya — biasanya buat
+                        coba-coba/testing.</li>
+                </ul>
+                <div class="tip">💡 Comment sama sekali tidak memengaruhi jalannya program. Python bakal melewatinya
+                    begitu saja.</div>
+            </div>
+
+            <div class="card" id="bab6-2">
+                <h3><span class="num">6.2</span> Try Python Comment</h3>
+                <p>Jalankan kode di bawah ini dulu, perhatikan cuma baris <code class="inline">print()</code> yang
+                    muncul di output — baris comment-nya "hilang".</p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">catatan.py</span><button class="pg-run"
+                            onclick="runCode('ed-main6','out-main6','bab6')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-main6" spellcheck="false"># baris ini adalah komentar, tidak akan tampil di output
+print("Tapi baris ini akan tampil!")</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-main6"></div>
+                    </div>
+                </div>
+
+                <div class="challenge">
+                    <span class="chal-tag">LATIHAN</span>
+                    <p style="margin:0 0 10px;">Coba "matikan sementara" salah satu baris print() di bawah dengan
+                        menambahkan <code class="inline">#</code> di depannya, lalu jalankan — lihat baris mana yang
+                        hilang dari output!</p>
+                    <div class="playground">
+                        <div class="pg-bar"><span class="pg-filename">latihan_6.py</span><button class="pg-run"
+                                onclick="runCode('ed-c6a','out-c6a','bab6')">▶ Jalankan</button></div>
+                        <textarea class="pg-editor" id="ed-c6a" spellcheck="false">print("Pesan pertama")
+print("Pesan kedua")</textarea>
+                        <div class="pg-output-wrap">
+                            <div class="pg-output-label">OUTPUT</div>
+                            <div class="pg-output" id="out-c6a"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge">
+                    <span class="chal-tag">TEBAK OUTPUT</span>
+                    <div id="quiz-bab6"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CHALLENGE ================= -->
+        <section class="bab" id="challenge">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span
+                        class="str">"Challenge"</span>)</div>
+                <h2 class="bab-title" data-text="Challenge">Challenge</h2>
+                <p class="bab-intro">Yuk gabungkan semua skill yang udah kamu pelajari jadi dua tantangan yang lebih
+                    seru.</p>
+            </div>
+
+            <div class="card" id="challenge-1">
+                <h3><span class="num">CH.1</span> Challenge 1 - Multiline String Print</h3>
+                <p>Buat sebuah "kartu ucapan" digital pakai satu <code class="inline">print()</code> dengan triple
+                    quotes, isinya minimal 4 baris: judul ucapan, isi pesan, dan nama pengirim.</p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">kartu_ucapan.py</span><button class="pg-run"
+                            onclick="runCode('ed-ch1','out-ch1','challenge')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-ch1" spellcheck="false" rows="7">print("""
+Selamat Ulang Tahun!
+Semoga sehat selalu dan sukses terus ya.
+Dari: ...
+""")</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-ch1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="challenge-2">
+                <h3><span class="num">CH.2</span> Challenge 2 - Math Operational Print</h3>
+                <p>Kamu belanja 3 buku seharga Rp15.000 per buku, dan 2 pulpen seharga Rp3.000 per pulpen. Tulis satu
+                    <code class="inline">print()</code> untuk menghitung dan menampilkan total harga belanjaannya.</p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">total_belanja.py</span><button class="pg-run"
+                            onclick="runCode('ed-ch2','out-ch2','challenge')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-ch2" spellcheck="false"># total = (jumlah buku x harga buku) + (jumlah pulpen x harga pulpen)
+print(...)</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-ch2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= RANGKUMAN + KUIS AKHIR ================= -->
+        <section class="bab" id="rangkuman">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Rangkuman &
+                        Quiz"</span>)</div>
+                <h2 class="bab-title" data-text="Rangkuman & Quiz">Rangkuman &amp; Quiz</h2>
+                <p class="bab-intro">Sebelum ditutup, yuk lihat ulang poin-poin pentingnya, terus uji pemahamanmu lewat
+                    kuis gabungan.</p>
+            </div>
+
+            <div class="card">
+                <h3>📌 Rangkuman Cepat</h3>
+                <div class="recap">
+                    <div class="recap-item"><b>Python</b><span>Bahasa pemrograman mudah dibaca, dibuat Guido van Rossum
+                            tahun 1991.</span></div>
+                    <div class="recap-item"><b>File .py</b><span>Kode Python disimpan dengan ekstensi .py, nama huruf
+                            kecil & underscore.</span></div>
+                    <div class="recap-item"><b>VS Code + Extension</b><span>Text editor + extension Python bikin nulis
+                            kode jauh lebih nyaman.</span></div>
+                    <div class="recap-item"><b>print("...")</b><span>Menampilkan teks satu baris ke layar.</span></div>
+                    <div class="recap-item"><b>print("""...""")</b><span>Menampilkan teks panjang / banyak baris
+                            sekaligus.</span></div>
+                    <div class="recap-item"><b>Setiap print() = baris baru</b><span>print() berikutnya otomatis pindah
+                            baris.</span></div>
+                    <div class="recap-item"><b>Math Operational</b><span>print(5 + 3) tanpa kutip = beneran dihitung: +,
+                            -, *, /, //, %, **</span></div>
+                    <div class="recap-item"><b>Comment ( # )</b><span>Catatan di kode yang tidak ikut dijalankan
+                            Python.</span></div>
+                </div>
+            </div>
+
+            <div class="card" id="kuis-final">
+                <h3>🏁 Quiz</h3>
+                <div id="quiz-final"></div>
+                <div id="finalScoreBox">
+                    <div class="score-num"><span id="finalScoreNum">0</span>/8</div>
+                    <div class="score-msg" id="finalScoreMsg"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Modul ini bisa dibuka ulang kapan saja untuk mengulang materi. Semangat terus belajar coding-nya! 🚀</p>
+        <div class="brand">🐍 Modul Ajar Python — Sesi Privat</div>
+        <a href="index_bab7_8.html" class="nav-link">Lanjut ke Bab 7–8 →</a>
+        <div class="edit-hint">catatan: nama tutor / brand bisa diganti langsung di bagian footer file HTML ini</div>
+    </footer>
+
+    <script>
+        /* ================= progress rail ================= */
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const scrolled = h.scrollHeight > h.clientHeight
+                ? (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 : 0;
+            document.getElementById('scrollFill').style.width = scrolled + '%';
+        });
+
+        /* ================= TOC collapse ================= */
+        function toggleToc(btn) {
+            const sub = btn.nextElementSibling;
+            const chevron = btn.querySelector('.toc-chevron');
+            sub.classList.toggle('collapsed');
+            chevron.classList.toggle('rotated');
+        }
+
+        /* ================= checklist ================= */
+        function toggleCheck(el) { el.classList.toggle('checked'); }
+
+        /* ================= heading type-in on scroll ================= */
+        const headingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('type-in');
+                    headingObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        document.querySelectorAll('h2.bab-title').forEach(el => headingObserver.observe(el));
+
+        /* ================= section-complete tracking ================= */
+        const sectionDone = { bab1: false, bab2: false, bab3: false, bab4: false, bab5: false, bab6: false, challenge: false, quizfinal: false };
+
+        function markSectionComplete(key) {
+            sectionDone[key] = true;
+            const el = document.getElementById('check-' + key);
+            if (el) el.classList.add('done');
+            updateTocPct();
+        }
+        function updateTocPct() {
+            const total = Object.keys(sectionDone).length;
+            const done = Object.values(sectionDone).filter(Boolean).length;
+            document.getElementById('tocPct').textContent = Math.round(done / total * 100) + '% selesai';
+        }
+
+        /* ================= flip fun fact handled by inline onclick ================= */
+
+        /* ================= inline mini-quiz (bab 1.2 style) ================= */
+        function answerInline(btn, isCorrect, exp) {
+            const group = btn.parentElement;
+            const buttons = group.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => b.disabled = true);
+            const fb = group.nextElementSibling;
+            if (isCorrect) {
+                btn.classList.add('correct');
+                fb.textContent = '✅ ' + exp;
+                fb.className = 'quiz-feedback show correct';
+            } else {
+                btn.classList.add('wrong');
+                fb.textContent = '❌ ' + exp;
+                fb.className = 'quiz-feedback show wrong';
+            }
+        }
+
+        /* ================= quiz engine (data-driven) ================= */
+        const quizzes = {
+            bab1: [
+                {
+                    q: "Python pertama kali dirilis pada tahun berapa?", options: ["1985", "1991", "2000", "2015"], correct: 1,
+                    exp: "Python dirilis pertama kali oleh Guido van Rossum pada tahun 1991."
+                },
+                {
+                    q: "Ekstensi file yang benar untuk menyimpan kode Python adalah...", options: [".pyt", ".py", ".python", ".pt"], correct: 1,
+                    exp: "File Python selalu disimpan dengan ekstensi .py"
+                },
+                {
+                    q: "Saat instalasi Python di Windows, opsi apa yang WAJIB dicentang supaya Python bisa dipanggil dari Terminal/CMD di mana saja?", options: ["Install for all users", "Add Python to PATH", "Create desktop shortcut", "Install pip"], correct: 1,
+                    exp: "Add Python to PATH membuat perintah python bisa dipanggil dari folder mana saja di Terminal/CMD."
+                }
+            ],
+            bab2: [
+                {
+                    q: "Text editor apa yang direkomendasikan di modul ini untuk menulis kode Python?", options: ["Notepad", "Microsoft Word", "Visual Studio Code", "Paint"], correct: 2,
+                    exp: "VS Code gratis, ringan, dan sangat populer untuk menulis kode."
+                },
+                {
+                    q: "Fungsi utama extension Python di VS Code adalah...", options: ["Mempercantik wallpaper", "Menambah fitur seperti syntax highlighting & autocomplete", "Menghapus file otomatis", "Mempercepat koneksi internet"], correct: 1,
+                    exp: "Extension menambah fitur seperti syntax highlighting, IntelliSense, debugging, dan run code."
+                }
+            ],
+            bab3: [
+                {
+                    q: 'Apa hasil (output) dari kode berikut?', code: 'print("5 + 3")', options: ["8", "5 + 3", "Error", "55"], correct: 1,
+                    exp: 'Karena "5 + 3" ditulis di dalam tanda kutip, Python menganggapnya sebagai teks (string), bukan operasi hitung.'
+                },
+                {
+                    q: 'Apa hasil (output) dari kode berikut?', code: 'print("Aku suka")\nprint("Python!")', options: ['"Aku suka Python!" dalam satu baris', '"Aku suka" dan "Python!" di dua baris terpisah', 'Muncul Error', '"AkusukaPython!"'], correct: 1,
+                    exp: "Setiap print() otomatis pindah ke baris baru, jadi hasilnya tampil di dua baris terpisah."
+                }
+            ],
+            bab4: [
+                {
+                    q: 'Ada berapa baris teks yang tercetak dari kode berikut (tidak termasuk baris kosong di paling atas/bawah)?', code: 'print("""\nSatu\nDua\nTiga\n""")', options: ["1 baris", "2 baris", "3 baris", "Error"], correct: 2,
+                    exp: 'Triple quotes mencetak persis isi di dalamnya baris per baris: "Satu", "Dua", "Tiga".'
+                },
+                {
+                    q: "Tanda kutip apa yang dipakai untuk membuat string banyak baris (multiline)?", options: ['Kutip dua biasa " "', 'Kutip satu biasa \' \'', 'Tiga kutip berturut-turut \'\'\' \'\'\' atau """ """', 'Tanda kurung ( )'], correct: 2,
+                    exp: "Triple quotes ( ''' atau \"\"\" ) dipakai supaya string bisa berisi banyak baris sekaligus."
+                }
+            ],
+            bab5: [
+                {
+                    q: 'Apa hasil (output) dari kode berikut?', code: 'print(20 / 4)', options: ["5", "5.0", "5.something", "Error"], correct: 1,
+                    exp: "Pembagian ( / ) di Python SELALU menghasilkan angka desimal (float), meskipun hasilnya bulat."
+                },
+                {
+                    q: 'Apa hasil (output) dari kode berikut?', code: 'print(2 ** 3)', options: ["6", "8", "9", "5"], correct: 1,
+                    exp: "** adalah operator pangkat, jadi 2 ** 3 artinya 2 pangkat 3 = 8, bukan 2 x 3."
+                }
+            ],
+            bab6: [
+                {
+                    q: "Simbol apa yang dipakai untuk membuat comment satu baris di Python?", options: ["//", "#", "/* */", "&&"], correct: 1,
+                    exp: "Tanda pagar ( # ) dipakai untuk membuat comment di Python."
+                },
+                {
+                    q: 'Apa hasil (output) dari kode berikut?', code: '# print("Ini tidak akan muncul")\nprint("Ini akan muncul")', options: ['"Ini tidak akan muncul"', '"Ini akan muncul"', 'Kedua baris muncul', 'Error'], correct: 1,
+                    exp: "Baris pertama sudah jadi comment (diawali #), jadi Python melewatinya dan cuma print() kedua yang jalan."
+                }
+            ],
+            final: [
+                { q: "Siapa pencipta bahasa pemrograman Python?", options: ["Steve Jobs", "Guido van Rossum", "Bill Gates", "Mark Zuckerberg"], correct: 1, exp: "Guido van Rossum menciptakan Python dan merilisnya tahun 1991." },
+                { q: "Ekstensi file kode Python adalah...", options: [".py", ".exe", ".doc", ".txt"], correct: 0, exp: "Selalu gunakan ekstensi .py untuk file kode Python." },
+                { q: "Fungsi apa yang dipakai untuk menampilkan teks ke layar di Python?", options: ["show()", "display()", "print()", "output()"], correct: 2, exp: "print() adalah fungsi bawaan Python untuk menampilkan output." },
+                { q: 'Apa hasil dari: print(\'Halo Dunia\')', options: ["Halo Dunia", "'Halo Dunia'", "Error karena pakai kutip satu", "HaloDunia"], correct: 0, exp: "Kutip satu dan kutip dua sama-sama sah untuk membuat string." },
+                { q: "Tanda kutip apa yang dipakai untuk teks banyak baris?", options: ['Kutip dua biasa', "Triple quotes ''' atau \"\"\"", 'Kurung siku [ ]', 'Tanda pagar #'], correct: 1, exp: "Triple quotes memungkinkan string berisi banyak baris." },
+                { q: "Extension apa yang perlu diinstall di VS Code supaya nyaman menulis Python?", options: ["Extension Python (Microsoft)", "Extension Word", "Extension Excel", "Extension Paint"], correct: 0, exp: "Extension Python dari Microsoft menambahkan fitur-fitur penting untuk ngoding Python." },
+                { q: "Berapa hasil dari print(20 / 4) di Python?", options: ["5", "5.0", "20.4", "Error"], correct: 1, exp: "Operator / selalu menghasilkan angka desimal (float) di Python." },
+                { q: "Simbol apa yang dipakai untuk membuat comment di Python?", options: ["//", "#", "<!-- -->" ,"--"], correct :1, exp :"Tanda pagar ( # ) menandai comment yang tidak akan dijalankan Python." }
+            ]
+        };
+
+        const quizProgress = {};
+
+        function renderQuiz(key, containerId, { finalMode = false } = {}) {
+            const container = document.getElementById(containerId);
+            const data = quizzes[key];
+            container.innerHTML = data.map((item, qi) => {
+                const codeBlock = item.code ? `<pre style="background:var(--terminal-bg);color:var(--terminal-string);border-radius:8px;padding:10px 14px;font-size:13.5px;margin-top:8px;">${escapeHtml(item.code)}</pre>` : '';
+                return `
+    <div class="quiz-q" data-q="${qi}">
+      <p class="quiz-question">${qi + 1}. ${item.q}${codeBlock}</p>
+      <div class="quiz-options">
+        ${item.options.map((opt, oi) => `<button class="quiz-opt" onclick="answerQuiz('${key}',${qi},${oi},this,${finalMode})">${escapeHtml(opt)}</button>`).join('')}
+      </div>
+      <div class="quiz-feedback" id="${key}-fb-${qi}"></div>
+    </div>`;
+            }).join('');
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function answerQuiz(key, qi, oi, btnEl, finalMode) {
+            const item = quizzes[key][qi];
+            const buttons = btnEl.parentElement.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => b.disabled = true);
+            const fb = document.getElementById(`${key}-fb-${qi}`);
+            const isCorrect = oi === item.correct;
+            if (isCorrect) {
+                btnEl.classList.add('correct');
+                fb.textContent = '✅ Benar! ' + item.exp;
+                fb.className = 'quiz-feedback show correct';
+            } else {
+                btnEl.classList.add('wrong');
+                buttons[item.correct].classList.add('correct');
+                fb.textContent = '❌ Belum tepat. ' + item.exp;
+                fb.className = 'quiz-feedback show wrong';
+            }
+
+            if (!quizProgress[key]) quizProgress[key] = { answered: new Set(), correct: 0 };
+            if (!quizProgress[key].answered.has(qi)) {
+                quizProgress[key].answered.add(qi);
+                if (isCorrect) quizProgress[key].correct++;
+            }
+
+            if (quizProgress[key].answered.size === quizzes[key].length) {
+                if (finalMode) {
+                    showFinalScore(quizProgress[key].correct, quizzes[key].length);
+                    markSectionComplete('quizfinal');
+                } else if (sectionDone[key] !== undefined) {
+                    markSectionComplete(key);
+                }
+            }
+        }
+
+        function showFinalScore(correct, total) {
+            const box = document.getElementById('finalScoreBox');
+            document.getElementById('finalScoreNum').textContent = correct;
+            let msg, bg, color;
+            if (correct >= 7) { msg = 'Keren banget! Kamu udah paham dasar-dasar Python. 🎉'; bg = 'var(--forest-wash)'; color = 'var(--forest-deep)'; }
+            else if (correct >= 4) { msg = 'Bagus! Beberapa bagian tinggal diulang sedikit lagi. 💪'; bg = 'var(--highlighter-wash)'; color = '#7A5B0A'; }
+            else { msg = 'Yuk baca ulang materinya sebentar, kamu pasti bisa! 🌱'; bg = 'var(--danger-wash)'; color = 'var(--danger)'; }
+            document.getElementById('finalScoreMsg').textContent = msg;
+            box.style.background = bg;
+            box.style.color = color;
+            box.classList.add('show');
+        }
+
+        renderQuiz('bab1', 'quiz-bab1');
+        renderQuiz('bab2', 'quiz-bab2');
+        renderQuiz('bab3', 'quiz-bab3');
+        renderQuiz('bab4', 'quiz-bab4');
+        renderQuiz('bab5', 'quiz-bab5');
+        renderQuiz('bab6', 'quiz-bab6');
+        renderQuiz('final', 'quiz-final', { finalMode: true });
+
+        /* ================= Python simulator engine ================= */
+        function stripComments(code) {
+            let result = '', i = 0, inString = null;
+            while (i < code.length) {
+                if (inString) {
+                    if (inString.length === 3) {
+                        if (code.slice(i, i + 3) === inString) { result += inString; i += 3; inString = null; continue; }
+                        result += code[i]; i++; continue;
+                    } else {
+                        if (code[i] === '\\' && i + 1 < code.length) { result += code[i] + code[i + 1]; i += 2; continue; }
+                        if (code[i] === inString) { result += code[i]; i++; inString = null; continue; }
+                        result += code[i]; i++; continue;
+                    }
+                } else {
+                    if (code.slice(i, i + 3) === '"""' || code.slice(i, i + 3) === "'''") { inString = code.slice(i, i + 3); result += inString; i += 3; continue; }
+                    if (code[i] === '"' || code[i] === "'") { inString = code[i]; result += code[i]; i++; continue; }
+                    if (code[i] === '#') { while (i < code.length && code[i] !== '\n') i++; continue; }
+                    result += code[i]; i++;
+                }
+            }
+            return result;
+        }
+        function processEscapes(str) {
+            return str.replace(/\\n/g, "\n").replace(/\\t/g, "\t").replace(/\\"/g, '"').replace(/\\'/g, "'").replace(/\\\\/g, "\\");
+        }
+        function hasTopLevelComma(raw) {
+            let depth = 0, inString = null, i = 0;
+            while (i < raw.length) {
+                if (inString) {
+                    if (inString.length === 3) { if (raw.slice(i, i + 3) === inString) { inString = null; i += 3; continue; } i++; continue; }
+                    else { if (raw[i] === '\\') { i += 2; continue; } if (raw[i] === inString) { inString = null; i++; continue; } i++; continue; }
+                } else {
+                    if (raw.slice(i, i + 3) === '"""' || raw.slice(i, i + 3) === "'''") { inString = raw.slice(i, i + 3); i += 3; continue; }
+                    if (raw[i] === '"' || raw[i] === "'") { inString = raw[i]; i++; continue; }
+                    if (raw[i] === '(') { depth++; i++; continue; }
+                    if (raw[i] === ')') { depth--; i++; continue; }
+                    if (raw[i] === ',' && depth === 0) return true;
+                    i++;
+                }
+            }
+            return false;
+        }
+        function splitStatements(code) {
+            const stmts = []; let cur = '', i = 0, inString = null, depth = 0;
+            while (i < code.length) {
+                if (inString) {
+                    if (inString.length === 3) { if (code.slice(i, i + 3) === inString) { cur += inString; i += 3; inString = null; continue; } cur += code[i]; i++; continue; }
+                    else { if (code[i] === '\\' && i + 1 < code.length) { cur += code[i] + code[i + 1]; i += 2; continue; } if (code[i] === inString) { cur += code[i]; i++; inString = null; continue; } cur += code[i]; i++; continue; }
+                } else {
+                    if (code.slice(i, i + 3) === '"""' || code.slice(i, i + 3) === "'''") { inString = code.slice(i, i + 3); cur += inString; i += 3; continue; }
+                    if (code[i] === '"' || code[i] === "'") { inString = code[i]; cur += code[i]; i++; continue; }
+                    if (code[i] === '(') { depth++; cur += code[i]; i++; continue; }
+                    if (code[i] === ')') { depth--; cur += code[i]; i++; continue; }
+                    if (code[i] === '\n' && depth === 0) { stmts.push(cur); cur = ''; i++; continue; }
+                    cur += code[i]; i++; continue;
+                }
+            }
+            stmts.push(cur);
+            return stmts.map(s => s.trim()).filter(s => s.length > 0);
+        }
+        function tokenizeExpr(s) {
+            const tokens = []; let i = 0;
+            while (i < s.length) {
+                const c = s[i];
+                if (/\s/.test(c)) { i++; continue; }
+                if (/[0-9]/.test(c) || (c === '.' && /[0-9]/.test(s[i + 1] || ''))) {
+                    let num = '', hasDot = false;
+                    while (i < s.length && /[0-9.]/.test(s[i])) { if (s[i] === '.') hasDot = true; num += s[i]; i++; }
+                    tokens.push({ type: 'num', value: parseFloat(num), isFloat: hasDot });
+                    continue;
+                }
+                if (s.slice(i, i + 3) === '"""' || s.slice(i, i + 3) === "'''") {
+                    const q = s.slice(i, i + 3);
+                    const end = s.indexOf(q, i + 3);
+                    if (end === -1) throw new Error('⚠️ Triple quote belum ditutup dengan benar.');
+                    tokens.push({ type: 'str', value: s.slice(i + 3, end) });
+                    i = end + 3; continue;
+                }
+                if (c === '"' || c === "'") {
+                    const q = c; let j = i + 1, buf = '', closed = false;
+                    while (j < s.length) {
+                        if (s[j] === '\\' && j + 1 < s.length) { buf += s[j] + s[j + 1]; j += 2; continue; }
+                        if (s[j] === q) { closed = true; j++; break; }
+                        buf += s[j]; j++;
+                    }
+                    if (!closed) throw new Error('⚠️ Tanda kutip belum ditutup dengan benar.');
+                    tokens.push({ type: 'str', value: processEscapes(buf) });
+                    i = j; continue;
+                }
+                if (/[A-Za-z_]/.test(c)) {
+                    let id = '';
+                    while (i < s.length && /[A-Za-z0-9_]/.test(s[i])) { id += s[i]; i++; }
+                    tokens.push({ type: 'ident', value: id });
+                    continue;
+                }
+                if (c === '*' && s[i + 1] === '*') { tokens.push({ type: '**' }); i += 2; continue; }
+                if (c === '/' && s[i + 1] === '/') { tokens.push({ type: '//' }); i += 2; continue; }
+                if ('+-*/%(),'.includes(c)) { tokens.push({ type: c }); i++; continue; }
+                throw new Error('⚠️ Ada karakter yang belum dikenal: "' + c + '"');
+            }
+            return tokens;
+        }
+        function formatValue(v) {
+            if (v.type === 'str') return v.value;
+            if (v.isFloat) { if (Number.isInteger(v.value)) return v.value.toFixed(1); return String(v.value); }
+            return String(v.value);
+        }
+        function parseAndEval(tokens, env) {
+            let pos = 0;
+            const peek = () => tokens[pos];
+            const next = () => tokens[pos++];
+            function expect(type) { if (!peek() || peek().type !== type) throw new Error('⚠️ Tanda kurung/simbol yang diharapkan tidak ditemukan.'); next(); }
+            function applyOp(op, a, b) {
+                if (op === '+') {
+                    if (a.type === 'str' && b.type === 'str') return { type: 'str', value: a.value + b.value };
+                    if (a.type === 'num' && b.type === 'num') return { type: 'num', value: a.value + b.value, isFloat: a.isFloat || b.isFloat };
+                    throw new Error('⚠️ TypeError: nggak bisa langsung menggabungkan teks dan angka pakai +. Kalau nilainya dari input(), bungkus dulu pakai int() atau float().');
+                }
+                if (op === '*') {
+                    if (a.type === 'num' && b.type === 'num') return { type: 'num', value: a.value * b.value, isFloat: a.isFloat || b.isFloat };
+                    if (a.type === 'str' && b.type === 'num' && !b.isFloat) return { type: 'str', value: b.value > 0 ? a.value.repeat(b.value) : '' };
+                    if (b.type === 'str' && a.type === 'num' && !a.isFloat) return { type: 'str', value: a.value > 0 ? b.value.repeat(a.value) : '' };
+                    throw new Error('⚠️ TypeError: perkalian ini nggak didukung untuk tipe data tersebut.');
+                }
+                if (a.type !== 'num' || b.type !== 'num') throw new Error('⚠️ TypeError: operator "' + op + '" cuma bisa dipakai untuk angka, bukan teks. Kalau nilainya dari input(), bungkus dulu pakai int() atau float().');
+                const isFloat = a.isFloat || b.isFloat || op === '/';
+                let value;
+                switch (op) {
+                    case '-': value = a.value - b.value; break;
+                    case '/': if (b.value === 0) throw new Error('⚠️ ZeroDivisionError: tidak bisa membagi dengan nol.'); value = a.value / b.value; break;
+                    case '//': if (b.value === 0) throw new Error('⚠️ ZeroDivisionError: tidak bisa membagi dengan nol.'); value = Math.floor(a.value / b.value); break;
+                    case '%': if (b.value === 0) throw new Error('⚠️ ZeroDivisionError: tidak bisa membagi dengan nol.'); value = a.value - Math.floor(a.value / b.value) * b.value; break;
+                    case '**': value = Math.pow(a.value, b.value); break;
+                }
+                return { type: 'num', value, isFloat };
+            }
+            function convertType(fn, v) {
+                if (fn === 'int') {
+                    if (v.type === 'num') return { type: 'num', value: Math.trunc(v.value), isFloat: false };
+                    const s = v.value.trim();
+                    if (!/^-?\d+$/.test(s)) throw new Error('⚠️ ValueError: "' + v.value + '" bukan bilangan bulat yang valid buat int().');
+                    return { type: 'num', value: parseInt(s, 10), isFloat: false };
+                }
+                if (fn === 'float') {
+                    if (v.type === 'num') return { type: 'num', value: v.value, isFloat: true };
+                    const s = v.value.trim();
+                    if (!/^-?\d+(\.\d+)?$/.test(s)) throw new Error('⚠️ ValueError: "' + v.value + '" bukan angka desimal yang valid buat float().');
+                    return { type: 'num', value: parseFloat(s), isFloat: true };
+                }
+            }
+            function parseExpr() { let left = parseTerm(); while (peek() && (peek().type === '+' || peek().type === '-')) { const op = next().type; left = applyOp(op, left, parseTerm()); } return left; }
+            function parseTerm() { let left = parsePower(); while (peek() && ['*', '/', '//', '%'].includes(peek().type)) { const op = next().type; left = applyOp(op, left, parsePower()); } return left; }
+            function parsePower() { let base = parseUnary(); if (peek() && peek().type === '**') { next(); const exp = parsePower(); base = applyOp('**', base, exp); } return base; }
+            function parseUnary() {
+                if (peek() && peek().type === '-') { next(); const v = parseUnary(); if (v.type !== 'num') throw new Error('⚠️ Tanda minus cuma bisa dipakai di depan angka.'); return { type: 'num', value: -v.value, isFloat: v.isFloat }; }
+                if (peek() && peek().type === '+') { next(); return parseUnary(); }
+                return parsePrimary();
+            }
+            function parsePrimary() {
+                const t = peek();
+                if (!t) throw new Error('⚠️ Ekspresinya belum lengkap.');
+                if (t.type === 'num') { next(); return { type: 'num', value: t.value, isFloat: t.isFloat }; }
+                if (t.type === 'str') { next(); return { type: 'str', value: t.value }; }
+                if (t.type === '(') { next(); const v = parseExpr(); expect(')'); return v; }
+                if (t.type === 'ident') {
+                    next();
+                    const name = t.value;
+                    if (peek() && peek().type === '(') {
+                        next();
+                        if (name === 'input') {
+                            let promptMsg = 'Masukkan nilai:';
+                            if (peek() && peek().type !== ')') { const argVal = parseExpr(); if (argVal.type !== 'str') throw new Error('⚠️ Teks prompt input() harus berupa string, contoh: input("Masukkan nama: ")'); promptMsg = argVal.value; }
+                            expect(')');
+                            const userVal = window.prompt(promptMsg);
+                            return { type: 'str', value: userVal === null ? '' : userVal };
+                        }
+                        if (name === 'int' || name === 'float') { const argVal = parseExpr(); expect(')'); return convertType(name, argVal); }
+                        throw new Error('⚠️ Fungsi "' + name + '()" belum dikenal di modul ini.');
+                    }
+                    if (!(name in env)) throw new Error('⚠️ NameError: variabel "' + name + '" belum pernah dibuat.');
+                    return env[name];
+                }
+                throw new Error('⚠️ Ada bagian ekspresi yang nggak valid.');
+            }
+            if (!tokens.length) throw new Error('⚠️ Ekspresinya kosong.');
+            const result = parseExpr();
+            if (pos < tokens.length) throw new Error('⚠️ Ada bagian yang nggak bisa diproses di akhir ekspresi.');
+            return result;
+        }
+        const RESERVED_WORDS = new Set(['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield', 'print', 'input', 'int', 'float', 'str']);
+        function tryParseAssignTarget(stmt) { const m = stmt.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=)([\s\S]*)$/); if (!m) return null; return { name: m[1], exprText: m[2] }; }
+        function findTopLevelEqualsIndex(stmt) {
+            let depth = 0, inString = null, i = 0;
+            while (i < stmt.length) {
+                if (inString) { if (inString.length === 3) { if (stmt.slice(i, i + 3) === inString) { inString = null; i += 3; continue; } i++; continue; } else { if (stmt[i] === '\\') { i += 2; continue; } if (stmt[i] === inString) { inString = null; i++; continue; } i++; continue; } }
+                else {
+                    if (stmt.slice(i, i + 3) === '"""' || stmt.slice(i, i + 3) === "'''") { inString = stmt.slice(i, i + 3); i += 3; continue; }
+                    if (stmt[i] === '"' || stmt[i] === "'") { inString = stmt[i]; i++; continue; }
+                    if (stmt[i] === '(') { depth++; i++; continue; }
+                    if (stmt[i] === ')') { depth--; i++; continue; }
+                    if (stmt[i] === '=' && stmt[i + 1] !== '=' && stmt[i - 1] !== '=' && depth === 0) return i;
+                    i++;
+                }
+            }
+            return -1;
+        }
+        function validateVarName(name) {
+            if (/^[0-9]/.test(name)) return 'nggak boleh diawali angka';
+            if (RESERVED_WORDS.has(name)) return 'nggak boleh pakai kata yang udah dipakai Python ("' + name + '")';
+            if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(name)) return 'cuma boleh huruf, angka, dan underscore ( _ ), tanpa spasi';
+            return null;
+        }
+        function runPythonSim(code) {
+            const stripped = stripComments(code);
+            const statements = splitStatements(stripped);
+            if (statements.length === 0) throw new Error('⚠️ Belum ada kode yang bisa dijalankan.');
+            const env = {}; const output = []; let sawPrint = false;
+            for (const stmt of statements) {
+                if (/^print\s*\(/.test(stmt)) {
+                    sawPrint = true;
+                    if (!stmt.endsWith(')')) throw new Error('⚠️ Ada tanda kurung print( yang belum ditutup.');
+                    const inner = stmt.slice(stmt.indexOf('(') + 1, stmt.length - 1);
+                    if (inner.trim() === '') { output.push(''); continue; }
+                    if (hasTopLevelComma(inner)) throw new Error('💡 print() di modul ini baru mendukung satu nilai per pemanggilan. Coba pisah jadi print() terpisah ya.');
+                    const result = parseAndEval(tokenizeExpr(inner), env);
+                    output.push(formatValue(result));
+                    continue;
+                }
+                const assign = tryParseAssignTarget(stmt);
+                if (assign) {
+                    const problem = validateVarName(assign.name);
+                    if (problem) throw new Error('⚠️ SyntaxError: nama variabel "' + assign.name + '" ' + problem + '.');
+                    if (hasTopLevelComma(assign.exprText)) throw new Error('💡 Simulator ini baru mendukung satu nilai per variabel.');
+                    const result = parseAndEval(tokenizeExpr(assign.exprText), env);
+                    env[assign.name] = result;
+                    continue;
+                }
+                const eqIdx = findTopLevelEqualsIndex(stmt);
+                if (eqIdx !== -1) {
+                    const attempted = stmt.slice(0, eqIdx).trim();
+                    const problem = validateVarName(attempted) || 'formatnya belum sesuai';
+                    throw new Error('⚠️ SyntaxError: nama variabel "' + attempted + '" ' + problem + '.');
+                }
+                throw new Error('⚠️ Baris "' + stmt + '" bukan print() atau pemberian nilai variabel yang dikenali simulator ini.');
+            }
+            if (!sawPrint && output.length === 0) return '(Kode berhasil dijalankan, tapi belum ada print() jadi belum ada yang tampil.)';
+            return output.join('\n');
+        }
+        function runCode(editorId, outputId, babKey) {
+            const code = document.getElementById(editorId).value;
+            const out = document.getElementById(outputId);
+            out.classList.remove('error');
+            try {
+                out.textContent = runPythonSim(code);
+                if (babKey && sectionDone[babKey] !== undefined) markSectionComplete(babKey);
+            } catch (e) {
+                out.textContent = e.message;
+                out.classList.add('error');
+            }
+        }
+    </script>
+</body>
+
+</html>

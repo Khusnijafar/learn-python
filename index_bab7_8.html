@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Ajar Interaktif — Bab 7–11</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Caveat:wght@600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="scrollRail">
+        <div id="scrollFill"></div>
+    </div>
+
+    <header class="hero">
+        <nav class="top-nav">
+            <a href="index.html">🏠 Beranda</a>
+            <span class="sep">|</span>
+            <span class="current">📘 Bab 7–11</span>
+            <a href="index_bab1_6.html">Bab 1–6 ←</a>
+        </nav>
+        <div class="hero-kicker"><span class="dot"></span>MODUL AJAR · SESI PRIVAT</div>
+        <h1 class="hero-title">Pengenalan <span class="snake">Python</span> untuk Pemula</h1>
+        <div class="hero-meta">
+            <span>Bab 7–11</span>
+            <span>Level: Pemula → Menengah</span>
+        </div>
+    </header>
+
+    <nav class="toc" id="toc">
+        <div class="toc-head">
+            <h2>📋 Daftar Isi</h2>
+            <span id="tocPct">0% selesai</span>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab7"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 7 — Variable in Python</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab7-1">Variable in Python</a>
+                <a class="toc-item" href="#bab7-2">How to use Variable</a>
+                <a class="toc-item" href="#bab7-3">Rules in Typing Variables</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-codepractice"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Code Practice</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#codepractice-1">Code Practice 1</a>
+                <a class="toc-item" href="#codepractice-2">Code Practice 2</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab8"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 8 — Input in Python</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab8-1">Input and Data Types Explanation</a>
+                <a class="toc-item" href="#bab8-2">Input Explanation</a>
+                <a class="toc-item" href="#bab8-3">Code Practice 1</a>
+                <a class="toc-item" href="#bab8-4">Code Practice 2</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab9"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 9 — Python Data Types</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab9-1">Penjelasan Data Types</a>
+                <a class="toc-item" href="#bab9-2">Try to check Data Types</a>
+                <a class="toc-item" href="#bab9-3">Data Types Conversion</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab10"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 10 — List in Python</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab10-1">List Explanation</a>
+                <a class="toc-item" href="#bab10-2">How to use & List Rules in Python</a>
+                <a class="toc-item" href="#bab10-3">Try to use List</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab11"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 11 — Python Turtle</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab11-1">Python Turtle</a>
+                <a class="toc-item" href="#bab11-2">Python Turtle Methods</a>
+                <a class="toc-item" href="#bab11-3">Try Python Turtle</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-challenge2"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Challenge</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#challenge2-1">Challenge 1 — Data Types & List</a>
+                <a class="toc-item" href="#challenge2-2">Challenge 2 — Turtle Drawing</a>
+                <a class="toc-item" href="#challenge2-3">Challenge 3 — List & Turtle Combo</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <a class="toc-header" href="#kuis-final2" style="text-decoration:none;">
+                <span class="toc-check" id="check-quizfinal2"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Quiz</span>
+            </a>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- ================= BAB 7 ================= -->
+        <section class="bab" id="bab7">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 7 —
+                        Variable in Python"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 7 — Variable in Python">Bab 7 — Variable in Python</h2>
+                <p class="bab-intro">Sekarang kita belajar cara nyimpen nilai supaya bisa dipakai berkali-kali tanpa
+                    nulis ulang — kenalan sama variable, yuk!</p>
+            </div>
+
+            <div class="card" id="bab7-1">
+                <h3><span class="num">7.1</span> Variable in Python</h3>
+                <p><b>Variable</b> itu kayak kotak penyimpanan yang punya nama (label), isinya bisa berupa teks, angka,
+                    dan lain-lain. Sekali kamu simpan sesuatu ke dalam variable, kamu bisa pakai lagi nilainya kapan pun
+                    cukup dengan manggil namanya.</p>
+                <p>Kenapa variable penting?</p>
+                <ul>
+                    <li>Kode jadi lebih fleksibel — tinggal ganti isi variable-nya, nggak perlu ubah kode di banyak
+                        tempat.</li>
+                    <li>Nggak perlu nulis ulang nilai yang sama berkali-kali.</li>
+                    <li>Bikin kode lebih gampang dibaca, karena nama variable bisa menjelaskan isinya.</li>
+                </ul>
+                <div class="note"><span class="hand">Catatan tutor:</span> analoginya kayak toples berlabel di dapur —
+                    toples berlabel "gula" isinya bisa diganti-ganti, tapi labelnya tetap sama supaya gampang dicari.
+                </div>
+            </div>
+
+            <div class="card" id="bab7-2">
+                <h3><span class="num">7.2</span> How to Use Variable</h3>
+                <p>Cara membuat variable gampang banget — tinggal tulis nama variable-nya, tanda sama dengan <code
+                        class="inline">=</code>, terus nilainya. Tanda <code class="inline">=</code> di sini artinya
+                    "memberi nilai", bukan "sama dengan" kayak di matematika!</p>
+                <div class="term">
+                    <div class="term-bar">variable.py</div>
+                    <pre>nama = <span class="str">"Siti"</span>
+umur = 15
+<span class="fn">print</span>(nama)
+<span class="fn">print</span>(umur)
+<span class="cm"># Hasil: Siti lalu 15</span></pre>
+                </div>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">variable.py</span><button class="pg-run"
+                            onclick="runCode('ed-main7','out-main7','bab7')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-main7" spellcheck="false">nama = "Siti"
+umur = 15
+print(nama)
+print(umur)</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-main7"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bab7-3">
+                <h3><span class="num">7.3</span> Rules in Typing Variables</h3>
+                <ul>
+                    <li>Harus diawali huruf atau underscore <code class="inline">_</code> — <b>tidak boleh</b> diawali
+                        angka.</li>
+                    <li>Setelah huruf pertama, boleh mengandung huruf, angka, atau underscore.</li>
+                    <li>Tidak boleh ada spasi — pakai underscore.</li>
+                    <li><i>Case-sensitive</i> — <code class="inline">nama</code> dan <code class="inline">Nama</code>
+                        beda.</li>
+                    <li>Tidak boleh pakai kata kunci Python seperti <code class="inline">print</code>, <code
+                            class="inline">input</code>, <code class="inline">if</code>, <code
+                            class="inline">for</code>.</li>
+                </ul>
+                <div class="challenge">
+                    <span class="chal-tag">KUIS KILAT</span>
+                    <div class="quiz-q">
+                        <p class="quiz-question">Manakah nama variable yang paling benar?</p>
+                        <div class="quiz-options">
+                            <button class="quiz-opt"
+                                onclick="answerInline(this,false,'Nama variable nggak boleh diawali angka.')">2nilai</button>
+                            <button class="quiz-opt" onclick="answerInline(this,false,'Ada spasi di tengah.')">nilai
+                                ujian</button>
+                            <button class="quiz-opt" onclick="answerInline(this,true,'Tepat!')">nilai_ujian</button>
+                            <button class="quiz-opt"
+                                onclick="answerInline(this,false,'print adalah kata kunci Python.')">print</button>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CODE PRACTICE (Variable) ================= -->
+        <section class="bab" id="codepractice">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Code
+                        Practice"</span>)</div>
+                <h2 class="bab-title" data-text="Code Practice">Code Practice</h2>
+                <p class="bab-intro">Waktunya latihan langsung pakai variable.</p>
+            </div>
+
+            <div class="card" id="codepractice-1">
+                <h3><span class="num">CP.1</span> Code Practice 1</h3>
+                <p>Buat 3 variable: <code class="inline">nama</code>, <code class="inline">hobi</code>, <code
+                        class="inline">cita_cita</code>, lalu <code class="inline">print()</code> ketiganya.</p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">perkenalan.py</span><button class="pg-run"
+                            onclick="runCode('ed-cp1','out-cp1','codepractice')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-cp1" spellcheck="false" rows="6">nama = "..."
+hobi = "..."
+cita_cita = "..."
+print(nama)
+print(hobi)
+print(cita_cita)</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-cp1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="codepractice-2">
+                <h3><span class="num">CP.2</span> Code Practice 2</h3>
+                <p>Buat variable <code class="inline">panjang</code> dan <code class="inline">lebar</code>, lalu <code
+                        class="inline">luas = panjang * lebar</code>, <code class="inline">print(luas)</code>.</p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">luas.py</span><button class="pg-run"
+                            onclick="runCode('ed-cp2','out-cp2','codepractice')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-cp2" spellcheck="false" rows="5">panjang = 8
+lebar = 5
+luas = panjang * lebar
+print(luas)</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-cp2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 8 ================= -->
+        <section class="bab" id="bab8">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 8 —
+                        Input in Python"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 8 — Input in Python">Bab 8 — Input in Python</h2>
+                <p class="bab-intro">Program bisa nanya sesuatu ke user, bukan cuma nampilin teks.</p>
+            </div>
+
+            <div class="card" id="bab8-1">
+                <h3><span class="num">8.1</span> Input and Data Types Explanation</h3>
+                <p><code class="inline">input()</code> selalu menghasilkan <b>string</b> (teks), walaupun user mengetik
+                    angka.</p>
+                <p>Kalau mau dipakai buat hitung, ubah dulu pakai <code class="inline">int()</code> atau <code
+                        class="inline">float()</code>.</p>
+            </div>
+
+            <div class="card" id="bab8-2">
+                <h3><span class="num">8.2</span> Input Explanation</h3>
+                <div class="term">
+                    <div class="term-bar">tanya.py</div>
+                    <pre>nama = <span class="fn">input</span>(<span class="str">"Siapa namamu? "</span>)
+<span class="fn">print</span>(nama)</pre>
+                </div>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">tanya.py</span><button class="pg-run"
+                            onclick="runCode('ed-main8','out-main8','bab8')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-main8" spellcheck="false" rows="4">nama = input("Siapa namamu? ")
+print(nama)</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-main8"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bab8-3">
+                <h3><span class="num">8.3</span> Code Practice 1</h3>
+                <p>Minta nama user, lalu sapa dengan namanya.</p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">sapaan.py</span><button class="pg-run"
+                            onclick="runCode('ed-bp1','out-bp1','bab8')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-bp1" spellcheck="false" rows="4">nama = input("Siapa namamu? ")
+print("Halo, " + nama + "!")</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-bp1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bab8-4">
+                <h3><span class="num">8.4</span> Code Practice 2</h3>
+                <p>Minta dua angka, jumlahkan, lalu tampilkan hasilnya.</p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">jumlah.py</span><button class="pg-run"
+                            onclick="runCode('ed-bp2','out-bp2','bab8')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-bp2" spellcheck="false" rows="6">angka1 = int(input("Angka pertama: "))
+angka2 = int(input("Angka kedua: "))
+hasil = angka1 + angka2
+print(hasil)</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-bp2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 9 ================= -->
+        <section class="bab" id="bab9">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 9 —
+                        Python Data Types"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 9 — Python Data Types">Bab 9 — Python Data Types</h2>
+                <p class="bab-intro">Setiap nilai di Python punya tipe data. Yuk kenali tipe-tipe dasar dan cara
+                    mengubahnya.</p>
+            </div>
+
+            <div class="card" id="bab9-1">
+                <h3><span class="num">9.1</span> Penjelasan Data Types</h3>
+                <p>Python memiliki beberapa tipe data bawaan yang sering dipakai:</p>
+                <ul>
+                    <li><b>int</b> — bilangan bulat, contoh: <code class="inline">10</code>, <code
+                            class="inline">-3</code>, <code class="inline">0</code></li>
+                    <li><b>float</b> — bilangan desimal, contoh: <code class="inline">3.14</code>, <code
+                            class="inline">-0.5</code>, <code class="inline">2.0</code></li>
+                    <li><b>str</b> — teks/string, contoh: <code class="inline">"Halo"</code>, <code
+                            class="inline">'Python'</code></li>
+                    <li><b>bool</b> — nilai kebenaran: <code class="inline">True</code> atau <code
+                            class="inline">False</code></li>
+                    <li><b>list</b> — kumpulan nilai berurutan, contoh: <code class="inline">[1, 2, 3]</code></li>
+                    <li><b>tuple</b> — seperti list tapi tidak bisa diubah, contoh: <code
+                            class="inline">(1, 2, 3)</code></li>
+                    <li><b>dict</b> — pasangan kunci-nilai, contoh: <code
+                            class="inline">{"nama": "Siti", "umur": 15}</code></li>
+                    <li><b>set</b> — kumpulan nilai unik, contoh: <code class="inline">{1, 2, 3}</code></li>
+                </ul>
+                <div class="tip">💡 Tipe data menentukan operasi apa yang bisa dilakukan pada nilai tersebut. Misalnya,
+                    kamu bisa menjumlahkan dua angka, tapi tidak bisa menjumlahkan angka dengan teks secara langsung.
+                </div>
+            </div>
+
+            <div class="card" id="bab9-2">
+                <h3><span class="num">9.2</span> Try to check Data Types</h3>
+                <p>Gunakan fungsi <code class="inline">type()</code> untuk mengecek tipe data suatu nilai. Coba ubah
+                    nilai di dalam <code class="inline">type()</code> dan lihat hasilnya.</p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">cek_tipe.py</span><button class="pg-run"
+                            onclick="runCode('ed-dt1','out-dt1','bab9')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-dt1" spellcheck="false" rows="4">print(type(10))
+print(type(3.14))
+print(type("Python"))
+print(type(True))</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-dt1"></div>
+                    </div>
+                </div>
+                <div class="challenge">
+                    <span class="chal-tag">TANTANGAN</span>
+                    <p style="margin:0 0 8px;">Coba cek tipe data dari <code class="inline">[1, 2, 3]</code>, <code
+                            class="inline">(4, 5)</code>, dan <code class="inline">{"x": 1}</code>. Tambahkan baris
+                        <code class="inline">print(type(...))</code> di playground di atas, lalu jalankan!</p>
+                </div>
+            </div>
+
+            <div class="card" id="bab9-3">
+                <h3><span class="num">9.3</span> Data Types Conversion</h3>
+                <p>Kadang kita perlu mengubah suatu nilai dari satu tipe ke tipe lain. Python menyediakan fungsi-fungsi
+                    konversi:</p>
+                <ul>
+                    <li><code class="inline">int(x)</code> — mengubah x menjadi integer (bulat)</li>
+                    <li><code class="inline">float(x)</code> — mengubah x menjadi float (desimal)</li>
+                    <li><code class="inline">str(x)</code> — mengubah x menjadi string (teks)</li>
+                    <li><code class="inline">bool(x)</code> — mengubah x menjadi boolean (True/False)</li>
+                    <li><code class="inline">list(x)</code> — mengubah x menjadi list</li>
+                    <li><code class="inline">tuple(x)</code> — mengubah x menjadi tuple</li>
+                </ul>
+                <div class="term">
+                    <div class="term-bar">konversi.py</div>
+                    <pre>angka = <span class="str">"123"</span>
+<span class="fn">print</span>(<span class="fn">int</span>(angka) + 10)  <span class="cm"># 133</span>
+<span class="fn">print</span>(<span class="fn">float</span>(angka))       <span class="cm"># 123.0</span>
+<span class="fn">print</span>(<span class="fn">bool</span>(0))            <span class="cm"># False</span>
+<span class="fn">print</span>(<span class="fn">list</span>(<span class="str">"Python"</span>))    <span class="cm"># ['P', 'y', 't', 'h', 'o', 'n']</span></pre>
+                </div>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">konversi.py</span><button class="pg-run"
+                            onclick="runCode('ed-dt2','out-dt2','bab9')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-dt2" spellcheck="false" rows="6">angka_teks = "456"
+print(int(angka_teks) + 50)
+print(float(angka_teks))
+print(bool(0))
+print(list("Python"))</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-dt2"></div>
+                    </div>
+                </div>
+                <div class="challenge">
+                    <span class="chal-tag">CHALLENGE</span>
+                    <p style="margin:0 0 8px;">Buat program yang meminta user memasukkan dua angka (sebagai teks), lalu
+                        konversi ke integer, jumlahkan, dan tampilkan hasilnya dengan format: <i>"Hasil penjumlahan
+                            adalah: ..."</i></p>
+                    <div class="playground">
+                        <div class="pg-bar"><span class="pg-filename">penjumlahan_konversi.py</span><button
+                                class="pg-run" onclick="runCode('ed-dt3','out-dt3','bab9')">▶ Jalankan</button></div>
+                        <textarea class="pg-editor" id="ed-dt3" spellcheck="false" rows="5"># Tulis kode kamu di sini
+a = input("Angka pertama: ")
+b = input("Angka kedua: ")
+# konversi, jumlahkan, tampilkan</textarea>
+                        <div class="pg-output-wrap">
+                            <div class="pg-output-label">OUTPUT</div>
+                            <div class="pg-output" id="out-dt3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 10 ================= -->
+        <section class="bab" id="bab10">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 10 —
+                        List in Python"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 10 — List in Python">Bab 10 — List in Python</h2>
+                <p class="bab-intro">List adalah kumpulan nilai yang bisa diubah-ubah. Sangat berguna untuk menyimpan
+                    banyak data sekaligus.</p>
+            </div>
+
+            <div class="card" id="bab10-1">
+                <h3><span class="num">10.1</span> List Explanation</h3>
+                <p><b>List</b> adalah tipe data yang bisa menampung banyak nilai (bisa berbagai tipe) dalam satu
+                    variable. List dibuat dengan tanda kurung siku <code class="inline">[ ]</code> dan nilai-nilainya
+                    dipisahkan koma.</p>
+                <div class="term">
+                    <div class="term-bar">list.py</div>
+                    <pre>buah = [<span class="str">"apel"</span>, <span class="str">"pisang"</span>, <span class="str">"mangga"</span>]
+nilai = [90, 85, 78, 92]
+campuran = [<span class="str">"Andi"</span>, 17, <span class="str">"SMA"</span>, True]</pre>
+                </div>
+                <p>List bisa diakses indeksnya dimulai dari <b>0</b>:</p>
+                <div class="term">
+                    <div class="term-bar">list.py</div>
+                    <pre>buah = [<span class="str">"apel"</span>, <span class="str">"pisang"</span>, <span class="str">"mangga"</span>]
+<span class="fn">print</span>(buah[0])  <span class="cm"># apel</span>
+<span class="fn">print</span>(buah[2])  <span class="cm"># mangga</span>
+<span class="fn">print</span>(buah[-1]) <span class="cm"># mangga (indeks negatif dari belakang)</span></pre>
+                </div>
+                <div class="note"><span class="hand">Catatan tutor:</span> List itu <b>mutable</b> — artinya isinya bisa
+                    diubah setelah dibuat. Kamu bisa menambah, menghapus, atau mengganti elemen di dalam list.</div>
+            </div>
+
+            <div class="card" id="bab10-2">
+                <h3><span class="num">10.2</span> How to use & List Rules in Python</h3>
+                <p>Beberapa operasi penting pada list:</p>
+                <ul>
+                    <li><code class="inline">append(x)</code> — menambah x di akhir list</li>
+                    <li><code class="inline">insert(i, x)</code> — menyisipkan x pada indeks i</li>
+                    <li><code class="inline">remove(x)</code> — menghapus elemen pertama yang bernilai x</li>
+                    <li><code class="inline">pop(i)</code> — menghapus elemen pada indeks i (jika tanpa i, hapus elemen
+                        terakhir)</li>
+                    <li><code class="inline">len(list)</code> — mengembalikan jumlah elemen</li>
+                    <li><code class="inline">index(x)</code> — mengembalikan indeks pertama kemunculan x</li>
+                    <li><code class="inline">sort()</code> — mengurutkan list (untuk tipe yang sebanding)</li>
+                    <li><code class="inline">reverse()</code> — membalik urutan list</li>
+                </ul>
+                <div class="term">
+                    <div class="term-bar">list_ops.py</div>
+                    <pre>warna = [<span class="str">"merah"</span>, <span class="str">"kuning"</span>]
+warna.<span class="fn">append</span>(<span class="str">"hijau"</span>)
+<span class="fn">print</span>(warna)  <span class="cm"># ['merah', 'kuning', 'hijau']</span>
+warna.<span class="fn">insert</span>(1, <span class="str">"biru"</span>)
+<span class="fn">print</span>(warna)  <span class="cm"># ['merah', 'biru', 'kuning', 'hijau']</span>
+warna.<span class="fn">remove</span>(<span class="str">"kuning"</span>)
+<span class="fn">print</span>(warna)  <span class="cm"># ['merah', 'biru', 'hijau']</span>
+<span class="fn">print</span>(<span class="fn">len</span>(warna)) <span class="cm"># 3</span></pre>
+                </div>
+                <div class="tip">💡 List bisa berisi berbagai tipe data, bahkan list di dalam list (list bersarang).
+                </div>
+            </div>
+
+            <div class="card" id="bab10-3">
+                <h3><span class="num">10.3</span> Try to use List</h3>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">list_latihan.py</span><button class="pg-run"
+                            onclick="runCode('ed-list1','out-list1','bab10')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-list1" spellcheck="false" rows="8">buah = ["apel", "pisang", "mangga"]
+print(buah)
+# Tambahkan "jeruk" di akhir
+buah.append("jeruk")
+print(buah)
+# Sisipkan "anggur" di indeks 2
+buah.insert(2, "anggur")
+print(buah)</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-list1"></div>
+                    </div>
+                </div>
+                <div class="challenge">
+                    <span class="chal-tag">TANTANGAN</span>
+                    <p style="margin:0 0 8px;">Buat list berisi 5 angka bebas. Lalu:</p>
+                    <ol style="margin:4px 0 8px 20px;font-size:15px;">
+                        <li>Tampilkan angka terbesar (pakai <code class="inline">max()</code>)</li>
+                        <li>Tampilkan angka terkecil (pakai <code class="inline">min()</code>)</li>
+                        <li>Urutkan list dari kecil ke besar (pakai <code class="inline">sort()</code>)</li>
+                        <li>Balik urutannya (pakai <code class="inline">reverse()</code>)</li>
+                    </ol>
+                    <div class="playground">
+                        <div class="pg-bar"><span class="pg-filename">list_challenge.py</span><button class="pg-run"
+                                onclick="runCode('ed-list2','out-list2','bab10')">▶ Jalankan</button></div>
+                        <textarea class="pg-editor" id="ed-list2" spellcheck="false" rows="8">angka = [7, 2, 9, 4, 6]
+# Tulis kode kamu di sini
+print(max(angka))
+print(min(angka))
+angka.sort()
+print(angka)
+angka.reverse()
+print(angka)</textarea>
+                        <div class="pg-output-wrap">
+                            <div class="pg-output-label">OUTPUT</div>
+                            <div class="pg-output" id="out-list2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 11 ================= -->
+        <section class="bab" id="bab11">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 11 —
+                        Python Turtle"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 11 — Python Turtle">Bab 11 — Python Turtle</h2>
+                <p class="bab-intro">Turtle adalah cara seru untuk belajar pemrograman dengan menggambar. Kita akan
+                    menggerakkan "kura-kura" di layar menggunakan perintah Python.</p>
+            </div>
+
+            <div class="card" id="bab11-1">
+                <h3><span class="num">11.1</span> Python Turtle</h3>
+                <p>Module <b>turtle</b> adalah bagian dari library standar Python. Dengan turtle, kamu bisa menggambar
+                    berbagai bentuk dengan menggerakkan kursor seperti pena.</p>
+                <p>Konsep dasar: kura-kura bergerak di atas kanvas, meninggalkan jejak (jika pena diturunkan) atau tidak
+                    (jika pena diangkat). Kamu bisa mengatur warna, ukuran pena, kecepatan, dan banyak lagi.</p>
+                <div class="note"><span class="hand">Catatan tutor:</span> Di modul ini, kita menggunakan simulator
+                    turtle berbasis canvas. Semua perintah dasar turtle tersedia dan hasilnya langsung terlihat.</div>
+            </div>
+
+            <div class="card" id="bab11-2">
+                <h3><span class="num">11.2</span> Python Turtle Methods</h3>
+                <p>Berikut metode-metode utama turtle:</p>
+                <ul>
+                    <li><code class="inline">forward(jarak)</code> — maju sejauh jarak</li>
+                    <li><code class="inline">backward(jarak)</code> — mundur</li>
+                    <li><code class="inline">left(sudut)</code> — belok kiri (derajat)</li>
+                    <li><code class="inline">right(sudut)</code> — belok kanan</li>
+                    <li><code class="inline">penup()</code> — angkat pena (tidak meninggalkan jejak)</li>
+                    <li><code class="inline">pendown()</code> — turunkan pena</li>
+                    <li><code class="inline">color(warna)</code> — ubah warna pena (contoh: "red", "blue", "green",
+                        "#FF0000")</li>
+                    <li><code class="inline">pensize(ukuran)</code> — ubah ketebalan pena</li>
+                    <li><code class="inline">circle(jari_jari)</code> — gambar lingkaran</li>
+                    <li><code class="inline">begin_fill()</code> — mulai mengisi area</li>
+                    <li><code class="inline">end_fill()</code> — selesai mengisi area</li>
+                    <li><code class="inline">goto(x, y)</code> — pindah ke koordinat (x, y)</li>
+                    <li><code class="inline">setheading(derajat)</code> — arahkan ke sudut tertentu (0 = timur, 90 =
+                        utara)</li>
+                    <li><code class="inline">speed(kecepatan)</code> — kecepatan (0–10, 0 = tercepat)</li>
+                    <li><code class="inline">clear()</code> — hapus semua gambar</li>
+                    <li><code class="inline">home()</code> — kembali ke posisi awal (0,0) menghadap timur</li>
+                </ul>
+                <div class="tip">💡 Coba kombinasi perintah untuk membuat gambar yang keren! Misalnya: <code
+                        class="inline">forward(100); left(90); forward(100); left(90); ...</code> untuk buat persegi.
+                </div>
+            </div>
+
+            <div class="card" id="bab11-3">
+                <h3><span class="num">11.3</span> Try Python Turtle</h3>
+                <p>Tulis perintah turtle di kotak di bawah, lalu klik <b>Jalankan</b> untuk melihat hasilnya di kanvas.
+                </p>
+                <div class="turtle-canvas-wrap">
+                    <div class="turtle-bar">
+                        <span class="label">🐢 Turtle Canvas</span>
+                        <div class="btn-group">
+                            <button onclick="clearTurtle()">Clear</button>
+                            <button onclick="homeTurtle()">Home</button>
+                            <button class="primary" onclick="runTurtle()">▶ Jalankan</button>
+                        </div>
+                    </div>
+                    <canvas id="turtleCanvas" width="700" height="400"></canvas>
+                </div>
+                <div class="playground" style="margin-top:0;">
+                    <div class="pg-bar"><span class="pg-filename">turtle_script.py</span><button class="pg-run"
+                            onclick="runTurtle()">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-turtle" spellcheck="false" rows="8"># Contoh: buat persegi
+forward(100)
+left(90)
+forward(100)
+left(90)
+forward(100)
+left(90)
+forward(100)</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-turtle"></div>
+                    </div>
+                </div>
+                <div class="challenge">
+                    <span class="chal-tag">TANTANGAN</span>
+                    <p style="margin:0 0 8px;">Gambarlah sebuah segitiga sama sisi. Petunjuk: setiap sudut 60°, total
+                        sudut 180°.</p>
+                    <div class="playground" style="margin-top:8px;">
+                        <div class="pg-bar"><span class="pg-filename">segitiga.py</span><button class="pg-run"
+                                onclick="runTurtleCode('ed-turtle-ch1','out-turtle-ch1')">▶ Jalankan</button></div>
+                        <textarea class="pg-editor" id="ed-turtle-ch1" spellcheck="false" rows="6"># Gambar segitiga sama sisi
+forward(100)
+left(120)
+forward(100)
+left(120)
+forward(100)</textarea>
+                        <div class="pg-output-wrap">
+                            <div class="pg-output-label">OUTPUT</div>
+                            <div class="pg-output" id="out-turtle-ch1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CHALLENGE ================= -->
+        <section class="bab" id="challenge2">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span
+                        class="str">"Challenge"</span>)</div>
+                <h2 class="bab-title" data-text="Challenge">Challenge</h2>
+                <p class="bab-intro">Tantangan akhir untuk menguji semua skill yang sudah kamu pelajari dari Bab 7
+                    sampai 11.</p>
+            </div>
+
+            <div class="card" id="challenge2-1">
+                <h3><span class="num">CH.1</span> Data Types & List</h3>
+                <p>Buat program yang meminta user memasukkan 5 angka (pakai <code class="inline">input()</code>), simpan
+                    dalam list, lalu:</p>
+                <ul>
+                    <li>Tampilkan semua angka</li>
+                    <li>Tampilkan angka terbesar dan terkecil</li>
+                    <li>Tampilkan rata-rata (total / jumlah)</li>
+                    <li>Konversi semua angka ke float, lalu tampilkan</li>
+                </ul>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">challenge_data_list.py</span><button class="pg-run"
+                            onclick="runCode('ed-ch21','out-ch21','challenge2')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-ch21" spellcheck="false" rows="12"># Tulis kode kamu di sini
+angka = []
+for i in range(5):
+    nilai = int(input(f"Masukkan angka ke-{i+1}: "))
+    angka.append(nilai)
+
+print("Angka:", angka)
+print("Terbesar:", max(angka))
+print("Terkecil:", min(angka))
+print("Rata-rata:", sum(angka) / len(angka))
+
+# Konversi ke float
+float_angka = [float(x) for x in angka]
+print("Float:", float_angka)</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-ch21"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="challenge2-2">
+                <h3><span class="num">CH.2</span> Turtle Drawing</h3>
+                <p>Gunakan turtle untuk menggambar <b>bintang 5 sudut</b>. Petunjuk: bintang 5 sudut memiliki sudut luar
+                    144°.</p>
+                <div class="turtle-canvas-wrap">
+                    <div class="turtle-bar">
+                        <span class="label">🐢 Canvas</span>
+                        <div class="btn-group">
+                            <button onclick="clearTurtle()">Clear</button>
+                            <button onclick="homeTurtle()">Home</button>
+                            <button class="primary" onclick="runTurtleCode('ed-ch22','out-ch22')">▶ Jalankan</button>
+                        </div>
+                    </div>
+                    <canvas id="turtleCanvas2" width="700" height="400"></canvas>
+                </div>
+                <div class="playground" style="margin-top:0;">
+                    <div class="pg-bar"><span class="pg-filename">bintang.py</span><button class="pg-run"
+                            onclick="runTurtleCode('ed-ch22','out-ch22')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-ch22" spellcheck="false" rows="8"># Gambar bintang 5 sudut
+for i in range(5):
+    forward(100)
+    right(144)  # sudut luar bintang</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-ch22"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="challenge2-3">
+                <h3><span class="num">CH.3</span> List & Turtle Combo</h3>
+                <p>Buat list berisi warna-warna (misal: <code
+                        class="inline">["red", "blue", "green", "yellow", "purple"]</code>). Lalu gunakan turtle untuk
+                    menggambar 5 lingkaran dengan warna berbeda, masing-masing dengan jari-jari 50. Posisikan lingkaran
+                    agar tidak saling menutupi (misal: geser posisi setiap kali).</p>
+                <div class="turtle-canvas-wrap">
+                    <div class="turtle-bar">
+                        <span class="label">🐢 Canvas</span>
+                        <div class="btn-group">
+                            <button onclick="clearTurtle()">Clear</button>
+                            <button onclick="homeTurtle()">Home</button>
+                            <button class="primary" onclick="runTurtleCode('ed-ch23','out-ch23')">▶ Jalankan</button>
+                        </div>
+                    </div>
+                    <canvas id="turtleCanvas3" width="700" height="400"></canvas>
+                </div>
+                <div class="playground" style="margin-top:0;">
+                    <div class="pg-bar"><span class="pg-filename">lingkaran_warna.py</span><button class="pg-run"
+                            onclick="runTurtleCode('ed-ch23','out-ch23')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-ch23" spellcheck="false" rows="10">warna = ["red", "blue", "green", "yellow", "purple"]
+posisi = [-200, -100, 0, 100, 200]
+
+for i in range(5):
+    penup()
+    goto(posisi[i], 0)
+    pendown()
+    color(warna[i])
+    circle(50)</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-ch23"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= QUIZ FINAL ================= -->
+        <section class="bab" id="kuis-final2">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span
+                        class="str">"Quiz"</span>)</div>
+                <h2 class="bab-title" data-text="Quiz">Quiz</h2>
+                <p class="bab-intro">Uji pemahamanmu tentang Data Types, List, dan Turtle.</p>
+            </div>
+
+            <div class="card">
+                <h3>🏁 Quiz Bab 9–11</h3>
+                <div id="quiz-final2"></div>
+                <div id="finalScoreBox2">
+                    <div class="score-num"><span id="finalScoreNum2">0</span>/8</div>
+                    <div class="score-msg" id="finalScoreMsg2"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Modul ini bisa dibuka ulang kapan saja. Semangat terus belajar coding-nya! 🚀</p>
+        <div class="brand">🐍 Modul Ajar Python — Sesi Privat</div>
+        <a href="index_bab1_6.html" class="nav-link">← Kembali ke Bab 1–6</a>
+        <a href="index.html" class="nav-link" style="margin-left:10px;">🏠 Halaman Utama</a>
+        <div class="edit-hint">catatan: nama tutor / brand bisa diganti langsung di bagian footer file HTML ini</div>
+    </footer>
+
+    <script>
+        /* ================= PROGRESS RAIL ================= */
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const scrolled = h.scrollHeight > h.clientHeight
+                ? (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 : 0;
+            document.getElementById('scrollFill').style.width = scrolled + '%';
+        });
+
+        /* ================= TOC COLLAPSE ================= */
+        function toggleToc(btn) {
+            const sub = btn.nextElementSibling;
+            const chevron = btn.querySelector('.toc-chevron');
+            if (sub) sub.classList.toggle('collapsed');
+            if (chevron) chevron.classList.toggle('rotated');
+        }
+
+        /* ================= CHECKLIST ================= */
+        function toggleCheck(el) { el.classList.toggle('checked'); }
+
+        /* ================= HEADING TYPE-IN ================= */
+        const headingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('type-in');
+                    headingObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        document.querySelectorAll('h2.bab-title').forEach(el => headingObserver.observe(el));
+
+        /* ================= SECTION DONE TRACKING ================= */
+        const sectionDone = {
+            bab7: false, codepractice: false, bab8: false,
+            bab9: false, bab10: false, bab11: false,
+            challenge2: false, quizfinal2: false
+        };
+
+        function markSectionComplete(key) {
+            sectionDone[key] = true;
+            const el = document.getElementById('check-' + key);
+            if (el) el.classList.add('done');
+            updateTocPct();
+            // Simpan ke localStorage agar terbaca di halaman utama
+            try {
+                let progress = JSON.parse(localStorage.getItem('python_modul_progress') || '{}');
+                progress[key] = true;
+                localStorage.setItem('python_modul_progress', JSON.stringify(progress));
+            } catch (_) { }
+        }
+        function updateTocPct() {
+            const total = Object.keys(sectionDone).length;
+            const done = Object.values(sectionDone).filter(Boolean).length;
+            document.getElementById('tocPct').textContent = Math.round(done / total * 100) + '% selesai';
+        }
+
+        /* ================= INLINE QUIZ ================= */
+        function answerInline(btn, isCorrect, exp) {
+            const group = btn.parentElement;
+            const buttons = group.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => b.disabled = true);
+            const fb = group.nextElementSibling;
+            if (isCorrect) {
+                btn.classList.add('correct');
+                fb.textContent = '✅ ' + exp;
+                fb.className = 'quiz-feedback show correct';
+            } else {
+                btn.classList.add('wrong');
+                fb.textContent = '❌ ' + exp;
+                fb.className = 'quiz-feedback show wrong';
+            }
+        }
+
+        /* ================= QUIZ ENGINE ================= */
+        const quizzes = {
+            bab8: [
+                {
+                    q: 'Kalau kode ini dijalankan dan kamu mengetik "15" saat diminta input, apa yang terjadi?', code: 'umur = input("Umur: ")\nprint(umur + 1)', options: ["Hasilnya 16", "Hasilnya 151", "Muncul TypeError, karena umur masih berupa teks", "Hasilnya 15"], correct: 2,
+                    exp: 'input() selalu menghasilkan string, jadi umur bernilai teks "15" — nggak bisa langsung dijumlah dengan angka 1.'
+                },
+                {
+                    q: "Tipe data apa yang SELALU dihasilkan oleh input()?", options: ["int", "float", "string / teks", "boolean"], correct: 2,
+                    exp: "input() selalu mengembalikan string."
+                }
+            ],
+            final2: [
+                { q: "Tipe data apa yang digunakan untuk menyimpan teks di Python?", options: ["int", "float", "str", "bool"], correct: 2, exp: "str adalah tipe data untuk teks/string." },
+                { q: "Fungsi apa yang digunakan untuk mengecek tipe data suatu nilai?", options: ["check()", "type()", "typeof()", "isinstance()"], correct: 1, exp: "type() digunakan untuk mengecek tipe data." },
+                { q: "Bagaimana cara mengubah string '123' menjadi integer?", options: ["str('123')", "int('123')", "float('123')", "bool('123')"], correct: 1, exp: "int('123') mengubah string menjadi integer." },
+                { q: "Manakah cara yang benar untuk membuat list di Python?", options: ["(1,2,3)", "[1,2,3]", "{1,2,3}", "<1,2,3>"], correct: 1, exp: "List dibuat dengan tanda kurung siku []." },
+                { q: "Apa hasil dari len([10, 20, 30, 40])?", options: ["3", "4", "5", "Error"], correct: 1, exp: "len() mengembalikan jumlah elemen, yaitu 4." },
+                { q: "Metode apa yang digunakan untuk menambahkan elemen ke akhir list?", options: ["insert()", "append()", "add()", "push()"], correct: 1, exp: "append() menambahkan elemen di akhir list." },
+                { q: "Perintah turtle untuk maju sejauh 100 langkah adalah...", options: ["forward(100)", "move(100)", "fd(100)", "go(100)"], correct: 0, exp: "forward(100) adalah perintah turtle untuk maju." },
+                { q: "Perintah turtle untuk mengubah warna menjadi merah adalah...", options: ["color('red')", "pencolor('red')", "setcolor('red')", "warna('red')"], correct: 0, exp: "color('red') mengubah warna pena turtle." }
+            ]
+        };
+
+        const quizProgress = {};
+
+        function renderQuiz(key, containerId, { finalMode = false } = {}) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const data = quizzes[key];
+            if (!data) return;
+            container.innerHTML = data.map((item, qi) => {
+                const codeBlock = item.code ? `<pre style="background:var(--terminal-bg);color:var(--terminal-string);border-radius:8px;padding:10px 14px;font-size:13.5px;margin-top:8px;">${escapeHtml(item.code)}</pre>` : '';
+                return `
+    <div class="quiz-q" data-q="${qi}">
+      <p class="quiz-question">${qi + 1}. ${item.q}${codeBlock}</p>
+      <div class="quiz-options">
+        ${item.options.map((opt, oi) => `<button class="quiz-opt" onclick="answerQuiz('${key}',${qi},${oi},this,${finalMode})">${escapeHtml(opt)}</button>`).join('')}
+      </div>
+      <div class="quiz-feedback" id="${key}-fb-${qi}"></div>
+    </div>`;
+            }).join('');
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function answerQuiz(key, qi, oi, btnEl, finalMode) {
+            const item = quizzes[key][qi];
+            const buttons = btnEl.parentElement.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => b.disabled = true);
+            const fb = document.getElementById(`${key}-fb-${qi}`);
+            const isCorrect = oi === item.correct;
+            if (isCorrect) {
+                btnEl.classList.add('correct');
+                fb.textContent = '✅ Benar! ' + item.exp;
+                fb.className = 'quiz-feedback show correct';
+            } else {
+                btnEl.classList.add('wrong');
+                buttons[item.correct].classList.add('correct');
+                fb.textContent = '❌ Belum tepat. ' + item.exp;
+                fb.className = 'quiz-feedback show wrong';
+            }
+
+            if (!quizProgress[key]) quizProgress[key] = { answered: new Set(), correct: 0 };
+            if (!quizProgress[key].answered.has(qi)) {
+                quizProgress[key].answered.add(qi);
+                if (isCorrect) quizProgress[key].correct++;
+            }
+
+            if (quizProgress[key].answered.size === quizzes[key].length) {
+                if (finalMode) {
+                    showFinalScore2(quizProgress[key].correct, quizzes[key].length);
+                    markSectionComplete('quizfinal2');
+                } else if (sectionDone[key] !== undefined) {
+                    markSectionComplete(key);
+                }
+            }
+        }
+
+        function showFinalScore2(correct, total) {
+            const box = document.getElementById('finalScoreBox2');
+            document.getElementById('finalScoreNum2').textContent = correct;
+            let msg, bg, color;
+            if (correct >= 7) { msg = 'Keren banget! Kamu udah paham Data Types, List, dan Turtle. 🎉'; bg = 'var(--forest-wash)'; color = 'var(--forest-deep)'; }
+            else if (correct >= 4) { msg = 'Bagus! Beberapa bagian tinggal diulang sedikit lagi. 💪'; bg = 'var(--highlighter-wash)'; color = '#7A5B0A'; }
+            else { msg = 'Yuk baca ulang materinya sebentar, kamu pasti bisa! 🌱'; bg = 'var(--danger-wash)'; color = 'var(--danger)'; }
+            document.getElementById('finalScoreMsg2').textContent = msg;
+            box.style.background = bg;
+            box.style.color = color;
+            box.classList.add('show');
+        }
+
+        renderQuiz('bab8', 'quiz-bab8');
+        renderQuiz('final2', 'quiz-final2', { finalMode: true });
+
+        /* ================= PYTHON SIMULATOR (tanpa turtle) ================= */
+        function stripComments(code) {
+            let result = '', i = 0, inString = null;
+            while (i < code.length) {
+                if (inString) {
+                    if (inString.length === 3) {
+                        if (code.slice(i, i + 3) === inString) { result += inString; i += 3; inString = null; continue; }
+                        result += code[i]; i++; continue;
+                    } else {
+                        if (code[i] === '\\' && i + 1 < code.length) { result += code[i] + code[i + 1]; i += 2; continue; }
+                        if (code[i] === inString) { result += code[i]; i++; inString = null; continue; }
+                        result += code[i]; i++; continue;
+                    }
+                } else {
+                    if (code.slice(i, i + 3) === '"""' || code.slice(i, i + 3) === "'''") { inString = code.slice(i, i + 3); result += inString; i += 3; continue; }
+                    if (code[i] === '"' || code[i] === "'") { inString = code[i]; result += code[i]; i++; continue; }
+                    if (code[i] === '#') { while (i < code.length && code[i] !== '\n') i++; continue; }
+                    result += code[i]; i++;
+                }
+            }
+            return result;
+        }
+        function processEscapes(str) {
+            return str.replace(/\\n/g, "\n").replace(/\\t/g, "\t").replace(/\\"/g, '"').replace(/\\'/g, "'").replace(/\\\\/g, "\\");
+        }
+        function hasTopLevelComma(raw) {
+            let depth = 0, inString = null, i = 0;
+            while (i < raw.length) {
+                if (inString) {
+                    if (inString.length === 3) { if (raw.slice(i, i + 3) === inString) { inString = null; i += 3; continue; } i++; continue; }
+                    else { if (raw[i] === '\\') { i += 2; continue; } if (raw[i] === inString) { inString = null; i++; continue; } i++; continue; }
+                } else {
+                    if (raw.slice(i, i + 3) === '"""' || raw.slice(i, i + 3) === "'''") { inString = raw.slice(i, i + 3); i += 3; continue; }
+                    if (raw[i] === '"' || raw[i] === "'") { inString = raw[i]; i++; continue; }
+                    if (raw[i] === '(') { depth++; i++; continue; }
+                    if (raw[i] === ')') { depth--; i++; continue; }
+                    if (raw[i] === ',' && depth === 0) return true;
+                    i++;
+                }
+            }
+            return false;
+        }
+        function splitStatements(code) {
+            const stmts = []; let cur = '', i = 0, inString = null, depth = 0;
+            while (i < code.length) {
+                if (inString) {
+                    if (inString.length === 3) { if (code.slice(i, i + 3) === inString) { cur += inString; i += 3; inString = null; continue; } cur += code[i]; i++; continue; }
+                    else { if (code[i] === '\\' && i + 1 < code.length) { cur += code[i] + code[i + 1]; i += 2; continue; } if (code[i] === inString) { cur += code[i]; i++; inString = null; continue; } cur += code[i]; i++; continue; }
+                } else {
+                    if (code.slice(i, i + 3) === '"""' || code.slice(i, i + 3) === "'''") { inString = code.slice(i, i + 3); cur += inString; i += 3; continue; }
+                    if (code[i] === '"' || code[i] === "'") { inString = code[i]; cur += code[i]; i++; continue; }
+                    if (code[i] === '(') { depth++; cur += code[i]; i++; continue; }
+                    if (code[i] === ')') { depth--; cur += code[i]; i++; continue; }
+                    if (code[i] === '\n' && depth === 0) { stmts.push(cur); cur = ''; i++; continue; }
+                    cur += code[i]; i++; continue;
+                }
+            }
+            stmts.push(cur);
+            return stmts.map(s => s.trim()).filter(s => s.length > 0);
+        }
+        function tokenizeExpr(s) {
+            const tokens = []; let i = 0;
+            while (i < s.length) {
+                const c = s[i];
+                if (/\s/.test(c)) { i++; continue; }
+                if (/[0-9]/.test(c) || (c === '.' && /[0-9]/.test(s[i + 1] || ''))) {
+                    let num = '', hasDot = false;
+                    while (i < s.length && /[0-9.]/.test(s[i])) { if (s[i] === '.') hasDot = true; num += s[i]; i++; }
+                    tokens.push({ type: 'num', value: parseFloat(num), isFloat: hasDot });
+                    continue;
+                }
+                if (s.slice(i, i + 3) === '"""' || s.slice(i, i + 3) === "'''") {
+                    const q = s.slice(i, i + 3);
+                    const end = s.indexOf(q, i + 3);
+                    if (end === -1) throw new Error('⚠️ Triple quote belum ditutup dengan benar.');
+                    tokens.push({ type: 'str', value: s.slice(i + 3, end) });
+                    i = end + 3; continue;
+                }
+                if (c === '"' || c === "'") {
+                    const q = c; let j = i + 1, buf = '', closed = false;
+                    while (j < s.length) {
+                        if (s[j] === '\\' && j + 1 < s.length) { buf += s[j] + s[j + 1]; j += 2; continue; }
+                        if (s[j] === q) { closed = true; j++; break; }
+                        buf += s[j]; j++;
+                    }
+                    if (!closed) throw new Error('⚠️ Tanda kutip belum ditutup dengan benar.');
+                    tokens.push({ type: 'str', value: processEscapes(buf) });
+                    i = j; continue;
+                }
+                if (/[A-Za-z_]/.test(c)) {
+                    let id = '';
+                    while (i < s.length && /[A-Za-z0-9_]/.test(s[i])) { id += s[i]; i++; }
+                    tokens.push({ type: 'ident', value: id });
+                    continue;
+                }
+                if (c === '*' && s[i + 1] === '*') { tokens.push({ type: '**' }); i += 2; continue; }
+                if (c === '/' && s[i + 1] === '/') { tokens.push({ type: '//' }); i += 2; continue; }
+                if ('+-*/%(),'.includes(c)) { tokens.push({ type: c }); i++; continue; }
+                throw new Error('⚠️ Ada karakter yang belum dikenal: "' + c + '"');
+            }
+            return tokens;
+        }
+        function formatValue(v) {
+            if (v.type === 'str') return v.value;
+            if (v.isFloat) { if (Number.isInteger(v.value)) return v.value.toFixed(1); return String(v.value); }
+            return String(v.value);
+        }
+        function parseAndEval(tokens, env) {
+            let pos = 0;
+            const peek = () => tokens[pos];
+            const next = () => tokens[pos++];
+            function expect(type) { if (!peek() || peek().type !== type) throw new Error('⚠️ Tanda kurung/simbol yang diharapkan tidak ditemukan.'); next(); }
+            function applyOp(op, a, b) {
+                if (op === '+') {
+                    if (a.type === 'str' && b.type === 'str') return { type: 'str', value: a.value + b.value };
+                    if (a.type === 'num' && b.type === 'num') return { type: 'num', value: a.value + b.value, isFloat: a.isFloat || b.isFloat };
+                    throw new Error('⚠️ TypeError: nggak bisa langsung menggabungkan teks dan angka pakai +.');
+                }
+                if (op === '*') {
+                    if (a.type === 'num' && b.type === 'num') return { type: 'num', value: a.value * b.value, isFloat: a.isFloat || b.isFloat };
+                    if (a.type === 'str' && b.type === 'num' && !b.isFloat) return { type: 'str', value: b.value > 0 ? a.value.repeat(b.value) : '' };
+                    if (b.type === 'str' && a.type === 'num' && !a.isFloat) return { type: 'str', value: a.value > 0 ? b.value.repeat(a.value) : '' };
+                    throw new Error('⚠️ TypeError: perkalian ini nggak didukung untuk tipe data tersebut.');
+                }
+                if (a.type !== 'num' || b.type !== 'num') throw new Error('⚠️ TypeError: operator "' + op + '" cuma bisa dipakai untuk angka.');
+                const isFloat = a.isFloat || b.isFloat || op === '/';
+                let value;
+                switch (op) {
+                    case '-': value = a.value - b.value; break;
+                    case '/': if (b.value === 0) throw new Error('⚠️ ZeroDivisionError: tidak bisa membagi dengan nol.'); value = a.value / b.value; break;
+                    case '//': if (b.value === 0) throw new Error('⚠️ ZeroDivisionError: tidak bisa membagi dengan nol.'); value = Math.floor(a.value / b.value); break;
+                    case '%': if (b.value === 0) throw new Error('⚠️ ZeroDivisionError: tidak bisa membagi dengan nol.'); value = a.value - Math.floor(a.value / b.value) * b.value; break;
+                    case '**': value = Math.pow(a.value, b.value); break;
+                }
+                return { type: 'num', value, isFloat };
+            }
+            function convertType(fn, v) {
+                if (fn === 'int') {
+                    if (v.type === 'num') return { type: 'num', value: Math.trunc(v.value), isFloat: false };
+                    const s = v.value.trim();
+                    if (!/^-?\d+$/.test(s)) throw new Error('⚠️ ValueError: "' + v.value + '" bukan bilangan bulat yang valid buat int().');
+                    return { type: 'num', value: parseInt(s, 10), isFloat: false };
+                }
+                if (fn === 'float') {
+                    if (v.type === 'num') return { type: 'num', value: v.value, isFloat: true };
+                    const s = v.value.trim();
+                    if (!/^-?\d+(\.\d+)?$/.test(s)) throw new Error('⚠️ ValueError: "' + v.value + '" bukan angka desimal yang valid buat float().');
+                    return { type: 'num', value: parseFloat(s), isFloat: true };
+                }
+                if (fn === 'str') {
+                    return { type: 'str', value: String(v.value) };
+                }
+                if (fn === 'bool') {
+                    return { type: 'num', value: !!v.value, isFloat: false };
+                }
+                if (fn === 'list') {
+                    if (v.type === 'str') {
+                        return { type: 'list', value: Array.from(v.value).map(ch => ({ type: 'str', value: ch })) };
+                    }
+                    if (v.type === 'tuple') {
+                        return { type: 'list', value: v.value.map(item => item) };
+                    }
+                    throw new Error('⚠️ TypeError: list() tidak bisa mengonversi tipe ini.');
+                }
+                if (fn === 'tuple') {
+                    if (v.type === 'str') {
+                        return { type: 'tuple', value: Array.from(v.value).map(ch => ({ type: 'str', value: ch })) };
+                    }
+                    if (v.type === 'list') {
+                        return { type: 'tuple', value: v.value.map(item => item) };
+                    }
+                    throw new Error('⚠️ TypeError: tuple() tidak bisa mengonversi tipe ini.');
+                }
+            }
+            function parseExpr() { let left = parseTerm(); while (peek() && (peek().type === '+' || peek().type === '-')) { const op = next().type; left = applyOp(op, left, parseTerm()); } return left; }
+            function parseTerm() { let left = parsePower(); while (peek() && ['*', '/', '//', '%'].includes(peek().type)) { const op = next().type; left = applyOp(op, left, parsePower()); } return left; }
+            function parsePower() { let base = parseUnary(); if (peek() && peek().type === '**') { next(); const exp = parsePower(); base = applyOp('**', base, exp); } return base; }
+            function parseUnary() {
+                if (peek() && peek().type === '-') { next(); const v = parseUnary(); if (v.type !== 'num') throw new Error('⚠️ Tanda minus cuma bisa dipakai di depan angka.'); return { type: 'num', value: -v.value, isFloat: v.isFloat }; }
+                if (peek() && peek().type === '+') { next(); return parseUnary(); }
+                return parsePrimary();
+            }
+            function parsePrimary() {
+                const t = peek();
+                if (!t) throw new Error('⚠️ Ekspresinya belum lengkap.');
+                if (t.type === 'num') { next(); return { type: 'num', value: t.value, isFloat: t.isFloat }; }
+                if (t.type === 'str') { next(); return { type: 'str', value: t.value }; }
+                if (t.type === '(') { next(); const v = parseExpr(); expect(')'); return v; }
+                if (t.type === 'ident') {
+                    next();
+                    const name = t.value;
+                    if (peek() && peek().type === '(') {
+                        next();
+                        if (name === 'input') {
+                            let promptMsg = 'Masukkan nilai:';
+                            if (peek() && peek().type !== ')') { const argVal = parseExpr(); if (argVal.type !== 'str') throw new Error('⚠️ Teks prompt input() harus berupa string.'); promptMsg = argVal.value; }
+                            expect(')');
+                            const userVal = window.prompt(promptMsg);
+                            return { type: 'str', value: userVal === null ? '' : userVal };
+                        }
+                        if (['int', 'float', 'str', 'bool', 'list', 'tuple'].includes(name)) {
+                            const argVal = parseExpr();
+                            expect(')');
+                            return convertType(name, argVal);
+                        }
+                        if (['max', 'min', 'sum', 'len'].includes(name)) {
+                            const argVal = parseExpr();
+                            expect(')');
+                            if (argVal.type !== 'list' && argVal.type !== 'tuple') throw new Error('⚠️ ' + name + '() hanya bisa dipakai untuk list/tuple.');
+                            const vals = argVal.value.map(v => v.type === 'num' ? v.value : (v.type === 'str' ? v.value : 0));
+                            if (name === 'max') return { type: 'num', value: Math.max(...vals), isFloat: false };
+                            if (name === 'min') return { type: 'num', value: Math.min(...vals), isFloat: false };
+                            if (name === 'sum') return { type: 'num', value: vals.reduce((a, b) => a + (typeof b === 'number' ? b : 0), 0), isFloat: false };
+                            if (name === 'len') return { type: 'num', value: argVal.value.length, isFloat: false };
+                        }
+                        throw new Error('⚠️ Fungsi "' + name + '()" belum dikenal di modul ini.');
+                    }
+                    if (!(name in env)) throw new Error('⚠️ NameError: variabel "' + name + '" belum pernah dibuat.');
+                    return env[name];
+                }
+                throw new Error('⚠️ Ada bagian ekspresi yang nggak valid.');
+            }
+            if (!tokens.length) throw new Error('⚠️ Ekspresinya kosong.');
+            const result = parseExpr();
+            if (pos < tokens.length) throw new Error('⚠️ Ada bagian yang nggak bisa diproses di akhir ekspresi.');
+            return result;
+        }
+        const RESERVED_WORDS = new Set(['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield', 'print', 'input', 'int', 'float', 'str', 'bool', 'list', 'tuple', 'max', 'min', 'sum', 'len']);
+        function tryParseAssignTarget(stmt) { const m = stmt.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=)([\s\S]*)$/); if (!m) return null; return { name: m[1], exprText: m[2] }; }
+        function findTopLevelEqualsIndex(stmt) {
+            let depth = 0, inString = null, i = 0;
+            while (i < stmt.length) {
+                if (inString) { if (inString.length === 3) { if (stmt.slice(i, i + 3) === inString) { inString = null; i += 3; continue; } i++; continue; } else { if (stmt[i] === '\\') { i += 2; continue; } if (stmt[i] === inString) { inString = null; i++; continue; } i++; continue; } }
+                else {
+                    if (stmt.slice(i, i + 3) === '"""' || stmt.slice(i, i + 3) === "'''") { inString = stmt.slice(i, i + 3); i += 3; continue; }
+                    if (stmt[i] === '"' || stmt[i] === "'") { inString = stmt[i]; i++; continue; }
+                    if (stmt[i] === '(') { depth++; i++; continue; }
+                    if (stmt[i] === ')') { depth--; i++; continue; }
+                    if (stmt[i] === '=' && stmt[i + 1] !== '=' && stmt[i - 1] !== '=' && depth === 0) return i;
+                    i++;
+                }
+            }
+            return -1;
+        }
+        function validateVarName(name) {
+            if (/^[0-9]/.test(name)) return 'nggak boleh diawali angka';
+            if (RESERVED_WORDS.has(name)) return 'nggak boleh pakai kata yang udah dipakai Python ("' + name + '")';
+            if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(name)) return 'cuma boleh huruf, angka, dan underscore ( _ ), tanpa spasi';
+            return null;
+        }
+        function runPythonSim(code) {
+            const stripped = stripComments(code);
+            const statements = splitStatements(stripped);
+            if (statements.length === 0) throw new Error('⚠️ Belum ada kode yang bisa dijalankan.');
+            const env = {}; const output = []; let sawPrint = false;
+            for (const stmt of statements) {
+                if (/^print\s*\(/.test(stmt)) {
+                    sawPrint = true;
+                    if (!stmt.endsWith(')')) throw new Error('⚠️ Ada tanda kurung print( yang belum ditutup.');
+                    const inner = stmt.slice(stmt.indexOf('(') + 1, stmt.length - 1);
+                    if (inner.trim() === '') { output.push(''); continue; }
+                    if (hasTopLevelComma(inner)) throw new Error('💡 print() di modul ini baru mendukung satu nilai per pemanggilan. Coba pisah jadi print() terpisah ya.');
+                    const result = parseAndEval(tokenizeExpr(inner), env);
+                    output.push(formatValue(result));
+                    continue;
+                }
+                const assign = tryParseAssignTarget(stmt);
+                if (assign) {
+                    const problem = validateVarName(assign.name);
+                    if (problem) throw new Error('⚠️ SyntaxError: nama variabel "' + assign.name + '" ' + problem + '.');
+                    if (hasTopLevelComma(assign.exprText)) throw new Error('💡 Simulator ini baru mendukung satu nilai per variabel.');
+                    const result = parseAndEval(tokenizeExpr(assign.exprText), env);
+                    env[assign.name] = result;
+                    continue;
+                }
+                const eqIdx = findTopLevelEqualsIndex(stmt);
+                if (eqIdx !== -1) {
+                    const attempted = stmt.slice(0, eqIdx).trim();
+                    const problem = validateVarName(attempted) || 'formatnya belum sesuai';
+                    throw new Error('⚠️ SyntaxError: nama variabel "' + attempted + '" ' + problem + '.');
+                }
+                // support for loop sederhana? tidak, kita lempar error.
+                throw new Error('⚠️ Baris "' + stmt + '" belum dikenali oleh simulator ini.');
+            }
+            if (!sawPrint && output.length === 0) return '(Kode berhasil dijalankan, tapi belum ada print() jadi belum ada yang tampil.)';
+            return output.join('\n');
+        }
+        function runCode(editorId, outputId, babKey) {
+            const code = document.getElementById(editorId).value;
+            const out = document.getElementById(outputId);
+            out.classList.remove('error');
+            try {
+                out.textContent = runPythonSim(code);
+                if (babKey && sectionDone[babKey] !== undefined) markSectionComplete(babKey);
+            } catch (e) {
+                out.textContent = e.message;
+                out.classList.add('error');
+            }
+        }
+
+        /* ================= TURTLE SIMULATOR ================= */
+        let turtleState = {
+            x: 350, y: 200,
+            angle: 0,   // 0 = timur (kanan)
+            penDown: true,
+            color: '#00FF88',
+            size: 2,
+            speed: 5,
+            drawing: false
+        };
+        let turtleCanvas = null;
+        let turtleCtx = null;
+        let turtlePaths = [];
+
+        function initTurtleCanvas(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return null;
+            const ctx = canvas.getContext('2d');
+            // Hapus semua gambar
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Gambar grid samar
+            ctx.strokeStyle = '#2a3340';
+            ctx.lineWidth = 0.5;
+            for (let x = 0; x <= canvas.width; x += 50) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+            }
+            for (let y = 0; y <= canvas.height; y += 50) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+            }
+            // Gambar titik origin
+            ctx.fillStyle = '#4a5a6a';
+            ctx.beginPath(); ctx.arc(350, 200, 3, 0, 2 * Math.PI); ctx.fill();
+            ctx.fillStyle = '#5a6a7a';
+            ctx.font = '10px monospace';
+            ctx.fillText('(0,0)', 355, 215);
+            return { canvas, ctx };
+        }
+
+        function drawTurtle(canvas, ctx, x, y, angle) {
+            const size = 10;
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle * Math.PI / 180);
+            // Badan
+            ctx.fillStyle = '#00FF88';
+            ctx.shadowColor = 'rgba(0,255,136,0.4)';
+            ctx.shadowBlur = 8;
+            ctx.beginPath();
+            ctx.ellipse(0, 0, size, size * 0.6, 0, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            // Kepala
+            ctx.fillStyle = '#66FFAA';
+            ctx.beginPath();
+            ctx.arc(size * 1.2, 0, size * 0.4, 0, 2 * Math.PI);
+            ctx.fill();
+            // Mata
+            ctx.fillStyle = '#000';
+            ctx.beginPath();
+            ctx.arc(size * 1.4, -size * 0.15, 1.5, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(size * 1.4, size * 0.15, 1.5, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function clearTurtle() {
+            const canvasId = getActiveCanvasId();
+            if (!canvasId) return;
+            const result = initTurtleCanvas(canvasId);
+            if (result) {
+                turtleCanvas = result.canvas;
+                turtleCtx = result.ctx;
+                turtleState.x = 350;
+                turtleState.y = 200;
+                turtleState.angle = 0;
+                turtleState.penDown = true;
+                turtleState.color = '#00FF88';
+                turtleState.size = 2;
+                turtlePaths = [];
+                drawTurtle(turtleCanvas, turtleCtx, turtleState.x, turtleState.y, turtleState.angle);
+            }
+        }
+
+        function homeTurtle() {
+            clearTurtle();
+        }
+
+        let activeCanvasId = 'turtleCanvas';
+        function getActiveCanvasId() {
+            // Cari canvas yang sedang aktif (yang terlihat)
+            const canvases = document.querySelectorAll('canvas[id^="turtleCanvas"]');
+            for (const c of canvases) {
+                if (c.offsetParent !== null) {
+                    return c.id;
+                }
+            }
+            return 'turtleCanvas';
+        }
+
+        function executeTurtleCommand(cmd, ctx, canvas) {
+            const parts = cmd.trim().split(/\s+/);
+            if (parts.length === 0) return;
+            const op = parts[0];
+            const args = parts.slice(1).map(Number).filter(n => !isNaN(n));
+
+            switch (op) {
+                case 'forward':
+                case 'fd': {
+                    const dist = args[0] || 0;
+                    const rad = turtleState.angle * Math.PI / 180;
+                    const newX = turtleState.x + dist * Math.cos(rad);
+                    const newY = turtleState.y - dist * Math.sin(rad);
+                    if (turtleState.penDown) {
+                        ctx.strokeStyle = turtleState.color;
+                        ctx.lineWidth = turtleState.size;
+                        ctx.beginPath();
+                        ctx.moveTo(turtleState.x, turtleState.y);
+                        ctx.lineTo(newX, newY);
+                        ctx.stroke();
+                        turtlePaths.push({ x1: turtleState.x, y1: turtleState.y, x2: newX, y2: newY, color: turtleState.color, size: turtleState.size });
+                    }
+                    turtleState.x = newX;
+                    turtleState.y = newY;
+                    break;
+                }
+                case 'backward':
+                case 'bk': {
+                    const dist = args[0] || 0;
+                    const rad = turtleState.angle * Math.PI / 180;
+                    const newX = turtleState.x - dist * Math.cos(rad);
+                    const newY = turtleState.y + dist * Math.sin(rad);
+                    if (turtleState.penDown) {
+                        ctx.strokeStyle = turtleState.color;
+                        ctx.lineWidth = turtleState.size;
+                        ctx.beginPath();
+                        ctx.moveTo(turtleState.x, turtleState.y);
+                        ctx.lineTo(newX, newY);
+                        ctx.stroke();
+                        turtlePaths.push({ x1: turtleState.x, y1: turtleState.y, x2: newX, y2: newY, color: turtleState.color, size: turtleState.size });
+                    }
+                    turtleState.x = newX;
+                    turtleState.y = newY;
+                    break;
+                }
+                case 'left':
+                case 'lt': {
+                    const deg = args[0] || 0;
+                    turtleState.angle = (turtleState.angle + deg) % 360;
+                    break;
+                }
+                case 'right':
+                case 'rt': {
+                    const deg = args[0] || 0;
+                    turtleState.angle = (turtleState.angle - deg) % 360;
+                    break;
+                }
+                case 'penup':
+                case 'pu':
+                    turtleState.penDown = false;
+                    break;
+                case 'pendown':
+                case 'pd':
+                    turtleState.penDown = true;
+                    break;
+                case 'color': {
+                    const colorArg = parts.slice(1).join(' ');
+                    if (colorArg) {
+                        turtleState.color = colorArg;
+                    }
+                    break;
+                }
+                case 'pensize': {
+                    const size = args[0] || 2;
+                    turtleState.size = size;
+                    break;
+                }
+                case 'circle': {
+                    const radius = args[0] || 50;
+                    const steps = 36;
+                    const angleStep = 360 / steps;
+                    const startAngle = turtleState.angle;
+                    const rad = startAngle * Math.PI / 180;
+                    const cx = turtleState.x + radius * Math.cos(rad + Math.PI / 2);
+                    const cy = turtleState.y - radius * Math.sin(rad + Math.PI / 2);
+                    ctx.strokeStyle = turtleState.color;
+                    ctx.lineWidth = turtleState.size;
+                    ctx.beginPath();
+                    for (let i = 0; i <= steps; i++) {
+                        const theta = i * angleStep * Math.PI / 180;
+                        const px = cx + radius * Math.cos(theta);
+                        const py = cy + radius * Math.sin(theta);
+                        if (i === 0) ctx.moveTo(px, py);
+                        else ctx.lineTo(px, py);
+                    }
+                    ctx.stroke();
+                    // Update posisi turtle ke titik akhir lingkaran
+                    const lastTheta = steps * angleStep * Math.PI / 180;
+                    turtleState.x = cx + radius * Math.cos(lastTheta);
+                    turtleState.y = cy + radius * Math.sin(lastTheta);
+                    break;
+                }
+                case 'goto': {
+                    const x = args[0] || 0;
+                    const y = args[1] || 0;
+                    const newX = 350 + x;
+                    const newY = 200 - y;
+                    if (turtleState.penDown) {
+                        ctx.strokeStyle = turtleState.color;
+                        ctx.lineWidth = turtleState.size;
+                        ctx.beginPath();
+                        ctx.moveTo(turtleState.x, turtleState.y);
+                        ctx.lineTo(newX, newY);
+                        ctx.stroke();
+                        turtlePaths.push({ x1: turtleState.x, y1: turtleState.y, x2: newX, y2: newY, color: turtleState.color, size: turtleState.size });
+                    }
+                    turtleState.x = newX;
+                    turtleState.y = newY;
+                    break;
+                }
+                case 'setheading':
+                case 'seth': {
+                    const deg = args[0] || 0;
+                    turtleState.angle = deg % 360;
+                    break;
+                }
+                case 'speed': {
+                    // speed diabaikan di simulator
+                    break;
+                }
+                case 'clear': {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    turtlePaths = [];
+                    // redraw grid
+                    ctx.strokeStyle = '#2a3340';
+                    ctx.lineWidth = 0.5;
+                    for (let x = 0; x <= canvas.width; x += 50) {
+                        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+                    }
+                    for (let y = 0; y <= canvas.height; y += 50) {
+                        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+                    }
+                    ctx.fillStyle = '#4a5a6a';
+                    ctx.beginPath(); ctx.arc(350, 200, 3, 0, 2 * Math.PI); ctx.fill();
+                    break;
+                }
+                case 'home': {
+                    homeTurtle();
+                    break;
+                }
+                case 'begin_fill': {
+                    turtleState.drawing = true;
+                    // mulai path untuk fill
+                    break;
+                }
+                case 'end_fill': {
+                    turtleState.drawing = false;
+                    // tutup path dan fill
+                    break;
+                }
+                default:
+                    throw new Error('⚠️ Perintah turtle "' + op + '" belum dikenal.');
+            }
+        }
+
+        function runTurtle() {
+            const canvasId = getActiveCanvasId();
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            // Reset canvas tapi pertahankan grid
+            initTurtleCanvas(canvasId);
+            turtleState.x = 350;
+            turtleState.y = 200;
+            turtleState.angle = 0;
+            turtleState.penDown = true;
+            turtleState.color = '#00FF88';
+            turtleState.size = 2;
+            turtlePaths = [];
+
+            const code = document.getElementById('ed-turtle').value;
+            const lines = code.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#'));
+            const out = document.getElementById('out-turtle');
+            out.classList.remove('error');
+            try {
+                for (const line of lines) {
+                    executeTurtleCommand(line, ctx, canvas);
+                }
+                drawTurtle(canvas, ctx, turtleState.x, turtleState.y, turtleState.angle);
+                out.textContent = '✅ Gambar selesai!';
+                markSectionComplete('bab11');
+            } catch (e) {
+                out.textContent = e.message;
+                out.classList.add('error');
+            }
+        }
+
+        function runTurtleCode(editorId, outputId) {
+            const canvasId = getActiveCanvasId();
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            initTurtleCanvas(canvasId);
+            turtleState.x = 350;
+            turtleState.y = 200;
+            turtleState.angle = 0;
+            turtleState.penDown = true;
+            turtleState.color = '#00FF88';
+            turtleState.size = 2;
+            turtlePaths = [];
+
+            const code = document.getElementById(editorId).value;
+            const lines = code.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#'));
+            const out = document.getElementById(outputId);
+            out.classList.remove('error');
+            try {
+                for (const line of lines) {
+                    executeTurtleCommand(line, ctx, canvas);
+                }
+                drawTurtle(canvas, ctx, turtleState.x, turtleState.y, turtleState.angle);
+                out.textContent = '✅ Gambar selesai!';
+                // Tandai challenge selesai jika dari challenge
+                if (editorId.includes('ch2')) markSectionComplete('challenge2');
+            } catch (e) {
+                out.textContent = e.message;
+                out.classList.add('error');
+            }
+        }
+
+        // Inisialisasi canvas turtle saat halaman dimuat
+        window.addEventListener('DOMContentLoaded', () => {
+            // Inisialisasi semua canvas turtle
+            document.querySelectorAll('canvas[id^="turtleCanvas"]').forEach(c => {
+                const ctx = c.getContext('2d');
+                ctx.clearRect(0, 0, c.width, c.height);
+                // Grid
+                ctx.strokeStyle = '#2a3340';
+                ctx.lineWidth = 0.5;
+                for (let x = 0; x <= c.width; x += 50) {
+                    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, c.height); ctx.stroke();
+                }
+                for (let y = 0; y <= c.height; y += 50) {
+                    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(c.width, y); ctx.stroke();
+                }
+                ctx.fillStyle = '#4a5a6a';
+                ctx.beginPath(); ctx.arc(350, 200, 3, 0, 2 * Math.PI); ctx.fill();
+                ctx.fillStyle = '#5a6a7a';
+                ctx.font = '10px monospace';
+                ctx.fillText('(0,0)', 355, 215);
+                // Gambar turtle di posisi awal
+                ctx.fillStyle = '#00FF88';
+                ctx.shadowColor = 'rgba(0,255,136,0.4)';
+                ctx.shadowBlur = 8;
+                ctx.beginPath();
+                ctx.ellipse(350, 200, 10, 6, 0, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = '#66FFAA';
+                ctx.beginPath();
+                ctx.arc(362, 200, 4, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.fillStyle = '#000';
+                ctx.beginPath();
+                ctx.arc(364, 198, 1.5, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(364, 202, 1.5, 0, 2 * Math.PI);
+                ctx.fill();
+            });
+        });
+
+        // Inisialisasi TOC: semua submenu collapsed
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.toc-sub').forEach(el => el.classList.add('collapsed'));
+            document.querySelectorAll('.toc-chevron').forEach(el => el.classList.add('rotated'));
+        });
+
+        // Load progress dari localStorage
+        try {
+            const saved = JSON.parse(localStorage.getItem('python_modul_progress') || '{}');
+            for (const key of Object.keys(sectionDone)) {
+                if (saved[key]) {
+                    sectionDone[key] = true;
+                    const el = document.getElementById('check-' + key);
+                    if (el) el.classList.add('done');
+                }
+            }
+            updateTocPct();
+        } catch (_) { }
+    </script>
+</body>
+
+</html>

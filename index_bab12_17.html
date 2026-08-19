@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Ajar Interaktif — Bab 12–17</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Caveat:wght@600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Tambahan spesifik untuk simulator lanjutan */
+        .pg-editor {
+            min-height: 120px;
+            font-size: 13px;
+        }
+
+        .term pre {
+            font-size: 13.5px;
+        }
+
+        .turtle-canvas-wrap canvas {
+            background: #1a1f24;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="scrollRail">
+        <div id="scrollFill"></div>
+    </div>
+
+    <header class="hero">
+        <!-- TOP NAVIGATION BAR -->
+        <nav class="top-nav">
+            <a href="index.html">🏠 Beranda</a>
+            <span class="sep">|</span>
+            <a href="index_bab1_6.html">Bab 1–6</a>
+            <a href="index_bab7_11.html">Bab 7–11</a>
+            <span class="current">📘 Bab 12–17</span>
+        </nav>
+
+        <div class="hero-kicker"><span class="dot"></span>MODUL AJAR · SESI PRIVAT</div>
+        <h1 class="hero-title">Python <span class="snake">Lanjutan</span></h1>
+        <div class="hero-meta">
+            <span>Bab 12–17</span>
+            <span>Level: Menengah</span>
+            <span>⚡ Simulator Full Python</span>
+        </div>
+    </header>
+
+    <nav class="toc" id="toc">
+        <div class="toc-head">
+            <h2>📋 Daftar Isi</h2>
+            <span id="tocPct">0% selesai</span>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab12"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 12 — Percabangan (If/Elif/Else)</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab12-1">Penjelasan If/Elif/Else</a>
+                <a class="toc-item" href="#bab12-2">Try Percabangan</a>
+                <a class="toc-item" href="#bab12-3">Challenge — Kalkulator Sederhana</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab13"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 13 — Perulangan (Loop)</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab13-1">Penjelasan For &amp; While</a>
+                <a class="toc-item" href="#bab13-2">Try Loop</a>
+                <a class="toc-item" href="#bab13-3">Challenge — Game Tebak Angka</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab14"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 14 — Fungsi (Function)</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab14-1">Penjelasan Fungsi</a>
+                <a class="toc-item" href="#bab14-2">Try Fungsi</a>
+                <a class="toc-item" href="#bab14-3">Challenge — Fungsi Luas Bangun Datar</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab15"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 15 — Dictionary &amp; Set</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab15-1">Penjelasan Dict &amp; Set</a>
+                <a class="toc-item" href="#bab15-2">Try Dict &amp; Set</a>
+                <a class="toc-item" href="#bab15-3">Challenge — Buku Kontak</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab16"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 16 — File Handling</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab16-1">Penjelasan File Handling</a>
+                <a class="toc-item" href="#bab16-2">Try File Handling</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab17"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 17 — Error Handling (Try/Except)</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab17-1">Penjelasan Try/Except</a>
+                <a class="toc-item" href="#bab17-2">Try Error Handling</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-challenge3"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">🏆 Final Project — To-Do List App</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#final-project">To-Do List Interaktif</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <a class="toc-header" href="#kuis-final3" style="text-decoration:none;">
+                <span class="toc-check" id="check-quizfinal3"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Quiz</span>
+            </a>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- ================= BAB 12 ================= -->
+        <section class="bab" id="bab12">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 12 —
+                        Percabangan"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 12 — Percabangan (If/Elif/Else)">Bab 12 — Percabangan
+                    (If/Elif/Else)</h2>
+                <p class="bab-intro">Program jadi punya "otak" — bisa mengambil keputusan berdasarkan kondisi tertentu.
+                </p>
+            </div>
+
+            <div class="card" id="bab12-1">
+                <h3><span class="num">12.1</span> Penjelasan If/Elif/Else</h3>
+                <p><b>Percabangan</b> memungkinkan program menjalankan blok kode yang berbeda tergantung kondisi.
+                    Struktur dasarnya:</p>
+                <ul>
+                    <li><code class="inline">if kondisi:</code> — jika kondisi bernilai <code
+                            class="inline">True</code>, jalankan blok ini.</li>
+                    <li><code class="inline">elif kondisi:</code> — jika kondisi <code class="inline">if</code> salah,
+                        cek kondisi ini (bisa banyak).</li>
+                    <li><code class="inline">else:</code> — jika semua kondisi di atas salah, jalankan blok ini.</li>
+                </ul>
+                <p>Operator perbandingan: <code class="inline">==</code>, <code class="inline">!=</code>, <code
+                        class="inline">&gt;</code>, <code class="inline">&lt;</code>, <code class="inline">&gt;=</code>,
+                    <code class="inline">&lt;=</code>.</p>
+                <p>Operator logika: <code class="inline">and</code>, <code class="inline">or</code>, <code
+                        class="inline">not</code>.</p>
+                <div class="term">
+                    <div class="term-bar">contoh.py</div>
+                    <pre>nilai = 85
+<span class="fn">if</span> nilai >= 75:
+    <span class="fn">print</span>(<span class="str">"Lulus!"</span>)
+<span class="fn">elif</span> nilai >= 50:
+    <span class="fn">print</span>(<span class="str">"Perbaikan"</span>)
+<span class="fn">else</span>:
+    <span class="fn">print</span>(<span class="str">"Tidak Lulus"</span>)</pre>
+                </div>
+            </div>
+
+            <div class="card" id="bab12-2">
+                <h3><span class="num">12.2</span> Try Percabangan</h3>
+                <p>Coba ubah nilai <code class="inline">nilai</code> dan lihat outputnya.</p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">percabangan.py</span><button class="pg-run"
+                            onclick="runCode('ed-b12a','out-b12a','bab12')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-b12a" spellcheck="false" rows="7">nilai = 85
+if nilai >= 75:
+    print("Lulus!")
+elif nilai >= 50:
+    print("Perbaikan")
+else:
+    print("Tidak Lulus")</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-b12a"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bab12-3">
+                <h3><span class="num">12.3</span> Challenge — Kalkulator Sederhana</h3>
+                <p>Buat program yang meminta 2 angka dan operator (<code class="inline">+</code>, <code
+                        class="inline">-</code>, <code class="inline">*</code>, <code class="inline">/</code>). Lakukan
+                    operasi sesuai operator. Jika operator tidak dikenal, tampilkan <i>"Operator tidak dikenal!"</i>.
+                </p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">kalkulator.py</span><button class="pg-run"
+                            onclick="runCode('ed-b12b','out-b12b','bab12')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-b12b" spellcheck="false" rows="12">a = int(input("Angka pertama: "))
+b = int(input("Angka kedua: "))
+op = input("Operator (+, -, *, /): ")
+
+if op == "+":
+    hasil = a + b
+elif op == "-":
+    hasil = a - b
+elif op == "*":
+    hasil = a * b
+elif op == "/":
+    hasil = a / b
+else:
+    hasil = "Operator tidak dikenal!"
+
+print(hasil)</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-b12b"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 13 ================= -->
+        <section class="bab" id="bab13">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 13 —
+                        Perulangan"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 13 — Perulangan (Loop)">Bab 13 — Perulangan (Loop)</h2>
+                <p class="bab-intro">Menjalankan perintah berulang kali tanpa capek. Jantung dari otomatisasi.</p>
+            </div>
+
+            <div class="card" id="bab13-1">
+                <h3><span class="num">13.1</span> Penjelasan For &amp; While</h3>
+                <ul>
+                    <li><code class="inline">for i in range(n):</code> — ulangi blok sebanyak <code
+                            class="inline">n</code> kali.</li>
+                    <li><code class="inline">while kondisi:</code> — ulangi blok SELAGI kondisi bernilai <code
+                            class="inline">True</code>.</li>
+                    <li><code class="inline">break</code> — keluar dari loop paksa.</li>
+                    <li><code class="inline">continue</code> — loncat ke iterasi berikutnya.</li>
+                </ul>
+                <div class="term">
+                    <div class="term-bar">loop.py</div>
+                    <pre><span class="cm"># For loop</span>
+<span class="fn">for</span> i <span class="fn">in</span> <span class="fn">range</span>(5):
+    <span class="fn">print</span>(<span class="str">"Halo ke-"</span>, i+1)
+
+<span class="cm"># While loop</span>
+x = 0
+<span class="fn">while</span> x < 3:
+    <span class="fn">print</span>(<span class="str">"x ="</span>, x)
+    x = x + 1</pre>
+                </div>
+            </div>
+
+            <div class="card" id="bab13-2">
+                <h3><span class="num">13.2</span> Try Loop</h3>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">loop.py</span><button class="pg-run"
+                            onclick="runCode('ed-b13a','out-b13a','bab13')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-b13a" spellcheck="false" rows="8">for i in range(5):
+    print("Halo ke-", i+1)
+
+x = 0
+while x < 3:
+    print("x =", x)
+    x = x + 1</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-b13a"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bab13-3">
+                <h3><span class="num">13.3</span> Challenge — Game Tebak Angka</h3>
+                <p>Buat game tebak angka dengan aturan:</p>
+                <ol>
+                    <li>Komputer pilih angka rahasia 1–100 (gunakan <code class="inline">random.randint(1,100)</code>).
+                    </li>
+                    <li>User punya <b>7 percobaan</b>.</li>
+                    <li>Setiap tebakan, beri petunjuk "Terlalu Kecil!" atau "Terlalu Besar!".</li>
+                    <li>Jika benar, tampilkan "Selamat! Kamu menang!" dan keluar.</li>
+                    <li>Jika habis, tampilkan angka rahasianya.</li>
+                </ol>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">tebak_angka.py</span><button class="pg-run"
+                            onclick="runCode('ed-b13b','out-b13b','bab13')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-b13b" spellcheck="false" rows="18">import random
+rahasia = random.randint(1, 100)
+percobaan = 7
+menang = False
+
+for i in range(percobaan):
+    tebak = int(input(f"Tebak (1-100) [{percobaan-i} tersisa]: "))
+    if tebak == rahasia:
+        print("Selamat! Kamu menang!")
+        menang = True
+        break
+    elif tebak < rahasia:
+        print("Terlalu Kecil!")
+    else:
+        print("Terlalu Besar!")
+
+if not menang:
+    print(f"Angka rahasianya adalah {rahasia}")</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-b13b"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 14 ================= -->
+        <section class="bab" id="bab14">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 14 —
+                        Fungsi"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 14 — Fungsi (Function)">Bab 14 — Fungsi (Function)</h2>
+                <p class="bab-intro">Membungkus kode ke dalam blok yang bisa dipanggil berkali-kali. Kode jadi rapi dan
+                    modular.</p>
+            </div>
+
+            <div class="card" id="bab14-1">
+                <h3><span class="num">14.1</span> Penjelasan Fungsi</h3>
+                <p><b>Fungsi</b> adalah blok kode yang punya nama, bisa menerima parameter, dan mengembalikan nilai
+                    (<code class="inline">return</code>).</p>
+                <div class="term">
+                    <div class="term-bar">fungsi.py</div>
+                    <pre><span class="fn">def</span> sapa(nama):
+    <span class="fn">return</span> <span class="str">"Halo "</span> + nama
+
+<span class="fn">print</span>(sapa(<span class="str">"Andi"</span>))</pre>
+                </div>
+                <p>Manfaat fungsi:</p>
+                <ul>
+                    <li>Menghindari duplikasi kode.</li>
+                    <li>Memudahkan debugging.</li>
+                    <li>Membuat program lebih terstruktur.</li>
+                </ul>
+            </div>
+
+            <div class="card" id="bab14-2">
+                <h3><span class="num">14.2</span> Try Fungsi</h3>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">fungsi.py</span><button class="pg-run"
+                            onclick="runCode('ed-b14a','out-b14a','bab14')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-b14a" spellcheck="false" rows="7">def sapa(nama):
+    return "Halo " + nama
+
+print(sapa("Andi"))
+print(sapa("Budi"))</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-b14a"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bab14-3">
+                <h3><span class="num">14.3</span> Challenge — Fungsi Luas Bangun Datar</h3>
+                <p>Buat 3 fungsi: <code class="inline">luas_persegi(s)</code>, <code
+                        class="inline">luas_lingkaran(r)</code>, <code class="inline">luas_segitiga(a,t)</code>. Lalu
+                    buat menu pilihan yang memanggil fungsi sesuai pilihan user.</p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">luas_bangun.py</span><button class="pg-run"
+                            onclick="runCode('ed-b14b','out-b14b','bab14')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-b14b" spellcheck="false" rows="25">def luas_persegi(s):
+    return s * s
+
+def luas_lingkaran(r):
+    return 3.14 * r * r
+
+def luas_segitiga(a, t):
+    return 0.5 * a * t
+
+print("1. Persegi")
+print("2. Lingkaran")
+print("3. Segitiga")
+pilihan = int(input("Pilih (1/2/3): "))
+
+if pilihan == 1:
+    s = int(input("Sisi: "))
+    print("Luas:", luas_persegi(s))
+elif pilihan == 2:
+    r = int(input("Jari-jari: "))
+    print("Luas:", luas_lingkaran(r))
+elif pilihan == 3:
+    a = int(input("Alas: "))
+    t = int(input("Tinggi: "))
+    print("Luas:", luas_segitiga(a, t))
+else:
+    print("Pilihan tidak valid!")</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-b14b"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 15 ================= -->
+        <section class="bab" id="bab15">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 15 —
+                        Dictionary & Set"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 15 — Dictionary & Set">Bab 15 — Dictionary &amp; Set</h2>
+                <p class="bab-intro">Menyimpan data dengan struktur yang lebih bermakna: pasangan kunci-nilai (dict) dan
+                    kumpulan unik (set).</p>
+            </div>
+
+            <div class="card" id="bab15-1">
+                <h3><span class="num">15.1</span> Penjelasan Dict &amp; Set</h3>
+                <p><b>Dictionary</b> <code class="inline">dict</code> menyimpan data dalam pasangan <i>key-value</i>.
+                    Setiap key bersifat unik.</p>
+                <div class="term">
+                    <div class="term-bar">dict.py</div>
+                    <pre>kontak = {
+    <span class="str">"Andi"</span>: <span class="str">"08123456789"</span>,
+    <span class="str">"Budi"</span>: <span class="str">"08198765432"</span>
+}
+<span class="fn">print</span>(kontak[<span class="str">"Andi"</span>])
+kontak[<span class="str">"Citra"</span>] = <span class="str">"08999999999"</span>  <span class="cm"># Tambah data</span>
+<span class="fn">print</span>(kontak.<span class="fn">keys</span>())</pre>
+                </div>
+                <p><b>Set</b> <code class="inline">set</code> adalah kumpulan nilai unik (tanpa duplikat).</p>
+                <div class="term">
+                    <div class="term-bar">set.py</div>
+                    <pre>nilai_unik = {1, 2, 3, 3, 4}
+<span class="fn">print</span>(nilai_unik)  <span class="cm"># {1, 2, 3, 4}</span>
+nilai_unik.<span class="fn">add</span>(5)
+<span class="fn">print</span>(nilai_unik)</pre>
+                </div>
+            </div>
+
+            <div class="card" id="bab15-2">
+                <h3><span class="num">15.2</span> Try Dict &amp; Set</h3>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">dict_set.py</span><button class="pg-run"
+                            onclick="runCode('ed-b15a','out-b15a','bab15')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-b15a" spellcheck="false" rows="10">kontak = {"Andi": "08123456789", "Budi": "08198765432"}
+print(kontak["Andi"])
+kontak["Citra"] = "08999999999"
+print(kontak.keys())
+
+nilai_unik = {1, 2, 3, 3, 4}
+print(nilai_unik)
+nilai_unik.add(5)
+print(nilai_unik)</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-b15a"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bab15-3">
+                <h3><span class="num">15.3</span> Challenge — Buku Kontak</h3>
+                <p>Buat program manajemen kontak sederhana (di memory) dengan fitur:</p>
+                <ol>
+                    <li>Tambah kontak (nama &amp; nomor).</li>
+                    <li>Cari kontak (input nama, tampilkan nomor).</li>
+                    <li>Hapus kontak (input nama).</li>
+                    <li>Lihat semua kontak.</li>
+                    <li>Keluar.</li>
+                </ol>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">buku_kontak.py</span><button class="pg-run"
+                            onclick="runCode('ed-b15b','out-b15b','bab15')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-b15b" spellcheck="false" rows="30">kontak = {}
+
+while True:
+    print("\n=== BUKU KONTAK ===")
+    print("1. Tambah")
+    print("2. Cari")
+    print("3. Hapus")
+    print("4. Lihat Semua")
+    print("5. Keluar")
+    pilih = int(input("Pilih: "))
+
+    if pilih == 1:
+        nama = input("Nama: ")
+        no = input("Nomor: ")
+        kontak[nama] = no
+        print("Kontak ditambahkan!")
+    elif pilih == 2:
+        nama = input("Nama: ")
+        if nama in kontak:
+            print("Nomor:", kontak[nama])
+        else:
+            print("Kontak tidak ditemukan!")
+    elif pilih == 3:
+        nama = input("Nama: ")
+        if nama in kontak:
+            del kontak[nama]
+            print("Kontak dihapus!")
+        else:
+            print("Kontak tidak ditemukan!")
+    elif pilih == 4:
+        for nama, no in kontak.items():
+            print(f"{nama}: {no}")
+    elif pilih == 5:
+        print("Sampai jumpa!")
+        break
+    else:
+        print("Pilihan tidak valid!")</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-b15b"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 16 ================= -->
+        <section class="bab" id="bab16">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 16 —
+                        File Handling"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 16 — File Handling">Bab 16 — File Handling</h2>
+                <p class="bab-intro">Menyimpan data secara permanen ke file, sehingga tidak hilang saat program ditutup.
+                </p>
+            </div>
+
+            <div class="card" id="bab16-1">
+                <h3><span class="num">16.1</span> Penjelasan File Handling</h3>
+                <p>Di Python, kita menggunakan fungsi <code class="inline">open()</code> untuk membuka file.</p>
+                <ul>
+                    <li><code class="inline">open("file.txt", "r")</code> — baca (read).</li>
+                    <li><code class="inline">open("file.txt", "w")</code> — tulis (write) — menimpa isi file.</li>
+                    <li><code class="inline">open("file.txt", "a")</code> — tambah (append) di akhir file.</li>
+                    <li><b>Best practice:</b> gunakan <code class="inline">with open(...) as f:</code> agar file
+                        otomatis ditutup.</li>
+                </ul>
+                <div class="term">
+                    <div class="term-bar">file.py</div>
+                    <pre><span class="cm"># Menyimpan data</span>
+<span class="fn">with</span> <span class="fn">open</span>(<span class="str">"catatan.txt"</span>, <span class="str">"w"</span>) <span class="fn">as</span> f:
+    f.<span class="fn">write</span>(<span class="str">"Halo dari Python!\n"</span>)
+
+<span class="cm"># Membaca data</span>
+<span class="fn">with</span> <span class="fn">open</span>(<span class="str">"catatan.txt"</span>, <span class="str">"r"</span>) <span class="fn">as</span> f:
+    isi = f.<span class="fn">read</span>()
+    <span class="fn">print</span>(isi)</pre>
+                </div>
+                <div class="note"><span class="hand">Catatan tutor:</span> Di simulator ini, file disimulasikan
+                    menggunakan <b>localStorage</b> agar tetap bisa dicoba di browser. Jadi file akan tetap ada meskipun
+                    halaman di-refresh.</div>
+            </div>
+
+            <div class="card" id="bab16-2">
+                <h3><span class="num">16.2</span> Try File Handling</h3>
+                <p>Coba tulis teks ke file, lalu baca kembali.</p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">file_handling.py</span><button class="pg-run"
+                            onclick="runCode('ed-b16a','out-b16a','bab16')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-b16a" spellcheck="false" rows="10"># Tulis ke file
+with open("catatan.txt", "w") as f:
+    f.write("Ini adalah catatan saya!\n")
+    f.write("Baris kedua.")
+
+# Baca dari file
+with open("catatan.txt", "r") as f:
+    isi = f.read()
+    print(isi)</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-b16a"></div>
+                    </div>
+                </div>
+
+                <div class="challenge">
+                    <span class="chal-tag">CHALLENGE</span>
+                    <p style="margin:0 0 8px;">Modifikasi program Buku Kontak dari Bab 15 agar menyimpan data ke file
+                        <code class="inline">kontak.txt</code> secara otomatis saat program keluar, dan memuatnya saat
+                        program dijalankan.</p>
+                    <div class="playground">
+                        <div class="pg-bar"><span class="pg-filename">kontak_file.py</span><button class="pg-run"
+                                onclick="runCode('ed-b16b','out-b16b','bab16')">▶ Jalankan</button></div>
+                        <textarea class="pg-editor" id="ed-b16b" spellcheck="false" rows="45"># Simulasi file dengan localStorage
+# Fungsi untuk load data
+def load_kontak():
+    try:
+        with open("kontak.txt", "r") as f:
+            data = f.read()
+            if data:
+                return eval(data)  # Hati-hati eval, tapi ini untuk demo
+            return {}
+    except:
+        return {}
+
+# Fungsi untuk save data
+def save_kontak(kontak):
+    with open("kontak.txt", "w") as f:
+        f.write(str(kontak))
+
+# Program utama
+kontak = load_kontak()
+
+while True:
+    print("\n=== BUKU KONTAK ===")
+    print("1. Tambah")
+    print("2. Cari")
+    print("3. Hapus")
+    print("4. Lihat Semua")
+    print("5. Keluar (data otomatis tersimpan)")
+    pilih = int(input("Pilih: "))
+
+    if pilih == 1:
+        nama = input("Nama: ")
+        no = input("Nomor: ")
+        kontak[nama] = no
+        print("Kontak ditambahkan!")
+    elif pilih == 2:
+        nama = input("Nama: ")
+        if nama in kontak:
+            print("Nomor:", kontak[nama])
+        else:
+            print("Kontak tidak ditemukan!")
+    elif pilih == 3:
+        nama = input("Nama: ")
+        if nama in kontak:
+            del kontak[nama]
+            print("Kontak dihapus!")
+        else:
+            print("Kontak tidak ditemukan!")
+    elif pilih == 4:
+        for nama, no in kontak.items():
+            print(f"{nama}: {no}")
+    elif pilih == 5:
+        save_kontak(kontak)
+        print("Data tersimpan. Sampai jumpa!")
+        break
+    else:
+        print("Pilihan tidak valid!")</textarea>
+                        <div class="pg-output-wrap">
+                            <div class="pg-output-label">OUTPUT</div>
+                            <div class="pg-output" id="out-b16b"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 17 ================= -->
+        <section class="bab" id="bab17">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 17 —
+                        Error Handling"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 17 — Error Handling (Try/Except)">Bab 17 — Error Handling
+                    (Try/Except)</h2>
+                <p class="bab-intro">Program profesional tidak akan crash hanya karena user salah input. Kita bisa
+                    menangkap error dengan <code class="inline">try/except</code>.</p>
+            </div>
+
+            <div class="card" id="bab17-1">
+                <h3><span class="num">17.1</span> Penjelasan Try/Except</h3>
+                <ul>
+                    <li><code class="inline">try:</code> — blok kode yang mungkin menimbulkan error.</li>
+                    <li><code class="inline">except:</code> — blok yang dijalankan jika terjadi error.</li>
+                    <li><code class="inline">except NamaError:</code> — tangkap error spesifik (misal: <code
+                            class="inline">ValueError</code>).</li>
+                    <li><code class="inline">else:</code> — dijalankan jika tidak ada error.</li>
+                    <li><code class="inline">finally:</code> — selalu dijalankan, entah error atau tidak.</li>
+                </ul>
+                <div class="term">
+                    <div class="term-bar">error.py</div>
+                    <pre><span class="fn">try</span>:
+    angka = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Masukkan angka: "</span>))
+    <span class="fn">print</span>(<span class="str">"Angka:"</span>, angka)
+<span class="fn">except</span> <span class="fn">ValueError</span>:
+    <span class="fn">print</span>(<span class="str">"Error: kamu harus memasukkan angka!"</span>)</pre>
+                </div>
+                <div class="tip">💡 Error handling membuat program lebih ramah pengguna. Daripada muncul pesan error
+                    merah, kita bisa memberi tahu user dengan kalimat yang jelas.</div>
+            </div>
+
+            <div class="card" id="bab17-2">
+                <h3><span class="num">17.2</span> Try Error Handling</h3>
+                <p>Coba jalankan kode di bawah. Jika kamu memasukkan huruf, program tidak akan crash.</p>
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">error_handling.py</span><button class="pg-run"
+                            onclick="runCode('ed-b17a','out-b17a','bab17')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-b17a" spellcheck="false" rows="8">try:
+    angka = int(input("Masukkan angka: "))
+    print("Angka:", angka)
+except ValueError:
+    print("Error: kamu harus memasukkan angka!")
+else:
+    print("Terima kasih!")
+finally:
+    print("Program selesai.")</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-b17a"></div>
+                    </div>
+                </div>
+
+                <div class="challenge">
+                    <span class="chal-tag">CHALLENGE</span>
+                    <p style="margin:0 0 8px;">Bungkus semua input angka di <b>kalkulator Bab 12</b> dan <b>game tebak
+                            angka Bab 13</b> dengan <code class="inline">try/except</code> untuk menangani <code
+                            class="inline">ValueError</code> jika user memasukkan huruf.</p>
+                    <div class="playground">
+                        <div class="pg-bar"><span class="pg-filename">kalkulator_aman.py</span><button class="pg-run"
+                                onclick="runCode('ed-b17b','out-b17b','bab17')">▶ Jalankan</button></div>
+                        <textarea class="pg-editor" id="ed-b17b" spellcheck="false" rows="20">try:
+    a = int(input("Angka pertama: "))
+    b = int(input("Angka kedua: "))
+    op = input("Operator (+, -, *, /): ")
+
+    if op == "+":
+        hasil = a + b
+    elif op == "-":
+        hasil = a - b
+    elif op == "*":
+        hasil = a * b
+    elif op == "/":
+        hasil = a / b
+    else:
+        hasil = "Operator tidak dikenal!"
+
+    print(hasil)
+except ValueError:
+    print("Error: Input harus berupa angka!")
+except ZeroDivisionError:
+    print("Error: Tidak bisa membagi dengan nol!")</textarea>
+                        <div class="pg-output-wrap">
+                            <div class="pg-output-label">OUTPUT</div>
+                            <div class="pg-output" id="out-b17b"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FINAL PROJECT ================= -->
+        <section class="bab" id="final-project">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"🏆 Final
+                        Project — To-Do List App"</span>)</div>
+                <h2 class="bab-title" data-text="🏆 Final Project — To-Do List App">🏆 Final Project — To-Do List App
+                </h2>
+                <p class="bab-intro">Inilah puncak dari semua materi yang sudah dipelajari! Buat aplikasi To-Do List
+                    lengkap dengan semua konsep: percabangan, perulangan, fungsi, dictionary, file handling, dan error
+                    handling.</p>
+            </div>
+
+            <div class="card" id="challenge3-1">
+                <h3><span class="num">📋</span> Spesifikasi Aplikasi</h3>
+                <p>Buat program dengan fitur:</p>
+                <ol>
+                    <li><b>Tambah tugas</b> — user input teks tugas, simpan ke dictionary dengan ID unik.</li>
+                    <li><b>Lihat daftar tugas</b> — tampilkan semua tugas dengan nomor urut.</li>
+                    <li><b>Tandai selesai</b> — user input ID tugas, tandai sebagai selesai (ubah status).</li>
+                    <li><b>Hapus tugas</b> — user input ID, hapus dari daftar.</li>
+                    <li><b>Simpan ke file</b> — data tersimpan otomatis ke <code class="inline">todo.txt</code> saat
+                        keluar.</li>
+                    <li><b>Load dari file</b> — data dimuat otomatis saat program dijalankan.</li>
+                    <li><b>Error handling</b> — semua input angka dibungkus <code class="inline">try/except</code>.</li>
+                </ol>
+                <p>🚀 <b>Ini adalah tantangan terbesar!</b> Tapi kamu sudah punya semua skill untuk membuatnya. Coba
+                    kerjakan, dan lihat hasilnya!</p>
+
+                <div class="playground">
+                    <div class="pg-bar"><span class="pg-filename">todo_app.py</span><button class="pg-run"
+                            onclick="runCode('ed-final','out-final','challenge3')">▶ Jalankan</button></div>
+                    <textarea class="pg-editor" id="ed-final" spellcheck="false" rows="60"># To-Do List App
+# Semua konsep digabung: if/else, loop, fungsi, dict, file, try/except
+
+def load_data():
+    try:
+        with open("todo.txt", "r") as f:
+            return eval(f.read())
+    except:
+        return {"next_id": 1, "tugas": {}}
+
+def save_data(data):
+    with open("todo.txt", "w") as f:
+        f.write(str(data))
+
+def tambah_tugas(data):
+    tugas = input("Masukkan tugas: ")
+    data["tugas"][data["next_id"]] = {"tugas": tugas, "selesai": False}
+    print(f"Tugas ID {data['next_id']} ditambahkan!")
+    data["next_id"] += 1
+    return data
+
+def lihat_tugas(data):
+    if not data["tugas"]:
+        print("Belum ada tugas.")
+        return
+    for id, info in data["tugas"].items():
+        status = "✅" if info["selesai"] else "⬜"
+        print(f"{id}. {status} {info['tugas']}")
+
+def tandai_selesai(data):
+    try:
+        id = int(input("ID tugas yang selesai: "))
+        if id in data["tugas"]:
+            data["tugas"][id]["selesai"] = True
+            print("Tugas ditandai selesai!")
+        else:
+            print("ID tidak ditemukan!")
+    except ValueError:
+        print("Error: ID harus berupa angka!")
+    return data
+
+def hapus_tugas(data):
+    try:
+        id = int(input("ID tugas yang dihapus: "))
+        if id in data["tugas"]:
+            del data["tugas"][id]
+            print("Tugas dihapus!")
+        else:
+            print("ID tidak ditemukan!")
+    except ValueError:
+        print("Error: ID harus berupa angka!")
+    return data
+
+# Program Utama
+data = load_data()
+
+while True:
+    print("\n=== TO-DO LIST ===")
+    print("1. Tambah Tugas")
+    print("2. Lihat Tugas")
+    print("3. Tandai Selesai")
+    print("4. Hapus Tugas")
+    print("5. Keluar (Simpan otomatis)")
+    try:
+        pilih = int(input("Pilih: "))
+        if pilih == 1:
+            data = tambah_tugas(data)
+        elif pilih == 2:
+            lihat_tugas(data)
+        elif pilih == 3:
+            data = tandai_selesai(data)
+        elif pilih == 4:
+            data = hapus_tugas(data)
+        elif pilih == 5:
+            save_data(data)
+            print("Data tersimpan. Sampai jumpa! 👋")
+            break
+        else:
+            print("Pilihan tidak valid!")
+    except ValueError:
+        print("Error: Pilih angka 1-5!")</textarea>
+                    <div class="pg-output-wrap">
+                        <div class="pg-output-label">OUTPUT</div>
+                        <div class="pg-output" id="out-final"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= QUIZ FINAL ================= -->
+        <section class="bab" id="kuis-final3">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span
+                        class="str">"Quiz"</span>)</div>
+                <h2 class="bab-title" data-text="Quiz">Quiz</h2>
+                <p class="bab-intro">Uji pemahamanmu tentang Percabangan, Loop, Fungsi, Dictionary, File, dan Error
+                    Handling.</p>
+            </div>
+
+            <div class="card">
+                <h3>🏁 Quiz Bab 12–17</h3>
+                <div id="quiz-final3"></div>
+                <div id="finalScoreBox3">
+                    <div class="score-num"><span id="finalScoreNum3">0</span>/8</div>
+                    <div class="score-msg" id="finalScoreMsg3"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Modul ini bisa dibuka ulang kapan saja. Semangat terus belajar coding-nya! 🚀</p>
+        <div class="brand">🐍 Modul Ajar Python — Sesi Privat</div>
+        <div class="nav-link-group">
+            <a href="index_bab1_6.html" class="nav-link">← Bab 1–6</a>
+            <a href="index_bab7_11.html" class="nav-link">← Bab 7–11</a>
+            <a href="index.html" class="nav-link" style="background:var(--forest-deep);">🏠 Halaman Utama</a>
+        </div>
+        <div class="edit-hint">Tutor: Khusni Ja'far</div>
+    </footer>
+
+    <script>
+        /* ================= PROGRESS RAIL ================= */
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const scrolled = h.scrollHeight > h.clientHeight
+                ? (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 : 0;
+            document.getElementById('scrollFill').style.width = scrolled + '%';
+        });
+
+        /* ================= TOC COLLAPSE ================= */
+        function toggleToc(btn) {
+            const sub = btn.nextElementSibling;
+            const chevron = btn.querySelector('.toc-chevron');
+            if (sub) sub.classList.toggle('collapsed');
+            if (chevron) chevron.classList.toggle('rotated');
+        }
+
+        /* ================= HEADING TYPE-IN ================= */
+        const headingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('type-in');
+                    headingObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        document.querySelectorAll('h2.bab-title').forEach(el => headingObserver.observe(el));
+
+        /* ================= SECTION DONE TRACKING ================= */
+        const sectionDone = {
+            bab12: false, bab13: false, bab14: false,
+            bab15: false, bab16: false, bab17: false,
+            challenge3: false, quizfinal3: false
+        };
+
+        function markSectionComplete(key) {
+            sectionDone[key] = true;
+            const el = document.getElementById('check-' + key);
+            if (el) el.classList.add('done');
+            updateTocPct();
+            try {
+                let progress = JSON.parse(localStorage.getItem('python_modul_progress') || '{}');
+                progress[key] = true;
+                localStorage.setItem('python_modul_progress', JSON.stringify(progress));
+            } catch (_) { }
+        }
+
+        function updateTocPct() {
+            const total = Object.keys(sectionDone).length;
+            const done = Object.values(sectionDone).filter(Boolean).length;
+            document.getElementById('tocPct').textContent = Math.round(done / total * 100) + '% selesai';
+        }
+
+        /* ================= QUIZ ENGINE ================= */
+        const quizzes = {
+            final3: [
+                { q: "Apa keyword yang digunakan untuk percabangan di Python?", options: ["if/elif/else", "switch/case", "do/while", "then/else"], correct: 0, exp: "Python menggunakan if/elif/else untuk percabangan." },
+                { q: "Perulangan manakah yang digunakan ketika jumlah iterasi tidak diketahui pasti?", options: ["for", "while", "foreach", "repeat"], correct: 1, exp: "while digunakan ketika kondisi belum pasti jumlahnya." },
+                { q: "Apa fungsi dari kata kunci return di dalam fungsi?", options: ["Mencetak nilai", "Mengembalikan nilai ke pemanggil", "Menghentikan program", "Menghapus variabel"], correct: 1, exp: "return mengembalikan nilai dari fungsi ke tempat pemanggilannya." },
+                { q: "Tipe data apa yang menyimpan pasangan key-value?", options: ["list", "tuple", "set", "dict"], correct: 3, exp: "Dictionary (dict) menyimpan data dalam pasangan key-value." },
+                { q: "Apa yang terjadi jika kita menambahkan elemen duplikat ke dalam set?", options: ["Error", "Duplikat tetap ada", "Duplikat diabaikan (hanya satu)", "Set berubah jadi list"], correct: 2, exp: "Set hanya menyimpan nilai unik, duplikat otomatis diabaikan." },
+                { q: "Mode apa yang digunakan untuk membaca file di Python?", options: ["'r'", "'w'", "'a'", "'x'"], correct: 0, exp: "'r' adalah mode read (baca) untuk file." },
+                { q: "Blok apa yang digunakan untuk menangani error di Python?", options: ["try/except", "if/else", "for/while", "open/close"], correct: 0, exp: "try/except digunakan untuk menangani error (exception handling)." },
+                { q: "Manakah pernyataan yang benar tentang fungsi?", options: ["Fungsi tidak bisa menerima parameter", "Fungsi harus selalu menggunakan return", "Fungsi membantu membuat kode lebih modular", "Fungsi hanya bisa dipanggil satu kali"], correct: 2, exp: "Fungsi membantu membuat kode lebih modular, reusable, dan terstruktur." }
+            ]
+        };
+
+        const quizProgress = {};
+
+        function renderQuiz(key, containerId, { finalMode = false } = {}) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const data = quizzes[key];
+            if (!data) return;
+            container.innerHTML = data.map((item, qi) => {
+                const codeBlock = item.code ? `<pre style="background:var(--terminal-bg);color:var(--terminal-string);border-radius:8px;padding:10px 14px;font-size:13.5px;margin-top:8px;">${escapeHtml(item.code)}</pre>` : '';
+                return `
+      <div class="quiz-q" data-q="${qi}">
+        <p class="quiz-question">${qi + 1}. ${item.q}${codeBlock}</p>
+        <div class="quiz-options">
+          ${item.options.map((opt, oi) => `<button class="quiz-opt" onclick="answerQuiz('${key}',${qi},${oi},this,${finalMode})">${escapeHtml(opt)}</button>`).join('')}
+        </div>
+        <div class="quiz-feedback" id="${key}-fb-${qi}"></div>
+      </div>
+    `;
+            }).join('');
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function answerQuiz(key, qi, oi, btnEl, finalMode) {
+            const item = quizzes[key][qi];
+            const buttons = btnEl.parentElement.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => b.disabled = true);
+            const fb = document.getElementById(`${key}-fb-${qi}`);
+            const isCorrect = oi === item.correct;
+            if (isCorrect) {
+                btnEl.classList.add('correct');
+                fb.textContent = '✅ Benar! ' + item.exp;
+                fb.className = 'quiz-feedback show correct';
+            } else {
+                btnEl.classList.add('wrong');
+                buttons[item.correct].classList.add('correct');
+                fb.textContent = '❌ Belum tepat. ' + item.exp;
+                fb.className = 'quiz-feedback show wrong';
+            }
+
+            if (!quizProgress[key]) quizProgress[key] = { answered: new Set(), correct: 0 };
+            if (!quizProgress[key].answered.has(qi)) {
+                quizProgress[key].answered.add(qi);
+                if (isCorrect) quizProgress[key].correct++;
+            }
+
+            if (quizProgress[key].answered.size === quizzes[key].length) {
+                if (finalMode) {
+                    showFinalScore3(quizProgress[key].correct, quizzes[key].length);
+                    markSectionComplete('quizfinal3');
+                }
+            }
+        }
+
+        function showFinalScore3(correct, total) {
+            const box = document.getElementById('finalScoreBox3');
+            document.getElementById('finalScoreNum3').textContent = correct;
+            let msg, bg, color;
+            if (correct >= 7) { msg = '🎉 Luar biasa! Kamu sudah menguasai Python tingkat lanjut!'; bg = 'var(--forest-wash)'; color = 'var(--forest-deep)'; } else if (correct >= 4) { msg = '💪 Bagus! Beberapa konsep masih perlu diulang, tapi kamu hebat!'; bg = 'var(--highlighter-wash)'; color = '#7A5B0A'; } else { msg = '🌱 Jangan menyerah! Baca ulang materi dan coba lagi, kamu pasti bisa!'; bg = 'var(--danger-wash)'; color = 'var(--danger)'; }
+            document.getElementById('finalScoreMsg3').textContent = msg;
+            box.style.background = bg;
+            box.style.color = color;
+            box.classList.add('show');
+        }
+
+        renderQuiz('final3', 'quiz-final3', { finalMode: true });
+
+        /* ================= PYTHON SIMULATOR LANJUTAN ================= */
+        // Simulator ini mendukung: if/elif/else, for/while loop, def/return, dict, set, try/except, with open (simulasi localStorage)
+
+        function stripComments(code) {
+            let result = '',
+                i = 0,
+                inString = null;
+            while (i < code.length) {
+                if (inString) {
+                    if (inString.length === 3) {
+                        if (code.slice(i, i + 3) === inString) {
+                            result += inString;
+                            i += 3;
+                            inString = null; continue;
+                        }
+                        result += code[i];
+                        i++; continue;
+                    } else {
+                        if (code[i] === '\\' && i + 1 < code.length) {
+                            result += code[i] + code[i + 1];
+                            i += 2; continue;
+                        }
+                        if (code[i] === inString) {
+                            result += code[i];
+                            i++;
+                            inString = null; continue;
+                        }
+                        result += code[i];
+                        i++; continue;
+                    }
+                } else {
+                    if (code.slice(i, i + 3) === '"""' || code.slice(i, i + 3) === "'''") {
+                        inString = code.slice(i, i + 3);
+                        result += inString;
+                        i += 3; continue;
+                    }
+                    if (code[i] === '"' || code[i] === "'") {
+                        inString = code[i];
+                        result += code[i];
+                        i++; continue;
+                    }
+                    if (code[i] === '#') { while (i < code.length && code[i] !== '\n') i++; continue; }
+                    result += code[i];
+                    i++;
+                }
+            }
+            return result;
+        }
+
+        function processEscapes(str) {
+            return str.replace(/\\n/g, "\n").replace(/\\t/g, "\t").replace(/\\"/g, '"').replace(/\\'/g, "'").replace(/\\\\/g, "\\");
+        }
+
+        function tokenizeExpr(s) {
+            const tokens = [];
+            let i = 0;
+            while (i < s.length) {
+                const c = s[i];
+                if (/\s/.test(c)) { i++; continue; }
+                if (/[0-9]/.test(c) || (c === '.' && /[0-9]/.test(s[i + 1] || ''))) {
+                    let num = '',
+                        hasDot = false;
+                    while (i < s.length && /[0-9.]/.test(s[i])) {
+                        if (s[i] === '.') hasDot = true;
+                        num += s[i];
+                        i++;
+                    }
+                    tokens.push({ type: 'num', value: parseFloat(num), isFloat: hasDot });
+                    continue;
+                }
+                if (s.slice(i, i + 3) === '"""' || s.slice(i, i + 3) === "'''") {
+                    const q = s.slice(i, i + 3);
+                    const end = s.indexOf(q, i + 3);
+                    if (end === -1) throw new Error('⚠️ Triple quote belum ditutup dengan benar.');
+                    tokens.push({ type: 'str', value: s.slice(i + 3, end) });
+                    i = end + 3;
+                    continue;
+                }
+                if (c === '"' || c === "'") {
+                    const q = c;
+                    let j = i + 1,
+                        buf = '',
+                        closed = false;
+                    while (j < s.length) {
+                        if (s[j] === '\\' && j + 1 < s.length) {
+                            buf += s[j] + s[j + 1];
+                            j += 2; continue;
+                        }
+                        if (s[j] === q) {
+                            closed = true;
+                            j++; break;
+                        }
+                        buf += s[j];
+                        j++;
+                    }
+                    if (!closed) throw new Error('⚠️ Tanda kutip belum ditutup dengan benar.');
+                    tokens.push({ type: 'str', value: processEscapes(buf) });
+                    i = j;
+                    continue;
+                }
+                if (/[A-Za-z_]/.test(c)) {
+                    let id = '';
+                    while (i < s.length && /[A-Za-z0-9_]/.test(s[i])) {
+                        id += s[i];
+                        i++;
+                    }
+                    tokens.push({ type: 'ident', value: id });
+                    continue;
+                }
+                if (c === '*' && s[i + 1] === '*') {
+                    tokens.push({ type: '**' });
+                    i += 2; continue;
+                }
+                if (c === '/' && s[i + 1] === '/') {
+                    tokens.push({ type: '//' });
+                    i += 2; continue;
+                }
+                if ('+-*/%(),:'.includes(c)) {
+                    tokens.push({ type: c });
+                    i++; continue;
+                }
+                if (c === '=' && s[i + 1] === '=') {
+                    tokens.push({ type: '==' });
+                    i += 2; continue;
+                }
+                if (c === '!' && s[i + 1] === '=') {
+                    tokens.push({ type: '!=' });
+                    i += 2; continue;
+                }
+                if (c === '>' && s[i + 1] === '=') {
+                    tokens.push({ type: '>=' });
+                    i += 2; continue;
+                }
+                if (c === '<' && s[i + 1] === '=') {
+                    tokens.push({ type: '<=' });
+                    i += 2; continue;
+                }
+                if (c === '>' && s[i + 1] !== '=') {
+                    tokens.push({ type: '>' });
+                    i++; continue;
+                }
+                if (c === '<' && s[i + 1] !== '=') {
+                    tokens.push({ type: '<' });
+                    i++; continue;
+                }
+                if (c === '=') {
+                    tokens.push({ type: '=' });
+                    i++; continue;
+                }
+                throw new Error('⚠️ Ada karakter yang belum dikenal: "' + c + '"');
+            }
+            return tokens;
+        }
+
+        function formatValue(v) {
+            if (v.type === 'str') return v.value;
+            if (v.type === 'list') return '[' + v.value.map(formatValue).join(', ') + ']';
+            if (v.type === 'tuple') return '(' + v.value.map(formatValue).join(', ') + ')';
+            if (v.type === 'dict') {
+                const pairs = Object.keys(v.value).map(k => k + ': ' + formatValue(v.value[k]));
+                return '{' + pairs.join(', ') + '}';
+            }
+            if (v.type === 'set') return '{' + v.value.map(formatValue).join(', ') + '}';
+            if (v.isFloat) { if (Number.isInteger(v.value)) return v.value.toFixed(1); return String(v.value); }
+            return String(v.value);
+        }
+
+        function evalExpr(tokens, env) {
+            let pos = 0;
+            const peek = () => tokens[pos];
+            const next = () => tokens[pos++];
+            const expect = (type) => { if (!peek() || peek().type !== type) throw new Error('⚠️ Syntax error: expected ' + type); next(); };
+
+            function applyOp(op, a, b) {
+                if (op === '+') {
+                    if (a.type === 'str' && b.type === 'str') return { type: 'str', value: a.value + b.value };
+                    if (a.type === 'num' && b.type === 'num') return { type: 'num', value: a.value + b.value, isFloat: a.isFloat || b.isFloat };
+                    if (a.type === 'list' && b.type === 'list') return { type: 'list', value: [...a.value, ...b.value] };
+                    throw new Error('⚠️ TypeError: tidak bisa menggabungkan tipe ini.');
+                }
+                if (op === '*') {
+                    if (a.type === 'num' && b.type === 'num') return { type: 'num', value: a.value * b.value, isFloat: a.isFloat || b.isFloat };
+                    if (a.type === 'str' && b.type === 'num' && !b.isFloat) return { type: 'str', value: b.value > 0 ? a.value.repeat(b.value) : '' };
+                    if (b.type === 'str' && a.type === 'num' && !a.isFloat) return { type: 'str', value: a.value > 0 ? b.value.repeat(a.value) : '' };
+                    throw new Error('⚠️ TypeError: perkalian ini tidak didukung.');
+                }
+                if (a.type !== 'num' || b.type !== 'num') throw new Error('⚠️ TypeError: operator "' + op + '" hanya untuk angka.');
+                const isFloat = a.isFloat || b.isFloat || op === '/';
+                let value;
+                switch (op) {
+                    case '-':
+                        value = a.value - b.value; break;
+                    case '/':
+                        if (b.value === 0) throw new Error('⚠️ ZeroDivisionError: tidak bisa membagi dengan nol.');
+                        value = a.value / b.value; break;
+                    case '//':
+                        if (b.value === 0) throw new Error('⚠️ ZeroDivisionError: tidak bisa membagi dengan nol.');
+                        value = Math.floor(a.value / b.value); break;
+                    case '%':
+                        if (b.value === 0) throw new Error('⚠️ ZeroDivisionError: tidak bisa membagi dengan nol.');
+                        value = a.value - Math.floor(a.value / b.value) * b.value; break;
+                    case '**':
+                        value = Math.pow(a.value, b.value); break;
+                }
+                return { type: 'num', value, isFloat };
+            }
+
+            function parseExpr() {
+                let left = parseTerm(); while (peek() && (peek().type === '+' || peek().type === '-')) {
+                    const op = next().type;
+                    left = applyOp(op, left, parseTerm());
+                } return left;
+            }
+
+            function parseTerm() {
+                let left = parsePower(); while (peek() && ['*', '/', '//', '%'].includes(peek().type)) {
+                    const op = next().type;
+                    left = applyOp(op, left, parsePower());
+                } return left;
+            }
+
+            function parsePower() {
+                let base = parseUnary(); if (peek() && peek().type === '**') {
+                    next(); const exp = parsePower();
+                    base = applyOp('**', base, exp);
+                } return base;
+            }
+
+            function parseUnary() {
+                if (peek() && peek().type === '-') {
+                    next(); const v = parseUnary(); if (v.type !== 'num') throw new Error('⚠️ Tanda minus hanya untuk angka.');
+                    return { type: 'num', value: -v.value, isFloat: v.isFloat };
+                }
+                if (peek() && peek().type === '+') { next(); return parseUnary(); }
+                return parsePrimary();
+            }
+
+            function parsePrimary() {
+                const t = peek();
+                if (!t) throw new Error('⚠️ Ekspresi belum lengkap.');
+                if (t.type === 'num') { next(); return { type: 'num', value: t.value, isFloat: t.isFloat }; }
+                if (t.type === 'str') { next(); return { type: 'str', value: t.value }; }
+                if (t.type === '(') { next(); const v = parseExpr(); expect(')'); return v; }
+                if (t.type === '[') {
+                    next();
+                    const items = [];
+                    while (peek() && peek().type !== ']') {
+                        items.push(parseExpr());
+                        if (peek() && peek().type === ',') next();
+                    }
+                    expect(']');
+                    return { type: 'list', value: items };
+                }
+                if (t.type === '{') {
+                    next();
+                    const dict = {};
+                    const setItems = [];
+                    let isSet = true;
+                    while (peek() && peek().type !== '}') {
+                        const key = parseExpr();
+                        if (peek() && peek().type === ':') {
+                            isSet = false;
+                            next();
+                            const val = parseExpr();
+                            dict[key.value] = val;
+                        } else {
+                            setItems.push(key);
+                        }
+                        if (peek() && peek().type === ',') next();
+                    }
+                    expect('}');
+                    if (isSet) return { type: 'set', value: setItems };
+                    return { type: 'dict', value: dict };
+                }
+                if (t.type === 'ident') {
+                    next();
+                    const name = t.value;
+                    if (peek() && peek().type === '(') {
+                        next();
+                        const args = [];
+                        while (peek() && peek().type !== ')') {
+                            args.push(parseExpr());
+                            if (peek() && peek().type === ',') next();
+                        }
+                        expect(')');
+                        // Built-in functions
+                        if (name === 'print') {
+                            const vals = args.map(a => formatValue(a));
+                            return { type: 'str', value: vals.join(' ') };
+                        }
+                        if (name === 'input') {
+                            const prompt = args.length > 0 ? args[0].value : 'Masukkan nilai:';
+                            const userVal = window.prompt(prompt);
+                            return { type: 'str', value: userVal === null ? '' : userVal };
+                        }
+                        if (name === 'int' || name === 'float' || name === 'str' || name === 'bool') {
+                            if (args.length !== 1) throw new Error('⚠️ ' + name + '() membutuhkan 1 argumen.');
+                            const v = args[0];
+                            if (name === 'int') {
+                                if (v.type === 'num') return { type: 'num', value: Math.trunc(v.value), isFloat: false }; const s = v.value.trim(); if (!/^-?\d+$/.test(s)) throw new Error('⚠️ ValueError: "' + v.value + '" bukan integer valid.');
+                                return { type: 'num', value: parseInt(s, 10), isFloat: false };
+                            }
+                            if (name === 'float') {
+                                if (v.type === 'num') return { type: 'num', value: v.value, isFloat: true }; const s = v.value.trim(); if (!/^-?\d+(\.\d+)?$/.test(s)) throw new Error('⚠️ ValueError: "' + v.value + '" bukan float valid.');
+                                return { type: 'num', value: parseFloat(s), isFloat: true };
+                            }
+                            if (name === 'str') return { type: 'str', value: String(v.value) };
+                            if (name === 'bool') return { type: 'num', value: !!v.value, isFloat: false };
+                        }
+                        if (name === 'len') {
+                            if (args.length !== 1) throw new Error('⚠️ len() membutuhkan 1 argumen.');
+                            const v = args[0];
+                            if (v.type === 'str') return { type: 'num', value: v.value.length, isFloat: false };
+                            if (v.type === 'list' || v.type === 'tuple' || v.type === 'set') return { type: 'num', value: v.value.length, isFloat: false };
+                            if (v.type === 'dict') return { type: 'num', value: Object.keys(v.value).length, isFloat: false };
+                            throw new Error('⚠️ TypeError: len() tidak bisa digunakan untuk tipe ini.');
+                        }
+                        if (['max', 'min', 'sum'].includes(name)) {
+                            if (args.length !== 1) throw new Error('⚠️ ' + name + '() membutuhkan 1 argumen (list).');
+                            const v = args[0];
+                            if (v.type !== 'list' && v.type !== 'tuple' && v.type !== 'set') throw new Error('⚠️ ' + name + '() hanya bisa untuk list/set/tuple.');
+                            const vals = v.value.map(item => item.type === 'num' ? item.value : 0);
+                            if (name === 'max') return { type: 'num', value: Math.max(...vals), isFloat: false };
+                            if (name === 'min') return { type: 'num', value: Math.min(...vals), isFloat: false };
+                            if (name === 'sum') return { type: 'num', value: vals.reduce((a, b) => a + b, 0), isFloat: false };
+                        }
+                        if (name === 'list' || name === 'tuple' || name === 'set') {
+                            if (args.length !== 1) throw new Error('⚠️ ' + name + '() membutuhkan 1 argumen.');
+                            const v = args[0];
+                            if (name === 'list') {
+                                if (v.type === 'str') return { type: 'list', value: Array.from(v.value).map(ch => ({ type: 'str', value: ch })) };
+                                if (v.type === 'tuple' || v.type === 'set') return { type: 'list', value: v.value.map(item => item) };
+                                if (v.type === 'dict') return { type: 'list', value: Object.keys(v.value).map(k => ({ type: 'str', value: k })) };
+                                throw new Error('⚠️ TypeError: list() tidak bisa mengonversi tipe ini.');
+                            }
+                            if (name === 'tuple') {
+                                if (v.type === 'str') return { type: 'tuple', value: Array.from(v.value).map(ch => ({ type: 'str', value: ch })) };
+                                if (v.type === 'list' || v.type === 'set') return { type: 'tuple', value: v.value.map(item => item) };
+                                throw new Error('⚠️ TypeError: tuple() tidak bisa mengonversi tipe ini.');
+                            }
+                            if (name === 'set') {
+                                if (v.type === 'list' || v.type === 'tuple') {
+                                    const unique = [];
+                                    const seen = new Set();
+                                    for (const item of v.value) {
+                                        const key = JSON.stringify(item);
+                                        if (!seen.has(key)) {
+                                            seen.add(key);
+                                            unique.push(item);
+                                        }
+                                    }
+                                    return { type: 'set', value: unique };
+                                }
+                                if (v.type === 'str') return { type: 'set', value: Array.from(v.value).map(ch => ({ type: 'str', value: ch })) };
+                                throw new Error('⚠️ TypeError: set() tidak bisa mengonversi tipe ini.');
+                            }
+                        }
+                        if (name === 'range') {
+                            let start = 0,
+                                end = 0,
+                                step = 1;
+                            if (args.length === 1) { end = Math.floor(args[0].value); } else if (args.length === 2) {
+                                start = Math.floor(args[0].value);
+                                end = Math.floor(args[1].value);
+                            } else if (args.length === 3) {
+                                start = Math.floor(args[0].value);
+                                end = Math.floor(args[1].value);
+                                step = Math.floor(args[2].value);
+                            }
+                            const vals = [];
+                            for (let i = start; i < end; i += step) vals.push({ type: 'num', value: i, isFloat: false });
+                            return { type: 'list', value: vals };
+                        }
+                        if (name === 'random') {
+                            // Simulate random.randint
+                            if (args.length === 2 && args[0].type === 'num' && args[1].type === 'num') {
+                                const min = Math.ceil(args[0].value);
+                                const max = Math.floor(args[1].value);
+                                const val = Math.floor(Math.random() * (max - min + 1)) + min;
+                                return { type: 'num', value: val, isFloat: false };
+                            }
+                            throw new Error('⚠️ random.randint(min, max) membutuhkan 2 angka.');
+                        }
+                        if (name === 'dict') {
+                            if (args.length === 0) return { type: 'dict', value: {} };
+                            throw new Error('⚠️ dict() tanpa argumen untuk membuat dict kosong.');
+                        }
+                        // Cek fungsi yang didefinisikan user
+                        if (env.__functions && env.__functions[name]) {
+                            const func = env.__functions[name];
+                            const scope = { ...env };
+                            func.params.forEach((p, i) => {
+                                scope[p] = args[i] || { type: 'num', value: 0, isFloat: false };
+                            });
+                            let returnVal = null;
+                            const result = executeStatements(func.body, scope);
+                            if (result && result.return) return result.return;
+                            return { type: 'num', value: 0, isFloat: false };
+                        }
+                        throw new Error('⚠️ Fungsi "' + name + '()" belum dikenal.');
+                    }
+                    if (!(name in env)) throw new Error('⚠️ NameError: variabel "' + name + '" belum pernah dibuat.');
+                    return env[name];
+                }
+                throw new Error('⚠️ Ada bagian ekspresi yang tidak valid.');
+            }
+            if (!tokens.length) throw new Error('⚠️ Ekspresi kosong.');
+            const result = parseExpr();
+            if (pos < tokens.length) throw new Error('⚠️ Ada bagian yang tidak terproses di akhir ekspresi.');
+            return result;
+        }
+
+        function evaluateCondition(condTokens, env) {
+            const result = evalExpr(condTokens, env);
+            if (result.type === 'num') return !!result.value;
+            if (result.type === 'str') return result.value.length > 0;
+            if (result.type === 'list' || result.type === 'tuple' || result.type === 'set') return result.value.length > 0;
+            if (result.type === 'dict') return Object.keys(result.value).length > 0;
+            return true;
+        }
+
+        function executeStatements(lines, env, options = {}) {
+            const output = [];
+            let i = 0;
+            let errorHandler = null;
+            let inExcept = false;
+            let tryBlock = [];
+
+            while (i < lines.length) {
+                const line = lines[i];
+                const stripped = line.trim();
+                const indent = line.length - line.trimStart().length;
+
+                if (!stripped || stripped.startsWith('#')) { i++; continue; }
+
+                // Handle try
+                if (stripped.startsWith('try:')) {
+                    const blockIndent = indent + 4;
+                    const block = [];
+                    i++;
+                    while (i < lines.length && lines[i].length - lines[i].trimStart().length >= blockIndent) {
+                        block.push(lines[i].trimStart());
+                        i++;
+                    }
+                    const exceptLine = lines[i] ? lines[i].trim() : '';
+                    if (exceptLine.startsWith('except')) {
+                        const exceptParts = exceptLine.split(':');
+                        const exceptType = exceptParts[0].replace('except', '').trim() || 'Exception';
+                        const exceptBlock = [];
+                        i++;
+                        const exceptIndent = (lines[i] ? lines[i].length - lines[i].trimStart().length : 0);
+                        while (i < lines.length && lines[i].length - lines[i].trimStart().length >= exceptIndent) {
+                            exceptBlock.push(lines[i].trimStart());
+                            i++;
+                        }
+                        try {
+                            const result = executeStatements(block, env);
+                            if (result && result.return) return result;
+                            if (result && result.break) return { break: true };
+                            if (result && result.continue) return { continue: true };
+                            // Else block not executed, just continue
+                        } catch (e) {
+                            // Execute except block
+                            const result = executeStatements(exceptBlock, env);
+                            if (result && result.return) return result;
+                        }
+                        continue;
+                    } else {
+                        // try without except? just execute
+                        const result = executeStatements(block, env);
+                        if (result && result.return) return result;
+                        continue;
+                    }
+                }
+
+                // Handle if/elif/else
+                if (stripped.startsWith('if ')) {
+                    const condStr = stripped.slice(3, stripped.length - 1).trim();
+                    const condTokens = tokenizeExpr(condStr);
+                    const condVal = evaluateCondition(condTokens, env);
+                    const blockIndent = indent + 4;
+                    const block = [];
+                    i++;
+                    while (i < lines.length && lines[i].length - lines[i].trimStart().length >= blockIndent) {
+                        block.push(lines[i].trimStart());
+                        i++;
+                    }
+                    if (condVal) {
+                        const result = executeStatements(block, env);
+                        if (result && result.return) return result;
+                        if (result && result.break) return { break: true };
+                        if (result && result.continue) return { continue: true };
+                        // Skip elif/else
+                        let skipCount = 0;
+                        let j = i;
+                        while (j < lines.length) {
+                            const l = lines[j].trim();
+                            if (l.startsWith('elif ') || l.startsWith('else:')) {
+                                const bIndent = lines[j].length - lines[j].trimStart().length;
+                                if (bIndent === indent) {
+                                    skipCount++;
+                                    j++;
+                                    while (j < lines.length && lines[j].length - lines[j].trimStart().length >= bIndent + 4) j++;
+                                    continue;
+                                }
+                            }
+                            j++;
+                        }
+                        i = j;
+                        continue;
+                    } else {
+                        // Find next elif or else at same indent
+                        let found = false;
+                        while (i < lines.length) {
+                            const l = lines[i].trim();
+                            if (l.startsWith('elif ') && (lines[i].length - lines[i].trimStart().length === indent)) {
+                                const condStr2 = l.slice(5, l.length - 1).trim();
+                                const condTokens2 = tokenizeExpr(condStr2);
+                                const condVal2 = evaluateCondition(condTokens2, env);
+                                const blockIndent2 = indent + 4;
+                                const block2 = [];
+                                i++;
+                                while (i < lines.length && lines[i].length - lines[i].trimStart().length >= blockIndent2) {
+                                    block2.push(lines[i].trimStart());
+                                    i++;
+                                }
+                                if (condVal2) {
+                                    const result = executeStatements(block2, env);
+                                    if (result && result.return) return result;
+                                    found = true;
+                                    break;
+                                }
+                                continue;
+                            } else if (l.startsWith('else:') && (lines[i].length - lines[i].trimStart().length === indent)) {
+                                const blockIndent2 = indent + 4;
+                                const block2 = [];
+                                i++;
+                                while (i < lines.length && lines[i].length - lines[i].trimStart().length >= blockIndent2) {
+                                    block2.push(lines[i].trimStart());
+                                    i++;
+                                }
+                                const result = executeStatements(block2, env);
+                                if (result && result.return) return result;
+                                found = true;
+                                break;
+                            } else {
+                                break;
+                            }
+                        }
+                        if (!found) continue;
+                        // Skip remaining elif/else at this indent
+                        let j = i;
+                        while (j < lines.length) {
+                            const l = lines[j].trim();
+                            if ((l.startsWith('elif ') || l.startsWith('else:')) && (lines[j].length - lines[j].trimStart().length === indent)) {
+                                j++;
+                                while (j < lines.length && lines[j].length - lines[j].trimStart().length >= indent + 4) j++;
+                                continue;
+                            }
+                            break;
+                        }
+                        i = j;
+                        continue;
+                    }
+                }
+
+                // Handle for loop
+                if (stripped.startsWith('for ')) {
+                    const parts = stripped.slice(4).split(' in ');
+                    if (parts.length !== 2) throw new Error('⚠️ Syntax error pada for loop.');
+                    const varName = parts[0].trim();
+                    const iterExpr = parts[1].slice(0, -1).trim();
+                    const iterTokens = tokenizeExpr(iterExpr);
+                    const iterVal = evalExpr(iterTokens, env);
+                    let iterItems = [];
+                    if (iterVal.type === 'list' || iterVal.type === 'tuple' || iterVal.type === 'set') iterItems = iterVal.value;
+                    else if (iterVal.type === 'str') iterItems = Array.from(iterVal.value).map(ch => ({ type: 'str', value: ch }));
+                    else throw new Error('⚠️ for loop hanya bisa untuk list/tuple/set/string.');
+                    const blockIndent = indent + 4;
+                    const block = [];
+                    i++;
+                    while (i < lines.length && lines[i].length - lines[i].trimStart().length >= blockIndent) {
+                        block.push(lines[i].trimStart());
+                        i++;
+                    }
+                    for (const item of iterItems) {
+                        env[varName] = item;
+                        const result = executeStatements(block, env);
+                        if (result && result.return) return result;
+                        if (result && result.break) { return { break: true }; }
+                        if (result && result.continue) { continue; }
+                    }
+                    continue;
+                }
+
+                // Handle while loop
+                if (stripped.startsWith('while ')) {
+                    const condStr = stripped.slice(6, stripped.length - 1).trim();
+                    const blockIndent = indent + 4;
+                    const block = [];
+                    i++;
+                    while (i < lines.length && lines[i].length - lines[i].trimStart().length >= blockIndent) {
+                        block.push(lines[i].trimStart());
+                        i++;
+                    }
+                    while (true) {
+                        const condTokens = tokenizeExpr(condStr);
+                        const condVal = evaluateCondition(condTokens, env);
+                        if (!condVal) break;
+                        const result = executeStatements(block, env);
+                        if (result && result.return) return result;
+                        if (result && result.break) { return { break: true }; }
+                        if (result && result.continue) { continue; }
+                    }
+                    continue;
+                }
+
+                // Handle def
+                if (stripped.startsWith('def ')) {
+                    const defParts = stripped.slice(4).split('(');
+                    const funcName = defParts[0].trim();
+                    const paramsStr = defParts[1].split(')')[0].trim();
+                    const params = paramsStr ? paramsStr.split(',').map(p => p.trim()) : [];
+                    const blockIndent = indent + 4;
+                    const block = [];
+                    i++;
+                    while (i < lines.length && lines[i].length - lines[i].trimStart().length >= blockIndent) {
+                        block.push(lines[i].trimStart());
+                        i++;
+                    }
+                    if (!env.__functions) env.__functions = {};
+                    env.__functions[funcName] = { params, body: block };
+                    continue;
+                }
+
+                // Handle return
+                if (stripped.startsWith('return ')) {
+                    const exprStr = stripped.slice(7).trim();
+                    if (exprStr) {
+                        const tokens = tokenizeExpr(exprStr);
+                        const val = evalExpr(tokens, env);
+                        return { return: val };
+                    } else {
+                        return { return: { type: 'num', value: 0, isFloat: false } };
+                    }
+                }
+                if (stripped === 'return') {
+                    return { return: { type: 'num', value: 0, isFloat: false } };
+                }
+
+                // Handle break
+                if (stripped === 'break') {
+                    return { break: true };
+                }
+
+                // Handle continue
+                if (stripped === 'continue') {
+                    return { continue: true };
+                }
+
+                // Handle import
+                if (stripped.startsWith('import ')) {
+                    const module = stripped.slice(7).trim();
+                    if (module === 'random') {
+                        // Simulate random module
+                        if (!env.__random) env.__random = { randint: (min, max) => Math.floor(Math.random() * (max - min + 1)) + min };
+                        env.random = env.__random;
+                    }
+                    i++;
+                    continue;
+                }
+
+                // Handle with open (simulasi localStorage)
+                if (stripped.startsWith('with open(')) {
+                    const openParts = stripped.slice('with open('.length).split(') as ');
+                    const argsStr = openParts[0];
+                    const varName = openParts[1].split(':')[0].trim();
+                    const args = argsStr.split(',').map(s => s.trim());
+                    const filename = args[0].replace(/['"]/g, '');
+                    const mode = args.length > 1 ? args[1].replace(/['"]/g, '') : 'r';
+                    const blockIndent = indent + 4;
+                    const block = [];
+                    i++;
+                    while (i < lines.length && lines[i].length - lines[i].trimStart().length >= blockIndent) {
+                        block.push(lines[i].trimStart());
+                        i++;
+                    }
+                    // Simulate file with localStorage
+                    const key = 'simfile_' + filename;
+                    const fileObj = {
+                        data: localStorage.getItem(key) || '',
+                        write: function (text) { this.data += text; localStorage.setItem(key, this.data); },
+                        read: function () { return this.data; },
+                        readlines: function () { return this.data.split('\n').filter(l => l.length > 0); },
+                        close: function () { }
+                    };
+                    env[varName] = fileObj;
+                    const result = executeStatements(block, env);
+                    if (result && result.return) return result;
+                    continue;
+                }
+
+                // Handle simple assignment or expression
+                const eqIdx = findTopLevelEqualsIndex(stripped);
+                if (eqIdx !== -1) {
+                    const varName = stripped.slice(0, eqIdx).trim();
+                    const exprStr = stripped.slice(eqIdx + 1).trim();
+                    const problem = validateVarName(varName);
+                    if (problem) throw new Error('⚠️ SyntaxError: nama variabel "' + varName + '" ' + problem + '.');
+                    const tokens = tokenizeExpr(exprStr);
+                    const result = evalExpr(tokens, env);
+                    env[varName] = result;
+                    i++;
+                    continue;
+                }
+
+                // If it's a standalone expression (like function call or method call)
+                if (stripped.endsWith(')') || stripped.endsWith(']') || stripped.endsWith('}')) {
+                    try {
+                        const tokens = tokenizeExpr(stripped);
+                        const result = evalExpr(tokens, env);
+                        if (stripped.startsWith('print')) {
+                            output.push(formatValue(result));
+                        }
+                        // Method call on object like list.append()
+                        // We handle this by checking if the expression is a method call
+                        // For simplicity, if it's not print, we just evaluate it (for side effects like append)
+                        i++;
+                        continue;
+                    } catch (e) {
+                        throw new Error('⚠️ Syntax error pada baris: "' + stripped + '" - ' + e.message);
+                    }
+                }
+
+                throw new Error('⚠️ Baris tidak dikenali: "' + stripped + '"');
+            }
+            if (output.length > 0) return { output: output.join('\n') };
+            return { output: '' };
+        }
+
+        function findTopLevelEqualsIndex(stmt) {
+            let depth = 0,
+                inString = null,
+                i = 0;
+            while (i < stmt.length) {
+                if (inString) {
+                    if (inString.length === 3) {
+                        if (stmt.slice(i, i + 3) === inString) {
+                            inString = null;
+                            i += 3; continue;
+                        }
+                        i++; continue;
+                    } else {
+                        if (stmt[i] === '\\') { i += 2; continue; } if (stmt[i] === inString) {
+                            inString = null;
+                            i++; continue;
+                        }
+                        i++; continue;
+                    }
+                } else {
+                    if (stmt.slice(i, i + 3) === '"""' || stmt.slice(i, i + 3) === "'''") {
+                        inString = stmt.slice(i, i + 3);
+                        i += 3; continue;
+                    }
+                    if (stmt[i] === '"' || stmt[i] === "'") {
+                        inString = stmt[i];
+                        i++; continue;
+                    }
+                    if (stmt[i] === '(') {
+                        depth++;
+                        i++; continue;
+                    }
+                    if (stmt[i] === '[') {
+                        depth++;
+                        i++; continue;
+                    }
+                    if (stmt[i] === '{') {
+                        depth++;
+                        i++; continue;
+                    }
+                    if (stmt[i] === ')') {
+                        depth--;
+                        i++; continue;
+                    }
+                    if (stmt[i] === ']') {
+                        depth--;
+                        i++; continue;
+                    }
+                    if (stmt[i] === '}') {
+                        depth--;
+                        i++; continue;
+                    }
+                    if (stmt[i] === '=' && stmt[i + 1] !== '=' && stmt[i - 1] !== '=' && depth === 0) return i;
+                    i++;
+                }
+            }
+            return -1;
+        }
+
+        function validateVarName(name) {
+            if (/^[0-9]/.test(name)) return 'tidak boleh diawali angka';
+            if (RESERVED_WORDS.has(name)) return 'tidak boleh pakai kata kunci Python ("' + name + '")';
+            if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(name)) return 'hanya boleh huruf, angka, dan underscore, tanpa spasi';
+            return null;
+        }
+
+        const RESERVED_WORDS = new Set(['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield', 'print', 'input', 'int', 'float', 'str', 'bool', 'list', 'tuple', 'set', 'dict', 'len', 'max', 'min', 'sum', 'range', 'random', 'open']);
+
+        function runPythonSim(code) {
+            const stripped = stripComments(code);
+            const lines = stripped.split('\n');
+            const env = { __functions: {} };
+            const result = executeStatements(lines, env);
+            if (result && result.return) {
+                return formatValue(result.return);
+            }
+            if (result && result.output !== undefined) {
+                return result.output || '(Tidak ada output)';
+            }
+            return '(Kode berhasil dijalankan, tapi tidak ada output.)';
+        }
+
+        function runCode(editorId, outputId, babKey) {
+            const code = document.getElementById(editorId).value;
+            const out = document.getElementById(outputId);
+            out.classList.remove('error');
+            try {
+                const result = runPythonSim(code);
+                out.textContent = result;
+                if (babKey && sectionDone[babKey] !== undefined) markSectionComplete(babKey);
+            } catch (e) {
+                out.textContent = '⚠️ ' + e.message;
+                out.classList.add('error');
+            }
+        }
+
+        // Inisialisasi TOC: semua submenu collapsed
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.toc-sub').forEach(el => el.classList.add('collapsed'));
+            document.querySelectorAll('.toc-chevron').forEach(el => el.classList.add('rotated'));
+            // Load progress dari localStorage
+            try {
+                const saved = JSON.parse(localStorage.getItem('python_modul_progress') || '{}');
+                for (const key of Object.keys(sectionDone)) {
+                    if (saved[key]) {
+                        sectionDone[key] = true;
+                        const el = document.getElementById('check-' + key);
+                        if (el) el.classList.add('done');
+                    }
+                }
+                updateTocPct();
+            } catch (_) { }
+        });
+    </script>
+</body>
+
+</html>

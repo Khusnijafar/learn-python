@@ -1,9 +1,13 @@
-# Tulis ke file
-with open("catatan.txt", "w") as f:
-    f.write("Ini adalah catatan saya!\n")
-    f.write("Baris kedua.")
+import json
 
-# Baca dari file
-with open("catatan.txt", "r") as f:
-    isi = f.read()
-    print(isi)
+data = {
+    "nama": "Andi",
+    "umur": 20,
+    "hobi": ["coding", "membaca"]
+}
+
+json_str = json.dumps(data)
+print("JSON:", json_str)
+
+obj = json.loads(json_str)
+print("Nama:", obj["nama"])

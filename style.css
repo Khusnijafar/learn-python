@@ -919,7 +919,10 @@ code.inline {
 
 /* ===== FINAL SCORE ===== */
 #finalScoreBox,
-#finalScoreBox2 {
+#finalScoreBox2,
+#finalScoreBox3,
+#finalScoreBox4,
+#finalScoreBox5 {
   display: none;
   margin-top: 20px;
   text-align: center;
@@ -928,20 +931,29 @@ code.inline {
 }
 
 #finalScoreBox.show,
-#finalScoreBox2.show {
+#finalScoreBox2.show,
+#finalScoreBox3.show,
+#finalScoreBox4.show,
+#finalScoreBox5.show {
   display: block;
   animation: pop .3s ease;
 }
 
 #finalScoreBox .score-num,
-#finalScoreBox2 .score-num {
+#finalScoreBox2 .score-num,
+#finalScoreBox3 .score-num,
+#finalScoreBox4 .score-num,
+#finalScoreBox5 .score-num {
   font-family: var(--font-head);
   font-size: 44px;
   font-weight: 700;
 }
 
 #finalScoreBox .score-msg,
-#finalScoreBox2 .score-msg {
+#finalScoreBox2 .score-msg,
+#finalScoreBox3 .score-msg,
+#finalScoreBox4 .score-msg,
+#finalScoreBox5 .score-msg {
   font-size: 16px;
   margin-top: 6px;
 }

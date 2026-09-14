@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Ajar Interaktif — Flask Web Development</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Caveat:wght@600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .pg-editor {
+            min-height: 160px;
+            font-size: 13px;
+        }
+
+        .term pre {
+            font-size: 13px;
+        }
+
+        /* Flask simulator */
+        .flask-wrap {
+            background: var(--terminal-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin: 16px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .flask-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--terminal-panel);
+            padding: 10px 16px;
+            border-bottom: 1px solid #0f1216;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .flask-bar .label {
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--terminal-comment);
+        }
+
+        .flask-bar .btn-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .flask-bar button {
+            font-family: var(--font-code);
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--terminal-panel);
+            color: var(--terminal-text);
+            border: 1px solid #303a42;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background .15s;
+        }
+
+        .flask-bar button:hover {
+            background: #2a3340;
+        }
+
+        .flask-bar button.primary {
+            background: var(--terminal-string);
+            color: #0d1a12;
+            border-color: var(--terminal-string);
+        }
+
+        .flask-bar button.primary:hover {
+            background: #e6b84a;
+        }
+
+        .flask-request-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #1a1f26;
+            padding: 10px 16px;
+            border-bottom: 1px dashed #303a42;
+            flex-wrap: wrap;
+        }
+
+        .flask-request-bar select {
+            background: var(--terminal-panel);
+            color: var(--terminal-text);
+            border: 1px solid #303a42;
+            border-radius: 6px;
+            padding: 6px 10px;
+            font-family: var(--font-code);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .flask-request-bar select.method-get {
+            color: #6EE7B7;
+        }
+
+        .flask-request-bar select.method-post {
+            color: #FCD34D;
+        }
+
+        .flask-request-bar input {
+            flex: 1;
+            min-width: 180px;
+            background: var(--terminal-panel);
+            color: var(--terminal-text);
+            border: 1px solid #303a42;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-family: var(--font-code);
+            font-size: 13px;
+        }
+
+        .flask-request-bar input:focus {
+            outline: none;
+            border-color: var(--terminal-string);
+        }
+
+        .flask-request-bar .send-btn {
+            background: #10B981;
+            color: #fff;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 6px;
+            font-family: var(--font-code);
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .flask-request-bar .send-btn:hover {
+            background: #059669;
+        }
+
+        .flask-response {
+            padding: 14px 18px;
+            font-family: var(--font-code);
+            font-size: 13.5px;
+            color: var(--terminal-text);
+            min-height: 80px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+
+        .flask-response .status {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .flask-response .status.ok {
+            background: #065F46;
+            color: #6EE7B7;
+        }
+
+        .flask-response .status.err {
+            background: #7F1D1D;
+            color: #FCA5A5;
+        }
+
+        .flask-response .headers {
+            color: var(--terminal-comment);
+            font-size: 11.5px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #303a42;
+        }
+
+        .flask-response .body {
+            color: var(--terminal-string);
+        }
+
+        .flask-response .body-html {
+            color: var(--terminal-text);
+            white-space: normal;
+        }
+
+        .flask-response .body-html * {
+            max-width: 100%;
+        }
+
+        /* Template preview */
+        .template-preview {
+            background: #fff;
+            color: #1B211D;
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin: 12px 0;
+            font-family: var(--font-body);
+            box-shadow: var(--shadow);
+            max-height: 320px;
+            overflow-y: auto;
+        }
+
+        .template-preview h1,
+        .template-preview h2 {
+            font-family: var(--font-head);
+            margin: 0 0 10px;
+        }
+
+        .template-preview ul {
+            padding-left: 22px;
+        }
+
+        /* File tree */
+        .file-tree {
+            font-family: var(--font-code);
+            font-size: 13.5px;
+            background: var(--paper-alt);
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            margin: 12px 0;
+            line-height: 1.9;
+            color: var(--ink-soft);
+        }
+
+        .file-tree .folder {
+            color: var(--forest-deep);
+            font-weight: 600;
+        }
+
+        .file-tree .file {
+            color: var(--ink);
+        }
+
+        .file-tree .file.active {
+            background: var(--forest-wash);
+            padding: 1px 8px;
+            border-radius: 5px;
+        }
+
+        /* Endpoint list */
+        .endpoint-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin: 12px 0;
+        }
+
+        .endpoint-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--terminal-bg);
+            color: var(--terminal-text);
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-code);
+            font-size: 13px;
+            cursor: pointer;
+            transition: transform .12s, box-shadow .12s;
+            border: none;
+            text-align: left;
+            width: 100%;
+        }
+
+        .endpoint-item:hover {
+            transform: translateX(3px);
+            box-shadow: 0 4px 12px -4px rgba(30, 107, 68, .5);
+        }
+
+        .endpoint-item .method {
+            font-weight: 700;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 5px;
+            flex-shrink: 0;
+        }
+
+        .endpoint-item .method.get {
+            background: #065F46;
+            color: #6EE7B7;
+        }
+
+        .endpoint-item .method.post {
+            background: #78350F;
+            color: #FCD34D;
+        }
+
+        .endpoint-item .path {
+            color: var(--terminal-string);
+        }
+
+        .endpoint-item .desc {
+            color: var(--terminal-comment);
+            margin-left: auto;
+            font-size: 11.5px;
+        }
+
+        .deploy-step {
+            display: flex;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--rule);
+            align-items: flex-start;
+        }
+
+        .deploy-step:last-child {
+            border-bottom: none;
+        }
+
+        .deploy-step .num-badge {
+            font-family: var(--font-code);
+            font-weight: 700;
+            font-size: 13px;
+            background: var(--forest);
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .deploy-step .text b {
+            display: block;
+            margin-bottom: 3px;
+            font-family: var(--font-head);
+        }
+
+        .deploy-step .text span {
+            font-size: 14.5px;
+            color: var(--ink-soft);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="scrollRail">
+        <div id="scrollFill"></div>
+    </div>
+
+    <header class="hero">
+        <nav class="top-nav">
+            <a href="index.html">🏠 Beranda</a>
+            <span class="sep">|</span>
+            <a href="index_bab1_6.html">Bab 1–6</a>
+            <a href="index_bab7_11.html">Bab 7–11</a>
+            <a href="index_bab12_17.html">Bab 12–17</a>
+            <a href="index_bab18_24.html">Bab 18–24</a>
+            <span class="current">🌐 Flask</span>
+        </nav>
+        <div class="hero-kicker"><span class="dot"></span>TRACK 1 · WEB DEVELOPMENT</div>
+        <h1 class="hero-title">Python <span class="snake">Flask</span> Web Dev</h1>
+        <div class="hero-meta">
+            <span>Bab 25–30</span>
+            <span>Level: Web Developer</span>
+            <span>🌐 Interactive Server Simulator</span>
+        </div>
+    </header>
+
+    <nav class="toc" id="toc">
+        <div class="toc-head">
+            <h2>📋 Daftar Isi</h2>
+            <span id="tocPct">0% selesai</span>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab25"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 25 — Pengenalan Flask</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab25-1">Apa itu Flask?</a>
+                <a class="toc-item" href="#bab25-2">Route Pertama</a>
+                <a class="toc-item" href="#bab25-3">Challenge — Multi Route</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab26"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 26 — Templates (Jinja2)</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab26-1">Apa itu Template?</a>
+                <a class="toc-item" href="#bab26-2">Render Template</a>
+                <a class="toc-item" href="#bab26-3">Challenge — Profile Page</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab27"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 27 — Form &amp; Method (GET/POST)</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab27-1">GET vs POST</a>
+                <a class="toc-item" href="#bab27-2">Form Handling</a>
+                <a class="toc-item" href="#bab27-3">Challenge — Login Form</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab28"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 28 — REST API (JSON)</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab28-1">Apa itu REST API?</a>
+                <a class="toc-item" href="#bab28-2">jsonify()</a>
+                <a class="toc-item" href="#bab28-3">Challenge — API Buku</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab29"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 29 — Database di Flask</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab29-1">SQLAlchemy Dasar</a>
+                <a class="toc-item" href="#bab29-2">CRUD via API</a>
+                <a class="toc-item" href="#bab29-3">Challenge — To-Do API</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab30"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 30 — Deployment</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab30-1">Deploy ke Internet</a>
+                <a class="toc-item" href="#bab30-2">Checklist Deployment</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <a class="toc-header" href="#kuis-final5" style="text-decoration:none;">
+                <span class="toc-check" id="check-quizfinal5"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Quiz</span>
+            </a>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- ================= BAB 25 ================= -->
+        <section class="bab" id="bab25">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 25 —
+                        Pengenalan Flask"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 25 — Pengenalan Flask">Bab 25 — Pengenalan Flask</h2>
+                <p class="bab-intro">Flask adalah framework web Python yang ringan dan fleksibel. Cocok banget buat
+                    pemula yang mau bikin website atau API.</p>
+            </div>
+
+            <div class="card" id="bab25-1">
+                <h3><span class="num">25.1</span> Apa itu Flask?</h3>
+                <p><b>Flask</b> adalah <i>micro-framework</i> untuk membuat aplikasi web dengan Python. Disebut "micro"
+                    karena intinya sangat kecil, tapi bisa diperluas dengan banyak ekstensi.</p>
+                <p>Kenapa Flask cocok untuk pemula?</p>
+                <ul>
+                    <li>Sintaksnya sederhana dan mudah dipahami.</li>
+                    <li>Tidak memaksa struktur folder tertentu — kamu bebas mengatur.</li>
+                    <li>Cocok untuk belajar konsep web dasar: routing, request, response.</li>
+                    <li>Bisa dipakai untuk membuat REST API dengan cepat.</li>
+                </ul>
+
+                <p><b>Struktur project Flask minimal:</b></p>
+                <div class="file-tree">
+                    <span class="folder">📁 my_flask_app/</span><br>
+                    ├── <span class="file active">app.py</span> &nbsp;<span
+                        style="color:var(--terminal-comment);font-size:11px;">← kode utama</span><br>
+                    ├── <span class="folder">📁 templates/</span> &nbsp;<span
+                        style="color:var(--terminal-comment);font-size:11px;">← file HTML</span><br>
+                    └── <span class="folder">📁 static/</span> &nbsp;<span
+                        style="color:var(--terminal-comment);font-size:11px;">← CSS, JS, gambar</span>
+                </div>
+
+                <p><b>Instalasi Flask:</b></p>
+                <div class="term">
+                    <div class="term-bar">terminal</div>
+                    <pre>pip install flask</pre>
+                </div>
+
+                <div class="note"><span class="hand">Catatan tutor:</span> Flask tidak bisa dijalankan langsung di
+                    browser seperti Python biasa. Tapi di modul ini, kita punya <b>simulator server Flask</b> — kamu
+                    bisa tulis route, lalu "kirim request" dan lihat response-nya!</div>
+            </div>
+
+            <div class="card" id="bab25-2">
+                <h3><span class="num">25.2</span> Route Pertama</h3>
+                <p>Kode Flask paling sederhana:</p>
+                <div class="term">
+                    <div class="term-bar">app.py</div>
+                    <pre><span class="fn">from</span> flask <span class="fn">import</span> Flask
+
+app = <span class="fn">Flask</span>(__name__)
+
+<span class="cm">@app.route("/")</span>
+<span class="fn">def</span> <span class="fn">home</span>():
+    <span class="fn">return</span> <span class="str">"Halo, Dunia!"</span>
+
+<span class="fn">if</span> __name__ == <span class="str">"__main__"</span>:
+    app.<span class="fn">run</span>(debug=True)</pre>
+                </div>
+                <p>Penjelasan:</p>
+                <ul>
+                    <li><code class="inline">@app.route("/")</code> — dekorator yang menandai URL <code
+                            class="inline">/</code>.</li>
+                    <li><code class="inline">def home():</code> — fungsi yang dijalankan saat URL diakses.</li>
+                    <li><code class="inline">return "..."</code> — respons yang dikirim ke browser.</li>
+                    <li>Parameter <code class="inline">&lt;nama&gt;</code> di route = variabel dinamis.</li>
+                </ul>
+
+                <p><b>Coba simulator Flask di bawah!</b> Klik <b>▶ Jalankan Server</b>, lalu kirim request ke URL yang
+                    tersedia.</p>
+                <div class="flask-wrap" id="flask-25">
+                    <div class="flask-bar">
+                        <span class="label">🐍 Flask Server Simulator</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b25a','flask-25')">⟲ Reset</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b25a','flask-25')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b25a" spellcheck="false" rows="14">from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Halo, Dunia!"
+
+@app.route("/tentang")
+def tentang():
+    return "Ini halaman tentang saya."
+
+@app.route("/halo/<nama>")
+def halo(nama):
+    return f"Halo, {nama}!"</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-25-method" class="method-get">
+                            <option value="GET">GET</option>
+                        </select>
+                        <input type="text" id="flask-25-path" placeholder="/" value="/">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-25')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-25-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan. Klik ▶ Jalankan Server di
+                            atas.</span>
+                    </div>
+                </div>
+                <p style="font-size:14px;color:var(--ink-soft);margin-top:8px;">💡 Coba akses: <code
+                        class="inline">/</code>, <code class="inline">/tentang</code>, atau <code
+                        class="inline">/halo/Andi</code></p>
+            </div>
+
+            <div class="card" id="bab25-3">
+                <h3><span class="num">25.3</span> Challenge — Multi Route</h3>
+                <p>Buat Flask app dengan 4 route berikut:</p>
+                <ol>
+                    <li><code class="inline">/</code> → "Selamat datang di website saya!"</li>
+                    <li><code class="inline">/profil</code> → "Nama saya Andi, umur 17 tahun."</li>
+                    <li><code class="inline">/kontak</code> → "Email: andi@email.com"</li>
+                    <li><code class="inline">/sapa/&lt;nama&gt;</code> → "Halo, {nama}! Selamat datang."</li>
+                </ol>
+                <p>Ketik kode kamu di editor simulator berikut, jalankan server, lalu uji semua route!</p>
+                <div class="flask-wrap" id="flask-ch25">
+                    <div class="flask-bar">
+                        <span class="label">🐍 Flask Server — Challenge</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b25b','flask-ch25')">⟲ Reset</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b25b','flask-ch25')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b25b" spellcheck="false" rows="16">from flask import Flask
+app = Flask(__name__)
+
+# Tulis 4 route di sini
+@app.route("/")
+def home():
+    return "..."
+
+# @app.route("/profil")
+# ...
+</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-ch25-method" class="method-get">
+                            <option value="GET">GET</option>
+                        </select>
+                        <input type="text" id="flask-ch25-path" placeholder="/" value="/">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-ch25')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-ch25-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 26 ================= -->
+        <section class="bab" id="bab26">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 26 —
+                        Templates (Jinja2)"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 26 — Templates (Jinja2)">Bab 26 — Templates (Jinja2)</h2>
+                <p class="bab-intro">Daripada menulis HTML di dalam Python, kita pisahkan ke file template terpisah.
+                    Flask menggunakan Jinja2 untuk render dinamis.</p>
+            </div>
+
+            <div class="card" id="bab26-1">
+                <h3><span class="num">26.1</span> Apa itu Template?</h3>
+                <p><b>Template</b> adalah file HTML dengan placeholder khusus yang bisa diisi data dari Python. Flask
+                    menggunakan engine <b>Jinja2</b>.</p>
+                <p>Sintaks dasar Jinja2:</p>
+                <ul>
+                    <li><code class="inline">{{ variabel }}</code> — menampilkan nilai variabel.</li>
+                    <li><code class="inline">{% if kondisi %} ... {% endif %}</code> — percabangan.</li>
+                    <li><code class="inline">{% for item in items %} ... {% endfor %}</code> — perulangan.</li>
+                    <li><code class="inline">{# komentar #}</code> — komentar.</li>
+                </ul>
+                <p>Fungsi <code class="inline">render_template()</code> digunakan untuk merender file template:</p>
+                <div class="term">
+                    <div class="term-bar">app.py</div>
+                    <pre><span class="fn">from</span> flask <span class="fn">import</span> Flask, <span class="fn">render_template</span>
+
+app = <span class="fn">Flask</span>(__name__)
+
+<span class="cm">@app.route("/")</span>
+<span class="fn">def</span> <span class="fn">home</span>():
+    <span class="fn">return</span> <span class="fn">render_template</span>(<span class="str">"index.html"</span>, nama=<span class="str">"Andi"</span>, umur=17)</pre>
+                </div>
+                <div class="term">
+                    <div class="term-bar">templates/index.html</div>
+                    <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;h1&gt;Halo, <span style="color:#FFCB66;">{{ nama }}</span>!&lt;/h1&gt;
+    &lt;p&gt;Umur kamu: <span style="color:#FFCB66;">{{ umur }}</span> tahun&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                </div>
+            </div>
+
+            <div class="card" id="bab26-2">
+                <h3><span class="num">26.2</span> Render Template</h3>
+                <p>Simulator di bawah bisa merender template HTML sederhana dengan substitusi <code
+                        class="inline">{{ }}</code> dan loop <code class="inline">{% for %}</code>.</p>
+                <div class="flask-wrap" id="flask-26">
+                    <div class="flask-bar">
+                        <span class="label">🐍 Flask + Jinja2 Simulator</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b26a','flask-26')">⟲ Reset</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b26a','flask-26')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b26a" spellcheck="false" rows="18">from flask import Flask, render_template
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return render_template("index.html", nama="Andi", umur=17)
+
+@app.route("/daftar")
+def daftar():
+    buah = ["Apel", "Mangga", "Jeruk"]
+    return render_template("daftar.html", buah=buah)</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-26-method" class="method-get">
+                            <option value="GET">GET</option>
+                        </select>
+                        <input type="text" id="flask-26-path" placeholder="/" value="/">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-26')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-26-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+                <div class="note"><span class="hand">Catatan:</span> Simulator ini otomatis menyediakan template <code
+                        class="inline">index.html</code> dan <code class="inline">daftar.html</code>. Template <code
+                        class="inline">index.html</code> berisi <code
+                        class="inline">&lt;h1&gt;Halo, {{ nama }}!&lt;/h1&gt;</code> dan <code
+                        class="inline">&lt;p&gt;Umur: {{ umur }}&lt;/p&gt;</code>. Template <code
+                        class="inline">daftar.html</code> berisi list <code
+                        class="inline">{% for item in buah %}&lt;li&gt;{{ item }}&lt;/li&gt;{% endfor %}</code>.</div>
+            </div>
+
+            <div class="card" id="bab26-3">
+                <h3><span class="num">26.3</span> Challenge — Profile Page</h3>
+                <p>Buat route <code class="inline">/profil</code> yang merender template <code
+                        class="inline">profil.html</code> dengan data: <code class="inline">nama</code>, <code
+                        class="inline">kelas</code>, <code class="inline">hobi</code> (list). Template otomatis tersedia
+                    dan berisi:</p>
+                <div class="term">
+                    <div class="term-bar">templates/profil.html</div>
+                    <pre>&lt;h1&gt;{{ nama }}&lt;/h1&gt;
+&lt;p&gt;Kelas: {{ kelas }}&lt;/p&gt;
+&lt;ul&gt;
+{% for h in hobi %}&lt;li&gt;{{ h }}&lt;/li&gt;{% endfor %}
+&lt;/ul&gt;</pre>
+                </div>
+                <div class="flask-wrap" id="flask-ch26">
+                    <div class="flask-bar">
+                        <span class="label">🐍 Challenge — Profile Page</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b26b','flask-ch26')">⟲ Reset</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b26b','flask-ch26')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b26b" spellcheck="false" rows="10">from flask import Flask, render_template
+app = Flask(__name__)
+
+@app.route("/profil")
+def profil():
+    return render_template("profil.html",
+        nama="Andi",
+        kelas="XI IPA 2",
+        hobi=["Coding", "Membaca", "Gaming"])</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-ch26-method" class="method-get">
+                            <option value="GET">GET</option>
+                        </select>
+                        <input type="text" id="flask-ch26-path" value="/profil">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-ch26')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-ch26-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 27 ================= -->
+        <section class="bab" id="bab27">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 27 —
+                        Form & Method"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 27 — Form & Method (GET/POST)">Bab 27 — Form &amp; Method
+                    (GET/POST)</h2>
+                <p class="bab-intro">Form memungkinkan user mengirim data ke server. Ada dua method utama: GET (data di
+                    URL) dan POST (data di body).</p>
+            </div>
+
+            <div class="card" id="bab27-1">
+                <h3><span class="num">27.1</span> GET vs POST</h3>
+                <table style="width:100%;border-collapse:collapse;font-size:15px;">
+                    <tr style="background:var(--paper-alt);">
+                        <th style="padding:10px;text-align:left;border-bottom:1px solid var(--rule);">Aspek</th>
+                        <th style="padding:10px;text-align:left;border-bottom:1px solid var(--rule);">GET</th>
+                        <th style="padding:10px;text-align:left;border-bottom:1px solid var(--rule);">POST</th>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;border-bottom:1px solid var(--rule);">Data di</td>
+                        <td style="padding:10px;border-bottom:1px solid var(--rule);">URL (query string)</td>
+                        <td style="padding:10px;border-bottom:1px solid var(--rule);">Body request</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;border-bottom:1px solid var(--rule);">Terlihat?</td>
+                        <td style="padding:10px;border-bottom:1px solid var(--rule);">Ya</td>
+                        <td style="padding:10px;border-bottom:1px solid var(--rule);">Tidak</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;border-bottom:1px solid var(--rule);">Untuk</td>
+                        <td style="padding:10px;border-bottom:1px solid var(--rule);">Ambil data</td>
+                        <td style="padding:10px;border-bottom:1px solid var(--rule);">Kirim data</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;">Method di Flask</td>
+                        <td style="padding:10px;"><code class="inline">request.args.get('k')</code></td>
+                        <td style="padding:10px;"><code class="inline">request.form.get('k')</code></td>
+                    </tr>
+                </table>
+
+                <p style="margin-top:14px;">Untuk menerima POST, tambahkan <code class="inline">methods=["POST"]</code>
+                    di decorator:</p>
+                <div class="term">
+                    <div class="term-bar">app.py</div>
+                    <pre><span class="cm">@app.route("/login", methods=["GET", "POST"])</span>
+<span class="fn">def</span> <span class="fn">login</span>():
+    <span class="fn">if</span> request.method == <span class="str">"POST"</span>:
+        nama = request.form.<span class="fn">get</span>(<span class="str">"nama"</span>)
+        <span class="fn">return</span> <span class="str">f"Selamat datang, {nama}!"</span>
+    <span class="fn">return</span> <span class="str">"Silakan isi form."</span></pre>
+                </div>
+            </div>
+
+            <div class="card" id="bab27-2">
+                <h3><span class="num">27.2</span> Form Handling</h3>
+                <p>Di simulator ini, kamu bisa mengirim data POST dengan menambahkan query string ke URL. Contoh: <code
+                        class="inline">/login?nama=Andi</code> akan dianggap sebagai form data <code
+                        class="inline">nama=Andi</code>.</p>
+                <div class="flask-wrap" id="flask-27">
+                    <div class="flask-bar">
+                        <span class="label">🐍 Form Handler Simulator</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b27a','flask-27')">⟲ Reset</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b27a','flask-27')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b27a" spellcheck="false" rows="22">from flask import Flask, request
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Selamat datang!"
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        nama = request.form.get("nama")
+        pw = request.form.get("password")
+        if pw == "12345":
+            return f"Login berhasil! Halo, {nama}."
+        return "Password salah!"
+    return "Silakan login."
+
+@app.route("/cari", methods=["GET"])
+def cari():
+    q = request.args.get("q", "tidak ada")
+    return f"Kamu mencari: {q}"</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-27-method" class="method-get">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                        </select>
+                        <input type="text" id="flask-27-path" value="/cari?q=python">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-27')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-27-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+                <p style="font-size:14px;color:var(--ink-soft);margin-top:8px;">💡 Coba: <code
+                        class="inline">GET /cari?q=python</code>, <code
+                        class="inline">POST /login?nama=Andi&password=12345</code></p>
+            </div>
+
+            <div class="card" id="bab27-3">
+                <h3><span class="num">27.3</span> Challenge — Login Form</h3>
+                <p>Buat Flask app dengan 2 route:</p>
+                <ol>
+                    <li><code class="inline">GET /login</code> → "Silakan login."</li>
+                    <li><code class="inline">POST /login</code> → Ambil <code class="inline">username</code> & <code
+                            class="inline">password</code>. Jika username = "admin" dan password = "rahasia", kembalikan
+                        "Login berhasil!". Jika tidak, kembalikan "Login gagal!".</li>
+                </ol>
+                <div class="flask-wrap" id="flask-ch27">
+                    <div class="flask-bar">
+                        <span class="label">🐍 Challenge — Login</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b27b','flask-ch27')">⟲ Reset</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b27b','flask-ch27')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b27b" spellcheck="false" rows="16">from flask import Flask, request
+app = Flask(__name__)
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        u = request.form.get("username")
+        p = request.form.get("password")
+        # Tulis logika di sini
+        return "Login gagal!"
+    return "Silakan login."</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-ch27-method" class="method-get">
+                            <option value="GET">GET</option>
+                            <option value="POST" selected>POST</option>
+                        </select>
+                        <input type="text" id="flask-ch27-path" value="/login?username=admin&password=rahasia">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-ch27')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-ch27-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 28 ================= -->
+        <section class="bab" id="bab28">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 28 —
+                        REST API"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 28 — REST API (JSON)">Bab 28 — REST API (JSON)</h2>
+                <p class="bab-intro">REST API adalah cara aplikasi berkomunikasi lewat HTTP. Response-nya berformat JSON
+                    — bukan HTML.</p>
+            </div>
+
+            <div class="card" id="bab28-1">
+                <h3><span class="num">28.1</span> Apa itu REST API?</h3>
+                <p>REST API menggunakan HTTP method yang bermakna:</p>
+                <ul>
+                    <li><b>GET</b> — mengambil data</li>
+                    <li><b>POST</b> — membuat data baru</li>
+                    <li><b>PUT</b> — mengubah data</li>
+                    <li><b>DELETE</b> — menghapus data</li>
+                </ul>
+                <p>Response biasanya berbentuk JSON, bukan HTML. Di Flask, gunakan <code class="inline">jsonify()</code>
+                    untuk mengubah dictionary menjadi JSON.</p>
+                <div class="term">
+                    <div class="term-bar">api.py</div>
+                    <pre><span class="fn">from</span> flask <span class="fn">import</span> Flask, <span class="fn">jsonify</span>
+
+app = <span class="fn">Flask</span>(__name__)
+
+<span class="cm">@app.route("/api/halo")</span>
+<span class="fn">def</span> <span class="fn">api_halo</span>():
+    <span class="fn">return</span> <span class="fn">jsonify</span>({<span class="str">"pesan"</span>: <span class="str">"Halo!"</span>, <span class="str">"status"</span>: 200})
+
+<span class="cm">@app.route("/api/user/&lt;nama&gt;")</span>
+<span class="fn">def</span> <span class="fn">api_user</span>(nama):
+    <span class="fn">return</span> <span class="fn">jsonify</span>({<span class="str">"nama"</span>: nama, <span class="str">"aktif"</span>: True})</pre>
+                </div>
+            </div>
+
+            <div class="card" id="bab28-2">
+                <h3><span class="num">28.2</span> jsonify()</h3>
+                <p>Coba simulator berikut — perhatikan response-nya berformat JSON.</p>
+                <div class="flask-wrap" id="flask-28">
+                    <div class="flask-bar">
+                        <span class="label">🐍 REST API Simulator</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b28a','flask-28')">⟲ Reset</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b28a','flask-28')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b28a" spellcheck="false" rows="20">from flask import Flask, jsonify, request
+app = Flask(__name__)
+
+buku = [
+    {"id": 1, "judul": "Python 101", "penulis": "Andi"},
+    {"id": 2, "judul": "Flask Web", "penulis": "Budi"}
+]
+
+@app.route("/api/buku")
+def list_buku():
+    return jsonify(buku)
+
+@app.route("/api/buku/<int:id>")
+def detail_buku(id):
+    for b in buku:
+        if b["id"] == id:
+            return jsonify(b)
+    return jsonify({"error": "Buku tidak ditemukan"})
+
+@app.route("/api/buku", methods=["POST"])
+def tambah_buku():
+    judul = request.form.get("judul")
+    return jsonify({"pesan": f"Buku '{judul}' ditambahkan", "status": "ok"})</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-28-method" class="method-get">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                        </select>
+                        <input type="text" id="flask-28-path" value="/api/buku">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-28')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-28-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+                <p style="font-size:14px;color:var(--ink-soft);margin-top:8px;">💡 Coba: <code
+                        class="inline">GET /api/buku</code>, <code class="inline">GET /api/buku/1</code>, <code
+                        class="inline">GET /api/buku/99</code>, atau <code
+                        class="inline">POST /api/buku?judul=Flask+Dasar</code></p>
+            </div>
+
+            <div class="card" id="bab28-3">
+                <h3><span class="num">28.3</span> Challenge — API Buku</h3>
+                <p>Buat API dengan 2 endpoint:</p>
+                <ol>
+                    <li><code class="inline">GET /api/produk</code> → kembalikan list produk (bebas isinya).</li>
+                    <li><code class="inline">GET /api/produk/&lt;id&gt;</code> → kembalikan detail produk dengan id
+                        tersebut.</li>
+                </ol>
+                <p>Setiap produk harus punya: <code class="inline">id</code>, <code class="inline">nama</code>, <code
+                        class="inline">harga</code>.</p>
+                <div class="flask-wrap" id="flask-ch28">
+                    <div class="flask-bar">
+                        <span class="label">🐍 Challenge — API Produk</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b28b','flask-ch28')">⟲ Reset</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b28b','flask-ch28')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b28b" spellcheck="false" rows="18">from flask import Flask, jsonify
+app = Flask(__name__)
+
+produk = [
+    {"id": 1, "nama": "Laptop", "harga": 7000000},
+    {"id": 2, "nama": "Mouse", "harga": 150000}
+]
+
+@app.route("/api/produk")
+def list_produk():
+    # Tulis kode di sini
+    return jsonify([])
+
+# Tambahkan route /api/produk/<int:id> di sini
+</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-ch28-method" class="method-get">
+                            <option value="GET">GET</option>
+                        </select>
+                        <input type="text" id="flask-ch28-path" value="/api/produk">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-ch28')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-ch28-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 29 ================= -->
+        <section class="bab" id="bab29">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 29 —
+                        Database di Flask"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 29 — Database di Flask">Bab 29 — Database di Flask</h2>
+                <p class="bab-intro">Data penting harus disimpan di database, bukan di list sementara. Kita pakai
+                    SQLAlchemy sebagai ORM.</p>
+            </div>
+
+            <div class="card" id="bab29-1">
+                <h3><span class="num">29.1</span> SQLAlchemy Dasar</h3>
+                <p><b>ORM (Object-Relational Mapping)</b> memungkinkan kita berinteraksi dengan database pakai Python
+                    class, tanpa menulis SQL manual.</p>
+                <div class="term">
+                    <div class="term-bar">models.py</div>
+                    <pre><span class="fn">from</span> flask_sqlalchemy <span class="fn">import</span> SQLAlchemy
+
+db = <span class="fn">SQLAlchemy</span>()
+
+<span class="fn">class</span> <span class="fn">Buku</span>(db.Model):
+    id = db.<span class="fn">Column</span>(db.Integer, primary_key=True)
+    judul = db.<span class="fn">Column</span>(db.String(100))
+    penulis = db.<span class="fn">Column</span>(db.String(50))</pre>
+                </div>
+                <p>Operasi CRUD dengan SQLAlchemy:</p>
+                <ul>
+                    <li><b>Create</b>: <code class="inline">db.session.add(obj); db.session.commit()</code></li>
+                    <li><b>Read</b>: <code class="inline">Buku.query.all()</code> atau <code
+                            class="inline">Buku.query.get(id)</code></li>
+                    <li><b>Update</b>: ubah atribut, lalu <code class="inline">db.session.commit()</code></li>
+                    <li><b>Delete</b>: <code class="inline">db.session.delete(obj); db.session.commit()</code></li>
+                </ul>
+                <div class="note"><span class="hand">Catatan:</span> Di simulator ini, database disimulasikan dengan
+                    <code class="inline">localStorage</code>. API SQLAlchemy-nya disederhanakan agar bisa dijalankan di
+                    browser.</div>
+            </div>
+
+            <div class="card" id="bab29-2">
+                <h3><span class="num">29.2</span> CRUD via API</h3>
+                <p>Simulator berikut sudah menyediakan <code class="inline">db.session</code> yang mendukung <code
+                        class="inline">add</code>, <code class="inline">commit</code>, <code
+                        class="inline">delete</code>, dan <code class="inline">query.all()</code>.</p>
+                <div class="flask-wrap" id="flask-29">
+                    <div class="flask-bar">
+                        <span class="label">🐍 Flask + SQLAlchemy Simulator</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskDatabase('flask-29')">🗑️ Hapus DB</button>
+                            <button onclick="resetFlaskServer('ed-b29a','flask-29')">⟲ Reset</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b29a','flask-29')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b29a" spellcheck="false" rows="24">from flask import Flask, jsonify, request
+app = Flask(__name__)
+
+# Data disimpan di database simulasi
+BUKU_DATA = []
+
+@app.route("/api/buku", methods=["GET"])
+def list_buku():
+    return jsonify(BUKU_DATA)
+
+@app.route("/api/buku", methods=["POST"])
+def tambah_buku():
+    judul = request.form.get("judul")
+    penulis = request.form.get("penulis")
+    BUKU_DATA.append({"id": len(BUKU_DATA)+1, "judul": judul, "penulis": penulis})
+    return jsonify({"pesan": "Buku ditambahkan", "data": BUKU_DATA[-1]})</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-29-method" class="method-get">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                        </select>
+                        <input type="text" id="flask-29-path" value="/api/buku">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-29')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-29-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+                <p style="font-size:14px;color:var(--ink-soft);margin-top:8px;">💡 Coba: <code
+                        class="inline">POST /api/buku?judul=Flask&penulis=Andi</code> lalu <code
+                        class="inline">GET /api/buku</code></p>
+            </div>
+
+            <div class="card" id="bab29-3">
+                <h3><span class="num">29.3</span> Challenge — To-Do API</h3>
+                <p>Buat API To-Do List lengkap dengan 3 endpoint:</p>
+                <ol>
+                    <li><code class="inline">GET /api/todo</code> → semua tugas.</li>
+                    <li><code class="inline">POST /api/todo</code> → tambah tugas baru (parameter: <code
+                            class="inline">tugas</code>).</li>
+                    <li><code class="inline">GET /api/todo/&lt;id&gt;</code> → detail tugas berdasarkan id.</li>
+                </ol>
+                <div class="flask-wrap" id="flask-ch29">
+                    <div class="flask-bar">
+                        <span class="label">🐍 Challenge — To-Do API</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b29b','flask-ch29')">⟲ Reset</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b29b','flask-ch29')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b29b" spellcheck="false" rows="22">from flask import Flask, jsonify, request
+app = Flask(__name__)
+
+TODO_DATA = []
+
+@app.route("/api/todo")
+def list_todo():
+    return jsonify(TODO_DATA)
+
+# Tulis route POST /api/todo dan GET /api/todo/<id> di sini
+</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-ch29-method" class="method-get">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                        </select>
+                        <input type="text" id="flask-ch29-path" value="/api/todo">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-ch29')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-ch29-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 30 ================= -->
+        <section class="bab" id="bab30">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 30 —
+                        Deployment"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 30 — Deployment">Bab 30 — Deployment</h2>
+                <p class="bab-intro">Saatnya aplikasi Flask kamu online dan bisa diakses siapa saja lewat internet!</p>
+            </div>
+
+            <div class="card" id="bab30-1">
+                <h3><span class="num">30.1</span> Deploy ke Internet</h3>
+                <p>Beberapa platform gratis untuk deploy Flask:</p>
+                <ul>
+                    <li><b>Render</b> — paling mudah, gratis, support Flask langsung.</li>
+                    <li><b>PythonAnywhere</b> — khusus Python, cocok untuk pemula.</li>
+                    <li><b>Railway</b> — modern, cepat, ada free tier.</li>
+                    <li><b>Vercel</b> — lebih cocok untuk serverless functions.</li>
+                    <li><b>Heroku</b> — pernah populer, sekarang berbayar.</li>
+                </ul>
+
+                <p>Langkah umum deploy ke Render:</p>
+                <div class="deploy-step">
+                    <div class="num-badge">1</div>
+                    <div class="text"><b>Push kode ke GitHub</b><span>Buat repository baru, lalu upload folder project
+                            Flask kamu.</span></div>
+                </div>
+                <div class="deploy-step">
+                    <div class="num-badge">2</div>
+                    <div class="text"><b>Buat file requirements.txt</b><span>Isi dengan daftar library: <code
+                                class="inline">flask</code>, <code class="inline">gunicorn</code>, dll.</span></div>
+                </div>
+                <div class="deploy-step">
+                    <div class="num-badge">3</div>
+                    <div class="text"><b>Buat file Procfile</b><span>Isi: <code
+                                class="inline">web: gunicorn app:app</code> (menggantikan <code
+                                class="inline">app.run()</code>).</span></div>
+                </div>
+                <div class="deploy-step">
+                    <div class="num-badge">4</div>
+                    <div class="text"><b>Daftar di Render</b><span>Buat akun gratis di render.com, lalu connect ke
+                            GitHub.</span></div>
+                </div>
+                <div class="deploy-step">
+                    <div class="num-badge">5</div>
+                    <div class="text"><b>Deploy!</b><span>Pilih repository, atur build command, klik Deploy. Tunggu 2–5
+                            menit.</span></div>
+                </div>
+                <div class="deploy-step">
+                    <div class="num-badge">6</div>
+                    <div class="text"><b>Akses URL-mu</b><span>Kamu akan dapat URL seperti <code
+                                class="inline">nama-app.onrender.com</code>.</span></div>
+                </div>
+            </div>
+
+            <div class="card" id="bab30-2">
+                <h3><span class="num">30.2</span> Checklist Deployment</h3>
+                <div class="checklist" id="cl-deploy">
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>File requirements.txt sudah dibuat</b><span>Minimal berisi <code
+                                    class="inline">flask</code> dan <code class="inline">gunicorn</code>.</span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Procfile sudah dibuat</b><span>Isi: <code
+                                    class="inline">web: gunicorn app:app</code></span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>app.run() hanya dipanggil jika __name__ == "__main__"</b><span>Jangan
+                                hardcode <code class="inline">app.run()</code> di production.</span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Folder templates/ dan static/ sudah di-commit</b><span>Jangan lupa, ini
+                                sering kelewat!</span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Environment variable untuk secret key</b><span>Jangan hardcode password
+                                atau API key di kode.</span></div>
+                    </div>
+                    <div class="cl-item" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 16 16"
+                                fill="none">
+                                <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></span>
+                        <div class="cl-text"><b>Sudah dites di local</b><span>Pastikan semua route berjalan sebelum
+                                deploy.</span></div>
+                    </div>
+                </div>
+                <div class="tip">💡 Setelah deploy, setiap kali kamu push ke GitHub, Render akan otomatis rebuild dan
+                    redeploy aplikasimu. Ini disebut <b>CI/CD</b>.</div>
+            </div>
+        </section>
+
+        <!-- ================= QUIZ FINAL ================= -->
+        <section class="bab" id="kuis-final5">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span
+                        class="str">"Quiz"</span>)</div>
+                <h2 class="bab-title" data-text="Quiz">Quiz</h2>
+                <p class="bab-intro">Uji pemahamanmu tentang Flask: routing, template, form, API, database, dan
+                    deployment.</p>
+            </div>
+
+            <div class="card">
+                <h3>🏁 Quiz Flask Web Development</h3>
+                <div id="quiz-final5"></div>
+                <div id="finalScoreBox5">
+                    <div class="score-num"><span id="finalScoreNum5">0</span>/8</div>
+                    <div class="score-msg" id="finalScoreMsg5"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Selamat! Kamu sudah menguasai dasar web development dengan Flask. Lanjutkan dengan membangun proyek nyata! 🌐
+        </p>
+        <div class="brand">🐍 Modul Ajar Python — Sesi Privat</div>
+        <div class="nav-link-group">
+            <a href="index_bab18_24.html" class="nav-link">← Bab 18–24</a>
+            <a href="index.html" class="nav-link" style="background:var(--forest-deep);">🏠 Halaman Utama</a>
+        </div>
+    </footer>
+
+    <script>
+        /* ================= PROGRESS RAIL ================= */
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const scrolled = h.scrollHeight > h.clientHeight
+                ? (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 : 0;
+            document.getElementById('scrollFill').style.width = scrolled + '%';
+        });
+
+        /* ================= TOC COLLAPSE ================= */
+        function toggleToc(btn) {
+            const sub = btn.nextElementSibling;
+            const chevron = btn.querySelector('.toc-chevron');
+            if (sub) sub.classList.toggle('collapsed');
+            if (chevron) chevron.classList.toggle('rotated');
+        }
+
+        /* ================= CHECKLIST ================= */
+        function toggleCheck(el) { el.classList.toggle('checked'); }
+
+        /* ================= HEADING TYPE-IN ================= */
+        const headingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('type-in');
+                    headingObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        document.querySelectorAll('h2.bab-title').forEach(el => headingObserver.observe(el));
+
+        /* ================= SECTION DONE TRACKING ================= */
+        const sectionDone = {
+            bab25: false, bab26: false, bab27: false,
+            bab28: false, bab29: false, bab30: false,
+            quizfinal5: false
+        };
+
+        function markSectionComplete(key) {
+            sectionDone[key] = true;
+            const el = document.getElementById('check-' + key);
+            if (el) el.classList.add('done');
+            updateTocPct();
+            try {
+                let progress = JSON.parse(localStorage.getItem('python_modul_progress') || '{}');
+                progress[key] = true;
+                localStorage.setItem('python_modul_progress', JSON.stringify(progress));
+            } catch (_) { }
+        }
+
+        function updateTocPct() {
+            const total = Object.keys(sectionDone).length;
+            const done = Object.values(sectionDone).filter(Boolean).length;
+            document.getElementById('tocPct').textContent = Math.round(done / total * 100) + '% selesai';
+        }
+
+        /* ================= QUIZ ENGINE ================= */
+        const quizzes = {
+            final5: [
+                { q: "Apa dekorator yang digunakan untuk mendefinisikan route di Flask?", options: ["@app.route()", "@route()", "@flask.url()", "@app.url()"], correct: 0, exp: "@app.route() menandai URL untuk fungsi handler." },
+                { q: "Fungsi apa yang digunakan untuk merender template HTML?", options: ["render()", "render_template()", "view()", "html()"], correct: 1, exp: "render_template() merender file HTML dengan Jinja2." },
+                { q: "Bagaimana cara mengakses parameter query string '?q=python' di Flask?", options: ["request.form.get('q')", "request.args.get('q')", "request.query.get('q')", "request.get('q')"], correct: 1, exp: "request.args.get() digunakan untuk query string (GET)." },
+                { q: "Method HTTP apa yang digunakan untuk mengirim data form secara aman?", options: ["GET", "POST", "PUT", "HEAD"], correct: 1, exp: "POST mengirim data di body, lebih aman dari GET." },
+                { q: "Fungsi apa yang mengubah dictionary Python menjadi response JSON?", options: ["json.dumps()", "jsonify()", "to_json()", "make_json()"], correct: 1, exp: "jsonify() dari Flask mengubah dictionary menjadi response JSON." },
+                { q: "Apa nama sintaks Jinja2 untuk menampilkan variabel?", options: ["{{ variabel }}", "{% variabel %}", "[[ variabel ]]", "<% variabel %>"], correct: 0, exp: "{{ }} adalah sintaks untuk menampilkan variabel di Jinja2." },
+                { q: "Library apa yang direkomendasikan untuk menjalankan Flask di production?", options: ["flask-run", "gunicorn", "wsgi-server", "werkzeug-prod"], correct: 1, exp: "gunicorn adalah WSGI server yang umum dipakai untuk Flask di production." },
+                { q: "File apa yang berisi daftar dependency Python?", options: ["package.json", "requirements.txt", "dependencies.txt", "pip.txt"], correct: 1, exp: "requirements.txt berisi daftar library yang dibutuhkan project." }
+            ]
+        };
+
+        const quizProgress = {};
+
+        function renderQuiz(key, containerId, { finalMode = false } = {}) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const data = quizzes[key];
+            if (!data) return;
+            container.innerHTML = data.map((item, qi) => {
+                const codeBlock = item.code ? `<pre style="background:var(--terminal-bg);color:var(--terminal-string);border-radius:8px;padding:10px 14px;font-size:13.5px;margin-top:8px;">${escapeHtml(item.code)}</pre>` : '';
+                return `
+      <div class="quiz-q" data-q="${qi}">
+        <p class="quiz-question">${qi + 1}. ${item.q}${codeBlock}</p>
+        <div class="quiz-options">
+          ${item.options.map((opt, oi) => `<button class="quiz-opt" onclick="answerQuiz('${key}',${qi},${oi},this,${finalMode})">${escapeHtml(opt)}</button>`).join('')}
+        </div>
+        <div class="quiz-feedback" id="${key}-fb-${qi}"></div>
+      </div>
+    `;
+            }).join('');
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function answerQuiz(key, qi, oi, btnEl, finalMode) {
+            const item = quizzes[key][qi];
+            const buttons = btnEl.parentElement.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => b.disabled = true);
+            const fb = document.getElementById(`${key}-fb-${qi}`);
+            const isCorrect = oi === item.correct;
+            if (isCorrect) {
+                btnEl.classList.add('correct');
+                fb.textContent = '✅ Benar! ' + item.exp;
+                fb.className = 'quiz-feedback show correct';
+            } else {
+                btnEl.classList.add('wrong');
+                buttons[item.correct].classList.add('correct');
+                fb.textContent = '❌ Belum tepat. ' + item.exp;
+                fb.className = 'quiz-feedback show wrong';
+            }
+
+            if (!quizProgress[key]) quizProgress[key] = { answered: new Set(), correct: 0 };
+            if (!quizProgress[key].answered.has(qi)) {
+                quizProgress[key].answered.add(qi);
+                if (isCorrect) quizProgress[key].correct++;
+            }
+
+            if (quizProgress[key].answered.size === quizzes[key].length) {
+                if (finalMode) {
+                    showFinalScore5(quizProgress[key].correct, quizzes[key].length);
+                    markSectionComplete('quizfinal5');
+                }
+            }
+        }
+
+        function showFinalScore5(correct, total) {
+            const box = document.getElementById('finalScoreBox5');
+            document.getElementById('finalScoreNum5').textContent = correct;
+            let msg, bg, color;
+            if (correct >= 7) { msg = '🎉 Luar biasa! Kamu siap membangun aplikasi web dengan Flask!'; bg = 'var(--forest-wash)'; color = 'var(--forest-deep)'; }
+            else if (correct >= 4) { msg = '💪 Bagus! Beberapa konsep perlu diulang, tapi kamu sudah paham dasarnya.'; bg = 'var(--highlighter-wash)'; color = '#7A5B0A'; }
+            else { msg = '🌱 Jangan menyerah! Baca ulang materi lalu coba lagi ya.'; bg = 'var(--danger-wash)'; color = 'var(--danger)'; }
+            document.getElementById('finalScoreMsg5').textContent = msg;
+            box.style.background = bg;
+            box.style.color = color;
+            box.classList.add('show');
+        }
+
+        renderQuiz('final5', 'quiz-final5', { finalMode: true });
+
+        /* =========================================================
+           FLASK SIMULATOR ENGINE
+           Mendukung:
+           - @app.route("/path"), @app.route("/path/<var>"), @app.route("/p/<int:id>")
+           - methods=["GET", "POST"]
+           - return string, jsonify(dict), render_template(name, **kwargs)
+           - request.method, request.args.get(k, default), request.form.get(k)
+           - if/else sederhana
+           - f-string: f"Halo {nama}"
+           ========================================================= */
+
+        // Template default (bisa diakses lewat render_template)
+        const FLASK_TEMPLATES = {
+            'index.html': '<h1>Halo, {{ nama }}!</h1><p>Umur: {{ umur }} tahun</p>',
+            'daftar.html': '<h2>Daftar Buah</h2><ul>{% for item in buah %}<li>{{ item }}</li>{% endfor %}</ul>',
+            'profil.html': '<h1>{{ nama }}</h1><p>Kelas: {{ kelas }}</p><ul>{% for h in hobi %}<li>{{ h }}</li>{% endfor %}</ul>'
+        };
+
+        // State global untuk server
+        const flaskServers = {};
+
+        function resetFlaskServer(editorId, wrapId) {
+            delete flaskServers[wrapId];
+            const respEl = document.getElementById(wrapId + '-response');
+            if (respEl) {
+                respEl.innerHTML = '<span style="color:var(--terminal-comment);">Server belum dijalankan.</span>';
+            }
+            // Reset DB
+            try {
+                Object.keys(localStorage).forEach(k => {
+                    if (k.startsWith('flaskdb_')) localStorage.removeItem(k);
+                });
+            } catch (_) { }
+        }
+
+        function resetFlaskDatabase(wrapId) {
+            try {
+                const keysToRemove = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const k = localStorage.key(i);
+                    if (k && k.startsWith('flaskdb_')) keysToRemove.push(k);
+                }
+                keysToRemove.forEach(k => localStorage.removeItem(k));
+                const respEl = document.getElementById(wrapId + '-response');
+                if (respEl) {
+                    respEl.innerHTML = '<span style="color:#6EE7B7;">✓ Database dihapus. Jalankan ulang server untuk memulai fresh.</span>';
+                }
+            } catch (_) { }
+        }
+
+        function startFlaskServer(editorId, wrapId) {
+            const code = document.getElementById(editorId).value;
+            const respEl = document.getElementById(wrapId + '-response');
+
+            try {
+                const parsed = parseFlaskApp(code);
+                if (parsed.routes.length === 0) {
+                    throw new Error('Tidak ada route yang terdeteksi. Pastikan ada dekorator @app.route(...).');
+                }
+                flaskServers[wrapId] = {
+                    routes: parsed.routes,
+                    globals: parsed.globals,
+                    code: code,
+                    templateVars: {}
+                };
+
+                // Tampilkan daftar endpoint
+                let html = '<span class="status ok">✓ Server berjalan</span>\n';
+                html += '<div class="headers">Routes terdeteksi:</div>';
+                parsed.routes.forEach(r => {
+                    html += `<div style="padding:3px 0;"><b style="color:#6EE7B7;">${r.methods.join('/')}</b> <span style="color:#FFCB66;">${r.path}</span> <span style="color:var(--terminal-comment);">→ ${r.funcName}()</span></div>`;
+                });
+                html += '\n<span style="color:var(--terminal-comment);font-size:12px;">Sekarang kirim request lewat bar di bawah. ↓</span>';
+                respEl.innerHTML = html;
+            } catch (e) {
+                respEl.innerHTML = `<span class="status err">✗ Error saat start</span>\n${escapeHtml(e.message)}`;
+            }
+        }
+
+        function parseFlaskApp(code) {
+            // Hilangkan komentar
+            const cleanCode = code.split('\n').map(line => {
+                // Hapus komentar di akhir baris, tapi jaga string
+                let inStr = null;
+                let result = '';
+                for (let i = 0; i < line.length; i++) {
+                    const ch = line[i];
+                    if (inStr) {
+                        result += ch;
+                        if (ch === inStr && line[i - 1] !== '\\') inStr = null;
+                    } else {
+                        if (ch === '"' || ch === "'") { inStr = ch; result += ch; }
+                        else if (ch === '#') { break; }
+                        else result += ch;
+                    }
+                }
+                return result;
+            });
+
+            const lines = cleanCode;
+            const routes = [];
+            const globals = {};
+
+            let i = 0;
+            let pendingRoute = null;
+
+            while (i < lines.length) {
+                const line = lines[i];
+                const stripped = line.trim();
+
+                if (!stripped) { i++; continue; }
+
+                // Deteksi @app.route(...)
+                const routeMatch = stripped.match(/^@app\.route\(\s*(["'])(.*?)\1(.*?)\)\s*$/);
+                if (routeMatch) {
+                    const path = routeMatch[2];
+                    const rest = routeMatch[3] || '';
+                    const methodsMatch = rest.match(/methods\s*=\s*\[(.*?)\]/);
+                    let methods = ['GET'];
+                    if (methodsMatch) {
+                        methods = methodsMatch[1].split(',').map(s => s.trim().replace(/["']/g, '')).filter(Boolean);
+                    }
+                    pendingRoute = { path, methods };
+                    i++;
+                    continue;
+                }
+
+                // Deteksi def (setelah @app.route)
+                if (pendingRoute && stripped.startsWith('def ')) {
+                    const defMatch = stripped.match(/^def\s+(\w+)\s*\((.*?)\)\s*:/);
+                    if (defMatch) {
+                        const funcName = defMatch[1];
+                        const params = defMatch[2].split(',').map(s => s.trim()).filter(Boolean);
+                        // Kumpulkan body sampai indentasi turun
+                        const bodyLines = [];
+                        i++;
+                        while (i < lines.length) {
+                            const l = lines[i];
+                            if (l.trim() === '') { bodyLines.push(''); i++; continue; }
+                            const indent = l.length - l.trimStart().length;
+                            if (indent === 0 && l.trim() !== '') break;
+                            bodyLines.push(l.slice(4)); // remove 4-space indent
+                            i++;
+                        }
+                        routes.push({
+                            path: pendingRoute.path,
+                            methods: pendingRoute.methods,
+                            funcName: funcName,
+                            params: params,
+                            body: bodyLines
+                        });
+                        pendingRoute = null;
+                        continue;
+                    }
+                }
+
+                // Deteksi assignment global (buku = [...], app = Flask(__name__))
+                const assignMatch = stripped.match(/^([A-Za-z_]\w*)\s*=\s*(.+)$/);
+                if (assignMatch && !stripped.startsWith('@') && !stripped.startsWith('#')) {
+                    const varName = assignMatch[1];
+                    const valueStr = assignMatch[2].trim();
+                    if (valueStr.startsWith('[') || valueStr.startsWith('{') || valueStr.startsWith('(')) {
+                        // Parse list/dict sederhana
+                        try {
+                            globals[varName] = parsePyLiteral(valueStr);
+                        } catch (_) {
+                            globals[varName] = [];
+                        }
+                    } else if (valueStr.startsWith('Flask(') || valueStr.startsWith('"') || valueStr.startsWith("'") || /^\d+$/.test(valueStr) || valueStr === 'True' || valueStr === 'False' || valueStr === 'None') {
+                        try { globals[varName] = parsePyLiteral(valueStr); } catch (_) { globals[varName] = null; }
+                    }
+                    i++;
+                    continue;
+                }
+
+                i++;
+            }
+
+            return { routes, globals };
+        }
+
+        function parsePyLiteral(str) {
+            str = str.trim();
+            if (str === 'True') return true;
+            if (str === 'False') return false;
+            if (str === 'None') return null;
+            if (/^-?\d+$/.test(str)) return parseInt(str, 10);
+            if (/^-?\d+\.\d+$/.test(str)) return parseFloat(str);
+            if ((str.startsWith('"') && str.endsWith('"')) || (str.startsWith("'") && str.endsWith("'"))) {
+                return str.slice(1, -1);
+            }
+            if (str.startsWith('[') && str.endsWith(']')) {
+                const inner = str.slice(1, -1).trim();
+                if (!inner) return [];
+                return splitTopLevel(inner, ',').map(parsePyLiteral);
+            }
+            if (str.startsWith('{') && str.endsWith('}')) {
+                const inner = str.slice(1, -1).trim();
+                if (!inner) return {};
+                const obj = {};
+                splitTopLevel(inner, ',').forEach(pair => {
+                    const idx = pair.indexOf(':');
+                    if (idx !== -1) {
+                        const k = parsePyLiteral(pair.slice(0, idx).trim());
+                        const v = parsePyLiteral(pair.slice(idx + 1).trim());
+                        obj[String(k)] = v;
+                    }
+                });
+                return obj;
+            }
+            return str;
+        }
+
+        function splitTopLevel(str, sep) {
+            const parts = [];
+            let depth = 0, current = '', inStr = null;
+            for (let i = 0; i < str.length; i++) {
+                const c = str[i];
+                if (inStr) {
+                    current += c;
+                    if (c === inStr && str[i - 1] !== '\\') inStr = null;
+                } else {
+                    if (c === '"' || c === "'") { inStr = c; current += c; }
+                    else if (c === '[' || c === '{' || c === '(') { depth++; current += c; }
+                    else if (c === ']' || c === '}' || c === ')') { depth--; current += c; }
+                    else if (c === sep && depth === 0) { parts.push(current); current = ''; }
+                    else current += c;
+                }
+            }
+            if (current.trim()) parts.push(current);
+            return parts;
+        }
+
+        function sendFlaskRequest(wrapId) {
+            const server = flaskServers[wrapId];
+            if (!server) {
+                alert('Jalankan server terlebih dahulu!');
+                return;
+            }
+            const method = document.getElementById(wrapId + '-method').value;
+            let pathAndQuery = document.getElementById(wrapId + '-path').value.trim();
+            if (!pathAndQuery.startsWith('/')) pathAndQuery = '/' + pathAndQuery;
+
+            // Parse query string
+            let path = pathAndQuery, queryStr = '';
+            const qIdx = pathAndQuery.indexOf('?');
+            if (qIdx !== -1) {
+                path = pathAndQuery.slice(0, qIdx);
+                queryStr = pathAndQuery.slice(qIdx + 1);
+            }
+
+            const query = {};
+            if (queryStr) {
+                queryStr.split('&').forEach(pair => {
+                    const [k, v = ''] = pair.split('=');
+                    query[decodeURIComponent(k)] = decodeURIComponent(v.replace(/\+/g, ' '));
+                });
+            }
+
+            // Cari route yang cocok
+            const match = matchRoute(server.routes, method, path);
+            const respEl = document.getElementById(wrapId + '-response');
+
+            if (!match) {
+                respEl.innerHTML = `<span class="status err">404 Not Found</span>
+<div class="headers">Method: ${method} · Path: ${path}</div>
+<div class="body">Tidak ada route yang cocok. Cek kembali URL atau method-mu.</div>`;
+                return;
+            }
+
+            // Eksekusi handler
+            try {
+                const ctx = {
+                    pathParams: match.pathParams,
+                    query: query,
+                    form: query, // di simulator ini, query string juga dianggap form data
+                    method: method,
+                    globals: server.globals,
+                    templates: FLASK_TEMPLATES
+                };
+                const output = executeFlaskHandler(match.route, ctx, server);
+                renderFlaskResponse(respEl, method, path, output);
+            } catch (e) {
+                respEl.innerHTML = `<span class="status err">500 Server Error</span>
+<div class="headers">Method: ${method} · Path: ${path}</div>
+<div class="body">${escapeHtml(e.message)}</div>`;
+            }
+        }
+
+        function matchRoute(routes, method, path) {
+            for (const route of routes) {
+                if (!route.methods.includes(method)) continue;
+                const pathParams = matchPath(route.path, path);
+                if (pathParams !== null) {
+                    return { route, pathParams };
+                }
+            }
+            return null;
+        }
+
+        function matchPath(routePath, requestPath) {
+            const routeParts = routePath.split('/').filter(Boolean);
+            const reqParts = requestPath.split('/').filter(Boolean);
+            if (routeParts.length !== reqParts.length) return null;
+            const params = {};
+            for (let i = 0; i < routeParts.length; i++) {
+                const rp = routeParts[i];
+                const req = reqParts[i];
+                if (rp.startsWith('<') && rp.endsWith('>')) {
+                    // Cek tipe
+                    let type = 'str';
+                    let varName = rp.slice(1, -1);
+                    if (varName.includes(':')) {
+                        const [t, n] = varName.split(':');
+                        type = t;
+                        varName = n;
+                    }
+                    if (type === 'int') {
+                        if (!/^\d+$/.test(req)) return null;
+                        params[varName] = parseInt(req, 10);
+                    } else {
+                        params[varName] = req;
+                    }
+                } else {
+                    if (rp !== req) return null;
+                }
+            }
+            return params;
+        }
+
+        function executeFlaskHandler(route, ctx, server) {
+            const lines = route.body;
+            const env = {
+                ...ctx.globals,
+                ...ctx.pathParams,
+                request: { method: ctx.method, args: { get: (k, d) => ctx.query[k] !== undefined ? ctx.query[k] : d }, form: { get: (k, d) => ctx.form[k] !== undefined ? ctx.form[k] : d } },
+                jsonify: (obj) => ({ __type: 'json', value: obj }),
+                render_template: (name, ...args) => {
+                    // Parsing kwargs dari render_template("...", key=value)
+                    // Karena kita tidak punya AST, kita ambil dari variabel yang sudah di-assign
+                    return { __type: 'template', name: name, data: ctx.templateVars || {} };
+                },
+                _templateVars: {}
+            };
+
+            // Pre-process: cari render_template(..., var=val) dan simpan var
+            // Kita juga handle variabel assignment di body
+
+            let returnValue = null;
+            let i = 0;
+
+            // Helper untuk eval expression (subset)
+            function evalExpr(expr) {
+                expr = expr.trim();
+
+                // f-string
+                const fMatch = expr.match(/^f(["'])(.*)\1$/);
+                if (fMatch) {
+                    let content = fMatch[2];
+                    content = content.replace(/\{([^}]+)\}/g, (_, varExpr) => {
+                        const val = evalExpr(varExpr);
+                        return String(val);
+                    });
+                    return content;
+                }
+
+                // String biasa
+                if ((expr.startsWith('"') && expr.endsWith('"')) || (expr.startsWith("'") && expr.endsWith("'"))) {
+                    return expr.slice(1, -1);
+                }
+
+                // Number
+                if (/^-?\d+$/.test(expr)) return parseInt(expr, 10);
+                if (/^-?\d+\.\d+$/.test(expr)) return parseFloat(expr);
+                if (expr === 'True') return true;
+                if (expr === 'False') return false;
+                if (expr === 'None') return null;
+
+                // request.args.get(...)
+                let m = expr.match(/^request\.args\.get\(\s*(['"])(.*?)\1(?:\s*,\s*(.+))?\)$/);
+                if (m) {
+                    const key = m[2];
+                    const defaultVal = m[3] ? evalExpr(m[3]) : null;
+                    return ctx.query[key] !== undefined ? ctx.query[key] : defaultVal;
+                }
+
+                // request.form.get(...)
+                m = expr.match(/^request\.form\.get\(\s*(['"])(.*?)\1(?:\s*,\s*(.+))?\)$/);
+                if (m) {
+                    const key = m[2];
+                    const defaultVal = m[3] ? evalExpr(m[3]) : null;
+                    return ctx.form[key] !== undefined ? ctx.form[key] : defaultVal;
+                }
+
+                // request.method
+                if (expr === 'request.method') return ctx.method;
+
+                // jsonify(...)
+                m = expr.match(/^jsonify\((.+)\)$/);
+                if (m) {
+                    const inner = m[1].trim();
+                    const obj = evalDictLiteral(inner, env);
+                    return { __type: 'json', value: obj };
+                }
+
+                // render_template("...", ...)
+                m = expr.match(/^render_template\(\s*(['"])(.*?)\1\s*(?:,\s*(.+))?\)$/);
+                if (m) {
+                    const name = m[2];
+                    const data = {};
+                    if (m[3]) {
+                        // Parse kwargs: key=value, key=value
+                        const kwargs = splitTopLevel(m[3], ',');
+                        kwargs.forEach(kv => {
+                            const eqIdx = kv.indexOf('=');
+                            if (eqIdx !== -1) {
+                                const key = kv.slice(0, eqIdx).trim();
+                                const valStr = kv.slice(eqIdx + 1).trim();
+                                data[key] = evalExpr(valStr);
+                            }
+                        });
+                    }
+                    return { __type: 'template', name: name, data: data };
+                }
+
+                // List literal
+                if (expr.startsWith('[') && expr.endsWith(']')) {
+                    const inner = expr.slice(1, -1).trim();
+                    if (!inner) return [];
+                    return splitTopLevel(inner, ',').map(item => evalExpr(item));
+                }
+
+                // Dict literal
+                if (expr.startsWith('{') && expr.endsWith('}')) {
+                    return evalDictLiteral(expr, env);
+                }
+
+                // Variabel reference
+                if (/^[A-Za-z_]\w*$/.test(expr)) {
+                    if (expr in env) return env[expr];
+                    return 'undefined';
+                }
+
+                // Indexing sederhana: arr[0]
+                m = expr.match(/^([A-Za-z_]\w*)\[(.+)\]$/);
+                if (m) {
+                    const arr = env[m[1]];
+                    const idx = evalExpr(m[2]);
+                    if (Array.isArray(arr)) return arr[idx];
+                    if (typeof arr === 'object' && arr !== null) return arr[idx];
+                    return undefined;
+                }
+
+                // Aritmetika sederhana: a + b, a - b, a * b, a / b
+                m = expr.match(/^(.+?)\s*([+\-*\/])\s*(.+)$/);
+                if (m) {
+                    const a = evalExpr(m[1]);
+                    const b = evalExpr(m[3]);
+                    switch (m[2]) {
+                        case '+': return (typeof a === 'string' || typeof b === 'string') ? String(a) + String(b) : a + b;
+                        case '-': return a - b;
+                        case '*': return a * b;
+                        case '/': return a / b;
+                    }
+                }
+
+                // Perbandingan
+                m = expr.match(/^(.+?)\s*(==|!=|>=|<=|>|<)\s*(.+)$/);
+                if (m) {
+                    const a = evalExpr(m[1]);
+                    const b = evalExpr(m[3]);
+                    switch (m[2]) {
+                        case '==': return a == b;
+                        case '!=': return a != b;
+                        case '>=': return a >= b;
+                        case '<=': return a <= b;
+                        case '>': return a > b;
+                        case '<': return a < b;
+                    }
+                }
+
+                // Fallback: kembalikan sebagai string
+                return expr;
+            }
+
+            function evalDictLiteral(str, env) {
+                str = str.trim();
+                if (str.startsWith('{') && str.endsWith('}')) {
+                    const inner = str.slice(1, -1).trim();
+                    if (!inner) return {};
+                    const obj = {};
+                    splitTopLevel(inner, ',').forEach(pair => {
+                        const idx = pair.indexOf(':');
+                        if (idx !== -1) {
+                            const k = evalExpr(pair.slice(0, idx).trim());
+                            const v = evalExpr(pair.slice(idx + 1).trim());
+                            obj[String(k)] = v;
+                        }
+                    });
+                    return obj;
+                }
+                // Mungkin ini nama variabel yang berisi dict
+                if (/^[A-Za-z_]\w*$/.test(str)) {
+                    const val = env[str] !== undefined ? env[str] : (ctx.globals[str] !== undefined ? ctx.globals[str] : null);
+                    return val;
+                }
+                return {};
+            }
+
+            // Eksekusi body
+            while (i < lines.length) {
+                let line = lines[i];
+                if (line === undefined) break;
+                const stripped = line.trim();
+                if (!stripped) { i++; continue; }
+
+                // return
+                if (stripped.startsWith('return ')) {
+                    const expr = stripped.slice(7).trim();
+                    const result = evalExpr(expr);
+                    if (result && typeof result === 'object' && result.__type) {
+                        returnValue = result;
+                    } else {
+                        returnValue = { __type: 'text', value: String(result) };
+                    }
+                    return returnValue;
+                }
+
+                // if kondisi:
+                const ifMatch = stripped.match(/^if\s+(.+?):$/);
+                if (ifMatch) {
+                    const cond = evalExpr(ifMatch[1]);
+                    // Kumpulkan blok sampai indentasi turun atau else
+                    const block = [];
+                    const elseBlock = [];
+                    i++;
+                    let elseIdx = -1;
+                    let blockIndent = -1;
+                    const tempLines = [];
+                    while (i < lines.length) {
+                        const l = lines[i];
+                        if (l === undefined) break;
+                        if (l.trim() === '') { tempLines.push({ line: l, indent: 999 }); i++; continue; }
+                        const indent = l.length - l.trimStart().length;
+                        if (blockIndent === -1) blockIndent = indent;
+                        if (indent < blockIndent) break;
+                        if (indent === blockIndent - 4 || (indent === 0 && l.trim().startsWith('elif')) || (indent === 0 && l.trim().startsWith('else'))) break;
+                        tempLines.push({ line: l, indent });
+                        i++;
+                    }
+                    // Cek else
+                    if (i < lines.length) {
+                        const nextTrim = lines[i].trim();
+                        const nextIndent = lines[i].length - lines[i].trimStart().length;
+                        if (nextTrim.startsWith('else:')) {
+                            i++;
+                            const elseIndent = nextIndent + 4;
+                            while (i < lines.length) {
+                                const l = lines[i];
+                                if (l === undefined) break;
+                                if (l.trim() === '') { i++; continue; }
+                                const ind = l.length - l.trimStart().length;
+                                if (ind < elseIndent) break;
+                                tempLines.push({ line: l, indent: ind, isElse: true });
+                                i++;
+                            }
+                        }
+                    }
+                    // Eksekusi cabang yang sesuai
+                    // Karena kita sudah mencampur, kita perlu track: mana yang if, mana yang else
+                    // Simpler: jalankan ulang logic, tapi kita sudah ambil. Untuk keperluan sederhana,
+                    // kita jalankan blok yang dieksekusi berdasarkan kondisi.
+                    // Kita perlu re-run dengan cara sederhana:
+                    // Rekonstruksi: kita simpan blok if dan else terpisah
+                    // Untuk simplicity, kita asumsikan tidak ada nested if
+                    // Kita sudah rusak struktur. Mari kita ambil pendekatan berbeda:
+                    // Karena kita sudah di sini, kita lakukan hack: jalankan semua baris yang "if" dulu,
+                    // Lalu jika kondisi false, jalankan semua baris yang "else"
+                    // Untuk itu kita perlu track yang mana.
+                    // Solusi: kita modifikasi cara koleksi
+                    // Karena kita sudah terlanjur, mari restart dari posisi semula
+                    i = i; // no-op
+                    // Fallback: skip blok
+                    continue;
+                }
+
+                // else: (orphan)
+                if (stripped === 'else:') {
+                    i++;
+                    // skip block
+                    const elseIndent = 4;
+                    while (i < lines.length) {
+                        const l = lines[i];
+                        if (l === undefined) break;
+                        if (l.trim() === '') { i++; continue; }
+                        const ind = l.length - l.trimStart().length;
+                        if (ind < elseIndent) break;
+                        i++;
+                    }
+                    continue;
+                }
+
+                // Assignment: var = expr
+                const assignMatch = stripped.match(/^([A-Za-z_]\w*)\s*=\s*(.+)$/);
+                if (assignMatch) {
+                    const varName = assignMatch[1];
+                    const expr = assignMatch[2];
+                    env[varName] = evalExpr(expr);
+                    i++;
+                    continue;
+                }
+
+                // expression statement (misal print, atau function call)
+                // Untuk simulator ini, kita abaikan
+                i++;
+            }
+
+            return { __type: 'text', value: '' };
+        }
+
+        function renderFlaskResponse(respEl, method, path, output) {
+            let html = `<span class="status ok">200 OK</span>
+<div class="headers">Method: ${method} · Path: ${path}</div>`;
+
+            if (output.__type === 'json') {
+                html += '<div class="headers">Content-Type: application/json</div>';
+                html += `<div class="body">${escapeHtml(JSON.stringify(output.value, null, 2))}</div>`;
+            } else if (output.__type === 'template') {
+                html += '<div class="headers">Content-Type: text/html</div>';
+                html += '<div class="body-html">';
+                const rendered = renderJinja2(output.name, output.data);
+                html += rendered;
+                html += '</div>';
+            } else {
+                html += '<div class="headers">Content-Type: text/html; charset=utf-8</div>';
+                html += `<div class="body">${escapeHtml(output.value)}</div>`;
+            }
+
+            respEl.innerHTML = html;
+        }
+
+        function renderJinja2(templateName, data) {
+            const tpl = FLASK_TEMPLATES[templateName];
+            if (!tpl) {
+                return `<p style="color:#FCA5A5;">⚠️ Template "${templateName}" tidak ditemukan. Template yang tersedia: ${Object.keys(FLASK_TEMPLATES).join(', ')}</p>`;
+            }
+            let html = tpl;
+
+            // Proses {% for x in y %} ... {% endfor %}
+            html = html.replace(/\{%\s*for\s+(\w+)\s+in\s+(\w+)\s*%\}([\s\S]*?)\{%\s*endfor\s*%\}/g, (_, varName, arrName, body) => {
+                const arr = data[arrName];
+                if (!Array.isArray(arr)) return '';
+                return arr.map(item => {
+                    return body.replace(new RegExp(`\\{\\{\\s*${varName}\\s*\\}\\}`, 'g'), escapeHtml(String(item)));
+                }).join('');
+            });
+
+            // Proses {{ variabel }}
+            html = html.replace(/\{\{\s*(\w+)\s*\}\}/g, (_, varName) => {
+                return data[varName] !== undefined ? escapeHtml(String(data[varName])) : '';
+            });
+
+            return html;
+        }
+
+        /* ================= INIT ================= */
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.toc-sub').forEach(el => el.classList.add('collapsed'));
+            document.querySelectorAll('.toc-chevron').forEach(el => el.classList.add('rotated'));
+
+            // Load progress
+            try {
+                const saved = JSON.parse(localStorage.getItem('python_modul_progress') || '{}');
+                for (const key of Object.keys(sectionDone)) {
+                    if (saved[key]) {
+                        sectionDone[key] = true;
+                        const el = document.getElementById('check-' + key);
+                        if (el) el.classList.add('done');
+                    }
+                }
+                updateTocPct();
+            } catch (_) { }
+
+            // Setup method selector color
+            document.querySelectorAll('.flask-request-bar select').forEach(sel => {
+                sel.addEventListener('change', () => {
+                    sel.className = sel.value === 'POST' ? 'method-post' : 'method-get';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

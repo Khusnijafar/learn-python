@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Modul Ajar Python — Portal Utama</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <div class="wrap">
@@ -20,7 +24,7 @@
       <h1>🐍 <span class="snake">Python</span> untuk Pemula</h1>
       <p>Modul interaktif lengkap dari nol sampai mahir. Pilih level di bawah, lalu mulai petualangan coding-mu!</p>
       <div class="hero-meta">
-        <span>📘 24 Bab</span>
+        <span>📘 30 Bab</span>
         <span>🎯 10+ Challenge</span>
         <span>🧩 50+ Latihan</span>
         <span>⚡ Interaktif</span>
@@ -47,7 +51,8 @@
       <a href="index_bab1_6.html" class="nav-card" id="cardBab1_6">
         <span class="badge">📖 DASAR</span>
         <h2>Bab 1–6 <span class="arrow">→</span></h2>
-        <p class="desc">Kenalan dengan Python, instalasi, print, multiline, operasi matematika, comment, dan challenge pertama.</p>
+        <p class="desc">Kenalan dengan Python, instalasi, print, multiline, operasi matematika, comment, dan challenge
+          pertama.</p>
         <ul class="chapter-list">
           <li>1. Python</li>
           <li>2. Extension</li>
@@ -80,7 +85,8 @@
       <a href="index_bab12_17.html" class="nav-card" id="cardBab12_17">
         <span class="badge">🚀 LANJUTAN</span>
         <h2>Bab 12–17 <span class="arrow">→</span></h2>
-        <p class="desc">Percabangan, perulangan, fungsi, dictionary, file handling, error handling, dan final project To-Do List.</p>
+        <p class="desc">Percabangan, perulangan, fungsi, dictionary, file handling, error handling, dan final project
+          To-Do List.</p>
         <ul class="chapter-list">
           <li>12. If/Elif/Else</li>
           <li>13. Loop</li>
@@ -108,6 +114,23 @@
           <li>24. Database</li>
         </ul>
         <span class="cta"><span class="icon">▶</span> Buka Bab 18–24</span>
+      </a>
+
+      <!-- KARTU 5: Bab 25–30 -->
+      <a href="index_bab25_30.html" class="nav-card" id="cardBab25_30">
+        <span class="badge">🌐 WEB DEV</span>
+        <h2>Bab 25–30 <span class="arrow">→</span></h2>
+        <p class="desc">Belajar membuat website & REST API dengan Flask. Routing, template, form, database, sampai
+          deploy ke internet.</p>
+        <ul class="chapter-list">
+          <li>25. Flask Intro</li>
+          <li>26. Templates</li>
+          <li>27. Form & Method</li>
+          <li>28. REST API</li>
+          <li>29. Database</li>
+          <li>30. Deployment</li>
+        </ul>
+        <span class="cta"><span class="icon">▶</span> Buka Bab 25–30</span>
       </a>
 
     </div>
@@ -141,7 +164,7 @@
   </div>
 
   <script>
-    (function() {
+    (function () {
 
       // ===== PROGRESS TRACKER =====
       // Daftar semua section yang dilacak, sesuai dengan key di localStorage
@@ -153,7 +176,9 @@
         // Bab 12–17
         'bab12', 'bab13', 'bab14', 'bab15', 'bab16', 'bab17', 'challenge3', 'quizfinal3',
         // Bab 18–24
-        'bab18', 'bab19', 'bab20', 'bab21', 'bab22', 'bab23', 'bab24', 'quizfinal4'
+        'bab18', 'bab19', 'bab20', 'bab21', 'bab22', 'bab23', 'bab24', 'quizfinal4',
+        // Bab 25–30
+        'bab25', 'bab26', 'bab27', 'bab28', 'bab29', 'bab30', 'quizfinal5'
       ];
 
       const LABELS = {
@@ -167,7 +192,9 @@
         challenge3: '🏆', quizfinal3: '📝',
         // Bab 18–24
         bab18: '18', bab19: '19', bab20: '20', bab21: '21', bab22: '22', bab23: '23', bab24: '24',
-        quizfinal4: '🧠'
+        quizfinal4: '🧠',
+        // Bab 25–30
+        bab25: '25', bab26: '26', bab27: '27', bab28: '28', bab29: '29', bab30: '30', quizfinal5: '🌐'
       };
 
       function getDoneSet() {
@@ -202,7 +229,7 @@
       renderDots();
 
       // Sinkronisasi antar tab
-      window.addEventListener('storage', function(e) {
+      window.addEventListener('storage', function (e) {
         if (e.key === 'python_modul_progress') {
           renderDots();
         }
@@ -212,4 +239,5 @@
   </script>
 
 </body>
+
 </html>

@@ -1,0 +1,2116 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Ajar Interaktif — Web Dev Lanjutan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Caveat:wght@600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== HTML/CSS LIVE PREVIEW ===== */
+        .live-wrap {
+            background: var(--terminal-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin: 16px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .live-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--terminal-panel);
+            padding: 10px 16px;
+            border-bottom: 1px solid #0f1216;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .live-bar .label {
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--terminal-comment);
+        }
+
+        .live-bar .btn-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .live-bar button {
+            font-family: var(--font-code);
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--terminal-panel);
+            color: var(--terminal-text);
+            border: 1px solid #303a42;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background .15s;
+        }
+
+        .live-bar button:hover {
+            background: #2a3340;
+        }
+
+        .live-bar button.primary {
+            background: var(--terminal-string);
+            color: #0d1a12;
+            border-color: var(--terminal-string);
+        }
+
+        .live-bar button.primary:hover {
+            background: #e6b84a;
+        }
+
+        .live-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 260px;
+        }
+
+        @media (max-width: 720px) {
+            .live-split {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .live-editor {
+            width: 100%;
+            background: var(--terminal-bg);
+            color: var(--terminal-text);
+            border: none;
+            resize: vertical;
+            font-family: var(--font-code);
+            font-size: 13px;
+            padding: 14px 16px;
+            min-height: 260px;
+            line-height: 1.6;
+            border-right: 1px solid #0f1216;
+        }
+
+        .live-editor:focus {
+            outline: none;
+            background: #191F26;
+        }
+
+        .live-preview {
+            background: #ffffff;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .live-preview iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 260px;
+            border: none;
+            display: block;
+            background: #ffffff;
+        }
+
+        /* ===== FLASK SIMULATOR (compact) ===== */
+        .flask-wrap {
+            background: var(--terminal-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin: 16px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .flask-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--terminal-panel);
+            padding: 10px 16px;
+            border-bottom: 1px solid #0f1216;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .flask-bar .label {
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--terminal-comment);
+        }
+
+        .flask-bar .btn-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .flask-bar button {
+            font-family: var(--font-code);
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--terminal-panel);
+            color: var(--terminal-text);
+            border: 1px solid #303a42;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background .15s;
+        }
+
+        .flask-bar button:hover {
+            background: #2a3340;
+        }
+
+        .flask-bar button.primary {
+            background: var(--terminal-string);
+            color: #0d1a12;
+            border-color: var(--terminal-string);
+        }
+
+        .flask-request-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #1a1f26;
+            padding: 10px 16px;
+            border-bottom: 1px dashed #303a42;
+            flex-wrap: wrap;
+        }
+
+        .flask-request-bar select {
+            background: var(--terminal-panel);
+            color: var(--terminal-text);
+            border: 1px solid #303a42;
+            border-radius: 6px;
+            padding: 6px 10px;
+            font-family: var(--font-code);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .flask-request-bar select.method-get {
+            color: #6EE7B7;
+        }
+
+        .flask-request-bar select.method-post {
+            color: #FCD34D;
+        }
+
+        .flask-request-bar input {
+            flex: 1;
+            min-width: 180px;
+            background: var(--terminal-panel);
+            color: var(--terminal-text);
+            border: 1px solid #303a42;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-family: var(--font-code);
+            font-size: 13px;
+        }
+
+        .flask-request-bar input:focus {
+            outline: none;
+            border-color: var(--terminal-string);
+        }
+
+        .flask-request-bar .send-btn {
+            background: #10B981;
+            color: #fff;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 6px;
+            font-family: var(--font-code);
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .flask-request-bar .send-btn:hover {
+            background: #059669;
+        }
+
+        .flask-response {
+            padding: 14px 18px;
+            font-family: var(--font-code);
+            font-size: 13px;
+            color: var(--terminal-text);
+            min-height: 80px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+
+        .flask-response .status {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .flask-response .status.ok {
+            background: #065F46;
+            color: #6EE7B7;
+        }
+
+        .flask-response .status.err {
+            background: #7F1D1D;
+            color: #FCA5A5;
+        }
+
+        .flask-response .headers {
+            color: var(--terminal-comment);
+            font-size: 11.5px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #303a42;
+        }
+
+        .flask-response .body {
+            color: var(--terminal-string);
+        }
+
+        .flask-response .body-html {
+            color: var(--terminal-text);
+            white-space: normal;
+        }
+
+        /* Info box untuk konsep */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 14px 0;
+        }
+
+        @media (max-width: 640px) {
+            .concept-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .concept-item {
+            background: var(--paper-alt);
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            border: 1px solid var(--rule);
+        }
+
+        .concept-item b {
+            display: block;
+            font-family: var(--font-head);
+            font-size: 14.5px;
+            margin-bottom: 4px;
+            color: var(--forest-deep);
+        }
+
+        .concept-item span {
+            font-size: 14px;
+            color: var(--ink-soft);
+        }
+
+        .concept-item code {
+            font-family: var(--font-code);
+            background: #fff;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        /* File tree (reuse) */
+        .file-tree {
+            font-family: var(--font-code);
+            font-size: 13.5px;
+            background: var(--paper-alt);
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            margin: 12px 0;
+            line-height: 1.9;
+            color: var(--ink-soft);
+        }
+
+        .file-tree .folder {
+            color: var(--forest-deep);
+            font-weight: 600;
+        }
+
+        .file-tree .file {
+            color: var(--ink);
+        }
+
+        .file-tree .file.active {
+            background: var(--forest-wash);
+            padding: 1px 8px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="scrollRail">
+        <div id="scrollFill"></div>
+    </div>
+
+    <header class="hero">
+        <nav class="top-nav">
+            <a href="index.html">🏠 Beranda</a>
+            <span class="sep">|</span>
+            <a href="index_bab1_6.html">Bab 1–6</a>
+            <a href="index_bab7_11.html">Bab 7–11</a>
+            <a href="index_bab12_17.html">Bab 12–17</a>
+            <a href="index_bab18_24.html">Bab 18–24</a>
+            <a href="index_bab25_30.html">Flask</a>
+            <span class="current">🎨 Web Lanjutan</span>
+        </nav>
+        <div class="hero-kicker"><span class="dot"></span>TRACK 2 · WEB DEV LANJUTAN</div>
+        <h1 class="hero-title">Web <span class="snake">Lanjutan</span></h1>
+        <div class="hero-meta">
+            <span>Bab 31–36</span>
+            <span>Level: Web Developer</span>
+            <span>🎨 Live Preview &amp; Auth</span>
+        </div>
+    </header>
+
+    <nav class="toc" id="toc">
+        <div class="toc-head">
+            <h2>📋 Daftar Isi</h2>
+            <span id="tocPct">0% selesai</span>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab31"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 31 — HTML &amp; CSS untuk Flask</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab31-1">Struktur HTML5</a>
+                <a class="toc-item" href="#bab31-2">Live Preview HTML/CSS</a>
+                <a class="toc-item" href="#bab31-3">Challenge — Kartu Profil</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab32"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 32 — Bootstrap 5</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab32-1">Grid &amp; Komponen</a>
+                <a class="toc-item" href="#bab32-2">Live Preview Bootstrap</a>
+                <a class="toc-item" href="#bab32-3">Challenge — Landing Page</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab33"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 33 — Session &amp; Authentication</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab33-1">Session Dasar</a>
+                <a class="toc-item" href="#bab33-2">Login &amp; Logout</a>
+                <a class="toc-item" href="#bab33-3">Challenge — Login System</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab34"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 34 — Database Relasional</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab34-1">Model &amp; Relationship</a>
+                <a class="toc-item" href="#bab34-2">Query Lanjutan</a>
+                <a class="toc-item" href="#bab34-3">Challenge — Relasi Siswa-Kelas</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab35"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 35 — CRUD Lengkap</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab35-1">CRUD + Redirect</a>
+                <a class="toc-item" href="#bab35-2">Flash Messages</a>
+                <a class="toc-item" href="#bab35-3">Challenge — CRUD Buku</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab36"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 36 — Upload File &amp; Gambar</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab36-1">Upload Gambar</a>
+                <a class="toc-item" href="#bab36-2">Validasi File</a>
+                <a class="toc-item" href="#bab36-3">Challenge — Upload Foto Profil</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <a class="toc-header" href="#kuis-final6" style="text-decoration:none;">
+                <span class="toc-check" id="check-quizfinal6"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Quiz</span>
+            </a>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- ================= BAB 31 ================= -->
+        <section class="bab" id="bab31">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 31 —
+                        HTML & CSS"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 31 — HTML & CSS untuk Flask">Bab 31 — HTML &amp; CSS untuk Flask
+                </h2>
+                <p class="bab-intro">Sebelum halaman web terlihat cantik, kita perlu memahami struktur HTML dan cara
+                    styling dengan CSS.</p>
+            </div>
+
+            <div class="card" id="bab31-1">
+                <h3><span class="num">31.1</span> Struktur HTML5</h3>
+                <p>Setiap halaman HTML modern mengikuti struktur dasar berikut:</p>
+                <div class="term">
+                    <div class="term-bar">index.html</div>
+                    <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Judul Halaman&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;Header website&lt;/header&gt;
+    &lt;main&gt;Konten utama&lt;/main&gt;
+    &lt;footer&gt;Footer&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                </div>
+
+                <p>Tag HTML yang penting untuk dipahami:</p>
+                <div class="concept-grid">
+                    <div class="concept-item"><b>&lt;div&gt;</b><span>Wadah umum untuk mengelompokkan elemen.</span>
+                    </div>
+                    <div class="concept-item"><b>&lt;h1&gt; … &lt;h6&gt;</b><span>Judul dengan tingkat kepentingan
+                            berbeda.</span></div>
+                    <div class="concept-item"><b>&lt;p&gt;</b><span>Paragraf teks.</span></div>
+                    <div class="concept-item"><b>&lt;a href="…"&gt;</b><span>Link ke halaman lain.</span></div>
+                    <div class="concept-item"><b>&lt;img src="…"&gt;</b><span>Menampilkan gambar.</span></div>
+                    <div class="concept-item"><b>&lt;ul&gt; / &lt;ol&gt;</b><span>List tidak berurut / berurut.</span>
+                    </div>
+                </div>
+
+                <p><b>CSS Selector Dasar:</b></p>
+                <ul>
+                    <li><code class="inline">.kelas</code> — memilih elemen dengan <code
+                            class="inline">class="kelas"</code>.</li>
+                    <li><code class="inline">#id</code> — memilih elemen dengan <code class="inline">id="id"</code>.
+                    </li>
+                    <li><code class="inline">tag</code> — memilih semua elemen dengan tag tersebut.</li>
+                </ul>
+            </div>
+
+            <div class="card" id="bab31-2">
+                <h3><span class="num">31.2</span> Live Preview HTML/CSS</h3>
+                <p>Edit kode di editor sebelah kiri, lalu klik <b>▶ Render</b>. Hasilnya langsung tampil di sebelah
+                    kanan!</p>
+                <div class="live-wrap" id="live-31">
+                    <div class="live-bar">
+                        <span class="label">📝 HTML + CSS Live Editor</span>
+                        <div class="btn-group">
+                            <button class="primary" onclick="renderLive('ed-b31a','live-31')">▶ Render</button>
+                        </div>
+                    </div>
+                    <div class="live-split">
+                        <textarea class="live-editor" id="ed-b31a" spellcheck="false">&lt;div class="kartu"&gt;
+  &lt;h1&gt;Halo, Dunia!&lt;/h1&gt;
+  &lt;p&gt;Selamat datang di halaman web pertama saya.&lt;/p&gt;
+  &lt;a href="#"&gt;Klik di sini&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+  body {
+    font-family: Arial, sans-serif;
+    background: #F1EEE3;
+    padding: 24px;
+  }
+  .kartu {
+    background: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 400px;
+  }
+  h1 { color: #1E6B44; margin-top: 0; }
+  a { color: #1E6B44; font-weight: bold; }
+&lt;/style&gt;</textarea>
+                        <div class="live-preview">
+                            <iframe id="live-31-iframe" sandbox="allow-same-origin"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bab31-3">
+                <h3><span class="num">31.3</span> Challenge — Kartu Profil</h3>
+                <p>Buat <b>kartu profil</b> berisi: foto (gunakan placeholder dari <code
+                        class="inline">https://via.placeholder.com/100</code>), nama, kelas, dan hobi. Style dengan CSS:
+                    beri warna latar, border-radius, dan bayangan.</p>
+                <div class="live-wrap" id="live-ch31">
+                    <div class="live-bar">
+                        <span class="label">🎯 Challenge — Kartu Profil</span>
+                        <div class="btn-group">
+                            <button class="primary"
+                                onclick="renderLive('ed-b31b','live-ch31'); markSectionComplete('bab31');">▶
+                                Render</button>
+                        </div>
+                    </div>
+                    <div class="live-split">
+                        <textarea class="live-editor" id="ed-b31b" spellcheck="false">&lt;div class="profil"&gt;
+  &lt;img src="https://via.placeholder.com/100" alt="Foto"&gt;
+  &lt;h2&gt;Nama Kamu&lt;/h2&gt;
+  &lt;p&gt;Kelas: XI IPA 2&lt;/p&gt;
+  &lt;p&gt;Hobi: Coding, Gaming&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+  /* Tulis CSS kamu di sini */
+  .profil {
+    /* ... */
+  }
+&lt;/style&gt;</textarea>
+                        <div class="live-preview">
+                            <iframe id="live-ch31-iframe" sandbox="allow-same-origin"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 32 ================= -->
+        <section class="bab" id="bab32">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 32 —
+                        Bootstrap 5"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 32 — Bootstrap 5">Bab 32 — Bootstrap 5</h2>
+                <p class="bab-intro">Bootstrap adalah CSS framework yang membuat web kamu langsung terlihat modern tanpa
+                    harus menulis banyak CSS.</p>
+            </div>
+
+            <div class="card" id="bab32-1">
+                <h3><span class="num">32.1</span> Grid &amp; Komponen</h3>
+                <p>Bootstrap menggunakan sistem <b>grid 12 kolom</b> dengan <code class="inline">container</code>, <code
+                        class="inline">row</code>, dan <code class="inline">col</code>.</p>
+                <div class="term">
+                    <div class="term-bar">layout.html</div>
+                    <pre>&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-6"&gt;Kolom kiri&lt;/div&gt;
+    &lt;div class="col-md-6"&gt;Kolom kanan&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+                </div>
+
+                <p><b>Komponen Bootstrap yang paling sering dipakai:</b></p>
+                <div class="concept-grid">
+                    <div class="concept-item"><b>navbar</b><span>Menu navigasi di atas halaman.</span></div>
+                    <div class="concept-item"><b>card</b><span>Kotak konten dengan gambar, judul, dan teks.</span></div>
+                    <div class="concept-item"><b>btn btn-primary</b><span>Tombol berwarna.</span></div>
+                    <div class="concept-item"><b>form-control</b><span>Input dengan styling rapi.</span></div>
+                    <div class="concept-item"><b>alert alert-success</b><span>Notifikasi berwarna.</span></div>
+                    <div class="concept-item"><b>modal</b><span>Popup dialog.</span></div>
+                </div>
+
+                <p><b>Cara pakai Bootstrap 5 via CDN:</b></p>
+                <div class="term">
+                    <div class="term-bar">head</div>
+                    <pre>&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;</pre>
+                </div>
+            </div>
+
+            <div class="card" id="bab32-2">
+                <h3><span class="num">32.2</span> Live Preview Bootstrap</h3>
+                <p>Simulator ini otomatis memuat Bootstrap 5 — kamu tinggal pakai class-nya langsung!</p>
+                <div class="live-wrap" id="live-32">
+                    <div class="live-bar">
+                        <span class="label">📝 Bootstrap 5 Live Editor</span>
+                        <div class="btn-group">
+                            <button class="primary" onclick="renderLive('ed-b32a','live-32')">▶ Render</button>
+                        </div>
+                    </div>
+                    <div class="live-split">
+                        <textarea class="live-editor" id="ed-b32a" spellcheck="false">&lt;div class="container py-4"&gt;
+  &lt;h1 class="text-success"&gt;Hello Bootstrap!&lt;/h1&gt;
+  &lt;p class="lead"&gt;Halaman ini otomatis cantik.&lt;/p&gt;
+
+  &lt;div class="row g-3"&gt;
+    &lt;div class="col-md-4"&gt;
+      &lt;div class="card"&gt;
+        &lt;div class="card-body"&gt;
+          &lt;h5 class="card-title"&gt;Kartu 1&lt;/h5&gt;
+          &lt;p class="card-text"&gt;Deskripsi singkat.&lt;/p&gt;
+          &lt;button class="btn btn-primary"&gt;Klik&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-4"&gt;
+      &lt;div class="card"&gt;
+        &lt;div class="card-body"&gt;
+          &lt;h5 class="card-title"&gt;Kartu 2&lt;/h5&gt;
+          &lt;p class="card-text"&gt;Deskripsi singkat.&lt;/p&gt;
+          &lt;button class="btn btn-success"&gt;Klik&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</textarea>
+                        <div class="live-preview">
+                            <iframe id="live-32-iframe" sandbox="allow-same-origin allow-scripts"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bab32-3">
+                <h3><span class="num">32.3</span> Challenge — Landing Page</h3>
+                <p>Buat <b>landing page</b> sederhana dengan Bootstrap:</p>
+                <ol>
+                    <li><b>Navbar</b> dengan brand "Website Saya" dan menu (Beranda, Tentang, Kontak).</li>
+                    <li><b>Hero section</b> dengan judul besar dan tombol "Mulai".</li>
+                    <li><b>3 kartu fitur</b> dalam satu baris (gunakan <code class="inline">col-md-4</code>).</li>
+                    <li><b>Footer</b> dengan copyright.</li>
+                </ol>
+                <div class="live-wrap" id="live-ch32">
+                    <div class="live-bar">
+                        <span class="label">🎯 Challenge — Landing Page</span>
+                        <div class="btn-group">
+                            <button class="primary"
+                                onclick="renderLive('ed-b32b','live-ch32'); markSectionComplete('bab32');">▶
+                                Render</button>
+                        </div>
+                    </div>
+                    <div class="live-split">
+                        <textarea class="live-editor" id="ed-b32b" spellcheck="false">&lt;nav class="navbar navbar-expand-lg navbar-dark bg-success"&gt;
+  &lt;div class="container"&gt;
+    &lt;a class="navbar-brand" href="#"&gt;Website Saya&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;
+
+&lt;div class="container py-5 text-center"&gt;
+  &lt;h1 class="display-4"&gt;Selamat Datang&lt;/h1&gt;
+  &lt;p class="lead"&gt;Belajar web development dengan Bootstrap&lt;/p&gt;
+  &lt;a href="#" class="btn btn-success btn-lg"&gt;Mulai&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;!-- Tulis 3 kartu fitur di sini --&gt;</textarea>
+                        <div class="live-preview">
+                            <iframe id="live-ch32-iframe" sandbox="allow-same-origin allow-scripts"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 33 ================= -->
+        <section class="bab" id="bab33">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 33 —
+                        Session & Auth"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 33 — Session & Authentication">Bab 33 — Session &amp;
+                    Authentication</h2>
+                <p class="bab-intro">Session memungkinkan server "mengingat" siapa yang sedang login. Kita juga bahas
+                    cara mengamankan password.</p>
+            </div>
+
+            <div class="card" id="bab33-1">
+                <h3><span class="num">33.1</span> Session Dasar</h3>
+                <p><b>Session</b> adalah data yang disimpan di sisi server untuk setiap user. Di Flask, session diakses
+                    lewat objek <code class="inline">session</code> (mirip dictionary).</p>
+                <div class="term">
+                    <div class="term-bar">app.py</div>
+                    <pre><span class="fn">from</span> flask <span class="fn">import</span> Flask, session, redirect, url_for
+
+app = <span class="fn">Flask</span>(__name__)
+app.secret_key = <span class="str">"rahasia-super-aman"</span>
+
+<span class="cm">@app.route("/login")</span>
+<span class="fn">def</span> <span class="fn">login</span>():
+    session[<span class="str">"user"</span>] = <span class="str">"Andi"</span>
+    <span class="fn">return</span> <span class="str">"Login berhasil!"</span>
+
+<span class="cm">@app.route("/dashboard")</span>
+<span class="fn">def</span> <span class="fn">dashboard</span>():
+    <span class="fn">if</span> <span class="str">"user"</span> <span class="fn">not in</span> session:
+        <span class="fn">return</span> <span class="str">"Kamu belum login!"</span>
+    <span class="fn">return</span> <span class="str">f"Halo, {session['user']}"</span>
+
+<span class="cm">@app.route("/logout")</span>
+<span class="fn">def</span> <span class="fn">logout</span>():
+    session.<span class="fn">pop</span>(<span class="str">"user"</span>, None)
+    <span class="fn">return</span> <span class="str">"Logout berhasil."</span></pre>
+                </div>
+                <div class="note"><span class="hand">Catatan:</span> <code class="inline">secret_key</code> wajib di-set
+                    supaya session bisa dienkripsi. Jangan pernah hardcode di production — pakai environment variable!
+                </div>
+            </div>
+
+            <div class="card" id="bab33-2">
+                <h3><span class="num">33.2</span> Login &amp; Logout</h3>
+                <p>Pola umum login:</p>
+                <div class="term">
+                    <div class="term-bar">auth.py</div>
+                    <pre><span class="fn">from</span> werkzeug.security <span class="fn">import</span> generate_password_hash, check_password_hash
+
+<span class="cm"># Saat registrasi:</span>
+hashed = <span class="fn">generate_password_hash</span>(<span class="str">"password123"</span>)
+
+<span class="cm"># Saat login:</span>
+<span class="fn">if</span> <span class="fn">check_password_hash</span>(hashed, input_password):
+    session[<span class="str">"user"</span>] = username
+    <span class="fn">return</span> <span class="fn">redirect</span>(<span class="fn">url_for</span>(<span class="str">"dashboard"</span>))</pre>
+                </div>
+                <p>Coba simulator session di bawah — perhatikan bagaimana session "tersimpan" antar request.</p>
+                <div class="flask-wrap" id="flask-33">
+                    <div class="flask-bar">
+                        <span class="label">🐍 Session Simulator</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b33a','flask-33')">⟲ Reset Server</button>
+                            <button onclick="clearSession('flask-33')">🚪 Logout (Hapus Session)</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b33a','flask-33')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b33a" spellcheck="false" rows="14">from flask import Flask, session, redirect, url_for
+app = Flask(__name__)
+app.secret_key = "demo-key"
+
+@app.route("/login")
+def login():
+    session["user"] = "Andi"
+    return "Login berhasil! Session tersimpan."
+
+@app.route("/dashboard")
+def dashboard():
+    if "user" not in session:
+        return "Kamu belum login! Silakan akses /login dulu."
+    return f"Halo, {session['user']}! Ini dashboard-mu."
+
+@app.route("/logout")
+def logout():
+    session.pop("user", None)
+    return "Logout berhasil. Session dihapus."</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-33-method" class="method-get">
+                            <option value="GET">GET</option>
+                        </select>
+                        <input type="text" id="flask-33-path" value="/login">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-33')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-33-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+                <p style="font-size:14px;color:var(--ink-soft);margin-top:8px;">💡 Coba urutan: <code
+                        class="inline">/dashboard</code> (belum login) → <code class="inline">/login</code> → <code
+                        class="inline">/dashboard</code> (sudah login)</p>
+            </div>
+
+            <div class="card" id="bab33-3">
+                <h3><span class="num">33.3</span> Challenge — Login System</h3>
+                <p>Buat sistem login dengan 2 user:</p>
+                <ul>
+                    <li><code class="inline">admin</code> / <code class="inline">admin123</code> → tampilkan "Selamat
+                        datang, Admin!"</li>
+                    <li><code class="inline">siswa</code> / <code class="inline">siswa123</code> → tampilkan "Selamat
+                        datang, Siswa!"</li>
+                </ul>
+                <p>Simpan username di <code class="inline">session["user"]</code> dan role di <code
+                        class="inline">session["role"]</code>. Buat juga route <code class="inline">/profil</code> yang
+                    hanya bisa diakses jika sudah login.</p>
+                <div class="flask-wrap" id="flask-ch33">
+                    <div class="flask-bar">
+                        <span class="label">🎯 Challenge — Login System</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b33b','flask-ch33')">⟲ Reset</button>
+                            <button onclick="clearSession('flask-ch33')">🚪 Logout</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b33b','flask-ch33')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b33b" spellcheck="false" rows="20">from flask import Flask, session, request
+app = Flask(__name__)
+app.secret_key = "rahasia"
+
+users = {
+    "admin": "admin123",
+    "siswa": "siswa123"
+}
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        u = request.form.get("username")
+        p = request.form.get("password")
+        # Tulis logika login di sini
+        return "Login gagal!"
+    return "Silakan login."
+
+@app.route("/profil")
+def profil():
+    # Cek apakah sudah login
+    return "..."</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-ch33-method" class="method-get">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                        </select>
+                        <input type="text" id="flask-ch33-path" value="/login?username=admin&password=admin123">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-ch33')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-ch33-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 34 ================= -->
+        <section class="bab" id="bab34">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 34 —
+                        Database Relasional"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 34 — Database Relasional">Bab 34 — Database Relasional</h2>
+                <p class="bab-intro">Data yang saling berhubungan (siswa–kelas, penulis–buku) butuh relasi antar tabel.
+                </p>
+            </div>
+
+            <div class="card" id="bab34-1">
+                <h3><span class="num">34.1</span> Model &amp; Relationship</h3>
+                <p>SQLAlchemy punya 3 jenis relationship utama:</p>
+                <div class="concept-grid">
+                    <div class="concept-item"><b>One to Many</b><span>Satu Kelas punya banyak Siswa.
+                            <code>db.relationship()</code> + <code>ForeignKey</code>.</span></div>
+                    <div class="concept-item"><b>Many to Many</b><span>Siswa punya banyak Ekstrakurikuler, dan
+                            sebaliknya. Butuh tabel asosiasi.</span></div>
+                    <div class="concept-item"><b>One to One</b><span>Satu User punya satu Profil. Pakai
+                            <code>uselist=False</code>.</span></div>
+                </div>
+                <div class="term">
+                    <div class="term-bar">models.py</div>
+                    <pre><span class="fn">class</span> <span class="fn">Kelas</span>(db.Model):
+    id = db.<span class="fn">Column</span>(db.Integer, primary_key=True)
+    nama = db.<span class="fn">Column</span>(db.String(50))
+    siswa = db.<span class="fn">relationship</span>(<span class="str">"Siswa"</span>, backref=<span class="str">"kelas"</span>)
+
+<span class="fn">class</span> <span class="fn">Siswa</span>(db.Model):
+    id = db.<span class="fn">Column</span>(db.Integer, primary_key=True)
+    nama = db.<span class="fn">Column</span>(db.String(50))
+    kelas_id = db.<span class="fn">Column</span>(db.Integer, db.<span class="fn">ForeignKey</span>(<span class="str">"kelas.id"</span>))</pre>
+                </div>
+                <div class="tip">💡 Dengan relasi, kamu bisa akses <code class="inline">kelas.siswa</code> (list siswa)
+                    atau <code class="inline">siswa.kelas</code> (objek kelas) — tanpa perlu query manual!</div>
+            </div>
+
+            <div class="card" id="bab34-2">
+                <h3><span class="num">34.2</span> Query Lanjutan</h3>
+                <p>Query yang sering dipakai:</p>
+                <ul>
+                    <li><code class="inline">Model.query.all()</code> — semua data.</li>
+                    <li><code class="inline">Model.query.filter_by(kolom=nilai).all()</code> — filter sederhana.</li>
+                    <li><code class="inline">Model.query.filter(Model.kolom &gt; 10).all()</code> — filter lanjutan.
+                    </li>
+                    <li><code class="inline">Model.query.order_by(Model.kolom).all()</code> — urutkan.</li>
+                    <li><code class="inline">Model.query.first()</code> — ambil satu data pertama.</li>
+                    <li><code class="inline">Model.query.count()</code> — hitung jumlah.</li>
+                </ul>
+                <div class="term">
+                    <div class="term-bar">query.py</div>
+                    <pre><span class="cm"># Semua siswa di kelas XI IPA 2</span>
+kelas = Kelas.query.<span class="fn">filter_by</span>(nama=<span class="str">"XI IPA 2"</span>).<span class="fn">first</span>()
+<span class="fn">for</span> s <span class="fn">in</span> kelas.siswa:
+    <span class="fn">print</span>(s.nama)</pre>
+                </div>
+            </div>
+
+            <div class="card" id="bab34-3">
+                <h3><span class="num">34.3</span> Challenge — Relasi Siswa-Kelas</h3>
+                <p>Buat API dengan struktur relasi:</p>
+                <ul>
+                    <li><code class="inline">GET /api/kelas</code> → semua kelas beserta jumlah siswanya.</li>
+                    <li><code class="inline">GET /api/kelas/&lt;id&gt;/siswa</code> → daftar siswa di kelas tersebut.
+                    </li>
+                    <li><code class="inline">POST /api/siswa</code> → tambah siswa (parameter: nama, kelas_id).</li>
+                </ul>
+                <div class="flask-wrap" id="flask-ch34">
+                    <div class="flask-bar">
+                        <span class="label">🎯 Challenge — Siswa &amp; Kelas</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b34a','flask-ch34')">⟲ Reset</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b34a','flask-ch34')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b34a" spellcheck="false" rows="24">from flask import Flask, jsonify, request
+app = Flask(__name__)
+
+kelas = [
+    {"id": 1, "nama": "XI IPA 2"},
+    {"id": 2, "nama": "XI IPS 1"}
+]
+siswa = [
+    {"id": 1, "nama": "Andi", "kelas_id": 1},
+    {"id": 2, "nama": "Budi", "kelas_id": 1},
+    {"id": 3, "nama": "Citra", "kelas_id": 2}
+]
+
+@app.route("/api/kelas")
+def list_kelas():
+    # Tulis kode: tambahkan jumlah siswa per kelas
+    return jsonify(kelas)
+
+@app.route("/api/kelas/<int:id>/siswa")
+def siswa_di_kelas(id):
+    # Tulis kode: filter siswa berdasarkan kelas_id
+    return jsonify([])</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-ch34-method" class="method-get">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                        </select>
+                        <input type="text" id="flask-ch34-path" value="/api/kelas">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-ch34')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-ch34-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 35 ================= -->
+        <section class="bab" id="bab35">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 35 —
+                        CRUD Lengkap"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 35 — CRUD Lengkap">Bab 35 — CRUD Lengkap</h2>
+                <p class="bab-intro">Setelah paham Create-Read-Update-Delete, kita lengkapi dengan redirect, flash
+                    message, dan validasi.</p>
+            </div>
+
+            <div class="card" id="bab35-1">
+                <h3><span class="num">35.1</span> CRUD + Redirect</h3>
+                <p>Pola CRUD modern di Flask:</p>
+                <div class="term">
+                    <div class="term-bar">crud.py</div>
+                    <pre><span class="cm">@app.route("/buku/tambah", methods=["GET", "POST"])</span>
+<span class="fn">def</span> <span class="fn">tambah_buku</span>():
+    <span class="fn">if</span> request.method == <span class="str">"POST"</span>:
+        judul = request.form[<span class="str">"judul"</span>]
+        buku_baru = <span class="fn">Buku</span>(judul=judul)
+        db.session.<span class="fn">add</span>(buku_baru)
+        db.session.<span class="fn">commit</span>()
+        flash(<span class="str">"Buku berhasil ditambahkan!"</span>)
+        <span class="fn">return</span> <span class="fn">redirect</span>(<span class="fn">url_for</span>(<span class="str">"list_buku"</span>))
+    <span class="fn">return</span> <span class="fn">render_template</span>(<span class="str">"tambah_buku.html"</span>)</pre>
+                </div>
+                <p>Perhatikan: setelah POST, kita <b>redirect</b> (bukan render) supaya user tidak bisa refresh dan
+                    double submit.</p>
+            </div>
+
+            <div class="card" id="bab35-2">
+                <h3><span class="num">35.2</span> Flash Messages</h3>
+                <p><b>Flash message</b> adalah notifikasi sekali tampil yang bisa muncul di halaman berikutnya.</p>
+                <div class="term">
+                    <div class="term-bar">app.py</div>
+                    <pre><span class="fn">from</span> flask <span class="fn">import</span> flash
+
+<span class="cm"># Kirim pesan:</span>
+<span class="fn">flash</span>(<span class="str">"Data berhasil disimpan!"</span>, <span class="str">"success"</span>)
+
+<span class="cm"># Di template:</span>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    &lt;div class="alert alert-{{ category }}"&gt;{{ message }}&lt;/div&gt;
+  {% endfor %}
+{% endwith %}</pre>
+                </div>
+
+                <p>Coba simulator CRUD lengkap dengan flash message:</p>
+                <div class="flask-wrap" id="flask-35">
+                    <div class="flask-bar">
+                        <span class="label">🐍 CRUD + Flash Simulator</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b35a','flask-35')">⟲ Reset</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b35a','flask-35')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b35a" spellcheck="false" rows="20">from flask import Flask, jsonify, request
+app = Flask(__name__)
+
+buku = []
+next_id = 1
+
+@app.route("/buku", methods=["GET"])
+def list_buku():
+    return jsonify({"data": buku, "total": len(buku)})
+
+@app.route("/buku", methods=["POST"])
+def tambah_buku():
+    global next_id
+    judul = request.form.get("judul")
+    penulis = request.form.get("penulis", "Anonim")
+    item = {"id": next_id, "judul": judul, "penulis": penulis}
+    buku.append(item)
+    next_id = next_id + 1
+    return jsonify({"pesan": "Berhasil ditambahkan!", "data": item})
+
+@app.route("/buku/<int:id>", methods=["GET"])
+def detail(id):
+    for b in buku:
+        if b["id"] == id:
+            return jsonify(b)
+    return jsonify({"error": "Tidak ditemukan"})</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-35-method" class="method-get">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                        </select>
+                        <input type="text" id="flask-35-path" value="/buku">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-35')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-35-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bab35-3">
+                <h3><span class="num">35.3</span> Challenge — CRUD Buku</h3>
+                <p>Lengkapi API buku dengan semua operasi CRUD:</p>
+                <ul>
+                    <li><code class="inline">GET /buku</code> → semua buku ✓ (sudah ada)</li>
+                    <li><code class="inline">GET /buku/&lt;id&gt;</code> → detail ✓ (sudah ada)</li>
+                    <li><code class="inline">POST /buku</code> → tambah ✓ (sudah ada)</li>
+                    <li><b><code class="inline">PUT /buku/&lt;id&gt;</code></b> → update judul/penulis (challenge!)</li>
+                    <li><b><code class="inline">DELETE /buku/&lt;id&gt;</code></b> → hapus (challenge!)</li>
+                </ul>
+                <div class="flask-wrap" id="flask-ch35">
+                    <div class="flask-bar">
+                        <span class="label">🎯 Challenge — CRUD Lengkap</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b35b','flask-ch35')">⟲ Reset</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b35b','flask-ch35')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b35b" spellcheck="false" rows="22">from flask import Flask, jsonify, request
+app = Flask(__name__)
+
+buku = [{"id": 1, "judul": "Python 101", "penulis": "Andi"}]
+next_id = 2
+
+@app.route("/buku", methods=["GET"])
+def list_buku():
+    return jsonify(buku)
+
+@app.route("/buku", methods=["POST"])
+def tambah():
+    global next_id
+    item = {
+        "id": next_id,
+        "judul": request.form.get("judul"),
+        "penulis": request.form.get("penulis", "Anonim")
+    }
+    buku.append(item)
+    next_id = next_id + 1
+    return jsonify({"pesan": "Ditambahkan", "data": item})
+
+# Tulis route PUT dan DELETE di sini
+</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-ch35-method" class="method-get">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                            <option value="PUT">PUT</option>
+                            <option value="DELETE">DELETE</option>
+                        </select>
+                        <input type="text" id="flask-ch35-path" value="/buku">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-ch35')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-ch35-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 36 ================= -->
+        <section class="bab" id="bab36">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 36 —
+                        Upload File"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 36 — Upload File & Gambar">Bab 36 — Upload File &amp; Gambar</h2>
+                <p class="bab-intro">Hampir semua aplikasi modern punya fitur upload — foto profil, dokumen, gambar
+                    produk. Yuk pelajari!</p>
+            </div>
+
+            <div class="card" id="bab36-1">
+                <h3><span class="num">36.1</span> Upload Gambar</h3>
+                <p>Flask menerima file dari form lewat <code class="inline">request.files</code>. File disimpan dengan
+                    <code class="inline">file.save(path)</code>.</p>
+                <div class="term">
+                    <div class="term-bar">upload.py</div>
+                    <pre><span class="fn">import</span> os
+<span class="fn">from</span> werkzeug.utils <span class="fn">import</span> secure_filename
+
+UPLOAD_FOLDER = <span class="str">"static/uploads"</span>
+app.config[<span class="str">"UPLOAD_FOLDER"</span>] = UPLOAD_FOLDER
+
+<span class="cm">@app.route("/upload", methods=["GET", "POST"])</span>
+<span class="fn">def</span> <span class="fn">upload</span>():
+    <span class="fn">if</span> request.method == <span class="str">"POST"</span>:
+        file = request.files[<span class="str">"foto"</span>]
+        <span class="fn">if</span> file.filename != <span class="str">""</span>:
+            filename = <span class="fn">secure_filename</span>(file.filename)
+            file.<span class="fn">save</span>(os.path.<span class="fn">join</span>(UPLOAD_FOLDER, filename))
+            <span class="fn">return</span> <span class="str">f"File {filename} berhasil diupload!"</span>
+    <span class="fn">return</span> <span class="str">"Kirim file lewat form."</span></pre>
+                </div>
+            </div>
+
+            <div class="card" id="bab36-2">
+                <h3><span class="num">36.2</span> Validasi File</h3>
+                <p>Jangan pernah percaya file dari user! Selalu validasi:</p>
+                <ul>
+                    <li><b>Ekstensi</b> — hanya izinkan <code class="inline">.jpg</code>, <code
+                            class="inline">.png</code>, <code class="inline">.gif</code>.</li>
+                    <li><b>Ukuran</b> — batasi maksimal 2 MB.</li>
+                    <li><b>Nama file</b> — gunakan <code class="inline">secure_filename()</code> untuk mencegah path
+                        traversal.</li>
+                    <li><b>Konten</b> — verifikasi file benar-benar gambar (bukan script berbahaya).</li>
+                </ul>
+                <div class="term">
+                    <div class="term-bar">validasi.py</div>
+                    <pre>ALLOWED = {<span class="str">"png"</span>, <span class="str">"jpg"</span>, <span class="str">"jpeg"</span>, <span class="str">"gif"</span>}
+
+<span class="fn">def</span> <span class="fn">allowed_file</span>(filename):
+    <span class="fn">return</span> <span class="str">"."</span> <span class="fn">in</span> filename <span class="fn">and</span> \
+        filename.rsplit(<span class="str">"."</span>, 1)[1].<span class="fn">lower</span>() <span class="fn">in</span> ALLOWED</pre>
+                </div>
+                <div class="note"><span class="hand">Catatan tutor:</span> Bahaya keamanan yang paling sering terjadi
+                    adalah <i>path traversal</i> — user mengirim nama file seperti <code
+                        class="inline">../../etc/passwd</code>. <code class="inline">secure_filename()</code> mencegah
+                    ini!</div>
+            </div>
+
+            <div class="card" id="bab36-3">
+                <h3><span class="num">36.3</span> Challenge — Upload Foto Profil</h3>
+                <p>Buat API untuk upload foto profil dengan aturan:</p>
+                <ol>
+                    <li><code class="inline">POST /upload</code> menerima parameter <code class="inline">nama</code> dan
+                        <code class="inline">filename</code>.</li>
+                    <li>Validasi ekstensi: hanya <code class="inline">.jpg</code>, <code class="inline">.png</code>,
+                        <code class="inline">.gif</code> yang diterima.</li>
+                    <li>Jika valid, kembalikan: <code
+                            class="inline">{"pesan": "...", "url": "/static/uploads/&lt;filename&gt;"}</code>.</li>
+                    <li>Jika tidak valid, kembalikan: <code
+                            class="inline">{"error": "Format file tidak diizinkan"}</code>.</li>
+                </ol>
+                <div class="flask-wrap" id="flask-ch36">
+                    <div class="flask-bar">
+                        <span class="label">🎯 Challenge — Upload Foto</span>
+                        <div class="btn-group">
+                            <button onclick="resetFlaskServer('ed-b36a','flask-ch36')">⟲ Reset</button>
+                            <button class="primary" onclick="startFlaskServer('ed-b36a','flask-ch36')">▶ Jalankan
+                                Server</button>
+                        </div>
+                    </div>
+                    <textarea class="pg-editor" id="ed-b36a" spellcheck="false" rows="20">from flask import Flask, jsonify, request
+app = Flask(__name__)
+
+ALLOWED = ["jpg", "jpeg", "png", "gif"]
+
+@app.route("/upload", methods=["POST"])
+def upload():
+    nama = request.form.get("nama")
+    filename = request.form.get("filename")
+    # Tulis logika validasi di sini
+    # Cek apakah ekstensi ada di ALLOWED
+    return jsonify({"pesan": "Belum diimplementasikan"})</textarea>
+                    <div class="flask-request-bar">
+                        <select id="flask-ch36-method" class="method-get">
+                            <option value="GET">GET</option>
+                            <option value="POST" selected>POST</option>
+                        </select>
+                        <input type="text" id="flask-ch36-path" value="/upload?nama=Andi&filename=foto.jpg">
+                        <button class="send-btn" onclick="sendFlaskRequest('flask-ch36')">Kirim ➤</button>
+                    </div>
+                    <div class="flask-response" id="flask-ch36-response">
+                        <span style="color:var(--terminal-comment);">Server belum dijalankan.</span>
+                    </div>
+                </div>
+                <p style="font-size:14px;color:var(--ink-soft);margin-top:8px;">💡 Coba: <code
+                        class="inline">?filename=foto.jpg</code> (valid), <code
+                        class="inline">?filename=script.exe</code> (invalid)</p>
+            </div>
+        </section>
+
+        <!-- ================= QUIZ ================= -->
+        <section class="bab" id="kuis-final6">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span
+                        class="str">"Quiz"</span>)</div>
+                <h2 class="bab-title" data-text="Quiz">Quiz</h2>
+                <p class="bab-intro">Uji pemahamanmu tentang HTML/CSS, Bootstrap, Session, Database, CRUD, dan Upload
+                    File.</p>
+            </div>
+
+            <div class="card">
+                <h3>🏁 Quiz Web Dev Lanjutan</h3>
+                <div id="quiz-final6"></div>
+                <div id="finalScoreBox6">
+                    <div class="score-num"><span id="finalScoreNum6">0</span>/10</div>
+                    <div class="score-msg" id="finalScoreMsg6"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Selamat! Kamu sudah menguasai Web Development tingkat lanjut. Saatnya bikin project nyata! 🎨</p>
+        <div class="brand">🐍 Modul Ajar Python — Sesi Privat</div>
+        <div class="nav-link-group">
+            <a href="index_bab25_30.html" class="nav-link">← Bab 25–30 (Flask)</a>
+            <a href="index.html" class="nav-link" style="background:var(--forest-deep);">🏠 Halaman Utama</a>
+        </div>
+        <div class="edit-hint">catatan: nama tutor / brand bisa diganti langsung di bagian footer file HTML ini</div>
+    </footer>
+
+    <script>
+        /* ================= PROGRESS RAIL ================= */
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const scrolled = h.scrollHeight > h.clientHeight
+                ? (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 : 0;
+            document.getElementById('scrollFill').style.width = scrolled + '%';
+        });
+
+        /* ================= TOC COLLAPSE ================= */
+        function toggleToc(btn) {
+            const sub = btn.nextElementSibling;
+            const chevron = btn.querySelector('.toc-chevron');
+            if (sub) sub.classList.toggle('collapsed');
+            if (chevron) chevron.classList.toggle('rotated');
+        }
+
+        /* ================= SECTION DONE TRACKING ================= */
+        const sectionDone = {
+            bab31: false, bab32: false, bab33: false,
+            bab34: false, bab35: false, bab36: false,
+            quizfinal6: false
+        };
+
+        function markSectionComplete(key) {
+            sectionDone[key] = true;
+            const el = document.getElementById('check-' + key);
+            if (el) el.classList.add('done');
+            updateTocPct();
+            try {
+                let progress = JSON.parse(localStorage.getItem('python_modul_progress') || '{}');
+                progress[key] = true;
+                localStorage.setItem('python_modul_progress', JSON.stringify(progress));
+            } catch (_) { }
+        }
+
+        function updateTocPct() {
+            const total = Object.keys(sectionDone).length;
+            const done = Object.values(sectionDone).filter(Boolean).length;
+            document.getElementById('tocPct').textContent = Math.round(done / total * 100) + '% selesai';
+        }
+
+        /* ================= HEADING TYPE-IN ================= */
+        const headingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('type-in');
+                    headingObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        document.querySelectorAll('h2.bab-title').forEach(el => headingObserver.observe(el));
+
+        /* =========================================================
+           LIVE HTML/CSS PREVIEW
+           ========================================================= */
+        function renderLive(editorId, wrapId) {
+            const code = document.getElementById(editorId).value;
+            const iframeId = wrapId + '-iframe';
+            const iframe = document.getElementById(iframeId);
+            if (!iframe) return;
+
+            // Deteksi apakah butuh Bootstrap
+            const needsBootstrap = wrapId.includes('32');
+            const bootstrapCDN = needsBootstrap
+                ? '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">'
+                : '';
+
+            // Cek apakah user sudah menulis tag <html> atau belum
+            const isFullHTML = code.trim().toLowerCase().startsWith('<!doctype') ||
+                code.trim().toLowerCase().startsWith('<html');
+
+            let fullHTML;
+            if (isFullHTML) {
+                // Sisipkan Bootstrap jika belum ada
+                if (needsBootstrap && !code.includes('bootstrap')) {
+                    fullHTML = code.replace('</head>', bootstrapCDN + '</head>');
+                } else {
+                    fullHTML = code;
+                }
+            } else {
+                // Bungkus dengan struktur HTML lengkap
+                fullHTML = `<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  ${bootstrapCDN}
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 16px; margin: 0; color: #333; }
+  </style>
+</head>
+<body>
+${code}
+</body>
+</html>`;
+            }
+
+            iframe.srcdoc = fullHTML;
+
+            // Tandai section selesai (render pertama kali)
+            if (wrapId.includes('31')) markSectionComplete('bab31');
+            if (wrapId.includes('32')) markSectionComplete('bab32');
+        }
+
+        /* =========================================================
+           FLASK SIMULATOR ENGINE (Compact Version)
+           Support: session, request.form/args, jsonify, f-string, if/else
+           ========================================================= */
+        const flaskServers = {};
+        const flaskSessions = {};  // Global session state per wrapId
+
+        function resetFlaskServer(editorId, wrapId) {
+            delete flaskServers[wrapId];
+            const respEl = document.getElementById(wrapId + '-response');
+            if (respEl) {
+                respEl.innerHTML = '<span style="color:var(--terminal-comment);">Server belum dijalankan.</span>';
+            }
+        }
+
+        function clearSession(wrapId) {
+            flaskSessions[wrapId] = {};
+            const respEl = document.getElementById(wrapId + '-response');
+            if (respEl) {
+                respEl.innerHTML = '<span style="color:#6EE7B7;">✓ Session dihapus (logout).</span>';
+            }
+        }
+
+        function startFlaskServer(editorId, wrapId) {
+            const code = document.getElementById(editorId).value;
+            const respEl = document.getElementById(wrapId + '-response');
+
+            try {
+                const parsed = parseFlaskApp(code);
+                if (parsed.routes.length === 0) {
+                    throw new Error('Tidak ada route terdeteksi. Pastikan ada @app.route(...).');
+                }
+                flaskServers[wrapId] = {
+                    routes: parsed.routes,
+                    globals: parsed.globals
+                };
+                if (!flaskSessions[wrapId]) flaskSessions[wrapId] = {};
+
+                let html = '<span class="status ok">✓ Server berjalan</span>\n';
+                html += '<div class="headers">Routes terdeteksi:</div>';
+                parsed.routes.forEach(r => {
+                    html += `<div style="padding:3px 0;"><b style="color:#6EE7B7;">${r.methods.join('/')}</b> <span style="color:#FFCB66;">${r.path}</span> <span style="color:var(--terminal-comment);">→ ${r.funcName}()</span></div>`;
+                });
+                if (Object.keys(flaskSessions[wrapId]).length > 0) {
+                    html += `\n<div class="headers">Session aktif: ${JSON.stringify(flaskSessions[wrapId])}</div>`;
+                }
+                html += '\n<span style="color:var(--terminal-comment);font-size:12px;">Kirim request lewat bar di bawah. ↓</span>';
+                respEl.innerHTML = html;
+            } catch (e) {
+                respEl.innerHTML = `<span class="status err">✗ Error</span>\n${escapeHtml(e.message)}`;
+            }
+        }
+
+        function parseFlaskApp(code) {
+            const cleanCode = code.split('\n').map(line => {
+                let inStr = null, result = '';
+                for (let i = 0; i < line.length; i++) {
+                    const ch = line[i];
+                    if (inStr) {
+                        result += ch;
+                        if (ch === inStr && line[i - 1] !== '\\') inStr = null;
+                    } else {
+                        if (ch === '"' || ch === "'") { inStr = ch; result += ch; }
+                        else if (ch === '#') break;
+                        else result += ch;
+                    }
+                }
+                return result;
+            });
+
+            const lines = cleanCode;
+            const routes = [];
+            const globals = {};
+            let i = 0, pendingRoute = null;
+
+            while (i < lines.length) {
+                const stripped = lines[i].trim();
+                if (!stripped) { i++; continue; }
+
+                const routeMatch = stripped.match(/^@app\.route\(\s*(["'])(.*?)\1(.*?)\)\s*$/);
+                if (routeMatch) {
+                    const path = routeMatch[2];
+                    const rest = routeMatch[3] || '';
+                    const methodsMatch = rest.match(/methods\s*=\s*\[(.*?)\]/);
+                    let methods = ['GET'];
+                    if (methodsMatch) {
+                        methods = methodsMatch[1].split(',').map(s => s.trim().replace(/["']/g, '')).filter(Boolean);
+                    }
+                    pendingRoute = { path, methods };
+                    i++;
+                    continue;
+                }
+
+                if (pendingRoute && stripped.startsWith('def ')) {
+                    const defMatch = stripped.match(/^def\s+(\w+)\s*\((.*?)\)\s*:/);
+                    if (defMatch) {
+                        const funcName = defMatch[1];
+                        const params = defMatch[2].split(',').map(s => s.trim()).filter(Boolean);
+                        const bodyLines = [];
+                        i++;
+                        while (i < lines.length) {
+                            const l = lines[i];
+                            if (l.trim() === '') { bodyLines.push(''); i++; continue; }
+                            const indent = l.length - l.trimStart().length;
+                            if (indent === 0 && l.trim() !== '') break;
+                            bodyLines.push(l.slice(4));
+                            i++;
+                        }
+                        routes.push({
+                            path: pendingRoute.path,
+                            methods: pendingRoute.methods,
+                            funcName, params, body: bodyLines
+                        });
+                        pendingRoute = null;
+                        continue;
+                    }
+                }
+
+                const assignMatch = stripped.match(/^([A-Za-z_]\w*)\s*=\s*(.+)$/);
+                if (assignMatch && !stripped.startsWith('@') && !stripped.startsWith('#')) {
+                    const varName = assignMatch[1];
+                    const valueStr = assignMatch[2].trim();
+                    if (valueStr.startsWith('[') || valueStr.startsWith('{')) {
+                        try { globals[varName] = parsePyLiteral(valueStr); } catch (_) { globals[varName] = []; }
+                    }
+                    i++;
+                    continue;
+                }
+                i++;
+            }
+            return { routes, globals };
+        }
+
+        function parsePyLiteral(str) {
+            str = str.trim();
+            if (str === 'True') return true;
+            if (str === 'False') return false;
+            if (str === 'None') return null;
+            if (/^-?\d+$/.test(str)) return parseInt(str, 10);
+            if (/^-?\d+\.\d+$/.test(str)) return parseFloat(str);
+            if ((str.startsWith('"') && str.endsWith('"')) || (str.startsWith("'") && str.endsWith("'"))) {
+                return str.slice(1, -1);
+            }
+            if (str.startsWith('[') && str.endsWith(']')) {
+                const inner = str.slice(1, -1).trim();
+                if (!inner) return [];
+                return splitTopLevel(inner, ',').map(parsePyLiteral);
+            }
+            if (str.startsWith('{') && str.endsWith('}')) {
+                const inner = str.slice(1, -1).trim();
+                if (!inner) return {};
+                const obj = {};
+                splitTopLevel(inner, ',').forEach(pair => {
+                    const idx = pair.indexOf(':');
+                    if (idx !== -1) {
+                        const k = parsePyLiteral(pair.slice(0, idx).trim());
+                        const v = parsePyLiteral(pair.slice(idx + 1).trim());
+                        obj[String(k)] = v;
+                    }
+                });
+                return obj;
+            }
+            return str;
+        }
+
+        function splitTopLevel(str, sep) {
+            const parts = [];
+            let depth = 0, current = '', inStr = null;
+            for (let i = 0; i < str.length; i++) {
+                const c = str[i];
+                if (inStr) {
+                    current += c;
+                    if (c === inStr && str[i - 1] !== '\\') inStr = null;
+                } else {
+                    if (c === '"' || c === "'") { inStr = c; current += c; }
+                    else if (c === '[' || c === '{' || c === '(') { depth++; current += c; }
+                    else if (c === ']' || c === '}' || c === ')') { depth--; current += c; }
+                    else if (c === sep && depth === 0) { parts.push(current); current = ''; }
+                    else current += c;
+                }
+            }
+            if (current.trim()) parts.push(current);
+            return parts;
+        }
+
+        function sendFlaskRequest(wrapId) {
+            const server = flaskServers[wrapId];
+            if (!server) { alert('Jalankan server dulu!'); return; }
+
+            const method = document.getElementById(wrapId + '-method').value;
+            let pathAndQuery = document.getElementById(wrapId + '-path').value.trim();
+            if (!pathAndQuery.startsWith('/')) pathAndQuery = '/' + pathAndQuery;
+
+            let path = pathAndQuery, queryStr = '';
+            const qIdx = pathAndQuery.indexOf('?');
+            if (qIdx !== -1) {
+                path = pathAndQuery.slice(0, qIdx);
+                queryStr = pathAndQuery.slice(qIdx + 1);
+            }
+
+            const query = {};
+            if (queryStr) {
+                queryStr.split('&').forEach(pair => {
+                    const [k, v = ''] = pair.split('=');
+                    query[decodeURIComponent(k)] = decodeURIComponent(v.replace(/\+/g, ' '));
+                });
+            }
+
+            const match = matchRoute(server.routes, method, path);
+            const respEl = document.getElementById(wrapId + '-response');
+
+            if (!match) {
+                respEl.innerHTML = `<span class="status err">404 Not Found</span>
+<div class="headers">Method: ${method} · Path: ${path}</div>
+<div class="body">Tidak ada route yang cocok. Cek URL atau method.</div>`;
+                return;
+            }
+
+            try {
+                const session = flaskSessions[wrapId] || {};
+                const ctx = {
+                    pathParams: match.pathParams,
+                    query, form: query, method,
+                    globals: server.globals,
+                    session
+                };
+                const output = executeFlaskHandler(match.route, ctx, server);
+
+                // Simpan session setelah eksekusi
+                flaskSessions[wrapId] = session;
+
+                renderFlaskResponse(respEl, method, path, output, session);
+            } catch (e) {
+                respEl.innerHTML = `<span class="status err">500 Server Error</span>
+<div class="headers">Method: ${method} · Path: ${path}</div>
+<div class="body">${escapeHtml(e.message)}</div>`;
+            }
+        }
+
+        function matchRoute(routes, method, path) {
+            for (const route of routes) {
+                if (!route.methods.includes(method)) continue;
+                const pathParams = matchPath(route.path, path);
+                if (pathParams !== null) return { route, pathParams };
+            }
+            return null;
+        }
+
+        function matchPath(routePath, requestPath) {
+            const routeParts = routePath.split('/').filter(Boolean);
+            const reqParts = requestPath.split('/').filter(Boolean);
+            if (routeParts.length !== reqParts.length) return null;
+            const params = {};
+            for (let i = 0; i < routeParts.length; i++) {
+                const rp = routeParts[i], req = reqParts[i];
+                if (rp.startsWith('<') && rp.endsWith('>')) {
+                    let type = 'str', varName = rp.slice(1, -1);
+                    if (varName.includes(':')) {
+                        const [t, n] = varName.split(':');
+                        type = t; varName = n;
+                    }
+                    if (type === 'int') {
+                        if (!/^\d+$/.test(req)) return null;
+                        params[varName] = parseInt(req, 10);
+                    } else {
+                        params[varName] = req;
+                    }
+                } else if (rp !== req) return null;
+            }
+            return params;
+        }
+
+        function executeFlaskHandler(route, ctx, server) {
+            const lines = route.body;
+            const env = {
+                ...ctx.globals,
+                ...ctx.pathParams,
+                request: {
+                    method: ctx.method,
+                    args: { get: (k, d) => ctx.query[k] !== undefined ? ctx.query[k] : d },
+                    form: { get: (k, d) => ctx.form[k] !== undefined ? ctx.form[k] : d }
+                },
+                session: ctx.session,
+                jsonify: (obj) => ({ __type: 'json', value: obj })
+            };
+
+            let i = 0;
+
+            function evalExpr(expr) {
+                expr = expr.trim();
+
+                // f-string
+                const fMatch = expr.match(/^f(["'])(.*)\1$/);
+                if (fMatch) {
+                    let content = fMatch[2];
+                    content = content.replace(/\{([^}]+)\}/g, (_, varExpr) => String(evalExpr(varExpr)));
+                    return content;
+                }
+
+                // String
+                if ((expr.startsWith('"') && expr.endsWith('"')) || (expr.startsWith("'") && expr.endsWith("'"))) {
+                    return expr.slice(1, -1);
+                }
+                if (/^-?\d+$/.test(expr)) return parseInt(expr, 10);
+                if (/^-?\d+\.\d+$/.test(expr)) return parseFloat(expr);
+                if (expr === 'True') return true;
+                if (expr === 'False') return false;
+                if (expr === 'None') return null;
+
+                // request.args.get / request.form.get
+                let m = expr.match(/^request\.(args|form)\.get\(\s*(['"])(.*?)\2(?:\s*,\s*(.+))?\)$/);
+                if (m) {
+                    const key = m[3];
+                    const defaultVal = m[4] ? evalExpr(m[4]) : null;
+                    return ctx.query[key] !== undefined ? ctx.query[key] : defaultVal;
+                }
+
+                // request.method
+                if (expr === 'request.method') return ctx.method;
+
+                // session.get("key")
+                m = expr.match(/^session\.get\(\s*(['"])(.*?)\1(?:\s*,\s*(.+))?\)$/);
+                if (m) {
+                    const key = m[2];
+                    const defaultVal = m[3] ? evalExpr(m[3]) : null;
+                    return ctx.session[key] !== undefined ? ctx.session[key] : defaultVal;
+                }
+
+                // session["key"] atau session['key']
+                m = expr.match(/^session\[\s*(['"])(.*?)\1\s*\]$/);
+                if (m) return ctx.session[m[2]];
+
+                // jsonify(...)
+                m = expr.match(/^jsonify\((.+)\)$/);
+                if (m) {
+                    const inner = m[1].trim();
+                    const obj = evalDictLiteral(inner);
+                    return { __type: 'json', value: obj };
+                }
+
+                // List literal
+                if (expr.startsWith('[') && expr.endsWith(']')) {
+                    const inner = expr.slice(1, -1).trim();
+                    if (!inner) return [];
+                    return splitTopLevel(inner, ',').map(item => evalExpr(item));
+                }
+
+                // Dict literal
+                if (expr.startsWith('{') && expr.endsWith('}')) {
+                    return evalDictLiteral(expr);
+                }
+
+                // Variabel
+                if (/^[A-Za-z_]\w*$/.test(expr)) {
+                    if (expr in env) return env[expr];
+                    if (expr in ctx.globals) return ctx.globals[expr];
+                    return undefined;
+                }
+
+                // Indexing: arr[0]
+                m = expr.match(/^([A-Za-z_]\w*)\[(.+)\]$/);
+                if (m) {
+                    const arr = env[m[1]] !== undefined ? env[m[1]] : ctx.globals[m[1]];
+                    const idx = evalExpr(m[2]);
+                    if (Array.isArray(arr)) return arr[idx];
+                    if (typeof arr === 'object' && arr !== null) return arr[idx];
+                    return undefined;
+                }
+
+                // Aritmetika
+                m = expr.match(/^(.+?)\s*([+\-*\/])\s*(.+)$/);
+                if (m) {
+                    const a = evalExpr(m[1]), b = evalExpr(m[3]);
+                    switch (m[2]) {
+                        case '+': return (typeof a === 'string' || typeof b === 'string') ? String(a) + String(b) : a + b;
+                        case '-': return a - b;
+                        case '*': return a * b;
+                        case '/': return a / b;
+                    }
+                }
+
+                // Perbandingan
+                m = expr.match(/^(.+?)\s*(==|!=|>=|<=|>|<)\s*(.+)$/);
+                if (m) {
+                    const a = evalExpr(m[1]), b = evalExpr(m[3]);
+                    switch (m[2]) {
+                        case '==': return a == b;
+                        case '!=': return a != b;
+                        case '>=': return a >= b;
+                        case '<=': return a <= b;
+                        case '>': return a > b;
+                        case '<': return a < b;
+                    }
+                }
+
+                // `not in` untuk session
+                m = expr.match(/^(.+?)\s+not\s+in\s+(.+)$/);
+                if (m) {
+                    const needle = evalExpr(m[1]);
+                    const haystack = evalExpr(m[2]);
+                    if (haystack && typeof haystack === 'object') return !(needle in haystack);
+                    return true;
+                }
+
+                // `in` untuk session
+                m = expr.match(/^(.+?)\s+in\s+(.+)$/);
+                if (m) {
+                    const needle = evalExpr(m[1]);
+                    const haystack = evalExpr(m[2]);
+                    if (haystack && typeof haystack === 'object') return needle in haystack;
+                    return false;
+                }
+
+                return expr;
+            }
+
+            function evalDictLiteral(str) {
+                str = str.trim();
+                if (str.startsWith('{') && str.endsWith('}')) {
+                    const inner = str.slice(1, -1).trim();
+                    if (!inner) return {};
+                    const obj = {};
+                    splitTopLevel(inner, ',').forEach(pair => {
+                        const idx = pair.indexOf(':');
+                        if (idx !== -1) {
+                            const k = evalExpr(pair.slice(0, idx).trim());
+                            const v = evalExpr(pair.slice(idx + 1).trim());
+                            obj[String(k)] = v;
+                        }
+                    });
+                    return obj;
+                }
+                if (/^[A-Za-z_]\w*$/.test(str)) {
+                    return env[str] !== undefined ? env[str] : ctx.globals[str];
+                }
+                return {};
+            }
+
+            while (i < lines.length) {
+                let line = lines[i];
+                if (line === undefined) break;
+                const stripped = line.trim();
+                if (!stripped) { i++; continue; }
+
+                // return
+                if (stripped.startsWith('return ')) {
+                    const expr = stripped.slice(7).trim();
+                    const result = evalExpr(expr);
+                    if (result && typeof result === 'object' && result.__type) {
+                        return result;
+                    }
+                    return { __type: 'text', value: String(result) };
+                }
+
+                // if kondisi:
+                const ifMatch = stripped.match(/^if\s+(.+?):$/);
+                if (ifMatch) {
+                    const cond = evalExpr(ifMatch[1]);
+                    // Kumpulkan blok if dan else
+                    const ifBlock = [];
+                    const elseBlock = [];
+                    let currentBlock = ifBlock;
+                    i++;
+                    let blockIndent = -1;
+                    while (i < lines.length) {
+                        const l = lines[i];
+                        if (l === undefined) break;
+                        if (l.trim() === '') { currentBlock.push(''); i++; continue; }
+                        const indent = l.length - l.trimStart().length;
+                        if (blockIndent === -1) {
+                            if (indent === 0) break;
+                            blockIndent = indent;
+                        }
+                        if (indent < blockIndent) break;
+                        if (indent === 0 && (l.trim().startsWith('else') || l.trim().startsWith('elif'))) break;
+                        currentBlock.push(l.slice(blockIndent));
+                        i++;
+                    }
+                    // Cek else
+                    if (i < lines.length && lines[i].trim().startsWith('else')) {
+                        i++;
+                        let elseIndent = -1;
+                        while (i < lines.length) {
+                            const l = lines[i];
+                            if (l === undefined) break;
+                            if (l.trim() === '') { elseBlock.push(''); i++; continue; }
+                            const indent = l.length - l.trimStart().length;
+                            if (elseIndent === -1) {
+                                if (indent === 0) break;
+                                elseIndent = indent;
+                            }
+                            if (indent < elseIndent) break;
+                            elseBlock.push(l.slice(elseIndent));
+                            i++;
+                        }
+                    }
+                    // Eksekusi blok yang sesuai
+                    const execBlock = cond ? ifBlock : elseBlock;
+                    for (const bl of execBlock) {
+                        if (bl.trim().startsWith('return ')) {
+                            const expr = bl.trim().slice(7).trim();
+                            const result = evalExpr(expr);
+                            if (result && typeof result === 'object' && result.__type) {
+                                return result;
+                            }
+                            return { __type: 'text', value: String(result) };
+                        }
+                    }
+                    continue;
+                }
+
+                // session["key"] = value
+                let sessionSet = stripped.match(/^session\[\s*(['"])(.*?)\1\s*\]\s*=\s*(.+)$/);
+                if (sessionSet) {
+                    ctx.session[sessionSet[2]] = evalExpr(sessionSet[3]);
+                    i++;
+                    continue;
+                }
+
+                // session.pop("key", None)
+                let sessionPop = stripped.match(/^session\.pop\(\s*(['"])(.*?)\1\s*(?:,\s*.+)?\)$/);
+                if (sessionPop) {
+                    delete ctx.session[sessionPop[2]];
+                    i++;
+                    continue;
+                }
+
+                // Assignment biasa
+                const assignMatch = stripped.match(/^([A-Za-z_]\w*)\s*=\s*(.+)$/);
+                if (assignMatch) {
+                    env[assignMatch[1]] = evalExpr(assignMatch[2]);
+                    i++;
+                    continue;
+                }
+
+                i++;
+            }
+
+            return { __type: 'text', value: '' };
+        }
+
+        function renderFlaskResponse(respEl, method, path, output, session) {
+            let html = `<span class="status ok">200 OK</span>
+<div class="headers">Method: ${method} · Path: ${path}`;
+            if (session && Object.keys(session).length > 0) {
+                html += ` · Session: ${escapeHtml(JSON.stringify(session))}`;
+            }
+            html += '</div>';
+
+            if (output.__type === 'json') {
+                html += '<div class="headers">Content-Type: application/json</div>';
+                html += `<div class="body">${escapeHtml(JSON.stringify(output.value, null, 2))}</div>`;
+            } else {
+                html += '<div class="headers">Content-Type: text/html; charset=utf-8</div>';
+                html += `<div class="body">${escapeHtml(output.value)}</div>`;
+            }
+
+            respEl.innerHTML = html;
+        }
+
+        /* ================= QUIZ ENGINE ================= */
+        const quizzes = {
+            final6: [
+                { q: "Tag HTML apa yang digunakan untuk menampilkan gambar?", options: ["<img>", "<picture>", "<image>", "<photo>"], correct: 0, exp: "Tag <img> dengan atribut src menampilkan gambar." },
+                { q: "Class Bootstrap untuk membuat tombol berwarna hijau adalah...", options: ["btn-success", "btn-green", "button-success", "btn-primary"], correct: 0, exp: "btn-success menghasilkan tombol hijau khas Bootstrap." },
+                { q: "Apa itu session di Flask?", options: ["Data yang disimpan di browser user", "Data yang disimpan di server untuk setiap user", "Database permanen", "File konfigurasi"], correct: 1, exp: "Session disimpan di sisi server dan diakses lewat cookie session ID." },
+                { q: "Fungsi apa yang aman untuk memvalidasi nama file upload?", options: ["safe_name()", "secure_filename()", "clean_filename()", "sanitize()"], correct: 1, exp: "secure_filename() dari werkzeug mencegah path traversal." },
+                { q: "Setelah POST berhasil, praktik terbaik di Flask adalah...", options: ["Render langsung", "Redirect ke halaman lain", "Tampilkan alert JavaScript", "Tutup browser"], correct: 1, exp: "Redirect mencegah user refresh dan double submit." },
+                { q: "Untuk relasi one-to-many antara Kelas dan Siswa, di model Siswa perlu...", options: ["db.Column biasa", "db.ForeignKey ke kelas.id", "db.String(100)", "db.Boolean"], correct: 1, exp: "ForeignKey menghubungkan siswa ke kelas tertentu." },
+                { q: "Cara akses session di Flask?", options: ["request.session", "session.get('key')", "session['key'] saja", "Jawaban A dan B benar"], correct: 1, exp: "session adalah objek global Flask (mirip dict) — bisa pakai session.get() atau session['key']." },
+                { q: "Mengapa secret_key wajib di Flask?", options: ["Untuk enkripsi session", "Untuk koneksi database", "Untuk tampilan template", "Untuk upload file"], correct: 0, exp: "secret_key digunakan untuk menandatangani cookie session agar tidak bisa dipalsukan." },
+                { q: "Di mana file upload sebaiknya disimpan?", options: ["Di root project", "Di folder static/uploads", "Di database sebagai BLOB", "Di /tmp"], correct: 1, exp: "Folder static/uploads memudahkan akses via URL /static/uploads/nama_file." },
+                { q: "Ekstensi file berbahaya yang harus ditolak saat upload adalah...", options: [".jpg", ".png", ".exe", ".gif"], correct: 2, exp: ".exe adalah file executable yang berbahaya jika dieksekusi di server." }
+            ]
+        };
+
+        const quizProgress = {};
+
+        function renderQuiz(key, containerId, { finalMode = false } = {}) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const data = quizzes[key];
+            if (!data) return;
+            container.innerHTML = data.map((item, qi) => {
+                const codeBlock = item.code ? `<pre style="background:var(--terminal-bg);color:var(--terminal-string);border-radius:8px;padding:10px 14px;font-size:13.5px;margin-top:8px;">${escapeHtml(item.code)}</pre>` : '';
+                return `
+      <div class="quiz-q" data-q="${qi}">
+        <p class="quiz-question">${qi + 1}. ${item.q}${codeBlock}</p>
+        <div class="quiz-options">
+          ${item.options.map((opt, oi) => `<button class="quiz-opt" onclick="answerQuiz('${key}',${qi},${oi},this,${finalMode})">${escapeHtml(opt)}</button>`).join('')}
+        </div>
+        <div class="quiz-feedback" id="${key}-fb-${qi}"></div>
+      </div>
+    `;
+            }).join('');
+        }
+
+        function escapeHtml(str) {
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function answerQuiz(key, qi, oi, btnEl, finalMode) {
+            const item = quizzes[key][qi];
+            const buttons = btnEl.parentElement.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => b.disabled = true);
+            const fb = document.getElementById(`${key}-fb-${qi}`);
+            const isCorrect = oi === item.correct;
+            if (isCorrect) {
+                btnEl.classList.add('correct');
+                fb.textContent = '✅ Benar! ' + item.exp;
+                fb.className = 'quiz-feedback show correct';
+            } else {
+                btnEl.classList.add('wrong');
+                buttons[item.correct].classList.add('correct');
+                fb.textContent = '❌ Belum tepat. ' + item.exp;
+                fb.className = 'quiz-feedback show wrong';
+            }
+
+            if (!quizProgress[key]) quizProgress[key] = { answered: new Set(), correct: 0 };
+            if (!quizProgress[key].answered.has(qi)) {
+                quizProgress[key].answered.add(qi);
+                if (isCorrect) quizProgress[key].correct++;
+            }
+
+            if (quizProgress[key].answered.size === quizzes[key].length) {
+                if (finalMode) {
+                    showFinalScore6(quizProgress[key].correct, quizzes[key].length);
+                    markSectionComplete('quizfinal6');
+                }
+            }
+        }
+
+        function showFinalScore6(correct, total) {
+            const box = document.getElementById('finalScoreBox6');
+            document.getElementById('finalScoreNum6').textContent = correct;
+            let msg, bg, color;
+            if (correct >= 8) { msg = '🎉 Web Developer! Kamu siap bikin project nyata!'; bg = 'var(--forest-wash)'; color = 'var(--forest-deep)'; }
+            else if (correct >= 5) { msg = '💪 Bagus! Ulangi beberapa bab dan kamu pasti bisa lebih baik!'; bg = 'var(--highlighter-wash)'; color = '#7A5B0A'; }
+            else { msg = '🌱 Jangan menyerah! Baca ulang materi lalu coba lagi ya.'; bg = 'var(--danger-wash)'; color = 'var(--danger)'; }
+            document.getElementById('finalScoreMsg6').textContent = msg;
+            box.style.background = bg;
+            box.style.color = color;
+            box.classList.add('show');
+        }
+
+        renderQuiz('final6', 'quiz-final6', { finalMode: true });
+
+        /* ================= INIT ================= */
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.toc-sub').forEach(el => el.classList.add('collapsed'));
+            document.querySelectorAll('.toc-chevron').forEach(el => el.classList.add('rotated'));
+
+            // Auto-render live preview pertama
+            renderLive('ed-b31a', 'live-31');
+            renderLive('ed-b32a', 'live-32');
+
+            // Load progress
+            try {
+                const saved = JSON.parse(localStorage.getItem('python_modul_progress') || '{}');
+                for (const key of Object.keys(sectionDone)) {
+                    if (saved[key]) {
+                        sectionDone[key] = true;
+                        const el = document.getElementById('check-' + key);
+                        if (el) el.classList.add('done');
+                    }
+                }
+                updateTocPct();
+            } catch (_) { }
+
+            // Method color
+            document.querySelectorAll('.flask-request-bar select').forEach(sel => {
+                sel.addEventListener('change', () => {
+                    const v = sel.value;
+                    sel.className = v === 'POST' ? 'method-post' : (v === 'GET' ? 'method-get' : '');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

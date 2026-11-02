@@ -922,7 +922,9 @@ code.inline {
 #finalScoreBox2,
 #finalScoreBox3,
 #finalScoreBox4,
-#finalScoreBox5 {
+#finalScoreBox5,
+#finalScoreBox6,
+#finalScoreBox7 {
   display: none;
   margin-top: 20px;
   text-align: center;
@@ -934,7 +936,9 @@ code.inline {
 #finalScoreBox2.show,
 #finalScoreBox3.show,
 #finalScoreBox4.show,
-#finalScoreBox5.show {
+#finalScoreBox5.show,
+#finalScoreBox6.show,
+#finalScoreBox7.show {
   display: block;
   animation: pop .3s ease;
 }
@@ -943,7 +947,9 @@ code.inline {
 #finalScoreBox2 .score-num,
 #finalScoreBox3 .score-num,
 #finalScoreBox4 .score-num,
-#finalScoreBox5 .score-num {
+#finalScoreBox5 .score-num,
+#finalScoreBox6 .score-num,
+#finalScoreBox7 .score-num {
   font-family: var(--font-head);
   font-size: 44px;
   font-weight: 700;
@@ -953,7 +959,9 @@ code.inline {
 #finalScoreBox2 .score-msg,
 #finalScoreBox3 .score-msg,
 #finalScoreBox4 .score-msg,
-#finalScoreBox5 .score-msg {
+#finalScoreBox5 .score-msg,
+#finalScoreBox6 .score-msg,
+#finalScoreBox7 .score-msg {
   font-size: 16px;
   margin-top: 6px;
 }
@@ -1083,6 +1091,13 @@ code.inline {
 .nav-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 20px 40px -16px rgba(20, 30, 24, 0.40);
+}
+
+/* Kartu unggulan (Bab 37–42): selebar dua kolom, tepi kuning (guru) & hijau (siswa) seperti jalur estafet */
+.nav-card.featured {
+  grid-column: 1 / -1;
+  border-left: 6px solid var(--highlighter);
+  border-right: 6px solid var(--forest);
 }
 
 .nav-card .badge {

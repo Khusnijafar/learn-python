@@ -1,0 +1,2379 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Ajar Interaktif — AI &amp; Machine Learning (Bab 43–45)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Caveat:wght@600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== TOKEN KHUSUS AI ===== */
+        :root {
+            --ai: #7C3AED;
+            --ai-deep: #5B21B6;
+            --ai-wash: #EDE9FE;
+            --ml: #EC4899;
+            --ml-wash: #FCE7F3;
+            --nn: #0EA5E9;
+            --nn-wash: #E0F2FE;
+        }
+
+        /* ===== CONCEPT GRID ===== */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 14px 0;
+        }
+
+        .concept-item {
+            background: var(--paper-alt);
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            border: 1px solid var(--rule);
+        }
+
+        .concept-item b {
+            display: block;
+            font-family: var(--font-head);
+            font-size: 15px;
+            margin-bottom: 4px;
+            color: var(--forest-deep);
+        }
+
+        .concept-item span {
+            font-size: 14.5px;
+            color: var(--ink-soft);
+        }
+
+        .concept-item code {
+            font-family: var(--font-code);
+            background: #fff;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        /* ===== BADGE ===== */
+        .badge-ai {
+            background: var(--ai);
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .badge-ml {
+            background: var(--ml);
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .badge-cv {
+            background: var(--nn);
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* ===== LINEAR REGRESSION DEMO ===== */
+        .lr-wrap {
+            background: var(--terminal-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin: 16px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .lr-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--terminal-panel);
+            padding: 10px 16px;
+            border-bottom: 1px solid #0f1216;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .lr-bar .label {
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--terminal-comment);
+        }
+
+        .lr-bar button {
+            font-family: var(--font-code);
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--terminal-panel);
+            color: var(--terminal-text);
+            border: 1px solid #303a42;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background .15s;
+        }
+
+        .lr-bar button:hover {
+            background: #2a3340;
+        }
+
+        .lr-bar button.primary {
+            background: var(--ai);
+            color: #fff;
+            border-color: var(--ai);
+        }
+
+        .lr-body {
+            display: grid;
+            grid-template-columns: 1fr 240px;
+            gap: 0;
+        }
+
+        @media (max-width: 720px) {
+            .lr-body {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .lr-canvas-wrap {
+            background: #14181D;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .lr-canvas-wrap canvas {
+            background: #fff;
+            border-radius: 8px;
+            max-width: 100%;
+            height: auto;
+            cursor: crosshair;
+        }
+
+        .lr-controls {
+            background: #0F1418;
+            padding: 16px;
+            border-left: 1px solid #0f1216;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .lr-control-group label {
+            display: block;
+            font-family: var(--font-code);
+            font-size: 11.5px;
+            color: var(--terminal-comment);
+            margin-bottom: 6px;
+            letter-spacing: .03em;
+            text-transform: uppercase;
+        }
+
+        .lr-control-group input[type="range"] {
+            width: 100%;
+            accent-color: var(--ai);
+        }
+
+        .lr-control-group .val {
+            color: var(--terminal-string);
+            font-family: var(--font-code);
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .lr-stats {
+            background: #1A2026;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--terminal-text);
+            line-height: 1.7;
+        }
+
+        .lr-stats b {
+            color: var(--terminal-string);
+        }
+
+        .lr-stats .mse {
+            color: #FF9A8B;
+            font-weight: 700;
+        }
+
+        .lr-stats .good {
+            color: #6EE7B7;
+        }
+
+        .lr-hint {
+            font-size: 12px;
+            color: var(--terminal-comment);
+            font-family: var(--font-code);
+            padding: 0 16px 14px;
+            border-top: 1px dashed #303a42;
+            padding-top: 12px;
+        }
+
+        /* ===== TIC TAC TOE ===== */
+        .ttt-wrap {
+            background: var(--terminal-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin: 16px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .ttt-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--terminal-panel);
+            padding: 10px 16px;
+            border-bottom: 1px solid #0f1216;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .ttt-bar .label {
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--terminal-comment);
+        }
+
+        .ttt-bar .status {
+            font-family: var(--font-code);
+            font-size: 13px;
+            color: var(--terminal-string);
+            font-weight: 600;
+        }
+
+        .ttt-bar button {
+            font-family: var(--font-code);
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--terminal-panel);
+            color: var(--terminal-text);
+            border: 1px solid #303a42;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .ttt-bar button:hover {
+            background: #2a3340;
+        }
+
+        .ttt-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        @media (max-width: 720px) {
+            .ttt-main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ttt-board-wrap {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            border-right: 1px solid #0f1216;
+        }
+
+        .ttt-board {
+            display: grid;
+            grid-template-columns: repeat(3, 88px);
+            grid-template-rows: repeat(3, 88px);
+            gap: 8px;
+        }
+
+        .ttt-cell {
+            background: #1A2026;
+            border: 2px solid #303a42;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-head);
+            font-size: 42px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .15s, border-color .15s, transform .1s;
+            color: #fff;
+        }
+
+        .ttt-cell:hover:not(.taken) {
+            background: #232C33;
+            border-color: var(--ai);
+            transform: scale(1.02);
+        }
+
+        .ttt-cell.taken {
+            cursor: not-allowed;
+        }
+
+        .ttt-cell.x {
+            color: #6EE7B7;
+        }
+
+        .ttt-cell.o {
+            color: var(--terminal-string);
+        }
+
+        .ttt-cell.win {
+            background: #1F5C43;
+            border-color: #6EE7B7;
+        }
+
+        .ttt-cell.thinking {
+            animation: tttPulse 1s ease infinite;
+        }
+
+        @keyframes tttPulse {
+            50% { border-color: var(--terminal-string); }
+        }
+
+        .ttt-info {
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--terminal-comment);
+            text-align: center;
+        }
+
+        .ttt-side {
+            padding: 16px;
+            overflow-y: auto;
+            max-height: 420px;
+        }
+
+        .ttt-side h5 {
+            font-family: var(--font-head);
+            font-size: 14px;
+            color: #fff;
+            margin: 0 0 8px;
+            display: flex;
+            gap: 8px;
+            align-items: baseline;
+        }
+
+        .ttt-side h5 small {
+            font-family: var(--font-code);
+            font-size: 11px;
+            color: var(--terminal-comment);
+            font-weight: 400;
+        }
+
+        .ttt-side pre {
+            background: #14181D;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--terminal-text);
+            margin: 0 0 12px;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        .ttt-side pre .c { color: var(--terminal-comment); font-style: italic; }
+        .ttt-side pre .s { color: var(--terminal-string); }
+        .ttt-side pre .k { color: #9AD1FF; }
+
+        .ttt-score {
+            display: flex;
+            gap: 14px;
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--terminal-comment);
+        }
+
+        .ttt-score b {
+            color: var(--terminal-string);
+        }
+
+        /* ===== OPENCV DEMO ===== */
+        .cv-wrap {
+            background: var(--terminal-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin: 16px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .cv-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--terminal-panel);
+            padding: 10px 16px;
+            border-bottom: 1px solid #0f1216;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .cv-bar .label {
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--terminal-comment);
+        }
+
+        .cv-ops {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            padding: 12px 16px;
+            background: #0F1418;
+            border-bottom: 1px solid #0f1216;
+        }
+
+        .cv-op {
+            font-family: var(--font-code);
+            font-size: 12px;
+            font-weight: 600;
+            background: #1E242B;
+            color: var(--terminal-text);
+            border: 1px solid #303a42;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all .15s;
+            white-space: nowrap;
+        }
+
+        .cv-op:hover {
+            background: #2A3340;
+            border-color: #4A5764;
+        }
+
+        .cv-op.active {
+            background: var(--nn);
+            color: #fff;
+            border-color: var(--nn);
+        }
+
+        .cv-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            background: #14181D;
+        }
+
+        @media (max-width: 720px) {
+            .cv-body {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cv-panel {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .cv-panel:first-child {
+            border-right: 1px solid #0f1216;
+        }
+
+        .cv-panel h5 {
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--terminal-comment);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        .cv-canvas-wrap {
+            background: #0A0F14;
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 240px;
+        }
+
+        .cv-canvas-wrap canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .cv-param {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--terminal-text);
+        }
+
+        .cv-param input[type="range"] {
+            flex: 1;
+            accent-color: var(--nn);
+        }
+
+        .cv-param .val {
+            color: var(--terminal-string);
+            min-width: 40px;
+            text-align: right;
+        }
+
+        .cv-code {
+            background: #0A0F14;
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-family: var(--font-code);
+            font-size: 11.5px;
+            color: var(--terminal-text);
+            overflow-x: auto;
+            line-height: 1.7;
+            margin-top: auto;
+        }
+
+        .cv-code .c { color: var(--terminal-comment); font-style: italic; }
+        .cv-code .s { color: var(--terminal-string); }
+        .cv-code .k { color: #9AD1FF; }
+        .cv-code .n { color: #C792EA; }
+
+        .cv-upload {
+            font-family: var(--font-code);
+            font-size: 11.5px;
+            background: #1E242B;
+            color: var(--terminal-text);
+            border: 1px solid #303a42;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .cv-upload:hover {
+            background: #2A3340;
+        }
+
+        .cv-upload input {
+            display: none;
+        }
+
+        /* ===== FLOW / STEPS ===== */
+        .flow {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            counter-reset: flow;
+        }
+
+        .flow li {
+            counter-increment: flow;
+            background: var(--paper-alt);
+            border: 1px solid var(--rule);
+            border-radius: var(--radius-sm);
+            padding: 12px 12px 12px 44px;
+            position: relative;
+            font-size: 14px;
+            color: var(--ink-soft);
+        }
+
+        .flow li::before {
+            content: counter(flow);
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--ai);
+            color: #fff;
+            font-family: var(--font-code);
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flow li b {
+            display: block;
+            color: var(--ink);
+            font-family: var(--font-head);
+            font-size: 14px;
+        }
+
+        @media (max-width: 640px) {
+            .flow { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* ===== AI TYPE CARDS ===== */
+        .ai-types {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        @media (max-width: 640px) {
+            .ai-types { grid-template-columns: 1fr; }
+        }
+
+        .ai-type {
+            border-radius: var(--radius-sm);
+            padding: 16px 18px;
+            border: 1px solid var(--rule);
+            background: #fff;
+        }
+
+        .ai-type .ico {
+            font-size: 28px;
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+
+        .ai-type b {
+            display: block;
+            font-family: var(--font-head);
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .ai-type span {
+            font-size: 13.5px;
+            color: var(--ink-soft);
+        }
+
+        .ai-type sup {
+            background: var(--ai-wash);
+            color: var(--ai-deep);
+            padding: 1px 7px;
+            border-radius: 100px;
+            font-size: 10.5px;
+            font-weight: 700;
+            margin-left: 4px;
+        }
+
+        /* ===== NUMPY VISUAL ===== */
+        .np-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            max-width: 180px;
+            margin: 8px 0;
+        }
+
+        .np-grid div {
+            background: var(--paper-alt);
+            border: 1px solid var(--rule);
+            border-radius: 5px;
+            padding: 6px 0;
+            text-align: center;
+            font-family: var(--font-code);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* ===== FILE TREE ===== */
+        .file-tree {
+            font-family: var(--font-code);
+            font-size: 13.5px;
+            background: var(--paper-alt);
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            margin: 12px 0;
+            line-height: 1.9;
+            color: var(--ink-soft);
+        }
+
+        .file-tree .folder {
+            color: var(--forest-deep);
+            font-weight: 600;
+        }
+
+        /* ===== ROADMAP ===== */
+        .roadmap {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .road-card {
+            background: var(--paper-alt);
+            border: 1px solid var(--rule);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+        }
+
+        .road-card b {
+            display: block;
+            font-family: var(--font-head);
+            font-size: 14.5px;
+            margin-bottom: 4px;
+            color: var(--forest-deep);
+        }
+
+        .road-card span {
+            font-size: 13.5px;
+            color: var(--ink-soft);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="scrollRail">
+        <div id="scrollFill"></div>
+    </div>
+
+    <header class="hero">
+        <nav class="top-nav">
+            <a href="index.html">🏠 Beranda</a>
+            <span class="sep">|</span>
+            <a href="index_bab1_6.html">Bab 1–6</a>
+            <a href="index_bab7_11.html">Bab 7–11</a>
+            <a href="index_bab12_17.html">Bab 12–17</a>
+            <a href="index_bab18_24.html">Bab 18–24</a>
+            <a href="index_bab25_30.html">Flask</a>
+            <a href="index_bab31_36.html">Web Lanjutan</a>
+            <a href="index_bab37_42.html">Git</a>
+            <span class="current">🤖 AI</span>
+        </nav>
+        <div class="hero-kicker"><span class="dot"></span>TRACK 4 · KECERDASAN BUATAN</div>
+        <h1 class="hero-title">AI &amp; <span class="snake">Machine Learning</span></h1>
+        <div class="hero-meta">
+            <span>Bab 43–45</span>
+            <span>Level: Penjelajah AI</span>
+            <span>🤖 ML · 🎮 Game AI · 🖼️ Computer Vision</span>
+        </div>
+    </header>
+
+    <nav class="toc" id="toc">
+        <div class="toc-head">
+            <h2>📋 Daftar Isi</h2>
+            <span id="tocPct">0% selesai</span>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab43"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 43 — Introduction to AI &amp; ML</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab43-1">Apa itu AI, ML, DL?</a>
+                <a class="toc-item" href="#bab43-2">Jenis Machine Learning</a>
+                <a class="toc-item" href="#bab43-3">🧪 Linear Regression</a>
+                <a class="toc-item" href="#bab43-4">Kode: scikit-learn</a>
+                <a class="toc-item" href="#bab43-5">🎯 Challenge</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab44"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 44 — Tic Tac Toe with NumPy</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab44-1">NumPy Basics</a>
+                <a class="toc-item" href="#bab44-2">Board dengan NumPy</a>
+                <a class="toc-item" href="#bab44-3">Algoritma Minimax</a>
+                <a class="toc-item" href="#bab44-4">🎮 Main Tic Tac Toe</a>
+                <a class="toc-item" href="#bab44-5">Kode Lengkap</a>
+                <a class="toc-item" href="#bab44-6">🎯 Challenge</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <button class="toc-header" onclick="toggleToc(this)">
+                <span class="toc-check" id="check-bab45"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Bab 45 — OpenCV Image Manipulation</span>
+                <span class="toc-chevron">⌄</span>
+            </button>
+            <div class="toc-sub">
+                <a class="toc-item" href="#bab45-1">Kenalan OpenCV</a>
+                <a class="toc-item" href="#bab45-2">Operasi Dasar Gambar</a>
+                <a class="toc-item" href="#bab45-3">🖼️ Live Image Editor</a>
+                <a class="toc-item" href="#bab45-4">Filter &amp; Edge Detection</a>
+                <a class="toc-item" href="#bab45-5">🎯 Challenge</a>
+            </div>
+        </div>
+
+        <div class="toc-section">
+            <a class="toc-header" href="#kuis-final8" style="text-decoration:none;">
+                <span class="toc-check" id="check-quizfinal8"><svg viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8.5L6.2 12L13 4" stroke="white" stroke-width="2.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
+                <span class="toc-label">Quiz</span>
+            </a>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- ================= BAB 43 ================= -->
+        <section class="bab" id="bab43">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 43 —
+                        Introduction to AI & ML"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 43 — Introduction to AI & Machine Learning">Bab 43 — Introduction
+                    to AI &amp; Machine Learning</h2>
+                <p class="bab-intro">Kecerdasan Buatan (AI) bukan sihir — ia adalah cabang ilmu komputer yang membuat
+                    mesin bisa belajar dari data. Di bab ini, kamu akan memahami konsep dasarnya dan mencoba melatih
+                    model pertama.</p>
+            </div>
+
+            <div class="card" id="bab43-1">
+                <h3><span class="num">43.1</span> Apa itu AI, ML, dan DL?</h3>
+                <p>Tiga istilah ini sering tertukar. Mari kita pilah dengan analogi sederhana.</p>
+
+                <div class="ai-types">
+                    <div class="ai-type" style="border-top:4px solid var(--ai);">
+                        <div class="ico">🧠</div>
+                        <b>AI (Artificial Intelligence)<sup>LUAS</sup></b>
+                        <span>Payung besar: semua usaha membuat mesin "berpikir" seperti manusia — termasuk aturan
+                            sederhana seperti <code class="inline">if nilai &gt; 75: lulus</code>.</span>
+                    </div>
+                    <div class="ai-type" style="border-top:4px solid var(--ml);">
+                        <div class="ico">📊</div>
+                        <b>ML (Machine Learning)<sup>DATA</sup></b>
+                        <span>Cabang AI: mesin belajar dari data tanpa diprogram eksplisit. Kamu memberi contoh, ia
+                            menemukan polanya.</span>
+                    </div>
+                    <div class="ai-type" style="border-top:4px solid var(--nn);">
+                        <div class="ico">🕸️</div>
+                        <b>DL (Deep Learning)<sup>NEURAL</sup></b>
+                        <span>Cabang ML: menggunakan jaringan saraf tiruan berlapis-lapis. Dasar dari ChatGPT, image
+                            recognition, dan mobil otonom.</span>
+                    </div>
+                </div>
+
+                <p><b>Analogi:</b> AI adalah "kendaraan", ML adalah "mobil", dan DL adalah "mobil sport". Semua mobil
+                    sport adalah mobil, semua mobil adalah kendaraan — tapi tidak semua kendaraan adalah mobil.</p>
+
+                <div class="note"><span class="hand">Cara berpikir baru:</span> Pemrograman tradisional = kamu menulis
+                    aturan (<code class="inline">if</code>, <code class="inline">for</code>, dst). Machine Learning =
+                    kamu memberi <b>data + jawaban</b>, dan mesin menemukan aturannya sendiri.</div>
+            </div>
+
+            <div class="card" id="bab43-2">
+                <h3><span class="num">43.2</span> Jenis-jenis Machine Learning</h3>
+
+                <div class="concept-grid">
+                    <div class="concept-item" style="border-left:4px solid var(--ai);">
+                        <b>🎯 Supervised Learning</b>
+                        <span>Belajar dari data <b>berlabel</b>. Contoh: gambar kucing/dog yang sudah ditandai, harga
+                            rumah beserta harganya. Algoritma: Linear Regression, Decision Tree, Neural Network.</span>
+                    </div>
+                    <div class="concept-item" style="border-left:4px solid var(--ml);">
+                        <b>🔍 Unsupervised Learning</b>
+                        <span>Belajar dari data <b>tanpa label</b>. Mencari pola tersembunyi. Contoh: segmentasi
+                            pelanggan. Algoritma: K-Means, PCA.</span>
+                    </div>
+                    <div class="concept-item" style="border-left:4px solid var(--nn);">
+                        <b>🎮 Reinforcement Learning</b>
+                        <span>Belajar melalui <b>trial &amp; error</b> dengan reward/penalti. Contoh: AI bermain game,
+                            robot berjalan. Algoritma: Q-Learning, DQN.</span>
+                    </div>
+                    <div class="concept-item" style="border-left:4px solid var(--forest);">
+                        <b>🏷️ Klasifikasi vs Regresi</b>
+                        <span>Klasifikasi: memprediksi <b>kategori</b> (spam/bukan). Regresi: memprediksi
+                            <b>angka</b> (harga, suhu).</span>
+                    </div>
+                </div>
+
+                <p><b>Alur kerja Machine Learning</b> secara umum:</p>
+                <ol class="flow">
+                    <li><b>Kumpulkan Data</b>Contoh-contoh nyata</li>
+                    <li><b>Pilih Model</b>Algoritma yang cocok</li>
+                    <li><b>Latih (Training)</b>Model belajar pola</li>
+                    <li><b>Evaluasi &amp; Prediksi</b>Uji dengan data baru</li>
+                </ol>
+            </div>
+
+            <div class="card" id="bab43-3">
+                <h3><span class="num">43.3</span> 🧪 Demo: Linear Regression</h3>
+                <p>Linear Regression adalah model ML paling sederhana: mencari <b>garis terbaik</b> yang melewati
+                    titik-titik data. Bayangkan kamu ingin memprediksi nilai ujian dari jam belajar — garisnya membantu
+                    kamu menebak.</p>
+                <p>Geser slider untuk mengatur <b>garis prediksi</b>, atau klik <b>Fit Otomatis</b> agar model
+                    menghitung sendiri garis optimalnya (least squares).</p>
+
+                <div class="lr-wrap">
+                    <div class="lr-bar">
+                        <span class="label">📈 Linear Regression Playground</span>
+                        <button class="primary" onclick="lrAutoFit()">✨ Fit Otomatis (Least Squares)</button>
+                    </div>
+                    <div class="lr-body">
+                        <div class="lr-canvas-wrap">
+                            <canvas id="lrCanvas" width="480" height="340"></canvas>
+                        </div>
+                        <div class="lr-controls">
+                            <div class="lr-control-group">
+                                <label>Slope (m) — kemiringan <span class="val" id="lrMVal">1.00</span></label>
+                                <input type="range" id="lrM" min="-2" max="3" step="0.05" value="1">
+                            </div>
+                            <div class="lr-control-group">
+                                <label>Intercept (b) — titik potong <span class="val" id="lrBVal">0.00</span></label>
+                                <input type="range" id="lrB" min="-100" max="150" step="1" value="0">
+                            </div>
+                            <div class="lr-stats">
+                                <div>MSE: <span class="mse" id="lrMSE">—</span></div>
+                                <div>Model: <b>y = <span id="lrEq">1.00x + 0</span></b></div>
+                                <div id="lrVerdict" style="margin-top:6px; font-size:11px; color:var(--terminal-comment);">
+                                    Sesuaikan garis dengan titik-titik</div>
+                            </div>
+                            <div style="font-size:11px; color:var(--terminal-comment); font-family:var(--font-code); line-height:1.5;">
+                                💡 <b>MSE</b> (Mean Squared Error) = rata-rata kuadrat selisih. Makin kecil, makin baik.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lr-hint">
+                        <b>Klik pada kanvas</b> untuk menambahkan titik data baru · <b>Shift+Klik</b> untuk menghapus
+                        titik terdekat
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bab43-4">
+                <h3><span class="num">43.4</span> Kode: Melatih Model dengan scikit-learn</h3>
+                <p>Di Python asli, kamu bisa melatih Linear Regression hanya dengan 3 baris!</p>
+                <div class="term">
+                    <div class="term-bar">linear_regression.py</div>
+                    <pre><span class="fn">from</span> sklearn.linear_model <span class="fn">import</span> LinearRegression
+<span class="fn">import</span> numpy <span class="fn">as</span> np
+
+<span class="cm"># Data: jam belajar (X) vs nilai ujian (y)</span>
+X = np.<span class="fn">array</span>([[1], [2], [3], [4], [5], [6], [7], [8]])
+y = np.<span class="fn">array</span>([50, 55, 62, 68, 72, 78, 82, 88])
+
+<span class="cm"># Latih model</span>
+model = <span class="fn">LinearRegression</span>()
+model.<span class="fn">fit</span>(X, y)
+
+<span class="cm"># Prediksi nilai jika belajar 10 jam</span>
+<span class="fn">print</span>(<span class="str">f"Belajar 10 jam → prediksi {model.predict([[10]])[0]:.1f}"</span>)
+<span class="fn">print</span>(<span class="str">f"Slope: {model.coef_[0]:.2f}"</span>)
+<span class="fn">print</span>(<span class="str">f"Intercept: {model.intercept_:.2f}"</span>)</pre>
+                </div>
+                <p><b>Analogi hasilnya:</b> model menemukan garis <code class="inline">y = 5.4x + 44.3</code>. Artinya,
+                    setiap tambahan 1 jam belajar, nilai naik sekitar 5.4 poin.</p>
+                <div class="tip">💡 <b>Instalasi:</b> jalankan <code class="inline">pip install scikit-learn numpy</code>
+                    di terminal. Kalau belum bisa, jalankan versi browser-nya di simulator di atas — konsepnya
+                    sama!</div>
+            </div>
+
+            <div class="card" id="bab43-5">
+                <h3><span class="num">43.5</span> 🎯 Challenge — Prediksi Harga Rumah</h3>
+                <p>Buat program ML sederhana menggunakan scikit-learn (atau simulator konsep di atas):</p>
+                <ol>
+                    <li>Data: <code class="inline">luas_rumah = [50, 70, 90, 110, 130]</code>, <code
+                            class="inline">harga = [250, 350, 450, 550, 650]</code> (dalam juta rupiah)</li>
+                    <li>Latih model <code class="inline">LinearRegression</code></li>
+                    <li>Prediksi harga rumah dengan luas <b>100 m²</b> dan <b>200 m²</b></li>
+                    <li>Cetak nilai slope &amp; intercept-nya</li>
+                </ol>
+                <p><b>Bonus:</b> hitung manual slope dengan rumus <code class="inline">m = Σ((x-x̄)(y-ȳ)) / Σ(x-x̄)²</code>
+                    dan bandingkan dengan hasil model.</p>
+                <div class="challenge">
+                    <span class="chal-tag">KUIS KONSEP</span>
+                    <div class="quiz-q">
+                        <p class="quiz-question">Data berlabel pasangan (gambar, jenis hewan) cocok untuk jenis ML apa?
+                        </p>
+                        <div class="quiz-options">
+                            <button class="quiz-opt" onclick="answerInline(this,false,'Unsupervised tidak punya label — hanya mencari pola.')">Unsupervised Learning</button>
+                            <button class="quiz-opt" onclick="answerInline(this,true,'Betul! Supervised learning belajar dari data berlabel (input → output yang diketahui).')">Supervised Learning</button>
+                            <button class="quiz-opt" onclick="answerInline(this,false,'Reinforcement learning belajar dari reward/penalti, bukan label.')">Reinforcement Learning</button>
+                            <button class="quiz-opt" onclick="answerInline(this,false,'Itu bukan kategori ML.')">Deep Learning</button>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🎯 Kuis Bab 43</h3>
+                <div id="quiz-bab43"></div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 44 ================= -->
+        <section class="bab" id="bab44">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 44 —
+                        Tic Tac Toe with NumPy"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 44 — Tic Tac Toe with NumPy">Bab 44 — Tic Tac Toe with NumPy</h2>
+                <p class="bab-intro">Sekarang kita bikin AI yang benar-benar "berpikir". Tic Tac Toe adalah laboratorium
+                    sempurna untuk belajar Minimax — algoritma game AI klasik yang dipakai DeepMind, AlphaGo, dan game
+                    catur!</p>
+            </div>
+
+            <div class="card" id="bab44-1">
+                <h3><span class="num">44.1</span> NumPy Basics</h3>
+                <p><b>NumPy</b> (Numerical Python) adalah library yang jadi tulang punggung hampir semua AI/ML di
+                    Python. Fungsinya: array multidimensi super cepat dengan operasi vektor.</p>
+                <div class="term">
+                    <div class="term-bar">numpy_intro.py</div>
+                    <pre><span class="fn">import</span> numpy <span class="fn">as</span> np
+
+<span class="cm"># Array 1D</span>
+a = np.<span class="fn">array</span>([1, 2, 3, 4, 5])
+<span class="fn">print</span>(a * 2)  <span class="cm"># [2 4 6 8 10] — tanpa loop!</span>
+
+<span class="cm"># Array 2D — papan Tic Tac Toe 3×3</span>
+board = np.<span class="fn">zeros</span>((3, 3), dtype=<span class="fn">int</span>)
+<span class="fn">print</span>(board)
+
+<span class="cm"># Indexing</span>
+board[0, 1] = 1
+<span class="fn">print</span>(board[0])  <span class="cm"># baris pertama</span>
+
+<span class="cm"># Cek ada yang menang di baris?</span>
+<span class="fn">print</span>(np.<span class="fn">any</span>(np.<span class="fn">all</span>(board == 1, axis=1)))</pre>
+                </div>
+
+                <p><b>Mengapa NumPy dan bukan list biasa?</b></p>
+                <div class="concept-grid">
+                    <div class="concept-item"><b>⚡ Cepat</b><span>Operasi dijalankan di level C. 10-100× lebih cepat
+                            dari loop Python untuk data besar.</span></div>
+                    <div class="concept-item"><b>🎯 Ringkas</b><span><code>a * 2</code> mengalikan semua elemen sekaligus
+                            — disebut <i>vectorized operation</i>.</span></div>
+                    <div class="concept-item"><b>📐 Multidimensi</b><span>Dari skalar (1 angka) sampai tensor 4D
+                            (gambar batch di CNN).</span></div>
+                    <div class="concept-item"><b>🔗 Terintegrasi</b><span>Dipakai oleh scikit-learn, TensorFlow,
+                            PyTorch, OpenCV, Pandas.</span></div>
+                </div>
+
+                <p><b>Visualisasi papan 3×3:</b> angka 0 = kosong, 1 = X (kamu), 2 = O (AI).</p>
+                <div class="np-grid" id="npVisual">
+                    <div>0</div><div>0</div><div>0</div>
+                    <div>0</div><div>0</div><div>0</div>
+                    <div>0</div><div>0</div><div>0</div>
+                </div>
+                <p style="font-size:13px;color:var(--ink-soft);margin-top:0;">Di papan di bawah nanti, setiap gerakan
+                    mengubah array ini — dan AI memeriksa ribuan kemungkinan array sebelum memilih.</p>
+            </div>
+
+            <div class="card" id="bab44-2">
+                <h3><span class="num">44.2</span> Board dengan NumPy</h3>
+                <p>Repositori papan Tic Tac Toe yang rapi:</p>
+                <div class="term">
+                    <div class="term-bar">board.py</div>
+                    <pre><span class="fn">import</span> numpy <span class="fn">as</span> np
+
+<span class="cm"># Konstanta</span>
+EMPTY, X, O = 0, 1, 2
+
+<span class="fn">def</span> <span class="fn">new_board</span>():
+    <span class="fn">return</span> np.<span class="fn">zeros</span>((3, 3), dtype=<span class="fn">int</span>)
+
+<span class="fn">def</span> <span class="fn">winner</span>(board):
+    <span class="cm">"""Cek pemenang. Return 1/2 atau 0 kalau belum ada."""</span>
+    <span class="cm"># Cek baris dan kolom</span>
+    <span class="fn">for</span> i <span class="fn">in</span> <span class="fn">range</span>(3):
+        <span class="fn">if</span> <span class="fn">all</span>(board[i, :] == board[i, 0]) <span class="fn">and</span> board[i, 0] != EMPTY:
+            <span class="fn">return</span> board[i, 0]
+        <span class="fn">if</span> <span class="fn">all</span>(board[:, i] == board[0, i]) <span class="fn">and</span> board[0, i] != EMPTY:
+            <span class="fn">return</span> board[0, i]
+    <span class="cm"># Diagonal</span>
+    <span class="fn">if</span> board[0,0] == board[1,1] == board[2,2] != EMPTY: <span class="fn">return</span> board[0,0]
+    <span class="fn">if</span> board[0,2] == board[1,1] == board[2,0] != EMPTY: <span class="fn">return</span> board[0,2]
+    <span class="fn">return</span> 0
+
+<span class="fn">def</span> <span class="fn">empty_cells</span>(board):
+    <span class="cm">"""Return list (row, col) yang masih kosong."""</span>
+    <span class="fn">return</span> [(r, c) <span class="fn">for</span> r <span class="fn">in</span> <span class="fn">range</span>(3) <span class="fn">for</span> c <span class="fn">in</span> <span class="fn">range</span>(3) <span class="fn">if</span> board[r, c] == EMPTY]</pre>
+                </div>
+                <div class="tip">💡 Perhatikan trik NumPy: <code class="inline">board[i, :]</code> mengambil satu baris
+                    penuh, <code class="inline">all(...)</code> cek apakah semua elemen sama — tidak perlu loop manual!
+                </div>
+            </div>
+
+            <div class="card" id="bab44-3">
+                <h3><span class="num">44.3</span> Algoritma Minimax — Otak Si AI</h3>
+                <p><b>Minimax</b> adalah algoritma pencarian yang menganggap AI dan lawan bermain sempurna. Prinsipnya
+                    sederhana:</p>
+                <ol class="flow">
+                    <li><b>AI memaksimalkan</b>skor (menang = +1)</li>
+                    <li><b>Lawan meminimalkan</b>skor (kalah = -1)</li>
+                    <li><b>Rekursif</b>coba semua langkah masa depan</li>
+                    <li><b>Pilih</b>langkah dengan skor terbaik</li>
+                </ol>
+
+                <p><b>Pohon pencarian:</b> dari papan kosong, ada 9 kemungkinan langkah pertama. Setelah itu 8, 7, 6…
+                    sampai selesai. Total ±255.168 kemungkinan — kecil untuk komputer modern, tapi sangat besar untuk
+                    manusia!</p>
+
+                <div class="term">
+                    <div class="term-bar">minimax.py</div>
+                    <pre><span class="fn">def</span> <span class="fn">minimax</span>(board, depth, is_maximizing, ai_player):
+    <span class="cm">"""Return skor terbaik dari posisi ini."""</span>
+    w = <span class="fn">winner</span>(board)
+    <span class="fn">if</span> w == ai_player:  <span class="fn">return</span> 10 - depth    <span class="cm"># menang (makin cepat makin baik)</span>
+    <span class="fn">if</span> w != 0:            <span class="fn">return</span> depth - 10     <span class="cm"># kalah</span>
+    <span class="fn">if</span> <span class="fn">len</span>(<span class="fn">empty_cells</span>(board)) == 0: <span class="fn">return</span> 0  <span class="cm"># seri</span>
+
+    <span class="fn">if</span> is_maximizing:
+        best = -<span class="fn">inf</span>
+        <span class="fn">for</span> r, c <span class="fn">in</span> <span class="fn">empty_cells</span>(board):
+            board[r, c] = ai_player
+            score = <span class="fn">minimax</span>(board, depth+1, <span class="fn">False</span>, ai_player)
+            board[r, c] = 0  <span class="cm"># undo</span>
+            best = <span class="fn">max</span>(best, score)
+        <span class="fn">return</span> best
+    <span class="fn">else</span>:
+        best = +<span class="fn">inf</span>
+        opponent = 3 - ai_player
+        <span class="fn">for</span> r, c <span class="fn">in</span> <span class="fn">empty_cells</span>(board):
+            board[r, c] = opponent
+            score = <span class="fn">minimax</span>(board, depth+1, <span class="fn">True</span>, ai_player)
+            board[r, c] = 0
+            best = <span class="fn">min</span>(best, score)
+        <span class="fn">return</span> best</pre>
+                </div>
+
+                <div class="note"><span class="hand">Kenapa tidak pernah kalah?</span> Minimax mencoba <b>semua</b>
+                    kemungkinan. Selama papan Tic Tac Toe bisa diselesaikan, AI akan selalu menemukan langkah terbaik
+                    — dan hasil terburuknya adalah seri.</div>
+            </div>
+
+            <div class="card" id="bab44-4">
+                <h3><span class="num">44.4</span> 🎮 Main Tic Tac Toe</h3>
+                <p>Kamu adalah <b>X</b> (hijau), AI adalah <b>O</b> (kuning). Coba kalahkan AI — spoiler: kamu tidak
+                    akan bisa! Minimal hasilnya seri.</p>
+
+                <div class="ttt-wrap">
+                    <div class="ttt-bar">
+                        <span class="label">🎮 Tic Tac Toe vs Minimax AI</span>
+                        <span class="status" id="tttStatus">Giliranmu!</span>
+                        <button onclick="tttReset()">🔄 Main Lagi</button>
+                    </div>
+                    <div class="ttt-main">
+                        <div class="ttt-board-wrap">
+                            <div class="ttt-board" id="tttBoard"></div>
+                            <div class="ttt-score">
+                                <span>Menang: <b id="tttWins">0</b></span>
+                                <span>Seri: <b id="tttDraws">0</b></span>
+                                <span>Kalah: <b id="tttLosses">0</b></span>
+                            </div>
+                            <div class="ttt-info">Kamu = <b style="color:#6EE7B7;">X</b> · AI = <b style="color:#FFCB66;">O</b></div>
+                        </div>
+                        <div class="ttt-side">
+                            <h5>Kondisi papan <small>(array NumPy)</small></h5>
+                            <pre id="tttNumpy">board = np.zeros((3, 3), dtype=int)</pre>
+                            <h5>Langkah AI terakhir <small>(minimax score)</small></h5>
+                            <pre id="tttAI"><span class="c"># AI belum bergerak</span></pre>
+                            <h5>Info</h5>
+                            <pre id="tttInfo"><span class="c"># Klik papan untuk mulai</span></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bab44-5">
+                <h3><span class="num">44.5</span> Kode Lengkap (Jalankan di Laptopmu)</h3>
+                <p>Simpan sebagai <code class="inline">tictactoe.py</code> lalu jalankan <code
+                        class="inline">python tictactoe.py</code>:</p>
+                <div class="term">
+                    <div class="term-bar">tictactoe.py</div>
+                    <pre><span class="fn">import</span> numpy <span class="fn">as</span> np
+
+EMPTY, X, O = 0, 1, 2
+
+<span class="fn">def</span> <span class="fn">display</span>(board):
+    symbols = {0: <span class="str">"."</span>, 1: <span class="str">"X"</span>, 2: <span class="str">"O"</span>}
+    <span class="fn">for</span> row <span class="fn">in</span> board:
+        <span class="fn">print</span>(<span class="str">" "</span>.<span class="fn">join</span>(symbols[v] <span class="fn">for</span> v <span class="fn">in</span> row))
+
+<span class="fn">def</span> <span class="fn">winner</span>(b):
+    <span class="fn">for</span> i <span class="fn">in</span> <span class="fn">range</span>(3):
+        <span class="fn">if</span> b[i,0] == b[i,1] == b[i,2] != 0: <span class="fn">return</span> b[i,0]
+        <span class="fn">if</span> b[0,i] == b[1,i] == b[2,i] != 0: <span class="fn">return</span> b[0,i]
+    <span class="fn">if</span> b[0,0] == b[1,1] == b[2,2] != 0: <span class="fn">return</span> b[0,0]
+    <span class="fn">if</span> b[0,2] == b[1,1] == b[2,0] != 0: <span class="fn">return</span> b[0,2]
+    <span class="fn">return</span> 0
+
+<span class="fn">def</span> <span class="fn">empty_cells</span>(b):
+    <span class="fn">return</span> [(r,c) <span class="fn">for</span> r <span class="fn">in</span> <span class="fn">range</span>(3) <span class="fn">for</span> c <span class="fn">in</span> <span class="fn">range</span>(3) <span class="fn">if</span> b[r,c]==0]
+
+<span class="fn">def</span> <span class="fn">minimax</span>(b, depth, maxing, ai):
+    w = <span class="fn">winner</span>(b)
+    <span class="fn">if</span> w == ai: <span class="fn">return</span> 10 - depth
+    <span class="fn">if</span> w != 0: <span class="fn">return</span> depth - 10
+    cells = <span class="fn">empty_cells</span>(b)
+    <span class="fn">if</span> <span class="fn">not</span> cells: <span class="fn">return</span> 0
+    scores = []
+    <span class="fn">for</span> r,c <span class="fn">in</span> cells:
+        b[r,c] = ai <span class="fn">if</span> maxing <span class="fn">else</span> 3-ai
+        s = <span class="fn">minimax</span>(b, depth+1, <span class="fn">not</span> maxing, ai)
+        b[r,c] = 0
+        scores.<span class="fn">append</span>(s)
+    <span class="fn">return</span> <span class="fn">max</span>(scores) <span class="fn">if</span> maxing <span class="fn">else</span> <span class="fn">min</span>(scores)
+
+<span class="fn">def</span> <span class="fn">best_move</span>(b, ai):
+    cells = <span class="fn">empty_cells</span>(b)
+    best_score, best = -<span class="fn">inf</span>, cells[0]
+    <span class="fn">for</span> r,c <span class="fn">in</span> cells:
+        b[r,c] = ai
+        s = <span class="fn">minimax</span>(b, 0, <span class="fn">False</span>, ai)
+        b[r,c] = 0
+        <span class="fn">if</span> s &gt; best_score:
+            best_score, best = s, (r,c)
+    <span class="fn">return</span> best
+
+<span class="cm"># --- Game loop ---</span>
+board = np.<span class="fn">zeros</span>((3,3), dtype=<span class="fn">int</span>)
+<span class="fn">while</span> <span class="fn">True</span>:
+    <span class="fn">display</span>(board)
+    w = <span class="fn">winner</span>(board)
+    <span class="fn">if</span> w: <span class="fn">print</span>(<span class="str">"Pemenang: "</span> + (<span class="str">"X"</span> <span class="fn">if</span> w==1 <span class="fn">else</span> <span class="str">"O"</span>)); <span class="fn">break</span>
+    <span class="fn">if</span> <span class="fn">not</span> <span class="fn">empty_cells</span>(board): <span class="fn">print</span>(<span class="str">"Seri!"</span>); <span class="fn">break</span>
+    r, c = <span class="fn">map</span>(<span class="fn">int</span>, <span class="fn">input</span>(<span class="str">"Baris kolom (0-2): "</span>).<span class="fn">split</span>())
+    <span class="fn">if</span> board[r,c] == 0: board[r,c] = X
+    <span class="fn">if</span> <span class="fn">winner</span>(board) <span class="fn">or</span> <span class="fn">not</span> <span class="fn">empty_cells</span>(board): <span class="fn">continue</span>
+    r, c = <span class="fn">best_move</span>(board, O)
+    board[r,c] = O</pre>
+                </div>
+            </div>
+
+            <div class="card" id="bab44-6">
+                <h3><span class="num">44.6</span> 🎯 Challenge — Kembangkan Game-nya</h3>
+                <p>Modifikasi game Tic Tac Toe di atas untuk bereksperimen:</p>
+                <ol>
+                    <li><b>Level kesulitan</b> — buat AI "mudah" yang memilih langkah acak 50% dari waktu.</li>
+                    <li><b>Alpha-Beta Pruning</b> — optimasi minimax dengan memotong cabang yang tidak perlu. Bisa 10×
+                        lebih cepat!</li>
+                    <li><b>Papan 4×4</b> — ubah jadi 4×4 dengan syarat menang 4 sejajar.</li>
+                    <li><b>Catat statistik</b> — simpan skor (menang/seri/kalah) ke file <code
+                            class="inline">skor.txt</code>.</li>
+                </ol>
+                <div class="tip">💡 <b>Alpha-Beta Pruning</b> adalah trik klasik yang dipakai mesin catur Deep Blue.
+                    Prinsipnya: kalau sebuah cabang sudah lebih buruk dari pilihan terbaik, tidak perlu diperiksa lebih
+                    jauh.</div>
+            </div>
+        </section>
+
+        <!-- ================= BAB 45 ================= -->
+        <section class="bab" id="bab45">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span class="str">"Bab 45 —
+                        OpenCV"</span>)</div>
+                <h2 class="bab-title" data-text="Bab 45 — OpenCV Image Manipulation">Bab 45 — OpenCV Image
+                    Manipulation</h2>
+                <p class="bab-intro">Computer Vision adalah cabang AI yang membuat komputer "melihat". OpenCV adalah
+                    library nomor satu untuk itu. Di bab ini, kamu akan mengolah gambar — sama seperti yang dilakukan
+                    filter Instagram, mobil otonom, dan kamera pengawas.</p>
+            </div>
+
+            <div class="card" id="bab45-1">
+                <h3><span class="num">45.1</span> Kenalan OpenCV</h3>
+                <p><b>OpenCV</b> (Open Source Computer Vision) adalah library open-source yang berisi ribuan fungsi
+                    untuk mengolah gambar dan video. Dipakai oleh Google, Intel, NASA, dan ribuan perusahaan.</p>
+
+                <div class="concept-grid">
+                    <div class="concept-item"><b>🖼️ Image Processing</b><span>Resize, crop, rotate, filter, blur,
+                            threshold — manipulasi pixel.</span></div>
+                    <div class="concept-item"><b>🎯 Object Detection</b><span>Mendeteksi wajah, mobil, plat nomor,
+                            produk.</span></div>
+                    <div class="concept-item"><b>🎥 Video Analysis</b><span>Tracking objek, motion detection,
+                            counting.</span></div>
+                    <div class="concept-item"><b>🤖 ML Integration</b><span>Bekerja bareng TensorFlow/PyTorch untuk
+                            deep learning.</span></div>
+                </div>
+
+                <p><b>Instalasi:</b> jalankan di terminal:</p>
+                <div class="term">
+                    <div class="term-bar">terminal</div>
+                    <pre>pip install opencv-python numpy</pre>
+                </div>
+
+                <p><b>Struktur dasar file OpenCV:</b></p>
+                <div class="file-tree">
+                    <span class="folder">📁 proyek-opencv/</span><br>
+                    ├── <span style="color:var(--ink);">main.py</span> — kode Python<br>
+                    ├── <span style="color:var(--ink);">gambar.jpg</span> — gambar input<br>
+                    └── <span style="color:var(--ink);">output.jpg</span> — hasil (otomatis dibuat)
+                </div>
+
+                <div class="term">
+                    <div class="term-bar">hello_cv.py</div>
+                    <pre><span class="fn">import</span> cv2
+
+<span class="cm"># Baca gambar</span>
+img = cv2.<span class="fn">imread</span>(<span class="str">"gambar.jpg"</span>)
+<span class="fn">print</span>(<span class="str">f"Ukuran: {img.shape}"</span>)  <span class="cm"># (tinggi, lebar, 3)</span>
+
+<span class="cm"># Tampilkan (tekan tombol apa saja untuk menutup)</span>
+cv2.<span class="fn">imshow</span>(<span class="str">"Gambar"</span>, img)
+cv2.<span class="fn">waitKey</span>(0)
+cv2.<span class="fn">destroyAllWindows</span>()
+
+<span class="cm"># Simpan</span>
+cv2.<span class="fn">imwrite</span>(<span class="str">"output.jpg"</span>, img)</pre>
+                </div>
+                <div class="note"><span class="hand">Perhatikan:</span> OpenCV menyimpan warna dalam urutan <b>BGR</b>
+                    (Blue-Green-Red), bukan RGB! Ini adalah jebakan paling umum pemula. Kalau gambar terlihat aneh,
+                    tukar dulu dengan <code class="inline">cv2.cvtColor(img, cv2.COLOR_BGR2RGB)</code>.</div>
+            </div>
+
+            <div class="card" id="bab45-2">
+                <h3><span class="num">45.2</span> Operasi Dasar Gambar</h3>
+                <p><b>Resize, crop, rotate, dan flip</b> — empat operasi yang paling sering dipakai:</p>
+                <div class="term">
+                    <div class="term-bar">basic_ops.py</div>
+                    <pre><span class="fn">import</span> cv2
+
+img = cv2.<span class="fn">imread</span>(<span class="str">"gambar.jpg"</span>)
+
+<span class="cm"># 1. Resize (skala atau ukuran absolut)</span>
+kecil = cv2.<span class="fn">resize</span>(img, <span class="fn">None</span>, fx=0.5, fy=0.5)  <span class="cm"># setengah ukuran</span>
+besar = cv2.<span class="fn">resize</span>(img, (800, 600))                        <span class="cm"># lebar, tinggi</span>
+
+<span class="cm"># 2. Crop (slicing seperti NumPy!)</span>
+crop = img[100:300, 200:500]  <span class="cm"># [y1:y2, x1:x2]</span>
+
+<span class="cm"># 3. Rotate 90° searah jarum jam</span>
+rot90 = cv2.<span class="fn">rotate</span>(img, cv2.ROTATE_90_CLOCKWISE)
+
+<span class="cm"># 4. Flip horizontal (mirror)</span>
+flip = cv2.<span class="fn">flip</span>(img, 1)  <span class="cm"># 1=horizontal, 0=vertical, -1=keduanya</span>
+
+<span class="cm"># 5. Konversi ke grayscale</span>
+gray = cv2.<span class="fn">cvtColor</span>(img, cv2.COLOR_BGR2GRAY)
+<span class="fn">print</span>(gray.shape)  <span class="cm"># (tinggi, lebar) — tanpa channel warna!</span></pre>
+                </div>
+                <div class="tip">💡 <b>Grayscale</b> itu penting untuk ML: gambar berwarna 3 channel (BGR) butuh 3×
+                    lebih banyak memori dan komputasi. Untuk deteksi tepi dan pengenalan pola, hitam-putih sudah cukup.
+                </div>
+            </div>
+
+            <div class="card" id="bab45-3">
+                <h3><span class="num">45.3</span> 🖼️ Live Image Editor</h3>
+                <p>Ini adalah OpenCV mini di browser. Semua operasi di sini sama dengan yang akan kamu tulis di Python
+                    — cuma dijalankan pakai Canvas API.</p>
+
+                <div class="cv-wrap">
+                    <div class="cv-bar">
+                        <span class="label">🖼️ OpenCV Playground</span>
+                        <label class="cv-upload">
+                            📤 Upload Gambar
+                            <input type="file" accept="image/*" onchange="cvLoadImage(this)">
+                        </label>
+                    </div>
+                    <div class="cv-ops" id="cvOps">
+                        <button class="cv-op active" data-op="none" onclick="cvApply('none')">Original</button>
+                        <button class="cv-op" data-op="grayscale" onclick="cvApply('grayscale')">Grayscale</button>
+                        <button class="cv-op" data-op="invert" onclick="cvApply('invert')">Invert</button>
+                        <button class="cv-op" data-op="blur" onclick="cvApply('blur')">Blur</button>
+                        <button class="cv-op" data-op="edge" onclick="cvApply('edge')">Edge Detect</button>
+                        <button class="cv-op" data-op="threshold" onclick="cvApply('threshold')">Threshold</button>
+                        <button class="cv-op" data-op="sepia" onclick="cvApply('sepia')">Sepia</button>
+                        <button class="cv-op" data-op="pixelate" onclick="cvApply('pixelate')">Pixelate</button>
+                    </div>
+                    <div class="cv-body">
+                        <div class="cv-panel">
+                            <h5>Original</h5>
+                            <div class="cv-canvas-wrap">
+                                <canvas id="cvOriginal" width="320" height="240"></canvas>
+                            </div>
+                        </div>
+                        <div class="cv-panel">
+                            <h5>Hasil</h5>
+                            <div class="cv-canvas-wrap">
+                                <canvas id="cvResult" width="320" height="240"></canvas>
+                            </div>
+                            <div class="cv-param" id="cvParamWrap" style="display:none;">
+                                <span id="cvParamLabel">Kernel:</span>
+                                <input type="range" id="cvParam" min="1" max="15" step="2" value="5"
+                                    oninput="cvUpdateParam()">
+                                <span class="val" id="cvParamVal">5</span>
+                            </div>
+                            <div class="cv-code" id="cvCode">
+                                <span class="c"># Pilih operasi untuk melihat kode Python</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="bab45-4">
+                <h3><span class="num">45.4</span> Filter, Blur &amp; Edge Detection</h3>
+
+                <p><b>Blur (Gaussian Blur)</b> — melembutkan gambar dengan merata-ratakan pixel bertetangga. Berguna
+                    untuk mengurangi noise sebelum deteksi tepi.</p>
+                <div class="term">
+                    <div class="term-bar">blur.py</div>
+                    <pre><span class="cm"># Kernel 5×5 — semakin besar, semakin blur</span>
+blur = cv2.<span class="fn">GaussianBlur</span>(img, (5, 5), 0)</pre>
+                </div>
+
+                <p><b>Threshold</b> — mengubah grayscale jadi hitam-putih murni. Semua pixel di atas nilai tertentu jadi
+                    putih, di bawahnya jadi hitam.</p>
+                <div class="term">
+                    <div class="term-bar">threshold.py</div>
+                    <pre>gray = cv2.<span class="fn">cvtColor</span>(img, cv2.COLOR_BGR2GRAY)
+_, binary = cv2.<span class="fn">threshold</span>(gray, 127, 255, cv2.THRESH_BINARY)</pre>
+                </div>
+
+                <p><b>Edge Detection (Canny)</b> — mendeteksi "tepi" objek. Dasar dari pengenalan wajah, OCR, dan
+                    self-driving car.</p>
+                <div class="term">
+                    <div class="term-bar">edge.py</div>
+                    <pre>gray = cv2.<span class="fn">cvtColor</span>(img, cv2.COLOR_BGR2GRAY)
+edges = cv2.<span class="fn">Canny</span>(gray, 100, 200)
+
+<span class="cm"># 100 = ambang bawah, 200 = ambang atas</span>
+<span class="cm"># Pixel dianggap "tepi" jika gradiennya di antara keduanya</span></pre>
+                </div>
+
+                <div class="note"><span class="hand">Fun fact:</span> filter <b>Canny Edge Detection</b> pertama kali
+                    dikembangkan oleh John Canny pada 1986 — dan algoritmanya masih dipakai sampai sekarang, termasuk di
+                    mobil Tesla!</div>
+            </div>
+
+            <div class="card" id="bab45-5">
+                <h3><span class="num">45.5</span> 🎯 Challenge — Filter Foto Keren</h3>
+                <p>Buat program Python yang membaca gambar, lalu:</p>
+                <ol>
+                    <li>Ubah ke grayscale</li>
+                    <li>Resize jadi lebar 400px (proporsi tetap)</li>
+                    <li>Simpan sebagai <code class="inline">grayscale_400.jpg</code></li>
+                    <li>Buat versi blur dan deteksi tepi, simpan sebagai file terpisah</li>
+                </ol>
+                <div class="tip">💡 <b>Rumus resize proporsional:</b> <code
+                        class="inline">rasio = 400 / img.shape[1]</code>, lalu <code class="inline">cv2.resize(img, None, fx=rasio, fy=rasio)</code>.
+                    Dengan begitu tinggi otomatis menyesuaikan.</div>
+
+                <div class="challenge">
+                    <span class="chal-tag">KUIS KONSEP</span>
+                    <div class="quiz-q">
+                        <p class="quiz-question">Kenapa OpenCV menyimpan gambar dalam format BGR, bukan RGB?</p>
+                        <div class="quiz-options">
+                            <button class="quiz-opt" onclick="answerInline(this,false,'Ini hanya soal urutan channel.')">Karena OpenCV hanya bisa membaca gambar biru</button>
+                            <button class="quiz-opt" onclick="answerInline(this,true,'Betul! Ini warisan historis dari kamera BGR yang dipakai saat OpenCV dibuat tahun 2000.')">Warisan historis dari kamera BGR era awal OpenCV</button>
+                            <button class="quiz-opt" onclick="answerInline(this,false,'Tidak ada kaitannya dengan warna mata manusia.')">Karena mata manusia lebih sensitif ke biru</button>
+                            <button class="quiz-opt" onclick="answerInline(this,false,'Justru itu kesalahan desain OpenCV.')">Itu adalah kesalahan desain yang tidak bisa diperbaiki</button>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= QUIZ ================= -->
+        <section class="bab" id="kuis-final8">
+            <div class="bab-head">
+                <div class="prompt-line"><span class="chevrons">&gt;&gt;&gt;</span> print(<span
+                        class="str">"Quiz"</span>)</div>
+                <h2 class="bab-title" data-text="Quiz">Quiz</h2>
+                <p class="bab-intro">Uji pemahamanmu tentang AI, Machine Learning, NumPy, Minimax, dan OpenCV.</p>
+            </div>
+
+            <div class="card">
+                <h3>🏁 Quiz AI &amp; Machine Learning</h3>
+                <div id="quiz-final8"></div>
+                <div id="finalScoreBox8">
+                    <div class="score-num"><span id="finalScoreNum8">0</span>/10</div>
+                    <div class="score-msg" id="finalScoreMsg8"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Selamat! Kamu sudah menjelajahi AI dari fondasi sampai praktik nyata. Lanjutkan dengan eksperimen di
+            laptopmu! 🤖</p>
+        <div class="brand">🐍 Modul Ajar Python — Sesi Privat</div>
+        <div class="nav-link-group">
+            <a href="index_bab37_42.html" class="nav-link">← Bab 37–42 (Git)</a>
+            <a href="index.html" class="nav-link" style="background:var(--forest-deep);">🏠 Halaman Utama</a>
+        </div>
+        <div class="edit-hint">Tutor: Khusni Ja'far</div>
+    </footer>
+
+    <script>
+        /* ================= PROGRESS RAIL ================= */
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const scrolled = h.scrollHeight > h.clientHeight
+                ? (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 : 0;
+            document.getElementById('scrollFill').style.width = scrolled + '%';
+        });
+
+        /* ================= TOC COLLAPSE ================= */
+        function toggleToc(btn) {
+            const sub = btn.nextElementSibling;
+            const chevron = btn.querySelector('.toc-chevron');
+            if (sub) sub.classList.toggle('collapsed');
+            if (chevron) chevron.classList.toggle('rotated');
+        }
+
+        /* ================= SECTION DONE TRACKING ================= */
+        const sectionDone = {
+            bab43: false, bab44: false, bab45: false,
+            quizfinal8: false
+        };
+
+        function markSectionComplete(key) {
+            if (sectionDone[key] === undefined) return;
+            sectionDone[key] = true;
+            const el = document.getElementById('check-' + key);
+            if (el) el.classList.add('done');
+            updateTocPct();
+            try {
+                const progress = JSON.parse(localStorage.getItem('python_modul_progress') || '{}');
+                progress[key] = true;
+                localStorage.setItem('python_modul_progress', JSON.stringify(progress));
+            } catch (_) { }
+        }
+
+        function updateTocPct() {
+            const total = Object.keys(sectionDone).length;
+            const done = Object.values(sectionDone).filter(Boolean).length;
+            document.getElementById('tocPct').textContent = Math.round(done / total * 100) + '% selesai';
+        }
+
+        function escapeHtml(str) {
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        /* ================= HEADING TYPE-IN ================= */
+        const headingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('type-in');
+                    headingObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        document.querySelectorAll('h2.bab-title').forEach(el => headingObserver.observe(el));
+
+        /* ================= INLINE QUIZ ================= */
+        function answerInline(btn, isCorrect, exp) {
+            const group = btn.parentElement;
+            group.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+            const fb = group.nextElementSibling;
+            if (isCorrect) {
+                btn.classList.add('correct');
+                fb.textContent = '✅ ' + exp;
+                fb.className = 'quiz-feedback show correct';
+            } else {
+                btn.classList.add('wrong');
+                fb.textContent = '❌ ' + exp;
+                fb.className = 'quiz-feedback show wrong';
+            }
+        }
+
+        /* =========================================================
+           LINEAR REGRESSION DEMO
+           ========================================================= */
+        const lrState = {
+            points: [],
+            m: 1,
+            b: 0,
+            canvas: null,
+            ctx: null,
+            W: 480,
+            H: 340,
+            pad: 40
+        };
+
+        function lrInit() {
+            lrState.canvas = document.getElementById('lrCanvas');
+            if (!lrState.canvas) return;
+            lrState.ctx = lrState.canvas.getContext('2d');
+            // Default points
+            lrState.points = [
+                { x: 1, y: 55 }, { x: 2, y: 60 }, { x: 3, y: 65 },
+                { x: 4, y: 70 }, { x: 5, y: 75 }, { x: 6, y: 82 },
+                { x: 7, y: 85 }, { x: 8, y: 90 }
+            ];
+            document.getElementById('lrM').addEventListener('input', (e) => {
+                lrState.m = parseFloat(e.target.value);
+                lrRender();
+            });
+            document.getElementById('lrB').addEventListener('input', (e) => {
+                lrState.b = parseFloat(e.target.value);
+                lrRender();
+            });
+            lrState.canvas.addEventListener('click', (e) => {
+                const rect = lrState.canvas.getBoundingClientRect();
+                const scaleX = lrState.canvas.width / rect.width;
+                const scaleY = lrState.canvas.height / rect.height;
+                const px = (e.clientX - rect.left) * scaleX;
+                const py = (e.clientY - rect.top) * scaleY;
+                const { x, y } = lrPxToData(px, py);
+                if (e.shiftKey) {
+                    // Hapus titik terdekat
+                    let minDist = Infinity, idx = -1;
+                    lrState.points.forEach((p, i) => {
+                        const dx = p.x - x, dy = p.y - y;
+                        const d = dx * dx + dy * dy;
+                        if (d < minDist) { minDist = d; idx = i; }
+                    });
+                    if (idx !== -1 && minDist < 4) lrState.points.splice(idx, 1);
+                } else {
+                    lrState.points.push({ x, y });
+                }
+                lrRender();
+            });
+            lrRender();
+        }
+
+        function lrDataToPx(x, y) {
+            const { pad, W, H } = lrState;
+            const pw = W - pad * 2;
+            const ph = H - pad * 2;
+            const px = pad + (x / 10) * pw;
+            const py = H - pad - (y / 100) * ph;
+            return { px, py };
+        }
+
+        function lrPxToData(px, py) {
+            const { pad, W, H } = lrState;
+            const pw = W - pad * 2;
+            const ph = H - pad * 2;
+            const x = ((px - pad) / pw) * 10;
+            const y = ((H - pad - py) / ph) * 100;
+            return { x: Math.max(0, Math.min(10, Math.round(x * 2) / 2)), y: Math.max(0, Math.min(100, Math.round(y))) };
+        }
+
+        function lrRender() {
+            const { ctx, W, H, pad, points, m, b } = lrState;
+            if (!ctx) return;
+            ctx.clearRect(0, 0, W, H);
+            // Grid
+            ctx.strokeStyle = '#E5E7EB';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 10; i++) {
+                const { px, py } = lrDataToPx(i, 0);
+                ctx.beginPath(); ctx.moveTo(px, pad); ctx.lineTo(px, H - pad); ctx.stroke();
+            }
+            for (let i = 0; i <= 5; i++) {
+                const y = i * 20;
+                const { px, py } = lrDataToPx(0, y);
+                ctx.beginPath(); ctx.moveTo(pad, py); ctx.lineTo(W - pad, py); ctx.stroke();
+            }
+            // Axes labels
+            ctx.fillStyle = '#9CA3AF';
+            ctx.font = '11px monospace';
+            ctx.textAlign = 'center';
+            for (let i = 0; i <= 10; i += 2) {
+                const { px, py } = lrDataToPx(i, 0);
+                ctx.fillText(i, px, py + 16);
+            }
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 100; i += 20) {
+                const { px, py } = lrDataToPx(0, i);
+                ctx.fillText(i, px - 8, py + 4);
+            }
+            // Axis titles
+            ctx.fillStyle = '#6B7280';
+            ctx.font = '12px sans-serif';
+            ctx.textAlign = 'right';
+            ctx.fillText('Jam belajar →', W - pad, H - 8);
+            ctx.save();
+            ctx.translate(14, pad);
+            ctx.rotate(-Math.PI / 2);
+            ctx.textAlign = 'left';
+            ctx.fillText('Nilai ujian →', 0, 0);
+            ctx.restore();
+            // Regression line
+            const y1 = m * 0 + b, y2 = m * 10 + b;
+            const p1 = lrDataToPx(0, Math.max(0, Math.min(100, y1)));
+            const p2 = lrDataToPx(10, Math.max(0, Math.min(100, y2)));
+            ctx.strokeStyle = '#7C3AED';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo(p1.px, p1.py);
+            ctx.lineTo(p2.px, p2.py);
+            ctx.stroke();
+            // Points
+            let mse = 0;
+            points.forEach(p => {
+                const { px, py } = lrDataToPx(p.x, p.y);
+                // Residual line
+                const predY = m * p.x + b;
+                const predPx = lrDataToPx(p.x, Math.max(0, Math.min(100, predY))).py;
+                ctx.strokeStyle = 'rgba(236, 72, 153, 0.4)';
+                ctx.lineWidth = 1.5;
+                ctx.setLineDash([3, 3]);
+                ctx.beginPath();
+                ctx.moveTo(px, py);
+                ctx.lineTo(px, predPx);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                // Point
+                ctx.fillStyle = '#EC4899';
+                ctx.beginPath();
+                ctx.arc(px, py, 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                mse += Math.pow(predY - p.y, 2);
+            });
+            if (points.length > 0) mse /= points.length;
+            // Update UI
+            document.getElementById('lrMVal').textContent = m.toFixed(2);
+            document.getElementById('lrBVal').textContent = b.toFixed(0);
+            document.getElementById('lrMSE').textContent = points.length ? mse.toFixed(1) : '—';
+            document.getElementById('lrEq').textContent = `${m.toFixed(2)}x + ${b.toFixed(0)}`;
+            const verdict = document.getElementById('lrVerdict');
+            if (points.length && mse < 30) {
+                verdict.textContent = '✨ Garis sangat cocok dengan data!';
+                verdict.style.color = '#6EE7B7';
+            } else if (points.length && mse < 100) {
+                verdict.textContent = '👍 Cukup bagus, bisa lebih baik lagi';
+                verdict.style.color = '#FCD34D';
+            } else {
+                verdict.textContent = '📐 Sesuaikan garis dengan titik-titik';
+                verdict.style.color = 'var(--terminal-comment)';
+            }
+        }
+
+        function lrAutoFit() {
+            const pts = lrState.points;
+            if (pts.length < 2) {
+                alert('Butuh minimal 2 titik data untuk fit!');
+                return;
+            }
+            // Least squares: m = (n*Σxy - Σx*Σy) / (n*Σx² - (Σx)²)
+            const n = pts.length;
+            const sumX = pts.reduce((s, p) => s + p.x, 0);
+            const sumY = pts.reduce((s, p) => s + p.y, 0);
+            const sumXY = pts.reduce((s, p) => s + p.x * p.y, 0);
+            const sumX2 = pts.reduce((s, p) => s + p.x * p.x, 0);
+            const m = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+            const b = (sumY - m * sumX) / n;
+            lrState.m = Math.round(m * 20) / 20;
+            lrState.b = Math.round(b);
+            document.getElementById('lrM').value = lrState.m;
+            document.getElementById('lrB').value = lrState.b;
+            lrRender();
+        }
+
+        /* =========================================================
+           TIC TAC TOE — Minimax
+           ========================================================= */
+        const ttt = {
+            board: [],
+            player: 1,
+            ai: 2,
+            gameOver: false,
+            wins: 0,
+            losses: 0,
+            draws: 0,
+            aiInfo: null
+        };
+
+        function tttInit() {
+            tttReset();
+        }
+
+        function tttReset() {
+            ttt.board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+            ttt.player = 1;
+            ttt.ai = 2;
+            ttt.gameOver = false;
+            ttt.aiInfo = null;
+            tttRender();
+            document.getElementById('tttStatus').textContent = 'Giliranmu!';
+            document.getElementById('tttStatus').style.color = '#6EE7B7';
+            document.getElementById('tttAI').innerHTML = '<span class="c"># AI belum bergerak</span>';
+            document.getElementById('tttInfo').innerHTML = '<span class="c"># Klik papan untuk mulai</span>';
+            tttRenderNumpy();
+        }
+
+        function tttRender() {
+            const boardEl = document.getElementById('tttBoard');
+            if (!boardEl) return;
+            boardEl.innerHTML = '';
+            const winCells = tttGetWinCells();
+            ttt.board.forEach((val, i) => {
+                const cell = document.createElement('div');
+                cell.className = 'ttt-cell';
+                if (val === 1) { cell.classList.add('x', 'taken'); cell.textContent = 'X'; }
+                else if (val === 2) { cell.classList.add('o', 'taken'); cell.textContent = 'O'; }
+                if (winCells.includes(i)) cell.classList.add('win');
+                if (!ttt.gameOver && val === 0) {
+                    cell.addEventListener('click', () => tttPlayerMove(i));
+                } else {
+                    cell.classList.add('taken');
+                }
+                boardEl.appendChild(cell);
+            });
+        }
+
+        function tttRenderNumpy() {
+            const boardEl = document.getElementById('tttNumpy');
+            if (!boardEl) return;
+            const rows = [];
+            for (let r = 0; r < 3; r++) {
+                rows.push('    [' + ttt.board.slice(r * 3, r * 3 + 3).join(', ') + ']');
+            }
+            boardEl.innerHTML =
+                '<span class="k">board</span> = np.<span class="k">array</span>([\n' + rows.join(',\n') + '\n])';
+            // Update visual grid
+            const npVis = document.getElementById('npVisual');
+            if (npVis) {
+                npVis.innerHTML = ttt.board.map(v => `<div>${v}</div>`).join('');
+            }
+        }
+
+        function tttPlayerMove(idx) {
+            if (ttt.gameOver || ttt.board[idx] !== 0) return;
+            ttt.board[idx] = ttt.player;
+            tttRenderNumpy();
+            const w = tttCheckWinner(ttt.board);
+            if (w !== 0) {
+                tttEndGame(w);
+                return;
+            }
+            if (!ttt.board.includes(0)) {
+                tttEndGame(0);
+                return;
+            }
+            // AI move (delay for UX)
+            tttRender();
+            document.getElementById('tttStatus').textContent = 'AI sedang berpikir…';
+            document.getElementById('tttStatus').style.color = '#FFCB66';
+            setTimeout(tttAIMove, 200);
+        }
+
+        function tttAIMove() {
+            if (ttt.gameOver) return;
+            const cells = [];
+            ttt.board.forEach((v, i) => { if (v === 0) cells.push(i); });
+            if (!cells.length) return;
+
+            let bestScore = -Infinity;
+            let bestIdx = cells[0];
+            let bestDetails = null;
+            const scoresTable = [];
+            cells.forEach(idx => {
+                const b = ttt.board.slice();
+                b[idx] = ttt.ai;
+                const score = tttMinimax(b, 0, false);
+                scoresTable.push({ move: idx, score });
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestIdx = idx;
+                }
+            });
+
+            ttt.board[bestIdx] = ttt.ai;
+            ttt.aiInfo = { move: bestIdx, score: bestScore, table: scoresTable };
+            tttRenderNumpy();
+            tttRender();
+
+            // Show AI info
+            const moveStr = `(${Math.floor(bestIdx / 3)}, ${bestIdx % 3})`;
+            const tableHtml = scoresTable.map(s => {
+                const m = `(${Math.floor(s.move / 3)},${s.move % 3})`;
+                const cls = s.move === bestIdx ? 's' : 'c';
+                return `<span class="${cls}">${m} → ${s.score >= 0 ? '+' : ''}${s.score}</span>`;
+            }).join('\n');
+            document.getElementById('tttAI').innerHTML =
+                `<span class="k">AI memilih</span> ${moveStr} <span class="c">(score ${bestScore >= 0 ? '+' : ''}${bestScore})</span>\n\n` +
+                `<span class="c"># semua kandidat:</span>\n` + tableHtml;
+            document.getElementById('tttInfo').innerHTML =
+                `<span class="c"># minimax explored depth 0</span>\n` +
+                `<span class="k">scores</span> = [${scoresTable.map(s => s.score).join(', ')}]`;
+
+            const w = tttCheckWinner(ttt.board);
+            if (w !== 0) { tttEndGame(w); return; }
+            if (!ttt.board.includes(0)) { tttEndGame(0); return; }
+            document.getElementById('tttStatus').textContent = 'Giliranmu!';
+            document.getElementById('tttStatus').style.color = '#6EE7B7';
+            tttRender();
+        }
+
+        function tttCheckWinner(b) {
+            const lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+            for (const [a, c, d] of lines) {
+                if (b[a] !== 0 && b[a] === b[c] && b[c] === b[d]) return b[a];
+            }
+            return 0;
+        }
+
+        function tttGetWinCells() {
+            const lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+            for (const line of lines) {
+                const [a, c, d] = line;
+                if (ttt.board[a] !== 0 && ttt.board[a] === ttt.board[c] && ttt.board[c] === ttt.board[d]) return line;
+            }
+            return [];
+        }
+
+        function tttMinimax(b, depth, isMaxing) {
+            const w = tttCheckWinner(b);
+            if (w === ttt.ai) return 10 - depth;
+            if (w === ttt.player) return depth - 10;
+            const empty = [];
+            b.forEach((v, i) => { if (v === 0) empty.push(i); });
+            if (!empty.length) return 0;
+
+            if (isMaxing) {
+                let best = -Infinity;
+                for (const idx of empty) {
+                    b[idx] = ttt.ai;
+                    best = Math.max(best, tttMinimax(b, depth + 1, false));
+                    b[idx] = 0;
+                }
+                return best;
+            } else {
+                let best = Infinity;
+                for (const idx of empty) {
+                    b[idx] = ttt.player;
+                    best = Math.min(best, tttMinimax(b, depth + 1, true));
+                    b[idx] = 0;
+                }
+                return best;
+            }
+        }
+
+        function tttEndGame(winner) {
+            ttt.gameOver = true;
+            const status = document.getElementById('tttStatus');
+            if (winner === ttt.player) {
+                ttt.wins++;
+                status.textContent = '🎉 Kamu menang (hebat!)';
+                status.style.color = '#6EE7B7';
+            } else if (winner === ttt.ai) {
+                ttt.losses++;
+                status.textContent = '🤖 AI menang!';
+                status.style.color = '#FF9A8B';
+            } else {
+                ttt.draws++;
+                status.textContent = '🤝 Seri!';
+                status.style.color = '#FFCB66';
+            }
+            document.getElementById('tttWins').textContent = ttt.wins;
+            document.getElementById('tttLosses').textContent = ttt.losses;
+            document.getElementById('tttDraws').textContent = ttt.draws;
+            tttRender();
+            markSectionComplete('bab44');
+        }
+
+        /* =========================================================
+           OPENCV IMAGE EDITOR (via Canvas)
+           ========================================================= */
+        const cv = {
+            img: null,
+            currentOp: 'none',
+            param: 5,
+            paramName: 'Kernel',
+            originalCanvas: null,
+            originalCtx: null,
+            resultCanvas: null,
+            resultCtx: null
+        };
+
+        function cvInit() {
+            cv.originalCanvas = document.getElementById('cvOriginal');
+            cv.originalCtx = cv.originalCanvas.getContext('2d');
+            cv.resultCanvas = document.getElementById('cvResult');
+            cv.resultCtx = cv.resultCanvas.getContext('2d');
+            // Generate default synthetic image
+            cvGenerateDefaultImage();
+        }
+
+        function cvGenerateDefaultImage() {
+            const ctx = cv.originalCtx;
+            const w = cv.originalCanvas.width, h = cv.originalCanvas.height;
+            // Sky gradient
+            const grad = ctx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, '#87CEEB');
+            grad.addColorStop(1, '#E0F2FE');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+            // Sun
+            ctx.fillStyle = '#FCD34D';
+            ctx.beginPath();
+            ctx.arc(w * 0.8, h * 0.25, 30, 0, Math.PI * 2);
+            ctx.fill();
+            // Ground
+            ctx.fillStyle = '#84CC16';
+            ctx.fillRect(0, h * 0.7, w, h * 0.3);
+            // House
+            ctx.fillStyle = '#DC2626';
+            ctx.fillRect(w * 0.15, h * 0.5, w * 0.25, h * 0.25);
+            // Roof
+            ctx.fillStyle = '#7C2D12';
+            ctx.beginPath();
+            ctx.moveTo(w * 0.1, h * 0.5);
+            ctx.lineTo(w * 0.275, h * 0.32);
+            ctx.lineTo(w * 0.45, h * 0.5);
+            ctx.closePath();
+            ctx.fill();
+            // Door
+            ctx.fillStyle = '#451A03';
+            ctx.fillRect(w * 0.22, h * 0.6, w * 0.06, h * 0.15);
+            // Tree
+            ctx.fillStyle = '#78350F';
+            ctx.fillRect(w * 0.7, h * 0.55, 8, h * 0.2);
+            ctx.fillStyle = '#16A34A';
+            ctx.beginPath();
+            ctx.arc(w * 0.7 + 4, h * 0.5, 25, 0, Math.PI * 2);
+            ctx.fill();
+            // Cloud
+            ctx.fillStyle = 'rgba(255,255,255,0.85)';
+            ctx.beginPath();
+            ctx.arc(w * 0.3, h * 0.15, 15, 0, Math.PI * 2);
+            ctx.arc(w * 0.35, h * 0.15, 20, 0, Math.PI * 2);
+            ctx.arc(w * 0.42, h * 0.15, 15, 0, Math.PI * 2);
+            ctx.fill();
+            // Save baseline
+            cvCaptureOriginal();
+        }
+
+        function cvCaptureOriginal() {
+            cv.img = cv.originalCtx.getImageData(0, 0, cv.originalCanvas.width, cv.originalCanvas.height);
+            cvApply(cv.currentOp || 'none');
+        }
+
+        function cvLoadImage(input) {
+            const file = input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const w = cv.originalCanvas.width, h = cv.originalCanvas.height;
+                    const ctx = cv.originalCtx;
+                    ctx.clearRect(0, 0, w, h);
+                    // Fit image preserving aspect ratio
+                    const scale = Math.min(w / img.width, h / img.height);
+                    const nw = img.width * scale, nh = img.height * scale;
+                    const ox = (w - nw) / 2, oy = (h - nh) / 2;
+                    ctx.fillStyle = '#000';
+                    ctx.fillRect(0, 0, w, h);
+                    ctx.drawImage(img, ox, oy, nw, nh);
+                    cvCaptureOriginal();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function cvApply(op) {
+            if (!cv.img) return;
+            cv.currentOp = op;
+            // Update active button
+            document.querySelectorAll('.cv-op').forEach(b => {
+                b.classList.toggle('active', b.dataset.op === op);
+            });
+
+            const src = cv.img;
+            const w = src.width, h = src.height;
+            const output = cv.resultCtx.createImageData(w, h);
+            const data = src.data;
+            const out = output.data;
+
+            let codeHtml = '';
+
+            if (op === 'none') {
+                for (let i = 0; i < data.length; i++) out[i] = data[i];
+                codeHtml = `<span class="c"># Gambar original</span>\nimg = cv2.<span class="k">imread</span>(<span class="s">"gambar.jpg"</span>)`;
+                cvShowParam(false);
+            } else if (op === 'grayscale') {
+                for (let i = 0; i < data.length; i += 4) {
+                    const gray = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+                    out[i] = out[i + 1] = out[i + 2] = gray;
+                    out[i + 3] = data[i + 3];
+                }
+                codeHtml = `<span class="c"># Konversi ke grayscale</span>\ngray = cv2.<span class="k">cvtColor</span>(img, cv2.COLOR_BGR2GRAY)`;
+                cvShowParam(false);
+            } else if (op === 'invert') {
+                for (let i = 0; i < data.length; i += 4) {
+                    out[i] = 255 - data[i];
+                    out[i + 1] = 255 - data[i + 1];
+                    out[i + 2] = 255 - data[i + 2];
+                    out[i + 3] = data[i + 3];
+                }
+                codeHtml = `<span class="c"># Invert warna</span>\ninverted = cv2.<span class="k">bitwise_not</span>(img)`;
+                cvShowParam(false);
+            } else if (op === 'blur') {
+                cvBoxBlur(data, out, w, h, cv.param);
+                codeHtml = `<span class="c"># Gaussian Blur, kernel ${cv.param}×${cv.param}</span>\nblur = cv2.<span class="k">GaussianBlur</span>(img, (${cv.param}, ${cv.param}), <span class="n">0</span>)`;
+                cvShowParam(true, 'Kernel', cv.param);
+            } else if (op === 'edge') {
+                // Sobel edge detection
+                const gray = new Float32Array(w * h);
+                for (let i = 0; i < data.length; i += 4) {
+                    gray[i / 4] = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+                }
+                for (let y = 1; y < h - 1; y++) {
+                    for (let x = 1; x < w - 1; x++) {
+                        const gx =
+                            -gray[(y - 1) * w + (x - 1)] + gray[(y - 1) * w + (x + 1)] +
+                            -2 * gray[y * w + (x - 1)] + 2 * gray[y * w + (x + 1)] +
+                            -gray[(y + 1) * w + (x - 1)] + gray[(y + 1) * w + (x + 1)];
+                        const gy =
+                            -gray[(y - 1) * w + (x - 1)] - 2 * gray[(y - 1) * w + x] - gray[(y - 1) * w + (x + 1)] +
+                            gray[(y + 1) * w + (x - 1)] + 2 * gray[(y + 1) * w + x] + gray[(y + 1) * w + (x + 1)];
+                        const mag = Math.min(255, Math.sqrt(gx * gx + gy * gy));
+                        const i = (y * w + x) * 4;
+                        out[i] = out[i + 1] = out[i + 2] = mag;
+                        out[i + 3] = 255;
+                    }
+                }
+                codeHtml = `<span class="c"># Canny edge detection</span>\ngray = cv2.<span class="k">cvtColor</span>(img, cv2.COLOR_BGR2GRAY)\nedges = cv2.<span class="k">Canny</span>(gray, <span class="n">100</span>, <span class="n">200</span>)`;
+                cvShowParam(false);
+            } else if (op === 'threshold') {
+                const t = 100 + (cv.param * 10);
+                for (let i = 0; i < data.length; i += 4) {
+                    const gray = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+                    const v = gray > t ? 255 : 0;
+                    out[i] = out[i + 1] = out[i + 2] = v;
+                    out[i + 3] = data[i + 3];
+                }
+                codeHtml = `<span class="c"># Threshold biner (nilai: ${Math.round(t)})</span>\ngray = cv2.<span class="k">cvtColor</span>(img, cv2.COLOR_BGR2GRAY)\n_, binary = cv2.<span class="k">threshold</span>(gray, <span class="n">${Math.round(t)}</span>, <span class="n">255</span>, cv2.THRESH_BINARY)`;
+                cvShowParam(true, 'Threshold', t);
+            } else if (op === 'sepia') {
+                for (let i = 0; i < data.length; i += 4) {
+                    const r = data[i], g = data[i + 1], b = data[i + 2];
+                    out[i] = Math.min(255, r * 0.393 + g * 0.769 + b * 0.189);
+                    out[i + 1] = Math.min(255, r * 0.349 + g * 0.686 + b * 0.168);
+                    out[i + 2] = Math.min(255, r * 0.272 + g * 0.534 + b * 0.131);
+                    out[i + 3] = data[i + 3];
+                }
+                codeHtml = `<span class="c"># Efek Sepia (matriks warna)</span>\nsepia = cv2.<span class="k">transform</span>(img, kernel_sepia)`;
+                cvShowParam(false);
+            } else if (op === 'pixelate') {
+                const size = Math.max(4, cv.param * 2);
+                for (let y = 0; y < h; y += size) {
+                    for (let x = 0; x < w; x += size) {
+                        let rSum = 0, gSum = 0, bSum = 0, count = 0;
+                        for (let dy = 0; dy < size && y + dy < h; dy++) {
+                            for (let dx = 0; dx < size && x + dx < w; dx++) {
+                                const i = ((y + dy) * w + (x + dx)) * 4;
+                                rSum += data[i]; gSum += data[i + 1]; bSum += data[i + 2]; count++;
+                            }
+                        }
+                        const rAvg = rSum / count, gAvg = gSum / count, bAvg = bSum / count;
+                        for (let dy = 0; dy < size && y + dy < h; dy++) {
+                            for (let dx = 0; dx < size && x + dx < w; dx++) {
+                                const i = ((y + dy) * w + (x + dx)) * 4;
+                                out[i] = rAvg; out[i + 1] = gAvg; out[i + 2] = bAvg; out[i + 3] = 255;
+                            }
+                        }
+                    }
+                }
+                codeHtml = `<span class="c"># Downscale + upscale = pixelate</span>\nsmall = cv2.<span class="k">resize</span>(img, (${Math.floor(w / size)}, ${Math.floor(h / size)}))\npixelated = cv2.<span class="k">resize</span>(small, (${w}, ${h}), interpolation=cv2.INTER_NEAREST)`;
+                cvShowParam(true, 'Pixel size', size);
+            }
+
+            cv.resultCtx.putImageData(output, 0, 0);
+            document.getElementById('cvCode').innerHTML = codeHtml;
+            markSectionComplete('bab45');
+        }
+
+        function cvBoxBlur(src, dst, w, h, k) {
+            k = Math.max(1, Math.floor(k));
+            const half = Math.floor(k / 2);
+            for (let y = 0; y < h; y++) {
+                for (let x = 0; x < w; x++) {
+                    let r = 0, g = 0, b = 0, count = 0;
+                    for (let dy = -half; dy <= half; dy++) {
+                        for (let dx = -half; dx <= half; dx++) {
+                            const ny = y + dy, nx = x + dx;
+                            if (ny >= 0 && ny < h && nx >= 0 && nx < w) {
+                                const i = (ny * w + nx) * 4;
+                                r += src[i]; g += src[i + 1]; b += src[i + 2]; count++;
+                            }
+                        }
+                    }
+                    const oi = (y * w + x) * 4;
+                    dst[oi] = r / count;
+                    dst[oi + 1] = g / count;
+                    dst[oi + 2] = b / count;
+                    dst[oi + 3] = src[oi + 3];
+                }
+            }
+        }
+
+        function cvShowParam(show, label, val) {
+            const wrap = document.getElementById('cvParamWrap');
+            const lbl = document.getElementById('cvParamLabel');
+            const inp = document.getElementById('cvParam');
+            const valEl = document.getElementById('cvParamVal');
+            if (!wrap) return;
+            wrap.style.display = show ? 'flex' : 'none';
+            if (show) {
+                lbl.textContent = label + ':';
+                if (label === 'Threshold') {
+                    inp.min = 1; inp.max = 20; inp.step = 1;
+                    inp.value = Math.round((val - 100) / 10);
+                    valEl.textContent = Math.round(val);
+                } else {
+                    inp.min = 1; inp.max = label === 'Pixel size' ? 20 : 15; inp.step = label === 'Pixel size' ? 1 : 2;
+                    inp.value = val;
+                    valEl.textContent = val;
+                }
+            }
+        }
+
+        function cvUpdateParam() {
+            const inp = document.getElementById('cvParam');
+            const valEl = document.getElementById('cvParamVal');
+            if (cv.currentOp === 'threshold') {
+                cv.param = parseInt(inp.value, 10);
+                valEl.textContent = 100 + cv.param * 10;
+            } else {
+                cv.param = parseInt(inp.value, 10);
+                valEl.textContent = cv.param;
+            }
+            cvApply(cv.currentOp);
+        }
+
+        /* ================= QUIZ ENGINE ================= */
+        const quizzes = {
+            bab43: [
+                { q: "Apa perbedaan utama Machine Learning dengan pemrograman tradisional?", options: ["ML selalu lebih cepat", "ML belajar dari data, bukan dari aturan yang ditulis manual", "ML tidak butuh komputer", "ML hanya untuk game"], correct: 1, exp: "Pemrograman tradisional = kamu tulis aturan. ML = mesin menemukan aturan dari data berlabel." },
+                { q: "Data berlabel pasangan (gambar, jenis buah) cocok untuk jenis ML apa?", options: ["Supervised Learning", "Unsupervised Learning", "Reinforcement Learning", "Bukan ML"], correct: 0, exp: "Supervised learning belajar dari pasangan input → output yang diketahui." },
+                { q: "Apa yang dioptimalkan Linear Regression?", options: ["Jumlah data", "Kecepatan training", "Error (MSE) minimum", "Panjang kode"], correct: 2, exp: "Linear Regression mencari garis yang meminimalkan MSE (rata-rata kuadrat error)." }
+            ],
+            final8: [
+                { q: "Apa hubungan AI, ML, dan DL yang benar?", options: ["AI ⊂ ML ⊂ DL", "DL ⊂ ML ⊂ AI", "ML ⊂ AI ⊂ DL", "Ketiganya sama"], correct: 1, exp: "Deep Learning adalah cabang ML, dan ML adalah cabang AI. Jadi DL ⊂ ML ⊂ AI." },
+                { q: "Library Python apa yang jadi fondasi komputasi numerik untuk AI/ML?", options: ["NumPy", "Flask", "Django", "Matplotlib"], correct: 0, exp: "NumPy menyediakan array multidimensi cepat yang dipakai oleh semua library AI/ML." },
+                { q: "Pada Minimax, AI yang memaksimalkan skor disebut...", options: ["Minimizer", "Maximizer", "Neutral", "Random"], correct: 1, exp: "AI adalah maximizer (ingin skor tertinggi), lawan adalah minimizer." },
+                { q: "Mengapa algoritma Minimax tidak bisa dikalahkan di Tic Tac Toe?", options: ["Karena AI curang", "Karena AI mencoba semua kemungkinan dan memilih yang terbaik", "Karena AI pintar", "Karena AI pakai GPU"], correct: 1, exp: "Minimax mengeksplorasi seluruh pohon permainan, jadi selalu menemukan langkah optimal — hasil terburuknya adalah seri." },
+                { q: "Untuk deteksi tepi (edge detection) di OpenCV, fungsi yang umum dipakai adalah...", options: ["cv2.blur()", "cv2.threshold()", "cv2.Canny()", "cv2.resize()"], correct: 2, exp: "cv2.Canny() adalah fungsi deteksi tepi paling populer, dikembangkan John Canny tahun 1986." },
+                { q: "Urutan channel warna yang dipakai OpenCV adalah...", options: ["RGB", "BGR", "CMYK", "HSL"], correct: 1, exp: "OpenCV menggunakan BGR (Blue-Green-Red), warisan historis dari kamera era awal OpenCV." },
+                { q: "Apa fungsi cv2.GaussianBlur()?", options: ["Menajamkan gambar", "Melembutkan gambar (blur)", "Mengubah warna", "Memotong gambar"], correct: 1, exp: "GaussianBlur melembutkan gambar dengan merata-ratakan pixel bertetangga sesuai bobot Gaussian." },
+                { q: "Kenapa grayscale sering dipakai sebelum deteksi tepi?", options: ["Lebih cepat diproses & cukup untuk mendeteksi tepi", "Warna tidak penting", "Karena OpenCV tidak bisa warna", "Supaya lebih hemat"], correct: 0, exp: "Grayscale 1 channel (vs 3 channel BGR) menghemat komputasi 3×, dan tepi objek tetap terdeteksi dengan baik." },
+                { q: "Pada Linear Regression, MSE (Mean Squared Error) mengukur apa?", options: ["Kecepatan training", "Rata-rata kuadrat selisih prediksi dengan nilai sebenarnya", "Jumlah parameter model", "Akurasi klasifikasi"], correct: 1, exp: "MSE = rata-rata (prediksi - aktual)². Semakin kecil, semakin baik modelnya." }
+            ]
+        };
+
+        const quizProgress = {};
+
+        function renderQuiz(key, containerId, { finalMode = false } = {}) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const data = quizzes[key];
+            if (!data) return;
+            container.innerHTML = data.map((item, qi) => {
+                return `
+      <div class="quiz-q" data-q="${qi}">
+        <p class="quiz-question">${qi + 1}. ${escapeHtml(item.q)}</p>
+        <div class="quiz-options">
+          ${item.options.map((opt, oi) => `<button class="quiz-opt" onclick="answerQuiz('${key}',${qi},${oi},this,${finalMode})">${escapeHtml(opt)}</button>`).join('')}
+        </div>
+        <div class="quiz-feedback" id="${key}-fb-${qi}"></div>
+      </div>`;
+            }).join('');
+        }
+
+        function answerQuiz(key, qi, oi, btnEl, finalMode) {
+            const item = quizzes[key][qi];
+            const buttons = btnEl.parentElement.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => b.disabled = true);
+            const fb = document.getElementById(`${key}-fb-${qi}`);
+            const isCorrect = oi === item.correct;
+            if (isCorrect) {
+                btnEl.classList.add('correct');
+                fb.textContent = '✅ Benar! ' + item.exp;
+                fb.className = 'quiz-feedback show correct';
+            } else {
+                btnEl.classList.add('wrong');
+                buttons[item.correct].classList.add('correct');
+                fb.textContent = '❌ Belum tepat. ' + item.exp;
+                fb.className = 'quiz-feedback show wrong';
+            }
+
+            if (!quizProgress[key]) quizProgress[key] = { answered: new Set(), correct: 0 };
+            if (!quizProgress[key].answered.has(qi)) {
+                quizProgress[key].answered.add(qi);
+                if (isCorrect) quizProgress[key].correct++;
+            }
+
+            if (quizProgress[key].answered.size === quizzes[key].length) {
+                if (finalMode) {
+                    showFinalScore8(quizProgress[key].correct, quizzes[key].length);
+                    markSectionComplete('quizfinal8');
+                } else if (sectionDone[key] !== undefined) {
+                    markSectionComplete(key);
+                }
+            }
+        }
+
+        function showFinalScore8(correct, total) {
+            const box = document.getElementById('finalScoreBox8');
+            document.getElementById('finalScoreNum8').textContent = correct;
+            let msg, bg, color;
+            if (correct >= 8) { msg = '🎉 Luar biasa! Kamu siap menjelajah AI lebih dalam!'; bg = 'var(--forest-wash)'; color = 'var(--forest-deep)'; }
+            else if (correct >= 5) { msg = '💪 Bagus! Ulangi beberapa bagian, kamu hampir sampai!'; bg = 'var(--highlighter-wash)'; color = '#7A5B0A'; }
+            else { msg = '🌱 Jangan menyerah! Coba main lagi dengan AI-nya, lalu coba kuis ini kembali.'; bg = 'var(--danger-wash)'; color = 'var(--danger)'; }
+            document.getElementById('finalScoreMsg8').textContent = msg;
+            box.style.background = bg;
+            box.style.color = color;
+            box.classList.add('show');
+        }
+
+        /* ================= INIT ================= */
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.toc-sub').forEach(el => el.classList.add('collapsed'));
+            document.querySelectorAll('.toc-chevron').forEach(el => el.classList.add('rotated'));
+
+            // Load saved progress
+            try {
+                const saved = JSON.parse(localStorage.getItem('python_modul_progress') || '{}');
+                for (const key of Object.keys(sectionDone)) {
+                    if (saved[key]) {
+                        sectionDone[key] = true;
+                        const el = document.getElementById('check-' + key);
+                        if (el) el.classList.add('done');
+                    }
+                }
+                updateTocPct();
+            } catch (_) { }
+
+            // Render quizzes
+            renderQuiz('bab43', 'quiz-bab43');
+            renderQuiz('final8', 'quiz-final8', { finalMode: true });
+
+            // Init interactive demos
+            setTimeout(() => {
+                lrInit();
+                tttInit();
+                cvInit();
+            }, 50);
+        });
+    </script>
+</body>
+
+</html>
